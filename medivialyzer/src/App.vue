@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+
+import {LootReader} from "./utils/lootReader/lootReader.ts";
+
+
+const test = new LootReader('D:\\projects\\Medivialyzer/medivialyzer/src/utils/lootReader/Loot.txt')
 </script>
 
 <template>

@@ -1,0 +1,8 @@
+
+Channel saved at Wed Nov 27 19:34:52 2024
+19:19 Loot of rotworm: ham.
+19:19 Loot of rotworm: ham, meat, a bag.
+19:19 Content of a bag within the corpse of rotworm: a sword.
+19:19 Loot of rotworm: meat, 10 gold coins, a gold coin.
+19:34 Loot of rotworm: ham, a bag.
+19:34 Content of a bag within the corpse of rotworm: a sword.
