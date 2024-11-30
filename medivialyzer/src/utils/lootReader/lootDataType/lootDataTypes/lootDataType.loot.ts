@@ -1,5 +1,7 @@
 import {LootDataType} from "../lootDataType.ts";
-import {Item} from "../../lootReader.types.ts";
+
+import {Item} from "../../../item/item.types.ts";
+import {getItem} from "../../../item/item.helpers.ts";
 
 export class LootDataTypeLoot extends LootDataType {
     public type = 'loot'
@@ -12,9 +14,7 @@ export class LootDataTypeLoot extends LootDataType {
         const lootString = line.toLowerCase().split(':')[2]
         const lootValues = lootString.split(',')
 
-        return lootValues.map(value => ({
-            name: value,
-        }))
+        return lootValues.map(value => getItem(value.trim()))
     }
 }
 

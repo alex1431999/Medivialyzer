@@ -1,11 +1,7 @@
-export type LootItemName = string
-
-export type Item = {
-    name: LootItemName
-}
+import {Item} from "../item/item.types.ts";
 
 export type Loot = {
-    item: LootItemName;
+    item: Item;
     timestamp: number;
     value: number;
 }

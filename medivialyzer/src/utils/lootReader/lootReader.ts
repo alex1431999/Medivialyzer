@@ -1,6 +1,7 @@
 import {lootDataTypeLoot} from "./lootDataType/lootDataTypes/lootDataType.loot.ts";
-import {Item, Loot} from "./lootReader.types.ts";
+import {Loot} from "./lootReader.types.ts";
 import {lootDataTypeTimestamp} from "./lootDataType/lootDataTypes/lootDataType.timestamp.ts";
+import {Item} from "../item/item.types.ts";
 
 export class LootReader {
     private readonly lootData: string;
@@ -21,7 +22,7 @@ export class LootReader {
             if (lootDataTypeLoot.matches(line) && since < currentTimeStamp) {
                 const items: Item[] = lootDataTypeLoot.toValue(line)
                 const lootToAdd = items.map(item => ({
-                    name: item.name,
+                    item,
                     timestamp: currentTimeStamp,
                     value: 0,
                 }))
