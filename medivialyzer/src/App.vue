@@ -4,32 +4,24 @@ import HelloWorld from './components/HelloWorld.vue'
 import {LootReader} from "./utils/lootReader/lootReader.ts";
 
 
-const test = new LootReader('D:\\projects\\Medivialyzer/medivialyzer/src/utils/lootReader/Loot.txt')
+//const path = 'D:\\projects\\Medivialyzer/medivialyzer/src/utils/lootReader/Loot.txt'
+//const lootData = window.electron.fs.readFileSync(path).toString();
+const lootData = "\n" +
+    "Channel saved at Wed Nov 27 19:34:52 2024\n" +
+    "19:19 Loot of rotworm: ham.\n" +
+    "19:19 Loot of rotworm: ham, meat, a bag.\n" +
+    "19:19 Content of a bag within the corpse of rotworm: a sword.\n" +
+    "19:19 Loot of rotworm: meat, 10 gold coins, a gold coin.\n" +
+    "19:34 Loot of rotworm: ham, a bag.\n" +
+    "19:34 Content of a bag within the corpse of rotworm: a sword."
+
+const test = new LootReader(lootData);
+
+const loot = test.getLoot(0)
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  {{ loot }}
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
