@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
 
 import {LootReader} from "./utils/lootReader/lootReader.ts";
 
