@@ -2,7 +2,7 @@ import { app, BrowserWindow, BrowserWindowConstructorOptions, ipcMain, screen } 
 import path from "path";
 import { isDev } from "./env";
 import { appConfig } from "./electronStore/configuration";
-import AppUpdater from "./AutoUpdate";
+import AppUpdater from "./autoUpdate";
 
 async function createWindow() {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
