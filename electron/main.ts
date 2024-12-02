@@ -1,6 +1,6 @@
 import { app, BrowserWindow, BrowserWindowConstructorOptions, ipcMain, screen } from "electron";
 import path from "path";
-import { isDev } from "./config";
+import { isDev } from "./env";
 import { appConfig } from "./electronStore/configuration";
 import AppUpdater from "./AutoUpdate";
 
