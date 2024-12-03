@@ -24,13 +24,15 @@ function onHuntReset() {
 </script>
 
 <template>
-  <LootListMenu class="loot-list__menu" :total-loot-value="totalLootValue" @reset="onHuntReset"/>
-  <LootListItem class="loot-list__list-item" v-for="lootEntry in lootGrouped" :key="lootEntry.item.name" :loot-entry="lootEntry"></LootListItem>
+  <div class="loot-list__items">
+    <LootListItem class="loot-list__list-item" v-for="lootEntry in lootGrouped" :key="lootEntry.item.name" :loot-entry="lootEntry"></LootListItem>
+  </div>
+  <LootListMenu :total-loot-value="totalLootValue" @reset="onHuntReset"/>
 </template>
 
 <style scoped>
-.loot-list__menu {
-  margin-bottom: 16px;
+.loot-list__items {
+  height: 70vh
 }
 
 .loot-list__list-item {
