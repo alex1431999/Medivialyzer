@@ -8,7 +8,7 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 <template>
   <v-card class="loot-list-menu__card">
     <v-card-text class="loot-list-menu__card-text">
-      <v-btn color="secondary">
+      <v-btn color="secondary" @click="$emit('reset')">
         Reset hunt
       </v-btn>
 
