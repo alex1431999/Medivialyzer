@@ -10,5 +10,5 @@ const lootGrouped = groupLoot(loot)
 </script>
 
 <template>
-  <LootListItem v-for="lootEntry in lootGrouped" :loot-entry="lootEntry"></LootListItem>
+  <LootListItem v-for="lootEntry in lootGrouped" :key="lootEntry.item.name" :loot-entry="lootEntry"></LootListItem>
 </template>
