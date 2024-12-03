@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import {computed, defineProps} from 'vue'
+import {computed} from 'vue'
 import LootListItem from './LootListItem.vue'
-import {Loot} from "../utils/loot/loot.types.ts";
 import {groupLoot} from "../utils/loot/loot.helpers.ts";
 import LootListMenu from "./LootListMenu.vue";
 import * as _ from "lodash";
+import {lootReader} from "../utils/lootReader/lootReader.ts";
 
-const { loot } = defineProps<{ loot: Loot[] }>()
+const loot = lootReader.getLoot(0)
 const lootGrouped = groupLoot(loot)
 
 const totalLootValue = computed(() => {
