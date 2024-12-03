@@ -3,14 +3,23 @@ import {computed, defineProps} from 'vue'
 
 import { LootEntry} from "../utils/loot/loot.types.ts";
 import { VCard, VCardText } from "vuetify/components/VCard";
+import { VCard, VCardText } from "vuetify/components/VCard";
+import { VChip } from "vuetify/components/VChip";
 import { VChip } from "vuetify/components/VChip";
 import { VBadge } from "vuetify/components/VBadge";
+import { VBadge } from "vuetify/components/VBadge";
+import { VIcon, VBtn } from "vuetify/components";
 import { VIcon } from "vuetify/components/VIcon";
 
+const emit = defineEmits(['ignoreItem'])
 const { lootEntry } = defineProps<{ lootEntry: LootEntry }>()
 
 const totalValue = computed(() =>
   lootEntry.item.value * lootEntry.amount
+
+const ignoreItem = () => {
+  emit('ignoreItem', lootEntry.item)
+}
 )
 
 </script>
@@ -31,6 +40,7 @@ const totalValue = computed(() =>
         <v-icon icon="mdi-gold">
         </v-icon>
       </v-chip>
+      <v-btn icon="mdi-eye-off" size="small" @click="ignoreItem"></v-btn>
     </VCardText>
   </VCard>
 </template>

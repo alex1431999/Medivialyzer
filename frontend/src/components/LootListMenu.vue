@@ -2,7 +2,8 @@
 import { VCard, VCardText } from "vuetify/components/VCard";
 import { VBtn, VIcon, VChip } from 'vuetify/components'
 
-const { totalLootValue } = defineProps<{ totalLootValue: number }>()
+const { totalLootValue, ignoredItems } = defineProps<{ totalLootValue: number, ignoredItems: Set<string> }>()
+const emit = defineEmits(['reset', 'openSettings'])
 </script>
 
 <template>
@@ -10,6 +11,9 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
     <v-card-text class="loot-list-menu__card-text">
       <v-btn color="secondary" @click="$emit('reset')">
         Reset hunt
+       <v-btn color="primary" @click="emit('openSettings')">
+         Settings
+       </v-btn>
       </v-btn>
 
       <v-chip color="secondary">
