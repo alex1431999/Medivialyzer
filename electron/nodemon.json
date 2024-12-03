@@ -1,4 +1,5 @@
 {
-  "watch": ["electron/*"],
+  "watch": ["./*"],
+  "ignore": ["./dist"],
   "ext": "js,css,ts,json"
 }
