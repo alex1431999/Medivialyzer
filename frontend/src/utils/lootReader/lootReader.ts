@@ -20,7 +20,7 @@ export class LootReader {
             }
 
             if (lootDataTypeLoot.matches(line) && since < currentTimeStamp) {
-                const items: Item[] = lootDataTypeLoot.toValue(line).filter(item => item !== undefined)
+                const items: Item[] = lootDataTypeLoot.toValue(line)
                 const lootToAdd = items.map(item => ({
                     item,
                     timestamp: currentTimeStamp,

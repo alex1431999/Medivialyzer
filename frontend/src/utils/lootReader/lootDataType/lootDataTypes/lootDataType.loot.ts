@@ -14,7 +14,7 @@ export class LootDataTypeLoot extends LootDataType {
         const lootString = line.toLowerCase().split(':')[2]
         const lootValues = lootString.split(',')
 
-        return lootValues.map(value => getItem(value.trim()))
+        return lootValues.map(value => getItem(value.trim())).filter(item => item !== undefined)
     }
 }
 
