@@ -39,7 +39,7 @@ export class LootReader {
     }
 }
 
-//const path = 'D:\\projects\\Medivialyzer/medivialyzer/src/utils/lootReader/Loot.txt'
+//const path = 'D:\\projects\\Medivialyzer/frontend/src/utils/lootReader/Loot.txt'
 //const lootData = window.electron.fs.readFileSync(path).toString();
 const lootData = "\n" +
     "Channel saved at Wed Nov 27 19:34:52 2024\n" +
