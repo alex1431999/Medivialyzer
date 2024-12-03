@@ -6,6 +6,5 @@ const loot = lootReader.getLoot(0)
 </script>
 
 <template>
-  <LootList :loot="loot" ></LootList>
+    <LootList :loot="loot" ></LootList>
 </template>
-

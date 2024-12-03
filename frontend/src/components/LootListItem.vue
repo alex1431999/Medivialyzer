@@ -1,12 +1,24 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 
-import {Loot} from "../utils/loot/loot.types.ts";
+import { LootEntry} from "../utils/loot/loot.types.ts";
+import { VCard, VCardText } from "vuetify/components/VCard";
 
-const { lootEntry } = defineProps<{ lootEntry: Loot }>()
+const { lootEntry } = defineProps<{ lootEntry: LootEntry }>()
 
 </script>
 
 <template>
-  {{ lootEntry }}
+  <VCard class="loot-list-item__card">
+    <VCardText>
+      {{ lootEntry.item.name }}
+      {{ lootEntry.amount }}
+    </VCardText>
+  </VCard>
 </template>
+
+<style scoped>
+.loot-list-item__card {
+  width: 100%;
+}
+</style>
