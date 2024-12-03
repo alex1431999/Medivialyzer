@@ -1,6 +1,6 @@
 import {Item} from "./item.types.ts";
 
 export const items: Item[] = [
-    { name: 'ham', value: 0 },
-    { name: 'meat', value: 0 }
+    { name: 'ham', value: 10 },
+    { name: 'meat', value: 5 }
 ]
