@@ -2,6 +2,10 @@ import {Item} from "./item.types.ts";
 
 export const items: Item[] = [
     {
+        "name": "Gold Coin",
+        "value": 1,
+    },
+    {
         "name": "Albino Scale Mail",
         "value": 0
     },

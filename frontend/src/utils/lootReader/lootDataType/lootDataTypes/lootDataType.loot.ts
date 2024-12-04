@@ -1,4 +1,5 @@
 import {LootDataType} from "../lootDataType.ts";
+import * as _ from 'lodash'
 
 import {Item} from "../../../item/item.types.ts";
 import {getItem} from "../../../item/item.helpers.ts";
@@ -14,7 +15,18 @@ export class LootDataTypeLoot extends LootDataType {
         const lootString = line.toLowerCase().split(':')[2]
         const lootValues = lootString.split(',')
 
-        return lootValues.map(value => getItem(value.trim())).filter(item => item !== undefined)
+        return lootValues.map(value => {
+            const valueTrimmed = value.trim()
+            const [amountString, ...potentialNameString] = valueTrimmed.split(' ')
+
+            const hasAnAmount = !isNaN(amountString as any)
+            const name = hasAnAmount ? potentialNameString.join(' ') : valueTrimmed
+            const amount = hasAnAmount ? parseInt(amountString, 10) : 1
+
+            const item = getItem(name)
+
+            return item ? _.times(amount, () => item) : []
+        }).flat()
     }
 }
 
