@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig(({ mode }) => ({
   build: {
-    outDir: './../dist',
+    outDir: '../electron/dist',
     chunkSizeWarningLimit: 1000,
   },
   base: mode == 'development' ? '' : './',

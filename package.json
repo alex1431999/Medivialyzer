@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build": "yarn --cwd ./frontend build && yarn --cwd ./electron build && yarn --cwd ./electron builder"
+  }
+}

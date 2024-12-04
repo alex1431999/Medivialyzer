@@ -1,4 +1,5 @@
 dist
+dist_electron
 node_modules
 .idea
 .vite
