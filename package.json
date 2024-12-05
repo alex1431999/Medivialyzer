@@ -1,4 +1,7 @@
 {
+  "name": "medivialyzer",
+  "author": "alex1431999",
+  "license": "MIT",
   "scripts": {
     "build": "yarn --cwd ./frontend build && yarn --cwd ./electron build && yarn --cwd ./electron builder"
   }

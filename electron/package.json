@@ -1,5 +1,5 @@
 {
-  "name": "electron-vue",
+  "name": "medivialyzer-electron",
   "version": "1.0.0",
   "main": "./dist/main.js",
   "license": "MIT",
