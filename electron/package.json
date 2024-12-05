@@ -32,7 +32,7 @@
   },
   "build": {
     "appId": "com.official-electron-vue.app",
-    "productName": "Electron Vue",
+    "productName": "Medivialyzer",
     "copyright": "Copyright © 2022 ${author}",
     "publish": [
       {
