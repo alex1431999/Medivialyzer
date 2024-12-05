@@ -15,18 +15,30 @@ export class LootDataTypeLoot extends LootDataType {
         const lootString = line.toLowerCase().split(':')[2]
         const lootValues = lootString.split(',')
 
-        return lootValues.map(value => {
-            const valueTrimmed = value.trim().replace(/\./g, '')
-            const [amountString, ...potentialNameString] = valueTrimmed.split(' ')
+        return lootValues.map(lootValue => {
+            const valueSanitised = this.sanitiseValue(lootValue)
+            const [amountString, ...potentialNameString] = valueSanitised.split(' ')
 
             const hasAnAmount = !isNaN(amountString as any)
-            const name = hasAnAmount ? potentialNameString.join(' ') : valueTrimmed
+            const name = hasAnAmount ? potentialNameString.join(' ') : valueSanitised
             const amount = hasAnAmount ? parseInt(amountString, 10) : 1
 
             const item = getItem(name)
 
             return item ? _.times(amount, () => item) : []
         }).flat()
+    }
+
+    private sanitiseValue(lootValue: string): string {
+        const lootValueTrimmed = lootValue.trim() // Remove white space
+        const lootValueWithoutDot = lootValueTrimmed.replace(/\./g, '') // Remove trailing dot
+
+        if (lootValueWithoutDot.startsWith('a ') || lootValueWithoutDot.startsWith('an ')) {
+            const [_, ...rest] = lootValueWithoutDot.split(' ')
+            return rest.join(' ')
+        }
+
+        return lootValueWithoutDot
     }
 }
 
