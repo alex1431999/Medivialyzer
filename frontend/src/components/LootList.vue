@@ -42,7 +42,8 @@ function onHuntReset() {
 
 <style scoped>
 .loot-list__items {
-  height: 70vh
+  height: 65vh;
+  overflow-y: scroll;
 }
 
 .loot-list__list-item {
