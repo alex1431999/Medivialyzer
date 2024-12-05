@@ -1,1 +1,1 @@
-export const isDev = true // TODO read from env vars
+export const isDev = process.env.NODE_ENV === 'development';

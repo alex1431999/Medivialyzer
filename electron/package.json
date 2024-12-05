@@ -1,15 +1,15 @@
 {
-  "name": "medivialyzer",
+  "name": "electron-vue",
   "version": "1.0.0",
   "main": "./dist/main.js",
   "license": "MIT",
   "author": "alex1431999",
   "scripts": {
-    "build": "tsc",
-    "watch": "nodemon --exec yarn serve",
-    "serve": "yarn build && wait-on tcp:3000 && electron .",
+    "build": "cross-env NODE_ENV='production' tsc",
+    "watch": "cross-env NODE_ENV='develop' nodemon --exec yarn serve",
+    "serve": "cross-env NODE_ENV='develop' yarn build && wait-on tcp:3000 && electron .",
     "electron": "electron .",
-    "builder": "electron-builder",
+    "builder": "cross-env NODE_ENV='production' electron-builder",
     "electron-rebuild": "./node_modules/.bin/electron-rebuild",
     "postinstall": "electron-builder install-app-deps"
   },
@@ -24,6 +24,7 @@
     "wait-on": "^7.0.1"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "electron-log": "^4.4.8",
     "electron-store": "^8.1.0",
     "electron-updater": "^5.3.0",
@@ -31,7 +32,7 @@
   },
   "build": {
     "appId": "com.official-electron-vue.app",
-    "productName": "electron Vue",
+    "productName": "Electron Vue",
     "copyright": "Copyright © 2022 ${author}",
     "publish": [
       {
@@ -53,7 +54,7 @@
     ],
     "directories": {
       "buildResources": "assets",
-      "output": "./dist_electron"
+      "output": "dist_electron"
     }
   }
 }
