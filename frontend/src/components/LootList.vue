@@ -4,11 +4,21 @@ import LootListItem from './LootListItem.vue'
 import {groupLoot} from "../utils/loot/loot.helpers.ts";
 import LootListMenu from "./LootListMenu.vue";
 import * as _ from "lodash";
-import {lootReader} from "../utils/lootReader/lootReader.ts";
+import {LootReader} from "../utils/lootReader/lootReader.ts";
+import {electron} from "../utils/electron/electron.constants.ts";
 
 const since = ref<number>(0)
+const lootData = ref<string>('')
 
-const loot = computed(() => lootReader.getLoot(since.value))
+// Update the loot data regularly
+setInterval(() => {
+  lootData.value = electron.getLootData()
+}, 1000) // TODO increase the timeout for production
+
+const loot = computed(() => {
+  const lootReader = new LootReader(lootData.value)
+  return lootReader.getLoot(since.value)
+})
 
 const lootGrouped = computed(() => groupLoot(loot.value))
 

@@ -16,7 +16,7 @@ export class LootDataTypeLoot extends LootDataType {
         const lootValues = lootString.split(',')
 
         return lootValues.map(value => {
-            const valueTrimmed = value.trim()
+            const valueTrimmed = value.trim().replace(/\./g, '')
             const [amountString, ...potentialNameString] = valueTrimmed.split(' ')
 
             const hasAnAmount = !isNaN(amountString as any)

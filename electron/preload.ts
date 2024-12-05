@@ -7,5 +7,5 @@ contextBridge.exposeInMainWorld("browserWindow", {
 
 
 contextBridge.exposeInMainWorld('electron', {
-    lootData: getLootData(),
+    getLootData: () => getLootData(),
 });

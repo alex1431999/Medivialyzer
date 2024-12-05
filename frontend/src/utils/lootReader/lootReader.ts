@@ -38,5 +38,3 @@ export class LootReader {
         this.lootData.split("\n").forEach(callback)
     }
 }
-
-export const lootReader = new LootReader(window.electron.lootData);
