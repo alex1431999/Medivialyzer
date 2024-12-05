@@ -37,7 +37,7 @@ function onHuntReset() {
   <div class="loot-list__items">
     <LootListItem class="loot-list__list-item" v-for="lootEntry in lootGrouped" :key="lootEntry.item.name" :loot-entry="lootEntry"></LootListItem>
   </div>
-  <LootListMenu :total-loot-value="totalLootValue" @reset="onHuntReset"/>
+  <LootListMenu class="loot-list__menu" :total-loot-value="totalLootValue" @reset="onHuntReset"/>
 </template>
 
 <style scoped>
@@ -48,5 +48,9 @@ function onHuntReset() {
 
 .loot-list__list-item {
   margin-bottom: 16px;
+}
+
+.loot-list__menu {
+  margin-top: 16px;
 }
 </style>
