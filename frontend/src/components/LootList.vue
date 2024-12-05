@@ -8,7 +8,7 @@ import {LootReader} from "../utils/lootReader/lootReader.ts";
 import {electron} from "../utils/electron/electron.constants.ts";
 import {useConfigStore} from "../stores/configStore.ts";
 
-const config = useConfigStore()
+const configStore = useConfigStore()
 
 const lootData = ref<string>('')
 
@@ -19,7 +19,7 @@ setInterval(() => {
 
 const loot = computed(() => {
   const lootReader = new LootReader(lootData.value)
-  return lootReader.getLoot(config.since)
+  return lootReader.getLoot(configStore.config.since)
 })
 
 const lootGrouped = computed(() => groupLoot(loot.value))
@@ -33,7 +33,7 @@ const totalLootValue = computed(() => {
 })
 
 function onHuntReset() {
-  config.$patch({ since: Date.now() })
+  configStore.setConfig({ since: Date.now() })
 }
 
 </script>
