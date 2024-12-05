@@ -5,17 +5,17 @@
   "license": "MIT",
   "author": "alex1431999",
   "scripts": {
-    "build": "cross-env NODE_ENV='production' tsc",
-    "watch": "cross-env NODE_ENV='develop' nodemon --exec yarn serve",
-    "serve": "cross-env NODE_ENV='develop' yarn build && wait-on tcp:3000 && electron .",
-    "electron": "electron .",
-    "builder": "cross-env NODE_ENV='production' electron-builder",
+    "build": "tsc",
+    "watch": "nodemon --exec yarn serve",
+    "serve": "yarn build && wait-on tcp:3000 && yarn electron",
+    "electron": "node_modules/.bin/electron ./dist/main.js --dev",
+    "builder": "electron-builder",
     "electron-rebuild": "./node_modules/.bin/electron-rebuild",
     "postinstall": "electron-builder install-app-deps"
   },
   "devDependencies": {
     "concurrently": "^7.6.0",
-    "electron": "^22.0.0",
+    "electron": "^33.2.1",
     "electron-builder": "^23.6.0",
     "electron-devtools-installer": "^3.2.0",
     "json": "^11.0.0",
