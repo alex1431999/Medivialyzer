@@ -5,9 +5,13 @@ export type Config = {
     since: number
 }
 
+const DEFAULT_CONFIG: Config = {
+    since: 0,
+}
+
 export const useConfigStore = defineStore('config', {
     state: () => {
-        return { config: electron.getConfig() }
+        return { config: electron.getConfig() || DEFAULT_CONFIG }
     },
     actions: {
         setConfig(config: Partial<Config>) {
