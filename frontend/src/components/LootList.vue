@@ -6,8 +6,10 @@ import LootListMenu from "./LootListMenu.vue";
 import * as _ from "lodash";
 import {LootReader} from "../utils/lootReader/lootReader.ts";
 import {electron} from "../utils/electron/electron.constants.ts";
+import {useConfigStore} from "../stores/configStore.ts";
 
-const since = ref<number>(0)
+const config = useConfigStore()
+
 const lootData = ref<string>('')
 
 // Update the loot data regularly
@@ -17,7 +19,7 @@ setInterval(() => {
 
 const loot = computed(() => {
   const lootReader = new LootReader(lootData.value)
-  return lootReader.getLoot(since.value)
+  return lootReader.getLoot(config.since)
 })
 
 const lootGrouped = computed(() => groupLoot(loot.value))
@@ -31,7 +33,7 @@ const totalLootValue = computed(() => {
 })
 
 function onHuntReset() {
-  since.value = Date.now()
+  config.$patch({ since: Date.now() })
 }
 
 </script>
