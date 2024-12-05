@@ -21,6 +21,9 @@ const loot = computed(() => {
 })
 
 const lootGrouped = computed(() => groupLoot(loot.value))
+const lootSorted = computed(() => lootGrouped.value.sort((a, b) =>
+    (a.amount * a.item.value) > (b.amount * b.item.value) ? -1 : 1
+))
 
 const totalLootValue = computed(() => {
   const values = lootGrouped.value.map(lootEntry => lootEntry.item.value * lootEntry.amount)
@@ -35,7 +38,7 @@ function onHuntReset() {
 
 <template>
   <div class="loot-list__items">
-    <LootListItem class="loot-list__list-item" v-for="lootEntry in lootGrouped" :key="lootEntry.item.name" :loot-entry="lootEntry"></LootListItem>
+    <LootListItem class="loot-list__list-item" v-for="lootEntry in lootSorted" :key="lootEntry.item.name" :loot-entry="lootEntry"></LootListItem>
   </div>
   <LootListMenu class="loot-list__menu" :total-loot-value="totalLootValue" @reset="onHuntReset"/>
 </template>
