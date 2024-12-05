@@ -1,1 +1,1 @@
-export const electron = window.electron
+export const electron = (window as any).electron
