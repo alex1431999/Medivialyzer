@@ -48,3 +48,31 @@ body {
     background-color: #f9f9f9;
   }
 }
+
+
+/* Style the scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* Slimmer width of the scrollbar */
+}
+
+/* Style the track (the background of the scrollbar) */
+::-webkit-scrollbar-track {
+  background: #2e2e2e; /* Dark background color for the track */
+  border-radius: 10px; /* Rounded corners */
+}
+
+/* Style the thumb (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the thumb */
+  border-radius: 10px; /* Rounded corners */
+  border: 2px solid #2e2e2e; /* Add some space around the thumb */
+}
+
+/* Style the thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
+}
+
+/* Firefox scrollbar styles */
+scrollbar-width: thin; /* Make scrollbar thin in Firefox */
+scrollbar-color: #888 #2e2e2e; /* Thumb color and track color */
