@@ -8,6 +8,8 @@ import {LootReader} from "../utils/lootReader/lootReader.ts";
 import {electron} from "../utils/electron/electron.constants.ts";
 import {useConfigStore} from "../stores/configStore.ts";
 
+const THIRTY_MINUTES = 30 * 60 * 1000;
+
 const configStore = useConfigStore()
 
 const lootData = ref<string>('')
@@ -32,8 +34,16 @@ const totalLootValue = computed(() => {
   return _.sum(values)
 })
 
-function onHuntReset() {
+function onReset() {
   configStore.setConfig({ since: Date.now() })
+}
+
+function onForward() {
+  configStore.setConfig({ since: configStore.config.since + THIRTY_MINUTES})
+}
+
+function onBack() {
+  configStore.setConfig({ since: configStore.config.since - THIRTY_MINUTES})
 }
 
 </script>
@@ -42,7 +52,7 @@ function onHuntReset() {
   <div class="loot-list__items">
     <LootListItem class="loot-list__list-item" v-for="lootEntry in lootSorted" :key="lootEntry.item.name" :loot-entry="lootEntry"></LootListItem>
   </div>
-  <LootListMenu class="loot-list__menu" :total-loot-value="totalLootValue" @reset="onHuntReset"/>
+  <LootListMenu class="loot-list__menu" :total-loot-value="totalLootValue" @reset="onReset" @forward="onForward" @back="onBack"/>
 </template>
 
 <style scoped>

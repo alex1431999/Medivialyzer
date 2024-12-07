@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { VCard, VCardText } from "vuetify/components/VCard";
-import { VBtn, VIcon, VChip } from 'vuetify/components'
+import { VBtn, VIcon, VChip, VMenu } from 'vuetify/components'
+import LootListTimeControl from "./LootListTimeControl.vue";
 
 const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 </script>
@@ -8,9 +9,9 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 <template>
   <v-card class="loot-list-menu__card">
     <v-card-text class="loot-list-menu__card-text">
-      <v-btn color="secondary" @click="$emit('reset')">
-        Reset hunt
-      </v-btn>
+      <div>PLACEHOLDER</div>
+
+      <LootListTimeControl @reset="$emit('reset')" @back="$emit('back')" @forward="$emit('forward')" ></LootListTimeControl>
 
       <v-chip color="secondary">
         {{ totalLootValue }}
