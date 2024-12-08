@@ -2,10 +2,25 @@
 
 import {VBtn, VDialog, VTable, VCard, VCardText, VChip, VIcon, VCardTitle, VCardActions}  from "vuetify/components";
 import {SUPPLIES} from "../utils/supplies/supplies.constants.ts";
-import {computed} from "vue";
+import {computed, ref} from "vue";
+
+type SuppliesData = Record<string, { before: number, after: number }>
+
+const INITIAL_SUPPLIES_DATA: SuppliesData = SUPPLIES.reduce((data, supply) => ({ ...data, [supply.name]: { before: 0, after: 0 } }) ,{})
+
+const suppliesData = ref<SuppliesData>(INITIAL_SUPPLIES_DATA)
 
 const totalSuppliesUsed = computed(() => 100) // TODO
 
+
+function onBeforeChanged(supplyName: keyof SuppliesData, value: string | null) {
+  suppliesData.value[supplyName].before = parseInt(value || '0', 10)
+}
+
+function onAfterChanged(supplyName: keyof SuppliesData, value: string | null) {
+  suppliesData.value[supplyName].after = parseInt(value || '0', 10)
+}
+// TODO fix console warning
 </script>
 
 <template>
@@ -43,8 +58,20 @@ const totalSuppliesUsed = computed(() => 100) // TODO
             <tbody>
               <tr v-for="supply in SUPPLIES">
                 <td>{{ supply.name }}</td>
-                <td><input class="supplies-modal__supply-input" type="number" :size="5"></td>
-                <td><input class="supplies-modal__supply-input" type="number"></td>
+                <td>
+                  <input
+                    :value="suppliesData[supply.name].before"
+                    class="supplies-modal__supply-input"
+                    type="number"
+                    @change="onBeforeChanged(supply.name, ($event.target as any).value)">
+                </td>
+                <td>
+                  <input
+                    :value="suppliesData[supply.name].after"
+                    class="supplies-modal__supply-input"
+                    type="number"
+                    @change="onAfterChanged(supply.name, ($event.target as any).value)">
+                </td>
               </tr>
             </tbody>
           </v-table>
