@@ -10,7 +10,14 @@ const INITIAL_SUPPLIES_DATA: SuppliesData = SUPPLIES.reduce((data, supply) => ({
 
 const suppliesData = ref<SuppliesData>(INITIAL_SUPPLIES_DATA)
 
-const totalSuppliesUsed = computed(() => 100) // TODO
+const totalSuppliesUsed = computed(() => SUPPLIES.reduce((total, supply) => {
+  const before = suppliesData.value[supply.name].before
+  const after = suppliesData.value[supply.name].after
+  const amountUsed = before - after
+  const totalSupplyValue = amountUsed * supply.value
+
+  return total + totalSupplyValue
+}, 0))
 
 
 function onBeforeChanged(supplyName: keyof SuppliesData, value: string | null) {
