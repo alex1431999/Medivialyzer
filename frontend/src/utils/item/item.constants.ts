@@ -1,6 +1,6 @@
 import {Item} from "./item.types.ts";
 
-export const items: Item[] = [
+export const ITEMS: Item[] = [
     {
         "name": "Gold Coin",
         "value": 1,
