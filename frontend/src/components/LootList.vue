@@ -7,10 +7,7 @@ import * as _ from "lodash";
 import {LootReader} from "../utils/lootReader/lootReader.ts";
 import {electron} from "../utils/electron/electron.constants.ts";
 import {useConfigStore} from "../stores/configStore.ts";
-
-const THIRTY_MINUTES = 30 * 60 * 1000;
-
-const FIVE_SECONDS = 5 * 1000;
+import {FIVE_SECONDS, THIRTY_MINUTES} from "../constants/time.ts";
 
 const configStore = useConfigStore()
 
