@@ -9,7 +9,7 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 <template>
   <v-card class="loot-list-menu__card">
     <v-card-text class="loot-list-menu__card-text">
-      <div>PLACEHOLDER</div>
+      <v-btn size="small" icon="mdi-flask" color="secondary" />
 
       <LootListTimeControl @reset="$emit('reset')" @back="$emit('back')" @forward="$emit('forward')" ></LootListTimeControl>
 
