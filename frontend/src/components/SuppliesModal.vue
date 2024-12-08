@@ -27,7 +27,6 @@ function onBeforeChanged(supplyName: keyof SuppliesData, value: string | null) {
 function onAfterChanged(supplyName: keyof SuppliesData, value: string | null) {
   suppliesData.value[supplyName].after = parseInt(value || '0', 10)
 }
-// TODO fix console warning
 </script>
 
 <template>
