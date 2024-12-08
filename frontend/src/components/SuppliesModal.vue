@@ -1,7 +1,10 @@
 <script setup lang="ts">
 
-import {VBtn, VDialog, VTable, VCard, VCardActions, VCardText, VBadge}  from "vuetify/components";
+import {VBtn, VDialog, VTable, VCard, VCardText, VChip, VIcon, VCardTitle, VCardActions}  from "vuetify/components";
 import {SUPPLIES} from "../utils/supplies/supplies.constants.ts";
+import {computed} from "vue";
+
+const totalSuppliesUsed = computed(() => 100) // TODO
 
 </script>
 
@@ -12,7 +15,16 @@ import {SUPPLIES} from "../utils/supplies/supplies.constants.ts";
     </template>
 
     <template v-slot:default="{ isActive }">
-      <v-card title="Supplies">
+      <v-card>
+        <v-card-title class="supplies-modal__header">
+          <div>
+            Supplies
+          </div>
+          <v-chip color="warning">
+            {{ totalSuppliesUsed }}
+            <v-icon icon="mdi-gold" />
+          </v-chip>
+        </v-card-title>
         <v-card-text>
           <v-table>
             <thead>
@@ -50,6 +62,12 @@ import {SUPPLIES} from "../utils/supplies/supplies.constants.ts";
 </template>
 
 <style scoped>
+.supplies-modal__header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px
+}
+
 .supplies-modal__supply-input {
   width: 50px;
 }

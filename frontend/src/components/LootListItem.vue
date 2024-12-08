@@ -28,8 +28,7 @@ const totalValue = computed(() =>
       <!-- Total value -->
       <v-chip color="secondary">
         {{ totalValue }}
-        <v-icon icon="mdi-gold">
-        </v-icon>
+        <v-icon icon="mdi-gold" />
       </v-chip>
     </VCardText>
   </VCard>
