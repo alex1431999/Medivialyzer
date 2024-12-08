@@ -47,7 +47,7 @@ function onAfterChanged(supplyName: keyof SuppliesData, value: string | null) {
           </v-chip>
         </v-card-title>
         <v-card-text>
-          <v-table>
+          <v-table class="supplies-modal__table">
             <thead>
               <tr>
                 <th>
@@ -99,6 +99,10 @@ function onAfterChanged(supplyName: keyof SuppliesData, value: string | null) {
   display: flex;
   justify-content: space-between;
   margin-top: 10px
+}
+
+.supplies-modal__table {
+  max-height: 300px;
 }
 
 .supplies-modal__supply-input {
