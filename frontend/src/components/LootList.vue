@@ -8,6 +8,7 @@ import {LootReader} from "../utils/lootReader/lootReader.ts";
 import {electron} from "../utils/electron/electron.constants.ts";
 import {useConfigStore} from "../stores/configStore.ts";
 import {FIVE_SECONDS, THIRTY_MINUTES} from "../constants/time.ts";
+import LootTimeDisplay from "./LootTimeDisplay.vue";
 
 const configStore = useConfigStore()
 
@@ -48,6 +49,7 @@ function onBack() {
 </script>
 
 <template>
+  <LootTimeDisplay class="loot-list__time-display" :since="configStore.config.since" />
   <div class="loot-list__items">
     <LootListItem class="loot-list__list-item" v-for="lootEntry in lootSorted" :key="lootEntry.item.name" :loot-entry="lootEntry"></LootListItem>
   </div>
@@ -55,8 +57,12 @@ function onBack() {
 </template>
 
 <style scoped>
+.loot-list__time-display {
+  margin-bottom: 16px;
+}
+
 .loot-list__items {
-  height: 65vh;
+  height: 57vh;
   overflow-y: scroll;
 }
 
