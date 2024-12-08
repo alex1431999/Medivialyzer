@@ -10,6 +10,8 @@ import {useConfigStore} from "../stores/configStore.ts";
 
 const THIRTY_MINUTES = 30 * 60 * 1000;
 
+const FIVE_SECONDS = 5 * 1000;
+
 const configStore = useConfigStore()
 
 const lootData = ref<string>('')
@@ -17,7 +19,7 @@ const lootData = ref<string>('')
 // Update the loot data regularly
 setInterval(() => {
   lootData.value = electron.getLootData()
-}, 1000) // TODO increase the timeout for production
+}, FIVE_SECONDS)
 
 const loot = computed(() => {
   const lootReader = new LootReader(lootData.value)
