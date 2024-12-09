@@ -25,6 +25,14 @@ export const useConfigStore = defineStore('config', {
                 this.config.ignoredItems.push(itemName);
                 electron.setConfig(JSON.stringify(this.config))
             }
+        },
+        removeIgnoredItems(itemName: string) {
+          const index = this.config.ignoredItems.indexOf(itemName);
+
+          if (index > -1) {
+              this.config.ignoredItems.splice(index, 1);
+              electron.setConfig(JSON.stringify(this.config))
+          }
         }
     }
 })
