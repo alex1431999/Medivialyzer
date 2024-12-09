@@ -9,6 +9,7 @@ import {electron} from "../utils/electron/electron.constants.ts";
 import {useConfigStore} from "../stores/configStore.ts";
 import {FIVE_SECONDS, THIRTY_MINUTES} from "../constants/time.ts";
 import LootTimeDisplay from "./LootTimeDisplay.vue";
+import {Item} from "../utils/item/item.types.ts";
 
 const configStore = useConfigStore()
 
@@ -46,12 +47,16 @@ function onBack() {
   configStore.setConfig({ since: configStore.config.since - THIRTY_MINUTES})
 }
 
+function onIgnore(itemName: string) {
+  configStore.ignoreItem(itemName)
+}
+
 </script>
 
 <template>
   <LootTimeDisplay class="loot-list__time-display" :since="configStore.config.since" />
   <div class="loot-list__items">
-    <LootListItem class="loot-list__list-item" v-for="lootEntry in lootSorted" :key="lootEntry.item.name" :loot-entry="lootEntry"></LootListItem>
+    <LootListItem class="loot-list__list-item" v-for="lootEntry in lootSorted" :key="lootEntry.item.name" :loot-entry="lootEntry" @ignore="onIgnore"></LootListItem>
   </div>
   <LootListMenu class="loot-list__menu" :total-loot-value="totalLootValue" @reset="onReset" @forward="onForward" @back="onBack"/>
 </template>

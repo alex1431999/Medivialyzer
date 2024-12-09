@@ -8,6 +8,6 @@ contextBridge.exposeInMainWorld("browserWindow", {
 
 contextBridge.exposeInMainWorld('electron', {
     getLootData: () => getLootData(),
-    setConfig: (config: any) => configStore.set('config', config),
+    setConfig: (config: string) => configStore.set('config', JSON.parse(config)),
     getConfig: () => configStore.get('config'),
 });
