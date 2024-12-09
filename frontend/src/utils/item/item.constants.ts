@@ -1175,7 +1175,7 @@ export const ITEMS: Item[] = [
     },
     {
         "name": "Time Ring",
-        "value": 1500
+        "value": 100
     },
     {
         "name": "Torn Quicksand Boots",
