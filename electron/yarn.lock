@@ -913,11 +913,6 @@ crc@^3.8.0:
   dependencies:
     buffer "^5.1.0"
 
-cross-env-shell@^7.0.3:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/cross-env-shell/-/cross-env-shell-7.0.3.tgz#196dfea5093d17d78c38702195af4c6ce2b1a0ce"
-  integrity sha512-ZEtnHInQRRzuAbmMpUqu/mk1jaZun14WdcmnpzZZ6Bpi1BLTPkbKioQ6+wkFssf+m/DpdttDpsCX6g8zU9W40A==
-
 cross-env@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-7.0.3.tgz#865264b29677dc015ba8418918965dd232fc54cf"
