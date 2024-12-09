@@ -9,7 +9,6 @@ import {electron} from "../utils/electron/electron.constants.ts";
 import {useConfigStore} from "../stores/configStore.ts";
 import {FIVE_SECONDS, THIRTY_MINUTES} from "../constants/time.ts";
 import LootTimeDisplay from "./LootTimeDisplay.vue";
-import {Item} from "../utils/item/item.types.ts";
 
 const configStore = useConfigStore()
 
@@ -25,7 +24,8 @@ const loot = computed(() => {
   return lootReader.getLoot(configStore.config.since)
 })
 
-const lootGrouped = computed(() => groupLoot(loot.value))
+const lootFiltered = computed(() => loot.value.filter(lootCurrent => !configStore.config.ignoredItems.includes(lootCurrent.item.name)))
+const lootGrouped = computed(() => groupLoot(lootFiltered.value))
 const lootSorted = computed(() => lootGrouped.value.sort((a, b) =>
     (a.amount * a.item.value) > (b.amount * b.item.value) ? -1 : 1
 ))
