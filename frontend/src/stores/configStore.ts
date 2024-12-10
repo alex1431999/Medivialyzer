@@ -13,7 +13,7 @@ const DEFAULT_CONFIG: Config = {
 
 export const useConfigStore = defineStore('config', {
     state: () => {
-        return { config: electron.getConfig() || DEFAULT_CONFIG }
+        return { config: {...DEFAULT_CONFIG, ...electron.getConfig()} }
     },
     actions: {
         setConfig(config: Partial<Config>) {
