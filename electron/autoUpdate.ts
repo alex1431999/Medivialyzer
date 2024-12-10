@@ -8,9 +8,9 @@ export default () => {
         autoUpdater.addListener('update-downloaded', (info: UpdateInfo) => {
             dialog
                 .showMessageBox({
-                    title: 'Restart Believers Sword?',
+                    title: 'Restart Medivialyzer?',
                     type: 'question',
-                    message: `New version "Believers Sword ${info.version}" has been successfully downloaded.`,
+                    message: `New version "Medivialyzer ${info.version}" has been successfully downloaded.`,
                     buttons: ['Yes', 'Later', 'Yes, Update'],
                     cancelId: 1,
                 })
