@@ -1,4 +1,5 @@
 # Medivialyzer
+![medivialyzer-preview](https://github.com/alex1431999/Medivialyzer/blob/main/docs/assets/medivialyzer-preview.PNG)
 
 ## Getting started
 ### Install the client
