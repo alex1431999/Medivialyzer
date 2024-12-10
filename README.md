@@ -3,7 +3,13 @@
 
 ## Getting started
 ### Install the client
-TODO
+- Download the client [here](https://github.com/alex1431999/Medivialyzer/releases/download/test-release/medivialyzer.zip).
+- Unzip the archive
+- Run `Medivialyzer Setup <version>.exe`
+
+The client should open right after the install.
+
+If you want to open the application in the future you can simply search for "Medivialyzer" in your windows search.
 
 ### Configure Medivia
 1. Open the settings menu in game
