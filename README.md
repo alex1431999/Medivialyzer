@@ -29,6 +29,9 @@ This is a limitation by the game that we have to work around.
 If relogging does not fix it, make sure you have enabled the `automatically save loot messages to text file` 
 in your Medivia settings under `Console`
 
+**Please note:** do **not** use the `Save Messages` button on your loot window. It will duplicate the loot
+and not just update the loot file.
+
 ### Does Medivia allow the use of Medivialyzer?
 Yes they do. It has been confirmed by their staff that you are allowed to use Medivialyzer and you will
 not get banned for using it.
