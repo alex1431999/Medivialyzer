@@ -22,6 +22,15 @@ to Medivialyzer. You should see your first results within 30 minutes or you can 
 by logging out and in.
 
 ## FAQ
+### Why is Windows warning me about the install?
+Windows can't identify the publisher (me) of the project. That is because the application needs to be
+signed and the identity needs to be verified by a central authority. But that's pretty expansive for an open source
+dev (about 40€/month).
+
+I am currently looking into getting a free certificate for open source development, but until then
+please take my word for the application being safe, or if you don't trust me and are technically
+savvy you can also clone the repo and make a build yourself.
+
 #### Why isn't my loot updating?
 The loot file takes about 30 minutes to update. You an force an update by logging out and back in.
 This is a limitation by the game that we have to work around.
