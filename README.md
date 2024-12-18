@@ -32,7 +32,7 @@ please take my word for the application being safe, or if you don't trust me and
 savvy you can also clone the repo and make a build yourself.
 
 #### Why isn't my loot updating?
-The loot file takes about 30 minutes to update. You an force an update by logging out and back in.
+The loot file takes about 30 minutes to update. You can force an update by logging out and back in.
 This is a limitation by the game that we have to work around.
 
 If relogging does not fix it, make sure you have enabled the `automatically save loot messages to text file` 
