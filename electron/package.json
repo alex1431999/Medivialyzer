@@ -41,10 +41,16 @@
         "repo": "Medivialyzer"
       }
     ],
+    "win": {
+      "target": "nsis"
+    },
     "nsis": {
-      "oneClick": true,
-      "allowToChangeInstallationDirectory": false,
-      "deleteAppDataOnUninstall": true
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
     },
     "files": [
       "dist/**/*"
