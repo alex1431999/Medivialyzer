@@ -21,6 +21,11 @@ After killing your first monsters, Medivia will eventually write a loot file whi
 to Medivialyzer. You should see your first results within 30 minutes or you can always force a refresh
 by logging out and in.
 
+## Roadmap
+You can see the features that are currently being worked on [here](https://github.com/alex1431999/Medivialyzer/milestone/1).
+
+Feel free to participate by suggesting new features or filing bug reports!
+
 ## FAQ
 ### Why is Windows warning me about the install?
 Windows can't identify the publisher (me) of the project. That is because the application needs to be
