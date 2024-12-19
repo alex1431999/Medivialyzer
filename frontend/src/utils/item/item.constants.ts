@@ -1306,6 +1306,10 @@ export const ITEMS: Item[] = [
         "value": 110000
     },
     {
+        "name": "Watcher Shield",
+        "value": 7000
+    },
+    {
         "name": "Webcrawler Boots",
         "value": 53000
     },
@@ -1444,5 +1448,9 @@ export const ITEMS: Item[] = [
     {
         "name": "Abyssal Fang",
         "value": 5000
+    },
+    {
+        "name": "Ritual Mask",
+        "value": 1400
     }
 ]
