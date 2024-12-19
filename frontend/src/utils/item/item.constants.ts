@@ -1452,5 +1452,9 @@ export const ITEMS: Item[] = [
     {
         "name": "Ritual Mask",
         "value": 1400
+    },
+    {
+        "name": "Spider Silk",
+        "value": 40
     }
 ]
