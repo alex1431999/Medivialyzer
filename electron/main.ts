@@ -2,7 +2,6 @@ import { app, BrowserWindow, BrowserWindowConstructorOptions, ipcMain, screen } 
 import path from "path";
 import { isDev } from "./env";
 import { appConfig } from "./electronStore/configuration";
-import AppUpdater from "./autoUpdate";
 
 async function createWindow() {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -25,9 +24,6 @@ async function createWindow() {
 
     if (appBounds !== undefined && appBounds !== null) Object.assign(BrowserWindowOptions, appBounds);
     const mainWindow = new BrowserWindow(BrowserWindowOptions);
-
-    // auto updated
-    if (!isDev) AppUpdater();
 
     // and load the index.html of the app.
     // win.loadFile("index.html");
