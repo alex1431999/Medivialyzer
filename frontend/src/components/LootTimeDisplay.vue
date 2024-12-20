@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import {computed} from "vue";
 import { VChip } from "vuetify/components";
+import moment from "moment";
 
 const { since } = defineProps<{ since: number }>()
 
 const sinceFormatted = computed(() => {
-  const date = new Date(since)
-  return `${date.getHours()}:${date.getMinutes()}`
+  return moment(since).format("DD. MMM HH:mm")
 })
 </script>
 
