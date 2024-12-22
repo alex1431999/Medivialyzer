@@ -43,6 +43,9 @@
     "win": {
       "target": "nsis"
     },
+    "snap": {
+      "publish": "never"
+    },
     "nsis": {
       "oneClick": false,
       "perMachine": true,
