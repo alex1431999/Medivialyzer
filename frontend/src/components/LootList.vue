@@ -4,7 +4,7 @@ import LootListItem from './LootListItem.vue'
 import {groupLoot} from "../utils/loot/loot.helpers.ts";
 import LootListMenu from "./LootListMenu.vue";
 import * as _ from "lodash";
-import {LootReader} from "../utils/lootReader/lootReader.ts";
+import {LootParser} from "../utils/lootParser/lootParser.ts";
 import {electron} from "../utils/electron/electron.constants.ts";
 import {useConfigStore} from "../stores/configStore.ts";
 import {FIVE_SECONDS, THIRTY_MINUTES} from "../constants/time.ts";
@@ -20,8 +20,8 @@ setInterval(() => {
 }, FIVE_SECONDS)
 
 const loot = computed(() => {
-  const lootReader = new LootReader(lootData.value)
-  return lootReader.getLoot(configStore.config.since)
+  const lootParser = new LootParser(lootData.value)
+  return lootParser.getLoot(configStore.config.since)
 })
 
 const lootFiltered = computed(() => loot.value.filter(lootCurrent => !configStore.config.ignoredItems.includes(lootCurrent.item.name)))

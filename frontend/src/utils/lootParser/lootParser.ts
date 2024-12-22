@@ -3,7 +3,7 @@ import {lootDataTypeTimestamp} from "./lootDataType/lootDataTypes/lootDataType.t
 import {Item} from "../item/item.types.ts";
 import {Loot} from "../loot/loot.types.ts";
 
-export class LootReader {
+export class LootParser {
     private readonly lootData: string;
 
     constructor(lootData: string) {
