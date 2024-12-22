@@ -2,17 +2,14 @@
 
 import {VBtn, VDialog, VTable, VCard, VCardText, VChip, VIcon, VCardTitle, VCardActions}  from "vuetify/components";
 import {SUPPLIES} from "../utils/supplies/supplies.constants.ts";
-import {computed, ref} from "vue";
+import {computed} from "vue";
+import {SuppliesData, useSuppliesStore} from "../stores/suppliesStore.ts";
 
-type SuppliesData = Record<string, { before: number | null, after: number | null }>
-
-const INITIAL_SUPPLIES_DATA: SuppliesData = SUPPLIES.reduce((data, supply) => ({ ...data, [supply.name]: { before: null, after: null } }) ,{})
-
-const suppliesData = ref<SuppliesData>(INITIAL_SUPPLIES_DATA)
+const suppliesStore = useSuppliesStore()
 
 const totalSuppliesUsed = computed(() => SUPPLIES.reduce((total, supply) => {
-  const before = suppliesData.value[supply.name].before
-  const after = suppliesData.value[supply.name].after
+  const before = suppliesStore.supplies[supply.name].before
+  const after = suppliesStore.supplies[supply.name].after
 
   // This means the supply either wasn't used or we haven't entered the after value yet
   if (before === null || after === null) return total
@@ -28,11 +25,11 @@ function parseSupplyValue(value: string) {
 }
 
 function onBeforeChanged(supplyName: keyof SuppliesData, value: string) {
-  suppliesData.value[supplyName].before = parseSupplyValue(value)
+  suppliesStore.supplies[supplyName].before = parseSupplyValue(value)
 }
 
 function onAfterChanged(supplyName: keyof SuppliesData, value: string) {
-  suppliesData.value[supplyName].after = parseSupplyValue(value)
+  suppliesStore.supplies[supplyName].after = parseSupplyValue(value)
 }
 </script>
 
@@ -73,14 +70,14 @@ function onAfterChanged(supplyName: keyof SuppliesData, value: string) {
                 <td>{{ supply.name }}</td>
                 <td>
                   <input
-                    :value="suppliesData[supply.name].before"
+                    :value=" suppliesStore.supplies[supply.name].before"
                     class="supplies-modal__supply-input"
                     type="number"
                     @change="onBeforeChanged(supply.name, ($event.target as any).value)">
                 </td>
                 <td>
                   <input
-                    :value="suppliesData[supply.name].after"
+                    :value=" suppliesStore.supplies[supply.name].after"
                     class="supplies-modal__supply-input"
                     type="number"
                     @change="onAfterChanged(supply.name, ($event.target as any).value)">
