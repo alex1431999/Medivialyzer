@@ -7,19 +7,6 @@ import {SuppliesData, useSuppliesStore} from "../stores/suppliesStore.ts";
 
 const suppliesStore = useSuppliesStore()
 
-const totalSuppliesUsed = computed(() => SUPPLIES.reduce((total, supply) => {
-  const before = suppliesStore.supplies[supply.name].before
-  const after = suppliesStore.supplies[supply.name].after
-
-  // This means the supply either wasn't used or we haven't entered the after value yet
-  if (before === null || after === null) return total
-
-  const amountUsed = before - after
-  const totalSupplyValue = amountUsed * supply.value
-
-  return total + totalSupplyValue
-}, 0))
-
 function parseSupplyValue(value: string) {
   return value === '' ? null : parseInt(value || '0', 10)
 }
@@ -46,7 +33,7 @@ function onAfterChanged(supplyName: keyof SuppliesData, value: string) {
             Supplies
           </div>
           <v-chip color="warning">
-            {{ totalSuppliesUsed }}
+            {{ suppliesStore.totalSuppliesUsed }}
             <v-icon icon="mdi-gold" />
           </v-chip>
         </v-card-title>
