@@ -1,15 +1,15 @@
-import {Loot, LootEntry} from "./loot.types.ts";
+import { LootEntry} from "./loot.types.ts";
 
-export function groupLoot(loot: Loot[]): LootEntry[] {
+export function groupLoot(loot: LootEntry[]): LootEntry[] {
     const lootEntryByName: Record<string, LootEntry> = {}
 
-    loot.forEach((lootCurrent: Loot) => {
+    loot.forEach((lootCurrent: LootEntry) => {
         const name = lootCurrent.item.name
 
         if (Object.keys(lootEntryByName).includes(name)) {
-            lootEntryByName[name] = { ... lootEntryByName[name], amount: lootEntryByName[name].amount + 1 }
+            lootEntryByName[name] = { ... lootEntryByName[name], amount: lootEntryByName[name].amount + lootCurrent.amount }
         } else {
-            lootEntryByName[name] = { ...lootCurrent, amount: 1 }
+            lootEntryByName[name] = lootCurrent
         }
     })
 

@@ -1,7 +1,7 @@
 import {lootDataTypeLoot} from "./lootDataType/lootDataTypes/lootDataType.loot.ts";
 import {lootDataTypeTimestamp} from "./lootDataType/lootDataTypes/lootDataType.timestamp.ts";
-import {Item} from "../item/item.types.ts";
-import {Loot} from "../loot/loot.types.ts";
+import {ItemLooted} from "../item/item.types.ts";
+import {LootEntry} from "../loot/loot.types.ts";
 
 export class LootParser {
     private readonly lootData: string;
@@ -10,8 +10,8 @@ export class LootParser {
         this.lootData = lootData;
     }
 
-    public getLoot(since: number): Loot[] {
-        let loot: Loot[] = []
+    public getLoot(since: number): LootEntry[] {
+        let loot: LootEntry[] = []
         let currentTimeStamp = 0
 
         this.forEachLine(line => {
@@ -20,11 +20,11 @@ export class LootParser {
             }
 
             if (lootDataTypeLoot.matches(line) && since < currentTimeStamp) {
-                const items: Item[] = lootDataTypeLoot.toValue(line)
-                const lootToAdd = items.map(item => ({
+                const items: ItemLooted[] = lootDataTypeLoot.toValue(line)
+                const lootToAdd = items.map(({ amount, ...item }) => ({
                     item,
+                    amount,
                     timestamp: currentTimeStamp,
-                    value: 0,
                 }))
 
                 loot = loot.concat(lootToAdd)
