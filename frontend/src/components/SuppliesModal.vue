@@ -4,28 +4,35 @@ import {VBtn, VDialog, VTable, VCard, VCardText, VChip, VIcon, VCardTitle, VCard
 import {SUPPLIES} from "../utils/supplies/supplies.constants.ts";
 import {computed, ref} from "vue";
 
-type SuppliesData = Record<string, { before: number, after: number }>
+type SuppliesData = Record<string, { before: number | null, after: number | null }>
 
-const INITIAL_SUPPLIES_DATA: SuppliesData = SUPPLIES.reduce((data, supply) => ({ ...data, [supply.name]: { before: 0, after: 0 } }) ,{})
+const INITIAL_SUPPLIES_DATA: SuppliesData = SUPPLIES.reduce((data, supply) => ({ ...data, [supply.name]: { before: null, after: null } }) ,{})
 
 const suppliesData = ref<SuppliesData>(INITIAL_SUPPLIES_DATA)
 
 const totalSuppliesUsed = computed(() => SUPPLIES.reduce((total, supply) => {
   const before = suppliesData.value[supply.name].before
   const after = suppliesData.value[supply.name].after
+
+  // This means the supply either wasn't used or we haven't entered the after value yet
+  if (before === null || after === null) return total
+
   const amountUsed = before - after
   const totalSupplyValue = amountUsed * supply.value
 
   return total + totalSupplyValue
 }, 0))
 
-
-function onBeforeChanged(supplyName: keyof SuppliesData, value: string | null) {
-  suppliesData.value[supplyName].before = parseInt(value || '0', 10)
+function parseSupplyValue(value: string) {
+  return value === '' ? null : parseInt(value || '0', 10)
 }
 
-function onAfterChanged(supplyName: keyof SuppliesData, value: string | null) {
-  suppliesData.value[supplyName].after = parseInt(value || '0', 10)
+function onBeforeChanged(supplyName: keyof SuppliesData, value: string) {
+  suppliesData.value[supplyName].before = parseSupplyValue(value)
+}
+
+function onAfterChanged(supplyName: keyof SuppliesData, value: string) {
+  suppliesData.value[supplyName].after = parseSupplyValue(value)
 }
 </script>
 
