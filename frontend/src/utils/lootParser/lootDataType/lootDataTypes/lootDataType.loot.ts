@@ -32,6 +32,7 @@ export class LootDataTypeLoot extends LootDataType {
         const lootValueWithoutDot = lootValueTrimmed.replace(/\./g, '') // Remove trailing dot
 
         if (lootValueWithoutDot.startsWith('a ') || lootValueWithoutDot.startsWith('an ')) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const [_, ...rest] = lootValueWithoutDot.split(' ')
             return rest.join(' ')
         }
