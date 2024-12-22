@@ -1,7 +1,5 @@
 import {LootDataType} from "../lootDataType.ts";
-import * as _ from 'lodash'
-
-import {Item} from "../../../item/item.types.ts";
+import {ItemLooted} from "../../../item/item.types.ts";
 import {getItem} from "../../../item/item.helpers.ts";
 
 export class LootDataTypeLoot extends LootDataType {
@@ -11,7 +9,7 @@ export class LootDataTypeLoot extends LootDataType {
         return line.toLowerCase().includes('loot of') || line.toLowerCase().includes('content of');
     }
 
-    public toValue(line: string): Item[] {
+    public toValue(line: string): ItemLooted[] {
         const lootString = line.toLowerCase().split(':')[2]
         const lootValues = lootString.split(',')
 
@@ -25,7 +23,7 @@ export class LootDataTypeLoot extends LootDataType {
 
             const item = getItem(name)
 
-            return item ? _.times(amount, () => item) : []
+            return item ? { ...item, amount } : []
         }).flat()
     }
 
