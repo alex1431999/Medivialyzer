@@ -2,7 +2,7 @@
 import {computed, defineProps} from 'vue'
 
 import { LootEntry} from "../utils/loot/loot.types.ts";
-import { VCard, VCardText, VMenu, VBtn, VList, VListItem } from "vuetify/components";
+import { VCard, VCardText, VMenu, VList, VListItem } from "vuetify/components";
 import { VChip } from "vuetify/components/VChip";
 import { VBadge } from "vuetify/components/VBadge";
 import { VIcon } from "vuetify/components/VIcon";
