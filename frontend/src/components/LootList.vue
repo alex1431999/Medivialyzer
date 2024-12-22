@@ -10,8 +10,10 @@ import {useConfigStore} from "../stores/configStore.ts";
 import {FIVE_SECONDS, THIRTY_MINUTES} from "../constants/time.ts";
 import LootTimeDisplay from "./LootTimeDisplay.vue";
 import LootProfitDisplay from "./LootProfitDisplay.vue";
+import {useSuppliesStore} from "../stores/suppliesStore.ts";
 
 const configStore = useConfigStore()
+const suppliesStore = useSuppliesStore()
 
 const lootData = ref<string>(electron.getLootData())
 
@@ -36,6 +38,10 @@ const totalLootValue = computed(() => {
   return _.sum(values)
 })
 
+const profit = computed(() => {
+  return totalLootValue.value - suppliesStore.totalSuppliesUsed
+})
+
 function onReset() {
   configStore.setConfig({ since: Date.now() })
 }
@@ -57,7 +63,7 @@ function onIgnore(itemName: string) {
 <template>
   <div class="loot-list__header">
     <LootTimeDisplay class="loot-list__time-display" :since="configStore.config.since" />
-    <LootProfitDisplay />
+    <LootProfitDisplay :profit="profit" />
   </div>
 
   <div class="loot-list__items">
