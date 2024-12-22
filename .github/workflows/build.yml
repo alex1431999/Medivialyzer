@@ -1,0 +1,25 @@
+name: Build
+
+on : ['push']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install electron dependencies
+        run: yarn --cwd ./electron install
+
+      - name: Install frontend dependencies
+        run: yarn --cwd ./frontend install
+
+      - name: Build the project
+        run: yarn build:ci
