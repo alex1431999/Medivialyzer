@@ -23,13 +23,16 @@ const totalSuppliesUsed = computed(() => SUPPLIES.reduce((total, supply) => {
   return total + totalSupplyValue
 }, 0))
 
-
-function onBeforeChanged(supplyName: keyof SuppliesData, value: string | null) {
-  suppliesData.value[supplyName].before = parseInt(value || '0', 10)
+function parseSupplyValue(value: string) {
+  return value === '' ? null : parseInt(value || '0', 10)
 }
 
-function onAfterChanged(supplyName: keyof SuppliesData, value: string | null) {
-  suppliesData.value[supplyName].after = parseInt(value || '0', 10)
+function onBeforeChanged(supplyName: keyof SuppliesData, value: string) {
+  suppliesData.value[supplyName].before = parseSupplyValue(value)
+}
+
+function onAfterChanged(supplyName: keyof SuppliesData, value: string) {
+  suppliesData.value[supplyName].after = parseSupplyValue(value)
 }
 </script>
 
