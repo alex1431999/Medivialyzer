@@ -22,4 +22,6 @@ jobs:
         run: yarn --cwd ./frontend install
 
       - name: Build the project
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: yarn build
