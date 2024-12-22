@@ -12,7 +12,7 @@ import LootTimeDisplay from "./LootTimeDisplay.vue";
 
 const configStore = useConfigStore()
 
-const lootData = ref<string>('')
+const lootData = ref<string>(electron.getLootData())
 
 // Update the loot data regularly
 setInterval(() => {
