@@ -3,6 +3,7 @@ import { VCard, VCardText } from "vuetify/components/VCard";
 import { VIcon, VChip } from 'vuetify/components'
 import LootListTimeControl from "./LootListTimeControl.vue";
 import SuppliesModal from "./SuppliesModal.vue";
+import TotalLootValueDisplay from "./TotalLootValueDisplay.vue";
 
 const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 </script>
@@ -12,11 +13,7 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
     <v-card-text class="loot-list-menu__card-text">
       <SuppliesModal />
       <LootListTimeControl @reset="$emit('reset')" @back="$emit('back')" @forward="$emit('forward')" ></LootListTimeControl>
-
-      <v-chip color="secondary">
-        {{ totalLootValue }}
-        <v-icon icon="mdi-gold"></v-icon>
-      </v-chip>
+      <TotalLootValueDisplay :total-loot-value="totalLootValue" />
     </v-card-text>
   </v-card>
 </template>
