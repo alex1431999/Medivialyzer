@@ -21,9 +21,13 @@ export class LootDataTypeLoot extends LootDataType {
             const name = hasAnAmount ? potentialNameString.join(' ') : valueSanitised
             const amount = hasAnAmount ? parseInt(amountString, 10) : 1
 
-            const item = getItem(name)
+            // If it is a known item, great! Return it, otherwise return it as an unknown item
+            const knownItem = getItem(name)
+            const unknownItem: ItemLooted = { name, amount }
+            const item = knownItem || unknownItem
 
-            return item ? { ...item, amount } : []
+            return { ...item, amount }
+
         }).flat()
     }
 
