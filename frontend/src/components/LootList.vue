@@ -30,11 +30,11 @@ const loot = computed(() => {
 const lootFiltered = computed(() => loot.value.filter(lootCurrent => !configStore.config.ignoredItems.includes(lootCurrent.item.name)))
 const lootGrouped = computed(() => groupLoot(lootFiltered.value))
 const lootSorted = computed(() => lootGrouped.value.sort((a, b) =>
-    (a.amount * a.item.value) > (b.amount * b.item.value) ? -1 : 1
+    (a.amount * (a.item.value || 0)) > (b.amount * (b.item.value || 0)) ? -1 : 1
 ))
 
 const totalLootValue = computed(() => {
-  const values = lootGrouped.value.map(lootEntry => lootEntry.item.value * lootEntry.amount)
+  const values = lootGrouped.value.map(lootEntry => (lootEntry.item.value || 0) * lootEntry.amount)
   return _.sum(values)
 })
 
