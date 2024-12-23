@@ -9,9 +9,13 @@ import { VIcon } from "vuetify/components/VIcon";
 
 const { lootEntry } = defineProps<{ lootEntry: LootEntry }>()
 
+const isUnknownItem = computed(() => lootEntry.item.value === undefined)
+
 const totalValue = computed(() =>
-  lootEntry.item.value * lootEntry.amount
+    (lootEntry.item.value || 0) * lootEntry.amount
 )
+
+const valueColor = computed(() => isUnknownItem.value ? 'warning': 'secondary')
 
 </script>
 
@@ -40,8 +44,13 @@ const totalValue = computed(() =>
       </div>
 
       <!-- Total value -->
-      <v-chip color="secondary">
-        {{ totalValue }}
+      <v-chip :color="valueColor">
+        <template v-if="isUnknownItem">
+          unknown
+        </template>
+        <template v-else>
+          {{ totalValue }}
+        </template>
         <v-icon icon="mdi-gold" />
       </v-chip>
     </VCardText>
