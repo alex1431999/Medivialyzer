@@ -11,9 +11,13 @@ import {FIVE_SECONDS, THIRTY_MINUTES} from "../constants/time.ts";
 import LootTimeDisplay from "./LootTimeDisplay.vue";
 import LootProfitDisplay from "./LootProfitDisplay.vue";
 import {useSuppliesStore} from "../stores/suppliesStore.ts";
+import {LootEntry} from "../utils/loot/loot.types.ts";
+import AddItemModal from "./AddItemModal.vue";
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
+
+const itemToAddName = ref<string | null>(null);
 
 const lootData = ref<string>(electron.getLootData())
 
@@ -58,16 +62,30 @@ function onIgnore(itemName: string) {
   configStore.ignoreItem(itemName)
 }
 
+function onLootItemClicked(entry: LootEntry) {
+  itemToAddName.value = entry.item.name
+}
+
 </script>
 
 <template>
+  <AddItemModal :item-to-add-name="itemToAddName" />
+
   <div class="loot-list__header">
     <LootTimeDisplay class="loot-list__time-display" :since="configStore.config.since" />
     <LootProfitDisplay :profit="profit" />
   </div>
 
   <div class="loot-list__items">
-    <LootListItem class="loot-list__list-item" v-for="lootEntry in lootSorted" :key="lootEntry.item.name" :loot-entry="lootEntry" @ignore="onIgnore"></LootListItem>
+    <LootListItem
+        v-for="lootEntry in lootSorted"
+        class="loot-list__list-item"
+        :key="lootEntry.item.name"
+        :loot-entry="lootEntry"
+        @ignore="onIgnore"
+        @click="onLootItemClicked(lootEntry)"
+    >
+    </LootListItem>
   </div>
 
   <LootListMenu class="loot-list__menu" :total-loot-value="totalLootValue" @reset="onReset" @forward="onForward" @back="onBack"/>
