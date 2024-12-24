@@ -59,7 +59,7 @@ function onBack() {
 }
 
 function onIgnore(itemName: string) {
-  configStore.ignoreItem(itemName)
+  configStore.addIgnoredItem(itemName)
 }
 
 function onLootItemClicked(entry: LootEntry) {
