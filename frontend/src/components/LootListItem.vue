@@ -68,12 +68,12 @@ function onClick() {
 
         <!-- Total value -->
         <v-chip :color="valueColor">
-          <template v-if="isUnknownItem">
+          <span class="mr-1" v-if="isUnknownItem">
             unknown
-          </template>
-          <template v-else>
+          </span>
+          <span class="mr-1" v-else>
             {{ totalValue }}
-          </template>
+          </span>
           <v-icon icon="mdi-gold" />
         </v-chip>
       </div>

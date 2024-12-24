@@ -10,7 +10,7 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
   <v-tooltip text="Total loot">
     <template v-slot:activator="{ props }">
       <v-chip v-bind="props" color="secondary">
-        {{ totalLootValue }}
+        <span class="mr-1">{{ totalLootValue }}</span>
         <v-icon icon="mdi-gold"></v-icon>
       </v-chip>
     </template>
