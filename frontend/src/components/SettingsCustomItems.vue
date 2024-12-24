@@ -16,7 +16,7 @@ function onRemoveCustomItem(item: Item) {
 </script>
 
 <template>
-  <v-list v-if="customItems.length > 0">
+  <v-list class="settings-custom-items__list" v-if="customItems.length > 0">
     <v-list-item class="overflow-hidden mb-2 pa-2" variant="elevated"  v-for="item in customItems" :key="item.name">
       <div class="d-flex justify-space-between">
         <div>{{ item.name }}</div>
@@ -28,3 +28,9 @@ function onRemoveCustomItem(item: Item) {
     <v-alert text="You have not ignored an item yet" type="info" color="secondary"/>
   </div>
 </template>
+
+<style scoped>
+.settings-custom-items__list {
+  max-height: 300px
+}
+</style>
