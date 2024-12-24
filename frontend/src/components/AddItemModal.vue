@@ -3,6 +3,7 @@ import { VDialog, VCard, VCardTitle, VCardText, VTextField, VForm, VCardActions,
 import {ref, watch} from "vue";
 import {Item} from "../utils/item/item.types.ts";
 import {useConfigStore} from "../stores/configStore.ts";
+import {baserowSubmitItem} from "../utils/baserow/baserow.requests.ts";
 
 const configStore = useConfigStore()
 
@@ -28,7 +29,7 @@ watch(isOpen, (value: boolean) => {
   }
 })
 
-function submit() {
+async function submit() {
   if (!itemToAddName) throw new Error('Name is required')
   if (!itemValue.value) throw new Error('Value is required')
 
@@ -38,6 +39,8 @@ function submit() {
   }
 
   configStore.addCustomItem(item)
+
+  await baserowSubmitItem(item)
 
   isOpen.value = false
 }
