@@ -3,6 +3,7 @@ import { VDialog, VCard, VCardTitle, VCardText, VTextField, VForm, VCardActions,
 import {ref, watch} from "vue";
 
 const { itemToAddName } = defineProps<{ itemToAddName: string | null }>()
+const emit = defineEmits(['onClose'])
 
 const isOpen = ref<boolean>(false)
 const isValid = ref<boolean>(true)
@@ -13,6 +14,12 @@ const valueRules = [
 
 watch(() => itemToAddName, () => {
   isOpen.value = itemToAddName !== null
+})
+
+watch(isOpen, (value: boolean) => {
+  if (!value) {
+    emit('onClose')
+  }
 })
 
 </script>

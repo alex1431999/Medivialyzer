@@ -69,7 +69,7 @@ function onLootItemClicked(entry: LootEntry) {
 </script>
 
 <template>
-  <AddItemModal :item-to-add-name="itemToAddName" />
+  <AddItemModal :item-to-add-name="itemToAddName" @on-close="itemToAddName = null" />
 
   <div class="loot-list__header">
     <LootTimeDisplay class="loot-list__time-display" :since="configStore.config.since" />
