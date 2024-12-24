@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VDialog, VCard, VCardTitle, VCardText, VTextField, VForm, VCardActions, VBtn } from "vuetify/components";
+import { VDialog, VCard, VCardTitle, VCardText, VTextField, VForm, VCardActions, VBtn, VCheckbox } from "vuetify/components";
 import {ref, watch} from "vue";
 import {Item} from "../utils/item/item.types.ts";
 import {useConfigStore} from "../stores/configStore.ts";
@@ -13,6 +13,7 @@ const emit = defineEmits(['onClose'])
 const isOpen = ref<boolean>(false)
 const isValid = ref<boolean>(true)
 const itemValue = ref<string | null>(null)
+const consent = ref<boolean>(configStore.config.consentToSubmitItem)
 
 const valueRules = [
     (value: string) => !!value || "Value is required",
@@ -39,8 +40,11 @@ async function submit() {
   }
 
   configStore.addCustomItem(item)
+  configStore.setConsentToSubmitItem(consent.value)
 
-  await baserowSubmitItem(item)
+  if (consent.value) {
+    await baserowSubmitItem(item)
+  }
 
   isOpen.value = false
 }
@@ -48,7 +52,7 @@ async function submit() {
 </script>
 
 <template>
-  <v-dialog max-width="600" v-model="isOpen">
+  <v-dialog max-width="700" v-model="isOpen">
     <template #default>
       <v-card>
         <v-card-title>Add item</v-card-title>
@@ -56,6 +60,7 @@ async function submit() {
           <v-form v-model="isValid">
             <v-text-field label="Name" required readonly :value="itemToAddName" variant="solo" />
             <v-text-field label="Value" required placeholder="Value in gold" type="number" variant="solo" :rules="valueRules" v-model="itemValue" />
+            <v-checkbox label="Consent to Medivialyzer adding the item to the global database (Optional)" v-model="consent"></v-checkbox>
           </v-form>
         </v-card-text>
 
