@@ -10,7 +10,7 @@ const configStore = useConfigStore()
 const customItems = computed(() => configStore.config.customItems)
 
 function onRemoveCustomItem(item: Item) {
-  // TODO
+  configStore.removeCustomItem(item)
 }
 
 </script>
