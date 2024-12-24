@@ -2,7 +2,7 @@ export type ItemName = string
 
 export type Item = {
     name: ItemName
-    value: number
+    value?: number
 }
 
 export type ItemLooted = Item & {

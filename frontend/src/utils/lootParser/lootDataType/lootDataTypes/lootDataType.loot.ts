@@ -2,6 +2,9 @@ import {LootDataType} from "../lootDataType.ts";
 import {ItemLooted} from "../../../item/item.types.ts";
 import {getItem} from "../../../item/item.helpers.ts";
 
+// These items you can always ignore since they are special cases and don't represent and actual item
+const LOOT_TO_ALWAYS_IGNORE = ['empty', 'bag']
+
 export class LootDataTypeLoot extends LootDataType {
     public type = 'loot'
 
@@ -21,9 +24,15 @@ export class LootDataTypeLoot extends LootDataType {
             const name = hasAnAmount ? potentialNameString.join(' ') : valueSanitised
             const amount = hasAnAmount ? parseInt(amountString, 10) : 1
 
-            const item = getItem(name)
+            if (LOOT_TO_ALWAYS_IGNORE.includes(name)) return []
 
-            return item ? { ...item, amount } : []
+            // If it is a known item, great! Return it, otherwise return it as an unknown item
+            const knownItem = getItem(name)
+            const unknownItem: ItemLooted = { name, amount }
+            const item = knownItem || unknownItem
+
+            return { ...item, amount }
+
         }).flat()
     }
 

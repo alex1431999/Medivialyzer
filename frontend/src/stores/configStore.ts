@@ -1,14 +1,17 @@
 import {defineStore} from "pinia";
 import {electron} from "../utils/electron/electron.constants.ts";
+import {Item} from "../utils/item/item.types.ts";
 
 export type Config = {
     since: number
     ignoredItems: string[]
+    customItems: Item[]
 }
 
 const DEFAULT_CONFIG: Config = {
     since: 0,
-    ignoredItems: []
+    ignoredItems: [],
+    customItems: []
 }
 
 export const useConfigStore = defineStore('config', {
@@ -20,7 +23,7 @@ export const useConfigStore = defineStore('config', {
             this.config = { ...this.config, ...config }
             electron.setConfig(JSON.stringify(this.config))
         },
-        ignoreItem(itemName: string) {
+        addIgnoredItem(itemName: string) {
             if (!this.config.ignoredItems.includes(itemName)) {
                 this.config.ignoredItems.push(itemName);
                 electron.setConfig(JSON.stringify(this.config))
@@ -33,6 +36,10 @@ export const useConfigStore = defineStore('config', {
               this.config.ignoredItems.splice(index, 1);
               electron.setConfig(JSON.stringify(this.config))
           }
+        },
+        addCustomItem(item: Item) {
+            this.config.customItems.push(item)
+            electron.setConfig(JSON.stringify(this.config))
         }
     }
 })
