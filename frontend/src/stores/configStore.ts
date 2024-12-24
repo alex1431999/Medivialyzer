@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {electron} from "../utils/electron/electron.constants.ts";
 import {Item} from "../utils/item/item.types.ts";
+import _ from "lodash";
 
 export type Config = {
     since: number
@@ -41,6 +42,10 @@ export const useConfigStore = defineStore('config', {
         },
         addCustomItem(item: Item) {
             this.config.customItems.push(item)
+            electron.setConfig(JSON.stringify(this.config))
+        },
+        removeCustomItem(item: Item) {
+            _.remove(this.config.customItems, item)
             electron.setConfig(JSON.stringify(this.config))
         },
         setConsentToSubmitItem(consent: boolean) {
