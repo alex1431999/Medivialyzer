@@ -2,16 +2,24 @@
 import {computed, defineProps} from 'vue'
 
 import { LootEntry} from "../utils/loot/loot.types.ts";
-import { VCard, VCardText, VMenu, VList, VListItem } from "vuetify/components";
+import { VCard, VCardText, VMenu, VList, VListItem, VTooltip } from "vuetify/components";
 import { VChip } from "vuetify/components/VChip";
 import { VBadge } from "vuetify/components/VBadge";
 import { VIcon } from "vuetify/components/VIcon";
+import {getNPC} from "../utils/npc/npc.helpers.ts";
 
 const emit = defineEmits(['click', 'ignore'])
 
 const { lootEntry } = defineProps<{ lootEntry: LootEntry }>()
 
 const isUnknownItem = computed(() => lootEntry.item.value === undefined)
+const NPC = computed(() => {
+  const NPCs = lootEntry.item.NPCs || []
+
+  if (!NPCs.length) return null
+
+  return getNPC(NPCs[0])
+})
 
 const totalValue = computed(() =>
     (lootEntry.item.value || 0) * lootEntry.amount
@@ -40,25 +48,35 @@ function onClick() {
           </v-list>
         </v-menu>
 
-        <!-- Item name -->
-        <v-badge color="secondary" :content="`${lootEntry.amount}x`">
-          <v-chip>
-            {{ lootEntry.item.name }}
-          </v-chip>
-        </v-badge>
-
+          <!-- Item name -->
+          <v-badge color="secondary" :content="`${lootEntry.amount}x`">
+            <v-chip>
+              {{ lootEntry.item.name }}
+            </v-chip>
+          </v-badge>
       </div>
 
-      <!-- Total value -->
-      <v-chip :color="valueColor">
-        <template v-if="isUnknownItem">
-          unknown
-        </template>
-        <template v-else>
-          {{ totalValue }}
-        </template>
-        <v-icon icon="mdi-gold" />
-      </v-chip>
+      <div>
+        <v-tooltip v-if="NPC" location="top" :text="NPC.location">
+          <template v-slot:activator="{ props }">
+            <v-chip class="mr-2" v-bind="props" :color="NPC.color">
+              <span class="mr-1">{{ NPC.name }}</span>
+              <v-icon icon="mdi-account-cash" />
+            </v-chip>
+          </template>
+        </v-tooltip>
+
+        <!-- Total value -->
+        <v-chip :color="valueColor">
+          <template v-if="isUnknownItem">
+            unknown
+          </template>
+          <template v-else>
+            {{ totalValue }}
+          </template>
+          <v-icon icon="mdi-gold" />
+        </v-chip>
+      </div>
     </VCardText>
   </VCard>
 </template>

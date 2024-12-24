@@ -4,18 +4,22 @@ export const NPC_LIST: NPC[] = [
     {
         "name": "Nah'Bob",
         "location": "Blue Djinn",
+        "color": "blue",
     },
     {
         "name": "Haroun",
         "location": "Blue Djinn",
+        "color": "blue",
     },
     {
         "name": "Alesar",
         "location": "Green Djinn",
+        "color": "green",
     },
     {
         "name": "Yaman",
         "location": "Green Djinn",
+        "color": "green",
     },
     {
         "name": "Aremis",
@@ -23,7 +27,7 @@ export const NPC_LIST: NPC[] = [
     },
     {
         "name": "Evona",
-        "location": "Abukir"
+        "location": "Abukir",
     },
     {
         "name": "Wulkan",
@@ -31,11 +35,11 @@ export const NPC_LIST: NPC[] = [
     },
     {
         "name": "Annushka",
-        "location": "Arak"
+        "location": "Arak",
     },
     {
         "name": "Bronislav",
-        "location": "Arak"
+        "location": "Arak",
     },
     {
         "name": "Draculd",
@@ -144,6 +148,7 @@ export const NPC_LIST: NPC[] = [
     {
         "name": "Ziyad",
         "location": "Yehsha",
+        "color": "yellow"
     },
     {
         "name": "Drolgruth",
