@@ -14,6 +14,7 @@ import {
 } from "vuetify/components";
 import {ref} from "vue";
 import SettingsIgnoredItems from "./SettingsIgnoredItems.vue";
+import SettingsCustomItems from "./SettingsCustomItems.vue";
 
 const tab = ref<string>('ignoredItems')
 </script>
@@ -42,7 +43,7 @@ const tab = ref<string>('ignoredItems')
             </v-tabs-window-item>
 
             <v-tabs-window-item value="customItems">
-              Two
+              <SettingsCustomItems />
             </v-tabs-window-item>
           </v-tabs-window>
         </v-card-text>

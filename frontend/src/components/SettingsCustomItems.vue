@@ -3,23 +3,24 @@
 import {VBtn, VList, VListItem, VAlert} from "vuetify/components";
 import {computed} from "vue";
 import {useConfigStore} from "../stores/configStore.ts";
+import {Item} from "../utils/item/item.types.ts";
 
 const configStore = useConfigStore()
 
-const ignoredItems = computed(() => configStore.config.ignoredItems.sort())
+const customItems = computed(() => configStore.config.customItems)
 
-function onRemoveIgnoredItem(itemName: string) {
-  configStore.removeIgnoredItems(itemName)
+function onRemoveCustomItem(item: Item) {
+  // TODO
 }
 
 </script>
 
 <template>
-  <v-list v-if="ignoredItems.length > 0">
-    <v-list-item class="overflow-hidden mb-2 pa-2" v-for="itemName in ignoredItems" :key="itemName" variant="elevated">
+  <v-list v-if="customItems.length > 0">
+    <v-list-item class="overflow-hidden mb-2 pa-2" variant="elevated"  v-for="item in customItems" :key="item.name">
       <div class="d-flex justify-space-between">
-        <div>{{ itemName }}</div>
-        <v-btn icon="mdi-trash-can" size="x-small"  color="error" @click="onRemoveIgnoredItem(itemName)" />
+        <div>{{ item.name }}</div>
+        <v-btn icon="mdi-trash-can" size="x-small" color="error" @click="onRemoveCustomItem(item)" />
       </div>
     </v-list-item>
   </v-list>
