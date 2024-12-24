@@ -11,7 +11,7 @@ const color = computed(() => profit > 0 ? 'success' : 'error')
   <v-tooltip text="Profit">
     <template v-slot:activator="{ props }">
         <v-chip v-bind="props" :color="color">
-          {{ profit }}
+          <span class="mr-1">{{ profit }}</span>
           <v-icon icon="mdi-gold"></v-icon>
         </v-chip>
       </template>
