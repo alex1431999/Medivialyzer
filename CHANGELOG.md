@@ -6,6 +6,8 @@
 
 ## Features
 - Added profit indicator
+- Add ability to add custom items
+  - Medivialyzer now shows all items looted even if they are not recognized. This makes sure you can rely on Medivialyzer to show the complete list of items looted.
 
 ## UX
 - Added tooltips to UI elements
