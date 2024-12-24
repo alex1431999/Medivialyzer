@@ -6,12 +6,14 @@ export type Config = {
     since: number
     ignoredItems: string[]
     customItems: Item[]
+    consentToSubmitItem: boolean
 }
 
 const DEFAULT_CONFIG: Config = {
     since: 0,
     ignoredItems: [],
-    customItems: []
+    customItems: [],
+    consentToSubmitItem: false
 }
 
 export const useConfigStore = defineStore('config', {
@@ -39,6 +41,10 @@ export const useConfigStore = defineStore('config', {
         },
         addCustomItem(item: Item) {
             this.config.customItems.push(item)
+            electron.setConfig(JSON.stringify(this.config))
+        },
+        setConsentToSubmitItem(consent: boolean) {
+            this.config.consentToSubmitItem = consent
             electron.setConfig(JSON.stringify(this.config))
         }
     }
