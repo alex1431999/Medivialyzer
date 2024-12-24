@@ -1,24 +1,21 @@
 <script setup lang="ts">
 
 import {
-  VList,
-  VListItem,
-  VBtn,
-  VCardTitle,
-  VCard,
-  VDialog,
-  VCardActions, VCardText
+    VBtn,
+    VCardTitle,
+    VCard,
+    VDialog,
+    VCardActions,
+    VCardText,
+    VTabs,
+    VTab,
+    VTabsWindow,
+    VTabsWindowItem
 } from "vuetify/components";
-import {useConfigStore} from "../stores/configStore.ts";
-import {computed} from "vue";
+import {ref} from "vue";
+import SettingsIgnoredItems from "./SettingsIgnoredItems.vue";
 
-const configStore = useConfigStore()
-
-const ignoredItems = computed(() => configStore.config.ignoredItems.sort())
-
-function onRemoveIgnoredItem(itemName: string) {
-  configStore.removeIgnoredItems(itemName)
-}
+const tab = ref<string>('ignoredItems')
 </script>
 
 <template>
@@ -30,18 +27,24 @@ function onRemoveIgnoredItem(itemName: string) {
     <template v-slot:default="{ isActive }">
       <v-card>
         <v-card-title>
-          Ignored items
+          Settings
         </v-card-title>
 
+        <v-tabs color="secondary" v-model="tab">
+          <v-tab value="ignoredItems">Ignored items</v-tab>
+          <v-tab value="customItems">Custom items</v-tab>
+        </v-tabs>
+
         <v-card-text>
-          <v-list>
-            <v-list-item class="settings__list-item" v-for="itemName in ignoredItems" :key="itemName">
-              <div class="settings__list-item__content">
-                <div>{{ itemName }}</div>
-                <v-btn icon="mdi-trash-can" size="small" color="error" @click="onRemoveIgnoredItem(itemName)" />
-              </div>
-            </v-list-item>
-          </v-list>
+          <v-tabs-window v-model="tab">
+            <v-tabs-window-item value="ignoredItems">
+              <SettingsIgnoredItems />
+            </v-tabs-window-item>
+
+            <v-tabs-window-item value="customItems">
+              Two
+            </v-tabs-window-item>
+          </v-tabs-window>
         </v-card-text>
 
         <v-card-actions>
@@ -54,14 +57,3 @@ function onRemoveIgnoredItem(itemName: string) {
     </template>
   </v-dialog>
 </template>
-
-<style scoped>
-.settings__list-item {
-  overflow: hidden;
-}
-
-.settings__list-item__content {
-  display: flex;
-  justify-content: space-between;
-}
-</style>
