@@ -18,6 +18,7 @@
 
 ## UX
 - Added tooltips to UI elements
+- Color schemes and fonts have been improved
 
 ## Misc
 - Performance improvements
