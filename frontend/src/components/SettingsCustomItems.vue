@@ -26,7 +26,7 @@ function onRemoveCustomItem(item: Item) {
     </v-list-item>
   </v-list>
   <div class="d-flex justify-center" v-else>
-    <v-alert text="You have not ignored an item yet" type="info" color="secondary"/>
+    <v-alert text="You have added any custom an items yet" type="info" color="secondary"/>
   </div>
 </template>
 
