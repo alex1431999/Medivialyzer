@@ -2,7 +2,6 @@
 
 import {VBtn, VDialog, VTable, VCard, VCardText, VChip, VIcon, VCardTitle, VCardActions}  from "vuetify/components";
 import {SUPPLIES} from "../utils/supplies/supplies.constants.ts";
-import {computed} from "vue";
 import {SuppliesData, useSuppliesStore} from "../stores/suppliesStore.ts";
 
 const suppliesStore = useSuppliesStore()

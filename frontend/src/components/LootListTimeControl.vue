@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {VBtn, VChip, VIcon, VTooltip} from 'vuetify/components';
+import {VBtn, VTooltip} from 'vuetify/components';
 </script>
 
 <template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { VCard, VCardText } from "vuetify/components/VCard";
-import { VIcon, VChip } from 'vuetify/components'
 import LootListTimeControl from "./LootListTimeControl.vue";
 import SuppliesModal from "./SuppliesModal.vue";
 import TotalLootValueDisplay from "./TotalLootValueDisplay.vue";
