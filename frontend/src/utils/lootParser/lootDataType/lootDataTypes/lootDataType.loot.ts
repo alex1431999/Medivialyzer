@@ -1,6 +1,7 @@
 import {LootDataType} from "../lootDataType.ts";
 import {ItemLooted} from "../../../item/item.types.ts";
 import {getItem} from "../../../item/item.helpers.ts";
+import {singularize} from "../../../string.ts";
 
 // These items you can always ignore since they are special cases and don't represent and actual item
 const LOOT_TO_ALWAYS_IGNORE = ['empty', 'bag']
@@ -39,14 +40,15 @@ export class LootDataTypeLoot extends LootDataType {
     private sanitiseValue(lootValue: string): string {
         const lootValueTrimmed = lootValue.trim() // Remove white space
         const lootValueWithoutDot = lootValueTrimmed.replace(/\./g, '') // Remove trailing dot
+        const lootValueSingularised = singularize(lootValueWithoutDot)
 
-        if (lootValueWithoutDot.startsWith('a ') || lootValueWithoutDot.startsWith('an ')) {
+        if (lootValueSingularised.startsWith('a ') || lootValueSingularised.startsWith('an ')) {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const [_, ...rest] = lootValueWithoutDot.split(' ')
-            return rest.join(' ')
+            const [_, ...rest] = lootValueSingularised.split(' ')
+            return rest.join(' ').toLowerCase()
         }
 
-        return lootValueWithoutDot
+        return lootValueSingularised.toLowerCase()
     }
 }
 
