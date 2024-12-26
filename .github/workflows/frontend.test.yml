@@ -1,9 +1,9 @@
-name: Build
+name: Frontend test
 
 on : ['push']
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,5 +18,5 @@ jobs:
       - name: Install frontend dependencies
         run: yarn --cwd ./frontend install
 
-      - name: Build the project
+      - name: Test the project
         run: yarn --cwd ./frontend test
