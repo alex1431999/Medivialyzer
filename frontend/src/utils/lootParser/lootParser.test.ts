@@ -24,4 +24,21 @@ describe('lootParser', () => {
             }
         ])
     })
+
+    test('unknown item', () => {
+        const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        19:14 Loot of giant cobra: an unknown.
+        `
+        const lootParser = new LootParser(lootData);
+        expect(lootParser.getLoot(0)).toEqual([
+            {
+                item: {
+                    name: 'unknown',
+                },
+                amount: 1,
+                timestamp: new Date('Wed Dec 04 19:29:20 2024').getTime()
+            }
+        ])
+    })
 })
