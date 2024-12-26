@@ -2735,5 +2735,17 @@ export const ITEMS: Item[] =[
     {
         "name": "Spider Silk",
         "value": 40
+    },
+    {
+        "name": "Silver Elite Token",
+        "value": 0,
+    },
+    {
+        "name": "Golden Elite Token",
+        "value": 0,
+    },
+    {
+        "name": "Crystal Elite Token",
+        "value": 0,
     }
 ]
