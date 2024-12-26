@@ -1,10 +1,10 @@
 import {LootDataType} from "../lootDataType.ts";
 
 export class LootDataTypeTimestamp extends LootDataType {
-    public name = 'timestamp';
+    public type = 'timestamp';
 
     public matches(line: string): boolean {
-        return line.toLowerCase().startsWith('channel saved at');
+        return line.trim().toLowerCase().startsWith('channel saved at');
     }
 
     public toValue(line: string): number {
