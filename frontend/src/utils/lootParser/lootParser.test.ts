@@ -89,7 +89,6 @@ describe('lootParser', () => {
             {
                 item: {
                     name: 'unknown',
-                    value: 1
                 },
                 amount: 66,
                 timestamp: new Date('Wed Dec 04 19:29:20 2024').getTime()

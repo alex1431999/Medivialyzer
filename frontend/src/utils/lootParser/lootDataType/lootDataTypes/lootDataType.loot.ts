@@ -1,6 +1,7 @@
 import {LootDataType} from "../lootDataType.ts";
 import {ItemLooted} from "../../../item/item.types.ts";
 import {getItem} from "../../../item/item.helpers.ts";
+import {singularize} from "../../../string.ts";
 
 // These items you can always ignore since they are special cases and don't represent and actual item
 const LOOT_TO_ALWAYS_IGNORE = ['empty', 'bag']
@@ -22,13 +23,14 @@ export class LootDataTypeLoot extends LootDataType {
 
             const hasAnAmount = !isNaN(amountString as any)
             const name = hasAnAmount ? potentialNameString.join(' ') : valueSanitised
+            const nameSingular = hasAnAmount ? singularize(name) : name
             const amount = hasAnAmount ? parseInt(amountString, 10) : 1
 
             if (LOOT_TO_ALWAYS_IGNORE.includes(name)) return []
 
             // If it is a known item, great! Return it, otherwise return it as an unknown item
             const knownItem = getItem(name)
-            const unknownItem: ItemLooted = { name, amount }
+            const unknownItem: ItemLooted = { name: nameSingular, amount } // For unknown items we will always assume the singular name
             const item = knownItem || unknownItem
 
             return { ...item, amount }
