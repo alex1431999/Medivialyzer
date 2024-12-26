@@ -1,0 +1,22 @@
+name: Frontend test
+
+on : ['push']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install frontend dependencies
+        run: yarn --cwd ./frontend install
+
+      - name: Test the project
+        run: yarn --cwd ./frontend test
