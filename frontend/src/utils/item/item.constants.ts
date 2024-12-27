@@ -2764,4 +2764,8 @@ export const ITEMS: Item[] =[
         "name": "Crescent Sword",
         "value": 60000
     },
+    {
+        "name": "Undead Dragon Trophy",
+        "value": 300000
+    }
 ]
