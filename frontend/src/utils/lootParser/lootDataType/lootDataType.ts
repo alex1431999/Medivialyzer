@@ -1,7 +1,7 @@
 export abstract class LootDataType {
-    abstract type: string;
+  abstract type: string
 
-    public abstract matches(line: string): boolean;
+  public abstract matches(line: string): boolean
 
-    public abstract toValue(line: string): any;
+  public abstract toValue(line: string): any
 }
