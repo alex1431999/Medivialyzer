@@ -1,35 +1,32 @@
 <script setup lang="ts">
-
 import {
-    VBtn,
-    VCardTitle,
-    VCard,
-    VDialog,
-    VCardActions,
-    VCardText,
-    VTabs,
-    VTab,
-    VTabsWindow,
-    VTabsWindowItem
+  VBtn,
+  VCardTitle,
+  VCard,
+  VDialog,
+  VCardActions,
+  VCardText,
+  VTabs,
+  VTab,
+  VTabsWindow,
+  VTabsWindowItem,
 } from "vuetify/components";
-import {ref} from "vue";
+import { ref } from "vue";
 import SettingsIgnoredItems from "./SettingsIgnoredItems.vue";
 import SettingsCustomItems from "./SettingsCustomItems.vue";
 
-const tab = ref<string>('ignoredItems')
+const tab = ref<string>("ignoredItems");
 </script>
 
 <template>
   <v-dialog max-width="500">
     <template v-slot:activator="{ props: activatorProps }">
-      <v-btn  icon="mdi-cog" v-bind="activatorProps" />
+      <v-btn icon="mdi-cog" v-bind="activatorProps" />
     </template>
 
     <template v-slot:default="{ isActive }">
       <v-card>
-        <v-card-title>
-          Settings
-        </v-card-title>
+        <v-card-title> Settings </v-card-title>
 
         <v-tabs color="secondary" v-model="tab">
           <v-tab value="ignoredItems">Ignored items</v-tab>
@@ -49,10 +46,7 @@ const tab = ref<string>('ignoredItems')
         </v-card-text>
 
         <v-card-actions>
-          <v-btn
-              text="Close"
-              @click="isActive.value = false"
-          ></v-btn>
+          <v-btn text="Close" @click="isActive.value = false"></v-btn>
         </v-card-actions>
       </v-card>
     </template>

@@ -1,1 +1,1 @@
-export const electron = (window as any).electron || { getConfig: () => null }
+export const electron = (window as any).electron || { getConfig: () => null };
