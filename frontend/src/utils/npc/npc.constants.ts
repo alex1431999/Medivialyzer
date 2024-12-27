@@ -153,5 +153,9 @@ export const NPC_LIST: NPC[] = [
     {
         "name": "Drolgruth",
         "location": "Sheol"
+    },
+    {
+        "name": "Ellara",
+        "location": "Luana"
     }
 ]

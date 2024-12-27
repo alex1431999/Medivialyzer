@@ -2750,26 +2750,32 @@ export const ITEMS: Item[] =[
     },
     {
         "name": "Crescent Axe",
-        "value": 60000
+        "value": 60000,
+        "NPCs": ["Ziyad"]
     },
     {
         "name": "Crescent Bow",
-        "value": 60000
+        "value": 60000,
+        "NPCs": ["Ziyad"]
     },
     {
         "name": "Crescent Mace",
-        "value": 60000
+        "value": 60000,
+        "NPCs": ["Ziyad"]
     },
     {
         "name": "Crescent Sword",
-        "value": 60000
+        "value": 60000,
+        "NPCs": ["Ziyad"]
     },
     {
         "name": "Undead Dragon Trophy",
-        "value": 300000
+        "value": 300000,
+        "NPCs": ["Draculd"]
     },
     {
         "name": "The Bonecrusher",
-        "value": 40000
+        "value": 40000,
+        "NPCs": ['Ellara']
     }
 ]
