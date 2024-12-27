@@ -2747,5 +2747,21 @@ export const ITEMS: Item[] =[
     {
         "name": "Crystal Elite Token",
         "value": 0,
-    }
+    },
+    {
+        "name": "Crescent Axe",
+        "value": 60000
+    },
+    {
+        "name": "Crescent Bow",
+        "value": 60000
+    },
+    {
+        "name": "Crescent Mace",
+        "value": 60000
+    },
+    {
+        "name": "Crescent Sword",
+        "value": 60000
+    },
 ]
