@@ -1,4 +1,4 @@
-import { Item } from './item.types.ts';
+import { Item } from './item.types.ts'
 
 export const ITEMS: Item[] = [
   {
@@ -1989,4 +1989,4 @@ export const ITEMS: Item[] = [
     value: 40000,
     NPCs: ['Ellara'],
   },
-];
+]

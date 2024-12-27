@@ -9,22 +9,22 @@ import {
   VIcon,
   VCardTitle,
   VCardActions,
-} from 'vuetify/components';
-import { SUPPLIES } from '../utils/supplies/supplies.constants.ts';
-import { SuppliesData, useSuppliesStore } from '../stores/suppliesStore.ts';
+} from 'vuetify/components'
+import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
+import { SuppliesData, useSuppliesStore } from '../stores/suppliesStore.ts'
 
-const suppliesStore = useSuppliesStore();
+const suppliesStore = useSuppliesStore()
 
 function parseSupplyValue(value: string) {
-  return value === '' ? null : parseInt(value || '0', 10);
+  return value === '' ? null : parseInt(value || '0', 10)
 }
 
 function onBeforeChanged(supplyName: keyof SuppliesData, value: string) {
-  suppliesStore.supplies[supplyName].before = parseSupplyValue(value);
+  suppliesStore.supplies[supplyName].before = parseSupplyValue(value)
 }
 
 function onAfterChanged(supplyName: keyof SuppliesData, value: string) {
-  suppliesStore.supplies[supplyName].after = parseSupplyValue(value);
+  suppliesStore.supplies[supplyName].after = parseSupplyValue(value)
 }
 </script>
 

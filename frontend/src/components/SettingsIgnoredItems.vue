@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { VBtn, VList, VListItem, VAlert } from 'vuetify/components';
-import { computed } from 'vue';
-import { useConfigStore } from '../stores/configStore.ts';
+import { VBtn, VList, VListItem, VAlert } from 'vuetify/components'
+import { computed } from 'vue'
+import { useConfigStore } from '../stores/configStore.ts'
 
-const configStore = useConfigStore();
+const configStore = useConfigStore()
 
-const ignoredItems = computed(() => configStore.config.ignoredItems.sort());
+const ignoredItems = computed(() => configStore.config.ignoredItems.sort())
 
 function onRemoveIgnoredItem(itemName: string) {
-  configStore.removeIgnoredItems(itemName);
+  configStore.removeIgnoredItems(itemName)
 }
 </script>
 

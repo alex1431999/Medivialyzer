@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { VCard, VCardText } from 'vuetify/components/VCard';
-import LootListTimeControl from './LootListTimeControl.vue';
-import SuppliesModal from './SuppliesModal.vue';
-import TotalLootValueDisplay from './TotalLootValueDisplay.vue';
+import { VCard, VCardText } from 'vuetify/components/VCard'
+import LootListTimeControl from './LootListTimeControl.vue'
+import SuppliesModal from './SuppliesModal.vue'
+import TotalLootValueDisplay from './TotalLootValueDisplay.vue'
 
-const { totalLootValue } = defineProps<{ totalLootValue: number }>();
+const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 </script>
 
 <template>

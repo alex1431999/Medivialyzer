@@ -36,10 +36,10 @@ export type NPCName =
   | 'Noranim'
   | 'Ziyad'
   | 'Drolgruth'
-  | 'Ellara';
+  | 'Ellara'
 
 export type NPC = {
-  name: NPCName;
-  location: string;
-  color?: string;
-};
+  name: NPCName
+  location: string
+  color?: string
+}

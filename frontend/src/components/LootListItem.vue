@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
+import { computed, defineProps } from 'vue'
 
-import { LootEntry } from '../utils/loot/loot.types.ts';
+import { LootEntry } from '../utils/loot/loot.types.ts'
 import {
   VCard,
   VCardText,
@@ -9,35 +9,35 @@ import {
   VList,
   VListItem,
   VTooltip,
-} from 'vuetify/components';
-import { VChip } from 'vuetify/components/VChip';
-import { VBadge } from 'vuetify/components/VBadge';
-import { VIcon } from 'vuetify/components/VIcon';
-import { getNPC } from '../utils/npc/npc.helpers.ts';
+} from 'vuetify/components'
+import { VChip } from 'vuetify/components/VChip'
+import { VBadge } from 'vuetify/components/VBadge'
+import { VIcon } from 'vuetify/components/VIcon'
+import { getNPC } from '../utils/npc/npc.helpers.ts'
 
-const emit = defineEmits(['click', 'ignore']);
+const emit = defineEmits(['click', 'ignore'])
 
-const { lootEntry } = defineProps<{ lootEntry: LootEntry }>();
+const { lootEntry } = defineProps<{ lootEntry: LootEntry }>()
 
-const isUnknownItem = computed(() => lootEntry.item.value === undefined);
+const isUnknownItem = computed(() => lootEntry.item.value === undefined)
 const NPC = computed(() => {
-  const NPCs = lootEntry.item.NPCs || [];
+  const NPCs = lootEntry.item.NPCs || []
 
-  if (!NPCs.length) return null;
+  if (!NPCs.length) return null
 
-  return getNPC(NPCs[0]);
-});
+  return getNPC(NPCs[0])
+})
 
 const totalValue = computed(
   () => (lootEntry.item.value || 0) * lootEntry.amount,
-);
+)
 
 const valueColor = computed(() =>
   isUnknownItem.value ? 'warning' : 'secondary',
-);
+)
 
 function onClick() {
-  emit('click');
+  emit('click')
 }
 </script>
 

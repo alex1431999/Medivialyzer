@@ -51,4 +51,4 @@ export const SUPPLIES = [
     name: 'Hunting bolt',
     value: 5,
   },
-];
+]

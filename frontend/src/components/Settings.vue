@@ -10,12 +10,12 @@ import {
   VTab,
   VTabsWindow,
   VTabsWindowItem,
-} from 'vuetify/components';
-import { ref } from 'vue';
-import SettingsIgnoredItems from './SettingsIgnoredItems.vue';
-import SettingsCustomItems from './SettingsCustomItems.vue';
+} from 'vuetify/components'
+import { ref } from 'vue'
+import SettingsIgnoredItems from './SettingsIgnoredItems.vue'
+import SettingsCustomItems from './SettingsCustomItems.vue'
 
-const tab = ref<string>('ignoredItems');
+const tab = ref<string>('ignoredItems')
 </script>
 
 <template>

@@ -7,9 +7,9 @@ export function singularize(word: string) {
     ses: 's',
     es: 'e',
     s: '',
-  };
+  }
   return word.replace(
     new RegExp(`(${Object.keys(endings).join('|')})$`),
     (r) => endings[r],
-  );
+  )
 }

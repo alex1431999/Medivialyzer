@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import LootList from './components/LootList.vue';
-import Header from './components/Header.vue';
+import LootList from './components/LootList.vue'
+import Header from './components/Header.vue'
 </script>
 
 <template>

@@ -3,4 +3,4 @@ export default {
     environment: 'jsdom',
     setupFiles: ['./test/setup.ts'],
   },
-};
+}

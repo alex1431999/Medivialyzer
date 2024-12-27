@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { VChip, VIcon, VTooltip } from 'vuetify/components';
+import { VChip, VIcon, VTooltip } from 'vuetify/components'
 
-const { totalLootValue } = defineProps<{ totalLootValue: number }>();
+const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 </script>
 
 <template>

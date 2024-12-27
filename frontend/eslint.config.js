@@ -1,8 +1,8 @@
 // Import dependencies
-import vue from 'eslint-plugin-vue';
-import ts from '@typescript-eslint/eslint-plugin';
-import vueParser from 'vue-eslint-parser';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import vue from 'eslint-plugin-vue'
+import ts from '@typescript-eslint/eslint-plugin'
+import vueParser from 'vue-eslint-parser'
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default [
   {
@@ -29,4 +29,4 @@ export default [
     },
   },
   eslintPluginPrettierRecommended,
-];
+]
