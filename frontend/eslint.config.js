@@ -27,15 +27,4 @@ export default [
             '@typescript-eslint/no-unused-vars': 'error',
         },
     },
-    {
-        files: ['**/*.js'],
-        ignores: ['node_modules/', 'dist/'],
-        languageOptions: {
-            ecmaVersion: 'latest',
-            sourceType: 'module',
-        },
-        rules: {
-            'no-unused-vars': 'error',
-        },
-    },
 ];
