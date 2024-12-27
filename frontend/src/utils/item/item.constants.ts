@@ -2767,5 +2767,9 @@ export const ITEMS: Item[] =[
     {
         "name": "Undead Dragon Trophy",
         "value": 300000
+    },
+    {
+        "name": "The Bonecrusher",
+        "value": 40000
     }
 ]
