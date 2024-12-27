@@ -1,9 +1,4 @@
 # V1.1.0 - unreleased
-## Items added
-- Ritual Mask
-- Watcher Shield
-- Spider Silk
-
 ## Features
 - Added profit indicator
 - Add ability to add custom items
@@ -16,6 +11,7 @@
   - Every submitted item is manually checked for correctness before it's added to the client
   - The items will always be added to the official client with the next release
 - Show where you can sell the items looted
+- Various items added
 
 ## UX
 - Added tooltips to UI elements
