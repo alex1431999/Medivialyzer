@@ -1,8 +1,8 @@
-import { createApp, } from 'vue'
+import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import {vuetify} from "./plugins/vuetify.ts";
-import {pinia} from "./plugins/pinia.ts";
+import { vuetify } from './plugins/vuetify.ts'
+import { pinia } from './plugins/pinia.ts'
 
 const app = createApp(App)
 

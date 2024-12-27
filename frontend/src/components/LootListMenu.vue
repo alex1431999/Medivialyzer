@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { VCard, VCardText } from "vuetify/components/VCard";
-import LootListTimeControl from "./LootListTimeControl.vue";
-import SuppliesModal from "./SuppliesModal.vue";
-import TotalLootValueDisplay from "./TotalLootValueDisplay.vue";
+import { VCard, VCardText } from 'vuetify/components/VCard'
+import LootListTimeControl from './LootListTimeControl.vue'
+import SuppliesModal from './SuppliesModal.vue'
+import TotalLootValueDisplay from './TotalLootValueDisplay.vue'
 
 const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 </script>
@@ -11,7 +11,11 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
   <v-card class="loot-list-menu__card">
     <v-card-text class="loot-list-menu__card-text">
       <SuppliesModal />
-      <LootListTimeControl @reset="$emit('reset')" @back="$emit('back')" @forward="$emit('forward')" ></LootListTimeControl>
+      <LootListTimeControl
+        @reset="$emit('reset')"
+        @back="$emit('back')"
+        @forward="$emit('forward')"
+      ></LootListTimeControl>
       <TotalLootValueDisplay :total-loot-value="totalLootValue" />
     </v-card-text>
   </v-card>
