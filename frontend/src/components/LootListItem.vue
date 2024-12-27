@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, defineProps } from "vue";
+import { computed, defineProps } from 'vue';
 
-import { LootEntry } from "../utils/loot/loot.types.ts";
+import { LootEntry } from '../utils/loot/loot.types.ts';
 import {
   VCard,
   VCardText,
@@ -9,13 +9,13 @@ import {
   VList,
   VListItem,
   VTooltip,
-} from "vuetify/components";
-import { VChip } from "vuetify/components/VChip";
-import { VBadge } from "vuetify/components/VBadge";
-import { VIcon } from "vuetify/components/VIcon";
-import { getNPC } from "../utils/npc/npc.helpers.ts";
+} from 'vuetify/components';
+import { VChip } from 'vuetify/components/VChip';
+import { VBadge } from 'vuetify/components/VBadge';
+import { VIcon } from 'vuetify/components/VIcon';
+import { getNPC } from '../utils/npc/npc.helpers.ts';
 
-const emit = defineEmits(["click", "ignore"]);
+const emit = defineEmits(['click', 'ignore']);
 
 const { lootEntry } = defineProps<{ lootEntry: LootEntry }>();
 
@@ -33,11 +33,11 @@ const totalValue = computed(
 );
 
 const valueColor = computed(() =>
-  isUnknownItem.value ? "warning" : "secondary",
+  isUnknownItem.value ? 'warning' : 'secondary',
 );
 
 function onClick() {
-  emit("click");
+  emit('click');
 }
 </script>
 

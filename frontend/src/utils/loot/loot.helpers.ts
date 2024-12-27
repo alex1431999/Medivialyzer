@@ -1,4 +1,4 @@
-import { LootEntry } from "./loot.types.ts";
+import { LootEntry } from './loot.types.ts';
 
 export function groupLoot(loot: LootEntry[]): LootEntry[] {
   const lootEntryByName: Record<string, LootEntry> = {};

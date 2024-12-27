@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
-import { electron } from "../utils/electron/electron.constants.ts";
-import { Item } from "../utils/item/item.types.ts";
-import _ from "lodash";
+import { defineStore } from 'pinia';
+import { electron } from '../utils/electron/electron.constants.ts';
+import { Item } from '../utils/item/item.types.ts';
+import _ from 'lodash';
 
 export type Config = {
   since: number;
@@ -17,7 +17,7 @@ const DEFAULT_CONFIG: Config = {
   consentToSubmitItem: false,
 };
 
-export const useConfigStore = defineStore("config", {
+export const useConfigStore = defineStore('config', {
   state: () => {
     return { config: { ...DEFAULT_CONFIG, ...electron.getConfig() } };
   },

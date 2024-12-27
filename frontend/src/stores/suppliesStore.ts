@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { SUPPLIES } from "../utils/supplies/supplies.constants.ts";
+import { defineStore } from 'pinia';
+import { SUPPLIES } from '../utils/supplies/supplies.constants.ts';
 
 export type SuppliesData = Record<
   string,
@@ -19,7 +19,7 @@ const DEFAULT_SUPPLIES_STORE_DATA: SuppliesStoreData = {
   supplies: DEFAULT_SUPPLIES_DATA,
 };
 
-export const useSuppliesStore = defineStore("supplies", {
+export const useSuppliesStore = defineStore('supplies', {
   state: () => {
     return DEFAULT_SUPPLIES_STORE_DATA;
   },

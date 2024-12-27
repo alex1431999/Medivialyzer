@@ -1,7 +1,7 @@
-import { Item, ItemName } from "./item.types.ts";
-import { ITEMS } from "./item.constants.ts";
-import { useConfigStore } from "../../stores/configStore.ts";
-import { singularize } from "../string.ts";
+import { Item, ItemName } from './item.types.ts';
+import { ITEMS } from './item.constants.ts';
+import { useConfigStore } from '../../stores/configStore.ts';
+import { singularize } from '../string.ts';
 
 export function getAllItems() {
   const configStore = useConfigStore();

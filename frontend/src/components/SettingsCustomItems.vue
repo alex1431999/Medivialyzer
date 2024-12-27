@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { VBtn, VList, VListItem, VAlert } from "vuetify/components";
-import { computed } from "vue";
-import { useConfigStore } from "../stores/configStore.ts";
-import { Item } from "../utils/item/item.types.ts";
-import _ from "lodash";
+import { VBtn, VList, VListItem, VAlert } from 'vuetify/components';
+import { computed } from 'vue';
+import { useConfigStore } from '../stores/configStore.ts';
+import { Item } from '../utils/item/item.types.ts';
+import _ from 'lodash';
 
 const configStore = useConfigStore();
 
 const customItems = computed(() =>
-  _.sortBy(configStore.config.customItems, "name"),
+  _.sortBy(configStore.config.customItems, 'name'),
 );
 
 function onRemoveCustomItem(item: Item) {

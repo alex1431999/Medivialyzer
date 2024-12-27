@@ -10,19 +10,19 @@ import {
   VBtn,
   VCheckbox,
   VSelect,
-} from "vuetify/components";
-import { ref, watch } from "vue";
-import { Item } from "../utils/item/item.types.ts";
-import { useConfigStore } from "../stores/configStore.ts";
-import { baserowSubmitItem } from "../utils/baserow/baserow.requests.ts";
-import _ from "lodash";
-import { NPC_LIST } from "../utils/npc/npc.constants.ts";
+} from 'vuetify/components';
+import { ref, watch } from 'vue';
+import { Item } from '../utils/item/item.types.ts';
+import { useConfigStore } from '../stores/configStore.ts';
+import { baserowSubmitItem } from '../utils/baserow/baserow.requests.ts';
+import _ from 'lodash';
+import { NPC_LIST } from '../utils/npc/npc.constants.ts';
 
 const configStore = useConfigStore();
-const NPCNames = _.map(NPC_LIST, "name").sort();
+const NPCNames = _.map(NPC_LIST, 'name').sort();
 
 const { itemToAddName } = defineProps<{ itemToAddName: string | null }>();
-const emit = defineEmits(["onClose"]);
+const emit = defineEmits(['onClose']);
 
 const isOpen = ref<boolean>(false);
 const isValid = ref<boolean>(true);
@@ -30,7 +30,7 @@ const itemValue = ref<string | null>(null);
 const NPCSelected = ref<string | null>(null);
 const consent = ref<boolean>(configStore.config.consentToSubmitItem);
 
-const valueRules = [(value: string) => !!value || "Value is required"];
+const valueRules = [(value: string) => !!value || 'Value is required'];
 
 watch(
   () => itemToAddName,
@@ -43,13 +43,13 @@ watch(
 
 watch(isOpen, (value: boolean) => {
   if (!value) {
-    emit("onClose");
+    emit('onClose');
   }
 });
 
 async function submit() {
-  if (!itemToAddName) throw new Error("Name is required");
-  if (!itemValue.value) throw new Error("Value is required");
+  if (!itemToAddName) throw new Error('Name is required');
+  if (!itemValue.value) throw new Error('Value is required');
 
   const item: Item = {
     name: itemToAddName,

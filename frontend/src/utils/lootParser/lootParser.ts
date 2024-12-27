@@ -1,7 +1,7 @@
-import { lootDataTypeLoot } from "./lootDataType/lootDataTypes/lootDataType.loot.ts";
-import { lootDataTypeTimestamp } from "./lootDataType/lootDataTypes/lootDataType.timestamp.ts";
-import { ItemLooted } from "../item/item.types.ts";
-import { LootEntry } from "../loot/loot.types.ts";
+import { lootDataTypeLoot } from './lootDataType/lootDataTypes/lootDataType.loot.ts';
+import { lootDataTypeTimestamp } from './lootDataType/lootDataTypes/lootDataType.timestamp.ts';
+import { ItemLooted } from '../item/item.types.ts';
+import { LootEntry } from '../loot/loot.types.ts';
 
 export class LootParser {
   private readonly lootData: string;
@@ -35,6 +35,6 @@ export class LootParser {
   }
 
   private forEachLine(callback: (line: string) => void) {
-    this.lootData.split("\n").forEach(callback);
+    this.lootData.split('\n').forEach(callback);
   }
 }
