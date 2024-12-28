@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn --cwd ./frontend build && yarn --cwd ./electron build && yarn --cwd ./electron builder",
-    "build:ci": "yarn --cwd ./frontend build && yarn --cwd ./electron build && yarn --cwd ./electron builder:ci"
+    "build:ci": "yarn --cwd ./frontend build && yarn --cwd ./electron build && yarn --cwd ./electron builder:ci",
+    "serve": "yarn --cwd ./frontend serve & yarn --cwd ./electron watch"
   }
 }
