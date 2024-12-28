@@ -1,5 +1,6 @@
 import { LootDataType } from '../lootDataType.ts'
 import { Creature } from '../../../creature/creature.types.ts'
+import { getCreature } from '../../../creature/creature.constants.ts'
 
 export class LootDataTypeCreature extends LootDataType {
   public type = 'timestamp'
@@ -13,7 +14,10 @@ export class LootDataTypeCreature extends LootDataType {
     const creaturePart = parts[1]
     const creatureName = creaturePart.split(':')[0].trim()
 
-    return { name: creatureName }
+    const creatureFound = getCreature(creatureName)
+    const unknownCreature: Creature = { name: creatureName }
+
+    return creatureFound || unknownCreature
   }
 }
 
