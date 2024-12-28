@@ -6,7 +6,7 @@ import { singularize } from '../../../string.ts'
 // These items you can always ignore since they are special cases and don't represent and actual item
 const LOOT_TO_ALWAYS_IGNORE = ['empty', 'bag']
 
-export class LootDataTypeLoot extends LootDataType {
+export class LootDataTypeItems extends LootDataType {
   public type = 'loot'
 
   public matches(line: string): boolean {
@@ -61,4 +61,4 @@ export class LootDataTypeLoot extends LootDataType {
   }
 }
 
-export const lootDataTypeLoot = new LootDataTypeLoot()
+export const lootDataTypeItems = new LootDataTypeItems()

@@ -1,4 +1,4 @@
-import { lootDataTypeLoot } from './lootDataType/lootDataTypes/lootDataType.loot.ts'
+import { lootDataTypeItems } from './lootDataType/lootDataTypes/lootDataType.items.ts'
 import { lootDataTypeTimestamp } from './lootDataType/lootDataTypes/lootDataType.timestamp.ts'
 import { ItemLooted } from '../item/item.types.ts'
 import { LootEntry } from '../loot/loot.types.ts'
@@ -21,8 +21,8 @@ export class LootParser {
         currentTimeStamp = lootDataTypeTimestamp.toValue(line)
       }
 
-      if (lootDataTypeLoot.matches(line) && since < currentTimeStamp) {
-        const items: ItemLooted[] = lootDataTypeLoot.toValue(line)
+      if (lootDataTypeItems.matches(line) && since < currentTimeStamp) {
+        const items: ItemLooted[] = lootDataTypeItems.toValue(line)
         const lootToAdd = items.map(({ amount, ...item }) => ({
           item,
           amount,
@@ -45,7 +45,7 @@ export class LootParser {
         currentTimeStamp = lootDataTypeTimestamp.toValue(line)
       }
 
-      if (lootDataTypeLoot.matches(line) && since < currentTimeStamp) {
+      if (lootDataTypeItems.matches(line) && since < currentTimeStamp) {
         const creature: Creature = lootDataTypeCreature.toValue(line)
         creatures.push({ ...creature, timestamp: currentTimeStamp })
       }
