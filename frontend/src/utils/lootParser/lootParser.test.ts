@@ -97,4 +97,50 @@ describe('lootParser', () => {
       ])
     })
   })
+
+  describe('getCreatures', () => {
+    test('no creatures', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        `
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.getCreatures(0)).toEqual([])
+    })
+
+    test('one creature', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        19:19 Loot of giant cobra: 9 gold coins.
+        `
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.getCreatures(0)).toEqual([
+        {
+          name: 'giant cobra',
+          timestamp: new Date('Wed Dec 04 19:29:20 2024').getTime(),
+        },
+      ])
+    })
+
+    test('many creatures', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        19:19 Loot of giant cobra: 9 gold coins.
+        19:19 Loot of winged vermin: 17 gold coins.
+        `
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.getCreatures(0)).toEqual([
+        {
+          name: 'giant cobra',
+          timestamp: new Date('Wed Dec 04 19:29:20 2024').getTime(),
+        },
+        {
+          name: 'winged vermin',
+          timestamp: new Date('Wed Dec 04 19:29:20 2024').getTime(),
+        },
+      ])
+    })
+  })
 })
