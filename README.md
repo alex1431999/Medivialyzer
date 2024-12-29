@@ -36,7 +36,7 @@ I am currently looking into getting a free certificate for open source developme
 please take my word for the application being safe, or if you don't trust me and are technically
 savvy you can also clone the repo and make a build yourself.
 
-#### Why isn't my loot updating?
+### Why isn't my loot updating?
 The loot file updates about every 25-50 mob kills. It will only update once the loot
 window overflows. That means you will always be behind a certain amount of kills.
 
