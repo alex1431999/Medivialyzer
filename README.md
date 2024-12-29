@@ -37,8 +37,14 @@ please take my word for the application being safe, or if you don't trust me and
 savvy you can also clone the repo and make a build yourself.
 
 #### Why isn't my loot updating?
-The loot file takes about 30 minutes to update. You can force an update by logging out and back in.
-This is a limitation by the game that we have to work around.
+The loot file updates about every 25-50 mob kills. It will only update once the loot
+window overflows. That means you will always be behind a certain amount of kills.
+
+To force an update you need to log out of the game. Doing that is recommended after every hunt
+since it's the only way to make sure all you loot has been counted.
+
+There is an [open ticket](https://discord.com/channels/433936691431211009/1322161666527334411/1322161666527334411) with the Medivia team to update the behaviour to be better
+suited for Medivialyzer.
 
 If relogging does not fix it, make sure you have enabled the `automatically save loot messages to text file` 
 in your Medivia settings under `Console`
