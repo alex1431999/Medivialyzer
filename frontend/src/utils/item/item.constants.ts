@@ -6,6 +6,14 @@ export const ITEMS: Item[] = [
     value: 1,
   },
   {
+    name: 'Platinum Coin',
+    value: 100,
+  },
+  {
+    name: 'Crystal Coin',
+    value: 10000,
+  },
+  {
     name: 'Albino Scale Mail',
     value: 0,
     NPCs: ['Players'],
@@ -1988,5 +1996,9 @@ export const ITEMS: Item[] = [
     name: 'The Bonecrusher',
     value: 40000,
     NPCs: ['Ellara'],
+  },
+  {
+    name: 'Hydra Ham',
+    value: 0,
   },
 ]
