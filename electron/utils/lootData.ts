@@ -6,5 +6,10 @@ export function getLootData() {
     const homeDir = os.homedir();
     const filePath = path.join(homeDir, 'medivia', 'Loot.txt');
 
-    return fs.readFileSync(filePath).toString()
+    try {
+        return fs.readFileSync(filePath).toString()
+    }
+    catch (error) {
+        return ''
+    }
 }
