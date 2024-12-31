@@ -76,7 +76,6 @@ async function submit() {
         <v-card-text>
           <v-form v-model="isValid">
             <v-text-field
-              label="Name"
               required
               readonly
               :value="itemToAddName"
