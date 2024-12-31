@@ -3,7 +3,7 @@ import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
 
 export type SuppliesData = Record<
   string,
-  { before: number | null; after: number | null }
+  { before: number | ''; after: number | '' }
 >
 
 export type SuppliesStoreData = {
@@ -30,7 +30,8 @@ export const useSuppliesStore = defineStore('supplies', {
         const after = state.supplies[supply.name].after
 
         // This means the supply either wasn't used or we haven't entered the after value yet
-        if (before === null || after === null) return total
+        if (before === null || after === null || before === '' || after === '')
+          return total
 
         const amountUsed = before - after
         const totalSupplyValue = amountUsed * supply.value

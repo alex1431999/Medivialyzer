@@ -9,27 +9,16 @@ import {
   VIcon,
   VCardTitle,
   VCardActions,
+  VTextField,
 } from 'vuetify/components'
 import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
-import { SuppliesData, useSuppliesStore } from '../stores/suppliesStore.ts'
+import { useSuppliesStore } from '../stores/suppliesStore.ts'
 
 const suppliesStore = useSuppliesStore()
-
-function parseSupplyValue(value: string) {
-  return value === '' ? null : parseInt(value || '0', 10)
-}
-
-function onBeforeChanged(supplyName: keyof SuppliesData, value: string) {
-  suppliesStore.supplies[supplyName].before = parseSupplyValue(value)
-}
-
-function onAfterChanged(supplyName: keyof SuppliesData, value: string) {
-  suppliesStore.supplies[supplyName].after = parseSupplyValue(value)
-}
 </script>
 
 <template>
-  <v-dialog max-width="500">
+  <v-dialog max-width="600">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
@@ -61,23 +50,17 @@ function onAfterChanged(supplyName: keyof SuppliesData, value: string) {
               <tr v-for="supply in SUPPLIES">
                 <td>{{ supply.name }}</td>
                 <td>
-                  <input
-                    :value="suppliesStore.supplies[supply.name].before"
-                    class="supplies-modal__supply-input"
+                  <v-text-field
+                    v-model="suppliesStore.supplies[supply.name].before"
                     type="number"
-                    @change="
-                      onBeforeChanged(supply.name, ($event.target as any).value)
-                    "
+                    variant="solo"
                   />
                 </td>
                 <td>
-                  <input
-                    :value="suppliesStore.supplies[supply.name].after"
-                    class="supplies-modal__supply-input"
+                  <v-text-field
+                    v-model="suppliesStore.supplies[supply.name].after"
                     type="number"
-                    @change="
-                      onAfterChanged(supply.name, ($event.target as any).value)
-                    "
+                    variant="solo"
                   />
                 </td>
               </tr>
@@ -102,9 +85,5 @@ function onAfterChanged(supplyName: keyof SuppliesData, value: string) {
 
 .supplies-modal__table {
   max-height: 300px;
-}
-
-.supplies-modal__supply-input {
-  width: 50px;
 }
 </style>
