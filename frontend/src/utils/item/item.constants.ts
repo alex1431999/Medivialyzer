@@ -2001,4 +2001,21 @@ export const ITEMS: Item[] = [
     name: 'Hydra Ham',
     value: 0,
   },
+  {
+    name: 'Sling Herb',
+    value: 0,
+  },
+  {
+    name: 'Life crystal',
+    value: 85,
+    NPCs: ['Jodi'],
+  },
+  {
+    name: 'Frozen Ham',
+    value: 60,
+  },
+  {
+    name: 'Frost Dragon Heart',
+    value: 1600,
+  }
 ]
