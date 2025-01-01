@@ -22,7 +22,7 @@ to Medivialyzer. You should see your first results within 30 minutes or you can 
 by logging out and in.
 
 ## Roadmap
-You can see the features that are currently being worked on [here](https://github.com/alex1431999/Medivialyzer/milestone/1).
+You can see the features that are currently being worked on [here](https://github.com/alex1431999/Medivialyzer/milestone/3).
 
 Feel free to participate by suggesting new features or filing bug reports!
 
