@@ -2017,5 +2017,5 @@ export const ITEMS: Item[] = [
   {
     name: 'Frost Dragon Heart',
     value: 1600,
-  }
+  },
 ]
