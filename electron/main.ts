@@ -56,7 +56,8 @@ async function createWindow() {
     // Handle the file dialog request
     ipcMain.handle('open-file-dialog', async () => {
         const result = await dialog.showOpenDialog(mainWindow, {
-            properties: ['openFile'], // You can also use 'openDirectory' for folders
+            properties: ['openFile'],
+            filters: [{ name: '', extensions: ['txt'] }]
         });
         return result.filePaths[0]; // Return the selected file path
     });
