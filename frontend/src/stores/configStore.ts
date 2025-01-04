@@ -8,6 +8,7 @@ export type Config = {
   ignoredItems: string[]
   customItems: Item[]
   consentToSubmitItem: boolean
+  lootFilePath?: string
 }
 
 const DEFAULT_CONFIG: Config = {
@@ -50,6 +51,10 @@ export const useConfigStore = defineStore('config', {
     },
     setConsentToSubmitItem(consent: boolean) {
       this.config.consentToSubmitItem = consent
+      electron.setConfig(JSON.stringify(this.config))
+    },
+    setLootFilePath(lootFilePath: string) {
+      this.config.lootFilePath = lootFilePath
       electron.setConfig(JSON.stringify(this.config))
     },
   },
