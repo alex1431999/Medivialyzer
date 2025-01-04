@@ -18,6 +18,7 @@ async function selectLootFile() {
   <div>
     <div class="d-flex ga-2">
       <v-text-field
+        persistent-placeholder
         label="Loot file path"
         :value="configStore.config.lootFilePath"
       />
