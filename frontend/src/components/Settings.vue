@@ -14,6 +14,7 @@ import {
 import { ref } from 'vue'
 import SettingsIgnoredItems from './SettingsIgnoredItems.vue'
 import SettingsCustomItems from './SettingsCustomItems.vue'
+import SettingsGeneral from './SettingsGeneral.vue'
 
 const tab = ref<string>('general')
 </script>
@@ -37,7 +38,7 @@ const tab = ref<string>('general')
         <v-card-text>
           <v-tabs-window v-model="tab">
             <v-tabs-window-item value="general">
-              <div>General</div>
+              <SettingsGeneral />
             </v-tabs-window-item>
 
             <v-tabs-window-item value="ignoredItems">
