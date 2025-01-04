@@ -55,7 +55,7 @@ export const useConfigStore = defineStore('config', {
     },
     setLootFilePath(lootFilePath: string) {
       this.config.lootFilePath = lootFilePath
-      electron.setConfig(JSON.stringify(lootFilePath))
+      electron.setConfig(JSON.stringify(this.config))
     },
   },
 })
