@@ -8,6 +8,7 @@ export type Config = {
   ignoredItems: string[]
   customItems: Item[]
   consentToSubmitItem: boolean
+  lootFilePath?: string
 }
 
 const DEFAULT_CONFIG: Config = {
