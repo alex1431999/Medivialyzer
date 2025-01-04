@@ -1,4 +1,4 @@
-import { app, BrowserWindow, BrowserWindowConstructorOptions, ipcMain, screen } from "electron";
+import { app, BrowserWindow, BrowserWindowConstructorOptions, ipcMain, screen, dialog } from "electron";
 import path from "path";
 import { isDev } from "./env";
 import { appConfig } from "./electronStore/configuration";
@@ -51,6 +51,14 @@ async function createWindow() {
             version: app.getVersion(),
             name: app.getName(),
         };
+    });
+
+    // Handle the file dialog request
+    ipcMain.handle('open-file-dialog', async () => {
+        const result = await dialog.showOpenDialog(mainWindow, {
+            properties: ['openFile'], // You can also use 'openDirectory' for folders
+        });
+        return result.filePaths[0]; // Return the selected file path
     });
 }
 

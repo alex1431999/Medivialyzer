@@ -10,4 +10,5 @@ contextBridge.exposeInMainWorld('electron', {
     getLootData: () => getLootData(),
     setConfig: (config: string) => configStore.set('config', JSON.parse(config)),
     getConfig: () => configStore.get('config'),
+    openFileDialog: () => ipcRenderer.invoke('open-file-dialog'),
 });

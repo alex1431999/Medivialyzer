@@ -53,5 +53,9 @@ export const useConfigStore = defineStore('config', {
       this.config.consentToSubmitItem = consent
       electron.setConfig(JSON.stringify(this.config))
     },
+    setLootFilePath(lootFilePath: string) {
+      this.config.lootFilePath = lootFilePath
+      electron.setConfig(JSON.stringify(lootFilePath))
+    },
   },
 })
