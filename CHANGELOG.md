@@ -1,4 +1,8 @@
-# V1.1.0 - unreleased
+# V1.1.1
+- Added ability to define your own loot file path
+- Added missing supply types
+
+# V1.1.0
 ## Features
 - Added profit indicator
 - Add ability to add custom items
