@@ -12,6 +12,10 @@ export const SUPPLIES = [
     value: 75,
   },
   {
+    name: 'Ice Heavy magic missile rune',
+    value: 120,
+  },
+  {
     name: 'Sudden death rune',
     value: 300,
   },
@@ -50,5 +54,17 @@ export const SUPPLIES = [
   {
     name: 'Hunting bolt',
     value: 5,
+  },
+  {
+    name: 'Small explosive rune',
+    value: 55,
+  },
+  {
+    name: 'Burst Arrow',
+    value: 55,
+  },
+  {
+    name: 'Lionfish meal tier 1',
+    value: 900,
   },
 ]
