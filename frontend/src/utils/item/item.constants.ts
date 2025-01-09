@@ -2018,4 +2018,59 @@ export const ITEMS: Item[] = [
     name: 'Frost Dragon Heart',
     value: 1600,
   },
+  {
+    name: 'Crystal Ring',
+    value: 100,
+    NPCs: ['Ziyad'],
+  },
+  {
+    name: 'Silver Brooch',
+    value: 125,
+    NPCs: ['Dianne'],
+  },
+  {
+    name: 'Small Topaze',
+    value: 440,
+    NPCs: ['Astrid'],
+  },
+  {
+    name: 'Bow',
+    value: 130,
+    NPCs: ['Dalos'],
+  },
+  {
+    name: 'Golden Mug',
+    value: 1000,
+    NPCs: ['Lona'],
+  },
+  {
+    name: 'Shakirian Mace',
+    value: 80,
+    NPCs: ['Bronislav'],
+  },
+  {
+    name: 'Small Onyxe',
+    value: 460,
+    NPCs: ['Edea'],
+  },
+  {
+    name: 'Bonecrusher',
+    value: 40000,
+    NPCs: ['Ellara'],
+  },
+  {
+    name: 'Crystal Necklace',
+    value: 500,
+    NPCs: ['Arses'],
+  },
+  {
+    name: 'Dragonfetish',
+    value: 200,
+    NPCs: ['Jodi'],
+  },
+  {
+    name: 'Energy Ring',
+    value: 100,
+    NPCs: ['Yaman'],
+  },
 ]
