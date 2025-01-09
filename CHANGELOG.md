@@ -1,3 +1,6 @@
+# V1.2.0 - Unreleased
+- Added Falcon NPCs
+
 # V1.1.1
 - Added ability to define your own loot file path
 - Added missing supply types
