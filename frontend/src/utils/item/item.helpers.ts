@@ -6,7 +6,10 @@ import { singularize } from '../string.ts'
 export function getAllItems() {
   const configStore = useConfigStore()
 
-  return [...ITEMS, ...configStore.config.customItems]
+  // We insert the custom items first to make sure that custom items always
+  // overrule the defined items in case somebody is doing a search over this
+  // data.
+  return [...configStore.config.customItems, ...ITEMS]
 }
 
 export function getItem(itemName: ItemName) {
