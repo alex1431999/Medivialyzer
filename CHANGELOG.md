@@ -1,6 +1,7 @@
 # V1.2.0 - Unreleased
 - Added Falcon NPCs
 - Add NPC Omar
+- Add reset button to supplies modal
 
 # V1.1.1
 - Added ability to define your own loot file path
