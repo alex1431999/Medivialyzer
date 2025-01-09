@@ -1,4 +1,4 @@
-import { NPC } from './npc.types.ts'
+import type { NPC } from './npc.types.ts'
 
 export const NPC_LIST: NPC[] = [
   {
@@ -157,5 +157,17 @@ export const NPC_LIST: NPC[] = [
   {
     name: 'Ellara',
     location: 'Luana',
+  },
+  {
+    name: 'Isolde',
+    location: 'Falcon',
+  },
+  {
+    name: 'Cedric',
+    location: 'Falcon',
+  },
+  {
+    name: 'Tristan',
+    location: 'Falcon',
   },
 ]
