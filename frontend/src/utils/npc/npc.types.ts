@@ -37,6 +37,9 @@ export type NPCName =
   | 'Ziyad'
   | 'Drolgruth'
   | 'Ellara'
+  | 'Isolde'
+  | 'Cedric'
+  | 'Tristan'
 
 export type NPC = {
   name: NPCName
