@@ -1,5 +1,6 @@
 # V1.2.0 - Unreleased
 - Added Falcon NPCs
+- Add NPC Omar
 
 # V1.1.1
 - Added ability to define your own loot file path
