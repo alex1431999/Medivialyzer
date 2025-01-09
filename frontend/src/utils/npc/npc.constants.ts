@@ -170,4 +170,8 @@ export const NPC_LIST: NPC[] = [
     name: 'Tristan',
     location: 'Falcon',
   },
+  {
+    name: 'Omar',
+    location: 'Abukir',
+  },
 ]
