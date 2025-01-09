@@ -15,6 +15,10 @@ import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
 
 const suppliesStore = useSuppliesStore()
+
+function onReset() {
+  suppliesStore.reset()
+}
 </script>
 
 <template>
@@ -69,6 +73,7 @@ const suppliesStore = useSuppliesStore()
         </v-card-text>
 
         <v-card-actions>
+          <v-btn text="Reset" @click="onReset"></v-btn>
           <v-btn text="Close" @click="isActive.value = false"></v-btn>
         </v-card-actions>
       </v-card>
