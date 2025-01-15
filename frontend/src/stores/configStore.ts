@@ -7,6 +7,7 @@ export type Config = {
   since: number
   ignoredItems: string[]
   customItems: Item[]
+  ignoreItemsWithNoValue: boolean
   consentToSubmitItem: boolean
   lootFilePath?: string
 }
@@ -15,6 +16,7 @@ const DEFAULT_CONFIG: Config = {
   since: 0,
   ignoredItems: [],
   customItems: [],
+  ignoreItemsWithNoValue: false,
   consentToSubmitItem: false,
 }
 

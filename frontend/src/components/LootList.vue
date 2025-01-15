@@ -38,12 +38,21 @@ const loot = computed(() => {
   return lootParser.getLoot(configStore.config.since)
 })
 
-const lootFiltered = computed(() =>
-  loot.value.filter(
+const lootFiltered = computed(() => {
+  const lootWithoutIgnoredItems = loot.value.filter(
     (lootCurrent) =>
       !configStore.config.ignoredItems.includes(lootCurrent.item.name),
-  ),
-)
+  )
+
+  if (configStore.config.ignoreItemsWithNoValue) {
+    return lootWithoutIgnoredItems.filter(
+      (lootCurrent) =>
+        lootCurrent.item.value === undefined || lootCurrent.item.value > 0,
+    )
+  }
+
+  return lootWithoutIgnoredItems
+})
 const lootGrouped = computed(() => groupLoot(lootFiltered.value))
 const lootSorted = computed(() =>
   lootGrouped.value.sort((a, b) => {
