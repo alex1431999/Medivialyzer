@@ -1,6 +1,6 @@
 export function singularize(word: string): string {
   const irregularPlurals: Record<string, string> = {
-    onyxes: 'onyx',
+    Onyxes: 'Onyx',
   }
 
   // Check for irregular plurals
