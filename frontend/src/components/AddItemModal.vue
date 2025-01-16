@@ -36,6 +36,13 @@ watch(isOpen, (value: boolean) => {
   }
 })
 
+watch(
+  () => formData.value.value.consent,
+  (consent) => {
+    configStore.setConsentToSubmitItem(consent)
+  },
+)
+
 function initialiseFormData(): ItemFormData {
   return {
     value: {
