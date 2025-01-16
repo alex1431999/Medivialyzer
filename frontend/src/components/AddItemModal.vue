@@ -4,40 +4,29 @@ import {
   VCard,
   VCardTitle,
   VCardText,
-  VTextField,
-  VForm,
   VCardActions,
   VBtn,
-  VCheckbox,
-  VSelect,
 } from 'vuetify/components'
 import { ref, watch } from 'vue'
 import { Item } from '../utils/item/item.types.ts'
 import { useConfigStore } from '../stores/configStore.ts'
 import { baserowSubmitItem } from '../utils/baserow/baserow.requests.ts'
-import _ from 'lodash'
-import { NPC_LIST } from '../utils/npc/npc.constants.ts'
+import ItemForm, { ItemFormData } from './ItemForm.vue'
 
 const configStore = useConfigStore()
-const NPCNames = _.map(NPC_LIST, 'name').sort()
 
 const { itemToAddName } = defineProps<{ itemToAddName: string | null }>()
 const emit = defineEmits(['onClose'])
 
-const isOpen = ref<boolean>(false)
-const isValid = ref<boolean>(true)
-const itemValue = ref<string | null>(null)
-const NPCSelected = ref<string | null>(null)
-const consent = ref<boolean>(configStore.config.consentToSubmitItem)
+const formData = ref<ItemFormData>(initialiseFormData())
 
-const valueRules = [(value: string) => !!value || 'Value is required']
+const isOpen = ref<boolean>(false)
 
 watch(
   () => itemToAddName,
   () => {
     isOpen.value = itemToAddName !== null
-    itemValue.value = null
-    NPCSelected.value = null
+    formData.value = initialiseFormData()
   },
 )
 
@@ -47,20 +36,35 @@ watch(isOpen, (value: boolean) => {
   }
 })
 
+function initialiseFormData(): ItemFormData {
+  return {
+    value: {
+      item: {
+        name: itemToAddName || '',
+      },
+      consent: configStore.config.consentToSubmitItem,
+      isValid: true,
+    },
+  }
+}
+
 async function submit() {
   if (!itemToAddName) throw new Error('Name is required')
-  if (!itemValue.value) throw new Error('Value is required')
+  if (formData.value.value.item.value === null)
+    throw new Error('Value is required')
+  if (formData.value.value.item.value === undefined)
+    throw new Error('Value is required')
 
   const item: Item = {
-    name: itemToAddName,
-    value: parseInt(itemValue.value, 10),
-    NPCs: NPCSelected.value ? [NPCSelected.value] : [],
+    name: formData.value.value.item.name,
+    value: parseInt(formData.value.value.item.value as string, 10),
+    NPCs: formData.value.value.item.NPC ? [formData.value.value.item.NPC] : [],
   }
 
   configStore.addCustomItem(item)
-  configStore.setConsentToSubmitItem(consent.value)
+  configStore.setConsentToSubmitItem(formData.value.value.consent)
 
-  if (consent.value) {
+  if (formData.value.value.consent) {
     await baserowSubmitItem(item)
   }
 
@@ -74,37 +78,12 @@ async function submit() {
       <v-card>
         <v-card-title>Add item</v-card-title>
         <v-card-text>
-          <v-form v-model="isValid">
-            <v-text-field
-              required
-              readonly
-              :value="itemToAddName"
-              variant="solo"
-            />
-            <v-text-field
-              label="Value"
-              required
-              placeholder="Value in gold"
-              type="number"
-              variant="solo"
-              :rules="valueRules"
-              v-model="itemValue"
-            />
-            <v-select
-              label="NPC to sell to"
-              :items="NPCNames"
-              v-model="NPCSelected"
-            ></v-select>
-            <v-checkbox
-              label="Consent to Medivialyzer adding the item to the global database (Optional)"
-              v-model="consent"
-            ></v-checkbox>
-          </v-form>
+          <ItemForm v-model="formData"></ItemForm>
         </v-card-text>
 
         <v-card-actions>
           <v-btn @click="isOpen = false">Close</v-btn>
-          <v-btn @click="submit" :disabled="!isValid">Add</v-btn>
+          <v-btn @click="submit" :disabled="!formData.value.isValid">Add</v-btn>
         </v-card-actions>
       </v-card>
     </template>
