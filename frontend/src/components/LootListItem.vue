@@ -9,7 +9,7 @@ import { VIcon } from 'vuetify/components/VIcon'
 import { getNPC } from '../utils/npc/npc.helpers.ts'
 import LootListItemMenu from './LootListItemMenu.vue'
 
-const emit = defineEmits(['click', 'ignore'])
+const emit = defineEmits(['click', 'ignore', 'edit'])
 
 const { lootEntry } = defineProps<{ lootEntry: LootEntry }>()
 
@@ -42,7 +42,10 @@ function onClick() {
   >
     <VCardText class="loot-list-item__text">
       <div class="loot-list-item__name">
-        <LootListItemMenu @ignore="emit('ignore', lootEntry.item.name)" />
+        <LootListItemMenu
+          @ignore="emit('ignore', lootEntry.item.name)"
+          @edit="emit('edit')"
+        />
 
         <!-- Item name -->
         <v-badge color="secondary" :content="`${lootEntry.amount}x`">

@@ -18,6 +18,7 @@ const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
 
 const itemToAddName = ref<string | null>(null)
+const itemToEdit = ref<LootEntry | null>(null)
 
 const lootData = ref<string>(electron.getLootData())
 
@@ -93,6 +94,10 @@ function onIgnore(itemName: string) {
 function onLootItemClicked(entry: LootEntry) {
   itemToAddName.value = entry.item.name
 }
+
+function onLootItemEdit(entry: LootEntry) {
+  itemToEdit.value = entry
+}
 </script>
 
 <template>
@@ -117,6 +122,7 @@ function onLootItemClicked(entry: LootEntry) {
       :loot-entry="lootEntry"
       @ignore="onIgnore"
       @click="onLootItemClicked(lootEntry)"
+      @edit="onLootItemEdit(lootEntry)"
     >
     </LootListItem>
   </div>
