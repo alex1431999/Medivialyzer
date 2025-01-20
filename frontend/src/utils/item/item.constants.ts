@@ -320,8 +320,8 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Chaos Shield',
-    value: 2000000,
-    NPCs: ['Players'],
+    value: 500000,
+    NPCs: ['Wulkan'],
   },
   {
     name: 'Chimera Mane',
@@ -2072,5 +2072,75 @@ export const ITEMS: Item[] = [
     name: 'Energy Ring',
     value: 100,
     NPCs: ['Yaman'],
+  },
+  {
+    name: 'Small Onyx',
+    value: 460,
+    NPCs: ['Annushka'],
+  },
+  {
+    name: 'The Abyssal Scriptures',
+    value: 8000,
+    NPCs: ['Drolgruth'],
+  },
+  {
+    name: 'Lightning Shard',
+    value: 2750,
+    NPCs: ['Cedric'],
+  },
+  {
+    name: 'Storm Crystal',
+    value: 2400,
+    NPCs: ['Cedric'],
+  },
+  {
+    name: 'Blizzard Core',
+    value: 3200,
+    NPCs: ['Cedric'],
+  },
+  {
+    name: 'Glacial Chakram',
+    value: 1800,
+    NPCs: ['Cedric'],
+  },
+  {
+    name: 'Small zircon',
+    value: 460,
+    NPCs: ['Isolde'],
+  },
+  {
+    name: 'Mysterious Fetish',
+    value: 300,
+    NPCs: ['Jodi'],
+  },
+  {
+    name: 'Pyroweave Mask',
+    value: 265000,
+    NPCs: ['Tristan'],
+  },
+  {
+    name: 'Spirit of Fire',
+    value: 8000,
+    NPCs: ['Cedric'],
+  },
+  {
+    name: 'Blazing Crystal',
+    value: 3200,
+    NPCs: ['Cedric'],
+  },
+  {
+    name: 'Inferno Bangle',
+    value: 1470,
+    NPCs: ['Cedric'],
+  },
+  {
+    name: 'Simple Dress',
+    value: 80,
+    NPCs: ['Players'],
+  },
+  {
+    name: 'Bow',
+    value: 130,
+    NPCs: ['Risdarick'],
   },
 ]
