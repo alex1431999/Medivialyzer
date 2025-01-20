@@ -2,6 +2,7 @@
 - Added Falcon NPCs
 - Add NPC Omar
 - Add reset button to supplies modal
+- Add ability to edit existing items
 
 # V1.1.1
 - Added ability to define your own loot file path
