@@ -2,20 +2,14 @@
 import { computed, defineProps } from 'vue'
 
 import { LootEntry } from '../utils/loot/loot.types.ts'
-import {
-  VCard,
-  VCardText,
-  VMenu,
-  VList,
-  VListItem,
-  VTooltip,
-} from 'vuetify/components'
+import { VCard, VCardText, VTooltip } from 'vuetify/components'
 import { VChip } from 'vuetify/components/VChip'
 import { VBadge } from 'vuetify/components/VBadge'
 import { VIcon } from 'vuetify/components/VIcon'
 import { getNPC } from '../utils/npc/npc.helpers.ts'
+import LootListItemMenu from './LootListItemMenu.vue'
 
-const emit = defineEmits(['click', 'ignore'])
+const emit = defineEmits(['click', 'ignore', 'edit'])
 
 const { lootEntry } = defineProps<{ lootEntry: LootEntry }>()
 
@@ -48,19 +42,10 @@ function onClick() {
   >
     <VCardText class="loot-list-item__text">
       <div class="loot-list-item__name">
-        <v-menu>
-          <template v-slot:activator="{ props }">
-            <v-icon v-bind="props" icon="mdi-dots-vertical"></v-icon>
-          </template>
-          <v-list>
-            <v-list-item
-              class="loot-list-item__menu"
-              @click="$emit('ignore', lootEntry.item.name)"
-            >
-              Ignore item
-            </v-list-item>
-          </v-list>
-        </v-menu>
+        <LootListItemMenu
+          @ignore="emit('ignore', lootEntry.item.name)"
+          @edit="emit('edit')"
+        />
 
         <!-- Item name -->
         <v-badge color="secondary" :content="`${lootEntry.amount}x`">
@@ -102,10 +87,6 @@ function onClick() {
   display: flex;
   gap: 10px;
   align-items: center;
-}
-
-.loot-list-item__menu {
-  overflow: hidden;
 }
 
 .loot-list-item__text {

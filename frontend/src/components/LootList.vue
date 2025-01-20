@@ -13,11 +13,13 @@ import LootProfitDisplay from './LootProfitDisplay.vue'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
 import { LootEntry } from '../utils/loot/loot.types.ts'
 import AddItemModal from './AddItemModal.vue'
+import EditItemModal from './EditItemModal.vue'
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
 
 const itemToAddName = ref<string | null>(null)
+const itemToEdit = ref<LootEntry | null>(null)
 
 const lootData = ref<string>(electron.getLootData())
 
@@ -93,6 +95,10 @@ function onIgnore(itemName: string) {
 function onLootItemClicked(entry: LootEntry) {
   itemToAddName.value = entry.item.name
 }
+
+function onLootItemEdit(entry: LootEntry) {
+  itemToEdit.value = entry
+}
 </script>
 
 <template>
@@ -100,6 +106,7 @@ function onLootItemClicked(entry: LootEntry) {
     :item-to-add-name="itemToAddName"
     @on-close="itemToAddName = null"
   />
+  <EditItemModal :item-to-edit="itemToEdit" @on-close="itemToEdit = null" />
 
   <div class="loot-list__header">
     <LootTimeDisplay
@@ -117,6 +124,7 @@ function onLootItemClicked(entry: LootEntry) {
       :loot-entry="lootEntry"
       @ignore="onIgnore"
       @click="onLootItemClicked(lootEntry)"
+      @edit="onLootItemEdit(lootEntry)"
     >
     </LootListItem>
   </div>
