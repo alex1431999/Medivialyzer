@@ -44,6 +44,7 @@ export const useConfigStore = defineStore('config', {
       }
     },
     addCustomItem(item: Item) {
+      // TODO if custom item already exists in array, overwrite the existing item
       this.config.customItems.push(item)
       electron.setConfig(JSON.stringify(this.config))
     },

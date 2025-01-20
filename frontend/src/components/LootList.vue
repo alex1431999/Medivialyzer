@@ -13,6 +13,7 @@ import LootProfitDisplay from './LootProfitDisplay.vue'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
 import { LootEntry } from '../utils/loot/loot.types.ts'
 import AddItemModal from './AddItemModal.vue'
+import EditItemModal from './EditItemModal.vue'
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
@@ -105,6 +106,7 @@ function onLootItemEdit(entry: LootEntry) {
     :item-to-add-name="itemToAddName"
     @on-close="itemToAddName = null"
   />
+  <EditItemModal :item-to-edit="itemToEdit" @on-close="itemToEdit = null" />
 
   <div class="loot-list__header">
     <LootTimeDisplay
