@@ -44,8 +44,18 @@ export const useConfigStore = defineStore('config', {
       }
     },
     addCustomItem(item: Item) {
-      // TODO if custom item already exists in array, overwrite the existing item
+      // We remove an existing item since items can be overwritten multiple
+      // times and we only want to save the last time it was overwritten
+      const index = this.config.customItems.findIndex(
+        (itemCurrent: Item) => itemCurrent.name === item.name,
+      )
+
+      if (index > -1) {
+        this.config.customItems.splice(index, 1)
+      }
+
       this.config.customItems.push(item)
+
       electron.setConfig(JSON.stringify(this.config))
     },
     removeCustomItem(item: Item) {
