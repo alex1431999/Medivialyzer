@@ -2,15 +2,13 @@
 import { getConfig } from '../utils/make/make.requests.ts'
 import { VCard, VCardTitle, VCardText } from 'vuetify/components'
 
-const { version } = await getConfig()
-
-console.log(version)
+const config = await getConfig()
 </script>
 
 <template>
   <v-card class="upgrade-notification" elevation="4">
     <v-card-title> A new version is available! </v-card-title>
-    <v-card-text>Download <a href="google.com">here</a></v-card-text>
+    <v-card-text>Download <a :href="config.downloadLink">here</a></v-card-text>
   </v-card>
 </template>
 
