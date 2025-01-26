@@ -10,6 +10,7 @@ import {
 import { computed, onMounted, ref } from 'vue'
 import { APP_VERSION } from '../constants/app.ts'
 import { useConfigStore } from '../stores/configStore.ts'
+import { getRemoteConfig } from '../utils/baserow/baserow.requests.ts'
 
 const configStore = useConfigStore()
 
@@ -38,7 +39,7 @@ const downloadLink = computed(() =>
 )
 
 onMounted(async () => {
-  remoteConfig.value = await getConfig()
+  remoteConfig.value = await getRemoteConfig()
 })
 
 function onSkipVersionUpgrade() {
