@@ -10,6 +10,10 @@ const versionIsOutdated = computed(() => {
   return config.value && config.value.version !== APP_VERSION
 })
 
+const downloadLink = computed(() =>
+  config.value ? config.value.downloadLink : '',
+)
+
 onMounted(async () => {
   config.value = await getConfig()
 })
@@ -18,7 +22,7 @@ onMounted(async () => {
 <template>
   <v-card v-if="versionIsOutdated" class="upgrade-notification" elevation="4">
     <v-card-title> A new version is available! </v-card-title>
-    <v-card-text>Download <a :href="config.downloadLink">here</a></v-card-text>
+    <v-card-text>Download <a :href="downloadLink">here</a></v-card-text>
   </v-card>
 </template>
 
