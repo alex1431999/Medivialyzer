@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { AppRemoteConfig, getConfig } from '../utils/make/make.requests.ts'
 import {
   VCard,
   VCardTitle,
@@ -10,7 +9,10 @@ import {
 import { computed, onMounted, ref } from 'vue'
 import { APP_VERSION } from '../constants/app.ts'
 import { useConfigStore } from '../stores/configStore.ts'
-import { getRemoteConfig } from '../utils/baserow/baserow.requests.ts'
+import {
+  AppRemoteConfig,
+  getRemoteConfig,
+} from '../utils/baserow/baserow.requests.ts'
 
 const configStore = useConfigStore()
 
