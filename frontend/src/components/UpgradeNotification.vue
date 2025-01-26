@@ -9,25 +9,43 @@ import {
 } from 'vuetify/components'
 import { computed, onMounted, ref } from 'vue'
 import { APP_VERSION } from '../constants/app.ts'
+import { useConfigStore } from '../stores/configStore.ts'
 
-const config = ref<AppRemoteConfig | null>(null)
+const configStore = useConfigStore()
+
+const remoteConfig = ref<AppRemoteConfig | null>(null)
 const forceClose = ref<boolean>(false)
 
 const versionIsOutdated = computed(() => {
-  return config.value && config.value.version !== APP_VERSION
+  return remoteConfig.value && remoteConfig.value.version !== APP_VERSION
+})
+
+const skipCurrentVersion = computed(() => {
+  return (
+    remoteConfig.value &&
+    remoteConfig.value.version === configStore.$state.config.skipVersionUpgrade
+  )
 })
 
 const show = computed(() => {
-  return versionIsOutdated.value && !forceClose.value
+  return (
+    versionIsOutdated.value && !forceClose.value && !skipCurrentVersion.value
+  )
 })
 
 const downloadLink = computed(() =>
-  config.value ? config.value.downloadLink : '',
+  remoteConfig.value ? remoteConfig.value.downloadLink : '',
 )
 
 onMounted(async () => {
-  config.value = await getConfig()
+  remoteConfig.value = await getConfig()
 })
+
+function onSkipVersionUpgrade() {
+  configStore.setConfig({
+    skipVersionUpgrade: remoteConfig.value?.version || '',
+  })
+}
 </script>
 
 <template>
@@ -36,7 +54,7 @@ onMounted(async () => {
     <v-card-text>Download <a :href="downloadLink">here</a></v-card-text>
     <v-card-actions>
       <v-btn @click="forceClose = true">Close</v-btn>
-      <v-btn>Skip this version</v-btn>
+      <v-btn @click="onSkipVersionUpgrade">Skip this version</v-btn>
     </v-card-actions>
   </v-card>
 </template>
