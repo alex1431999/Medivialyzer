@@ -1,5 +1,7 @@
 import { Item } from '../item/item.types.ts'
 
+const BASEROW_API_PUBLIC_TOKEN = '6tUmTbXMXWAUpeDOy74jz6UdnUsWr9SZ'
+
 export function baserowSubmitItem(item: Item, isEdit: boolean) {
   const url =
     'https://api.baserow.io/api/database/views/form/6SG9rcE5kunuC5IuxodLoO3VjwEDdwsDsyoOf7GhP3I/submit/'
@@ -18,4 +20,25 @@ export function baserowSubmitItem(item: Item, isEdit: boolean) {
     },
     body: JSON.stringify(payload),
   })
+}
+
+export type AppRemoteConfig = {
+  version: string
+  downloadLink: string
+}
+
+export async function getRemoteConfig(): Promise<AppRemoteConfig> {
+  const url =
+    'https://api.baserow.io/api/database/rows/table/433953/?user_field_names=true'
+
+  const reponse = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Token ${BASEROW_API_PUBLIC_TOKEN}`,
+    },
+  })
+
+  const data: any = await reponse.json()
+
+  return data.results[0]
 }

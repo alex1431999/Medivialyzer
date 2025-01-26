@@ -10,6 +10,7 @@ export type Config = {
   ignoreItemsWithNoValue: boolean
   consentToSubmitItem: boolean
   lootFilePath?: string
+  skipVersionUpgrade?: string
 }
 
 const DEFAULT_CONFIG: Config = {
