@@ -14,13 +14,15 @@ import { getRemoteConfig } from '../utils/baserow/baserow.requests.ts'
 
 const configStore = useConfigStore()
 
-// TODO if request fails make sure that we don't show the notification
-
 const remoteConfig = ref<AppRemoteConfig | null>(null)
 const forceClose = ref<boolean>(false)
 
 const versionIsOutdated = computed(() => {
-  return remoteConfig.value && remoteConfig.value.version !== APP_VERSION
+  return (
+    remoteConfig.value &&
+    remoteConfig.value.version &&
+    remoteConfig.value.version !== APP_VERSION
+  )
 })
 
 const skipCurrentVersion = computed(() => {
