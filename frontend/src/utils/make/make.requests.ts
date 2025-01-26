@@ -5,7 +5,7 @@ export type Config = {
 
 export async function getConfig(): Promise<Config> {
   return {
-    version: '1.1.1',
+    version: '1.1.2',
     downloadLink:
       'https://github.com/alex1431999/Medivialyzer/releases/download/1.1.1/Medivialyzer-1.1.1.zip',
   } // TODO dummy data just for now
