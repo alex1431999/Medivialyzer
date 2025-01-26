@@ -615,8 +615,8 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Fiery Bow',
-    value: 150000,
-    NPCs: ['Players'],
+    value: 46000,
+    NPCs: ['Aremis'],
   },
   {
     name: 'Fiery Hammer',
