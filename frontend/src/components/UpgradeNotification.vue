@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import { getConfig } from '../utils/make/make.requests.ts'
+import { AppRemoteConfig, getConfig } from '../utils/make/make.requests.ts'
 import { VCard, VCardTitle, VCardText } from 'vuetify/components'
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { APP_VERSION } from '../constants/app.ts'
 
-// TODO fix console warnings
+const config = ref<AppRemoteConfig | null>(null)
 
-const config = await getConfig()
+const versionIsOutdated = computed(() => {
+  return config.value && config.value.version !== APP_VERSION
+})
 
-const versionIsOutdated = computed(() => config.version !== APP_VERSION)
+onMounted(async () => {
+  config.value = await getConfig()
+})
 </script>
 
 <template>

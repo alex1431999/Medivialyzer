@@ -7,9 +7,7 @@ import UpgradeNotification from './components/UpgradeNotification.vue'
 <template>
   <Header class="app__header" />
   <LootList />
-  <Suspense>
-    <UpgradeNotification />
-  </Suspense>
+  <UpgradeNotification />
 </template>
 
 <style scoped>

@@ -1,9 +1,9 @@
-export type Config = {
+export type AppRemoteConfig = {
   version: string
   downloadLink: string
 }
 
-export async function getConfig(): Promise<Config> {
+export async function getConfig(): Promise<AppRemoteConfig> {
   return {
     version: '1.1.2',
     downloadLink:
