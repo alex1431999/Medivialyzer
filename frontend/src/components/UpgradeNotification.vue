@@ -14,6 +14,8 @@ import { getRemoteConfig } from '../utils/baserow/baserow.requests.ts'
 
 const configStore = useConfigStore()
 
+// TODO if request fails make sure that we don't show the notification
+
 const remoteConfig = ref<AppRemoteConfig | null>(null)
 const forceClose = ref<boolean>(false)
 

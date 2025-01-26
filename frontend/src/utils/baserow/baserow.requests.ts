@@ -28,9 +28,17 @@ export type AppRemoteConfig = {
 }
 
 export async function getRemoteConfig(): Promise<AppRemoteConfig> {
-  return {
-    version: '1.1.2',
-    downloadLink:
-      'https://github.com/alex1431999/Medivialyzer/releases/download/1.1.1/Medivialyzer-1.1.1.zip',
-  } // TODO dummy data just for now
+  const url =
+    'https://api.baserow.io/api/database/rows/table/433953/?user_field_names=true'
+
+  const reponse = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Token ${BASEROW_API_PUBLIC_TOKEN}`,
+    },
+  })
+
+  const data: any = await reponse.json()
+
+  return data.results[0]
 }
