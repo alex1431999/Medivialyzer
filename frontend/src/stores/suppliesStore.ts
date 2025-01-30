@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
 import _ from 'lodash'
+import { useConfigStore } from './configStore.ts'
 
 export type SuppliesData = Record<
   string,
@@ -16,13 +17,14 @@ const DEFAULT_SUPPLIES_DATA: SuppliesData = SUPPLIES.reduce(
   {},
 )
 
-const DEFAULT_SUPPLIES_STORE_DATA: SuppliesStoreData = {
-  supplies: _.cloneDeep(DEFAULT_SUPPLIES_DATA),
-}
-
 export const useSuppliesStore = defineStore('supplies', {
   state: () => {
-    return _.cloneDeep(DEFAULT_SUPPLIES_STORE_DATA)
+    const configStore = useConfigStore()
+
+    const storedSupplies = _.cloneDeep(configStore.$state.config.supplies)
+    const defaultSupplies = _.cloneDeep(DEFAULT_SUPPLIES_DATA)
+
+    return { supplies: storedSupplies || defaultSupplies }
   },
   getters: {
     totalSuppliesUsed: (state) => {

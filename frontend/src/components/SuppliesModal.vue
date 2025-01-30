@@ -13,13 +13,23 @@ import {
 } from 'vuetify/components'
 import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { formatNumber } from '../utils/number.ts'
+import { useConfigStore } from '../stores/configStore.ts'
 
 const suppliesStore = useSuppliesStore()
+const configStore = useConfigStore()
 
 const totalSuppliesUsedFormatted = computed(() =>
   formatNumber(suppliesStore.totalSuppliesUsed),
+)
+
+watch(
+  suppliesStore.supplies,
+  (supplies) => {
+    configStore.setSupplies(supplies)
+  },
+  { deep: true },
 )
 
 function onReset() {
