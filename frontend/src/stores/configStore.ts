@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { electron } from '../utils/electron/electron.constants.ts'
 import { Item } from '../utils/item/item.types.ts'
 import _ from 'lodash'
+import { SuppliesData } from './suppliesStore.ts'
 
 export type Config = {
   since: number
@@ -11,6 +12,7 @@ export type Config = {
   consentToSubmitItem: boolean
   lootFilePath?: string
   skipVersionUpgrade?: string
+  supplies?: SuppliesData
 }
 
 const DEFAULT_CONFIG: Config = {
@@ -19,6 +21,7 @@ const DEFAULT_CONFIG: Config = {
   customItems: [],
   ignoreItemsWithNoValue: false,
   consentToSubmitItem: false,
+  supplies: {},
 }
 
 export const useConfigStore = defineStore('config', {
@@ -69,6 +72,10 @@ export const useConfigStore = defineStore('config', {
     },
     setLootFilePath(lootFilePath: string) {
       this.config.lootFilePath = lootFilePath
+      electron.setConfig(JSON.stringify(this.config))
+    },
+    setSupplies(supplies: SuppliesData) {
+      this.config.supplies = supplies
       electron.setConfig(JSON.stringify(this.config))
     },
   },
