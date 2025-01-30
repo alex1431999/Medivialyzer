@@ -8,6 +8,7 @@ import { VBadge } from 'vuetify/components/VBadge'
 import { VIcon } from 'vuetify/components/VIcon'
 import { getNPC } from '../utils/npc/npc.helpers.ts'
 import LootListItemMenu from './LootListItemMenu.vue'
+import { formatNumber } from '../utils/number.ts'
 
 const emit = defineEmits(['click', 'ignore', 'edit'])
 
@@ -25,6 +26,8 @@ const NPC = computed(() => {
 const totalValue = computed(
   () => (lootEntry.item.value || 0) * lootEntry.amount,
 )
+
+const totalValueFormatted = computed(() => formatNumber(totalValue.value))
 
 const valueColor = computed(() =>
   isUnknownItem.value ? 'warning' : 'secondary',
@@ -69,7 +72,7 @@ function onClick() {
         <v-chip :color="valueColor">
           <span class="mr-1" v-if="isUnknownItem"> unknown </span>
           <span class="mr-1" v-else>
-            {{ totalValue }}
+            {{ totalValueFormatted }}
           </span>
           <v-icon icon="mdi-gold" />
         </v-chip>
