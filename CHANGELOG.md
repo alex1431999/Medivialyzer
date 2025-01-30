@@ -3,6 +3,7 @@
 - Add NPC Omar
 - Add reset button to supplies modal
 - Add ability to edit existing items
+- Add number formatting (thousand separator)
 - Supplies are saved after client is closed
 
 # V1.1.1
