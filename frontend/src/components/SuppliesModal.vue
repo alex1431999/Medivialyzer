@@ -13,8 +13,14 @@ import {
 } from 'vuetify/components'
 import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
+import { computed } from 'vue'
+import { formatNumber } from '../utils/number.ts'
 
 const suppliesStore = useSuppliesStore()
+
+const totalSuppliesUsedFormatted = computed(() =>
+  formatNumber(suppliesStore.totalSuppliesUsed),
+)
 
 function onReset() {
   suppliesStore.reset()
@@ -37,7 +43,7 @@ function onReset() {
         <v-card-title class="supplies-modal__header">
           <div>Supplies</div>
           <v-chip color="warning">
-            {{ suppliesStore.totalSuppliesUsed }}
+            {{ totalSuppliesUsedFormatted }}
             <v-icon icon="mdi-gold" />
           </v-chip>
         </v-card-title>
