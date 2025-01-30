@@ -25,7 +25,7 @@ const totalSuppliesUsedFormatted = computed(() =>
 )
 
 watch(
-  suppliesStore.supplies,
+  () => suppliesStore.supplies,
   (supplies) => {
     configStore.setSupplies(supplies)
   },
