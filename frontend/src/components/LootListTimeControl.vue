@@ -45,6 +45,6 @@ import { VBtn, VTooltip } from 'vuetify/components'
 <style scoped>
 .button-container {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 </style>

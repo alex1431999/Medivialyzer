@@ -3,6 +3,7 @@ import { VCard, VCardText } from 'vuetify/components/VCard'
 import LootListTimeControl from './LootListTimeControl.vue'
 import SuppliesModal from './SuppliesModal.vue'
 import TotalLootValueDisplay from './TotalLootValueDisplay.vue'
+import CreaturesKilledModal from './CreaturesKilledModal.vue'
 
 const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 </script>
@@ -10,7 +11,10 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 <template>
   <v-card class="loot-list-menu__card">
     <v-card-text class="loot-list-menu__card-text">
-      <SuppliesModal />
+      <div class="d-flex ga-3">
+        <SuppliesModal />
+        <CreaturesKilledModal />
+      </div>
       <LootListTimeControl
         @reset="$emit('reset')"
         @back="$emit('back')"
