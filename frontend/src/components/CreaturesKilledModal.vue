@@ -12,6 +12,7 @@ import { useLootDataStore } from '../stores/lootDataStore.ts'
 import { computed } from 'vue'
 import { LootParser } from '../utils/lootParser/lootParser.ts'
 import CreatureKilled from './CreatureKilled.vue'
+import { groupCreatures } from '../utils/creature/creature.helpers.ts'
 
 const configStore = useConfigStore()
 const lootDataStore = useLootDataStore()
@@ -20,6 +21,8 @@ const creatures = computed(() => {
   const lootParser = new LootParser(lootDataStore.lootData)
   return lootParser.getCreatures(configStore.config.since)
 })
+
+const creaturesGrouped = computed(() => groupCreatures(creatures.value))
 </script>
 
 <template>
@@ -39,7 +42,7 @@ const creatures = computed(() => {
         <v-card-text>
           <CreatureKilled
             class="mb-2"
-            v-for="creature in creatures"
+            v-for="creature in creaturesGrouped"
             :key="creature.name"
             :creature="creature"
           ></CreatureKilled>
