@@ -27,7 +27,7 @@ const creatures = computed(() => {
 </script>
 
 <template>
-  <v-dialog>
+  <v-dialog width="700">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
