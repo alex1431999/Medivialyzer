@@ -40,6 +40,7 @@ const creatures = computed(() => {
           <CreatureKilled
             v-for="creature in creatures"
             :key="creature.name"
+            :creature="creature"
           ></CreatureKilled>
         </v-card-text>
 
