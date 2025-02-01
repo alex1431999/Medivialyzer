@@ -1,42 +1,29 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import LootListItem from './LootListItem.vue'
 import { groupLoot } from '../utils/loot/loot.helpers.ts'
 import LootListMenu from './LootListMenu.vue'
 import * as _ from 'lodash'
 import { LootParser } from '../utils/lootParser/lootParser.ts'
-import { electron } from '../utils/electron/electron.constants.ts'
 import { useConfigStore } from '../stores/configStore.ts'
-import { FIVE_SECONDS, THIRTY_MINUTES } from '../constants/time.ts'
+import { THIRTY_MINUTES } from '../constants/time.ts'
 import LootTimeDisplay from './LootTimeDisplay.vue'
 import LootProfitDisplay from './LootProfitDisplay.vue'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
 import { LootEntry } from '../utils/loot/loot.types.ts'
 import AddItemModal from './AddItemModal.vue'
 import EditItemModal from './EditItemModal.vue'
+import { useLootDataStore } from '../stores/lootDataStore.ts'
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
+const lootDataStore = useLootDataStore()
 
 const itemToAddName = ref<string | null>(null)
 const itemToEdit = ref<LootEntry | null>(null)
 
-const lootData = ref<string>(electron.getLootData())
-
-// Update the loot data regularly
-setInterval(() => {
-  lootData.value = electron.getLootData()
-}, FIVE_SECONDS)
-
-watch(
-  () => configStore.config.lootFilePath,
-  () => {
-    lootData.value = electron.getLootData()
-  },
-)
-
 const loot = computed(() => {
-  const lootParser = new LootParser(lootData.value)
+  const lootParser = new LootParser(lootDataStore.lootData)
   return lootParser.getLoot(configStore.config.since)
 })
 
