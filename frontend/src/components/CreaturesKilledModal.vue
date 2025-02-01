@@ -38,6 +38,7 @@ const creatures = computed(() => {
         <v-card-title> Creatures killed </v-card-title>
         <v-card-text>
           <CreatureKilled
+            class="mb-2"
             v-for="creature in creatures"
             :key="creature.name"
             :creature="creature"
