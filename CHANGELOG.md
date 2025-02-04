@@ -1,4 +1,4 @@
-# V1.2.0 - Unreleased
+# V1.2.0
 - Added Falcon NPCs
 - Add NPC Omar
 - Add reset button to supplies modal
