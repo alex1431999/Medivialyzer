@@ -29,11 +29,16 @@ export const useSuppliesStore = defineStore('supplies', {
   getters: {
     totalSuppliesUsed: (state) => {
       return SUPPLIES.reduce((total, supply) => {
-        const before = state.supplies[supply.name].before
-        const after = state.supplies[supply.name].after
+        const before = _.get(state.supplies, `${supply.name}.before`)
+        const after = _.get(state.supplies, `${supply.name}.after`)
 
         // This means the supply either wasn't used or we haven't entered the after value yet
-        if (before === null || after === null || before === '' || after === '')
+        if (
+          before === undefined ||
+          after === undefined ||
+          before === '' ||
+          after === ''
+        )
           return total
 
         const amountUsed = before - after
