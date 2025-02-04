@@ -5,6 +5,7 @@
 - Add ability to edit existing items
 - Add number formatting (thousand separator)
 - Supplies are saved after client is closed
+- Show number of monsters killed in a hunt
 
 # V1.1.1
 - Added ability to define your own loot file path
