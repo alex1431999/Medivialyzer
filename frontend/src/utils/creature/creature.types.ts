@@ -10,3 +10,9 @@ export type CreatureEntry = {
 export type CreatureGrouped = {
   amount: number
 } & Creature
+
+export type CreatureWithAverageLoot = {
+  creature: Creature
+  averageLootValue: number
+  confidence: number // a number between 0 and 1 where 1 is very confident
+}

@@ -143,4 +143,76 @@ describe('lootParser', () => {
       ])
     })
   })
+
+  describe('getCreaturesAverageLootValue', () => {
+    test('no creatures', () => {
+      const lootData = ``
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.getCreaturesAverageLootValue()).toEqual([])
+    })
+
+    test('one creatures', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        19:19 Loot of giant cobra: 9 gold coins.
+        `
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.getCreaturesAverageLootValue()).toEqual([
+        {
+          averageLootValue: 9,
+          confidence: expect.any(Number),
+          creature: {
+            name: 'giant cobra',
+          },
+        },
+      ])
+    })
+
+    test('two of the same creature', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        19:19 Loot of giant cobra: 7 gold coins.
+        19:19 Loot of giant cobra: 3 gold coins.
+        `
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.getCreaturesAverageLootValue()).toEqual([
+        {
+          averageLootValue: 5,
+          confidence: expect.any(Number),
+          creature: {
+            name: 'giant cobra',
+          },
+        },
+      ])
+    })
+
+    test('two different creatures', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        19:19 Loot of giant cobra: 7 gold coins.
+        19:19 Loot of bat: 3 gold coins.
+        `
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.getCreaturesAverageLootValue()).toEqual([
+        {
+          averageLootValue: 7,
+          confidence: expect.any(Number),
+          creature: {
+            name: 'giant cobra',
+          },
+        },
+        {
+          averageLootValue: 3,
+          confidence: expect.any(Number),
+          creature: {
+            name: 'bat',
+          },
+        },
+      ])
+    })
+  })
 })
