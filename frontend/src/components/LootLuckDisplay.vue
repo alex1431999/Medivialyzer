@@ -7,15 +7,15 @@ const { lootLuck } = defineProps<{ lootLuck: number }>()
 const lootLuckAsPercentage = computed(() => (lootLuck * 100).toFixed(0))
 
 const color = computed(() => {
-  if (lootLuck < 0.5) {
+  if (lootLuck < 0.75) {
     return 'red'
   }
 
-  if (lootLuck < 0.75) {
+  if (lootLuck < 0.9) {
     return 'yellow'
   }
 
-  if (lootLuck < 1.25) {
+  if (lootLuck < 1.2) {
     return 'green'
   }
 
@@ -23,15 +23,15 @@ const color = computed(() => {
 })
 
 const tooltipText = computed(() => {
-  if (lootLuck < 0.5) {
+  if (lootLuck < 0.75) {
     return `Loot Luck - Very bad - ${lootLuckAsPercentage.value}%`
   }
 
-  if (lootLuck < 0.75) {
+  if (lootLuck < 0.9) {
     return `Loot Luck - Bad - ${lootLuckAsPercentage.value}%`
   }
 
-  if (lootLuck < 1.25) {
+  if (lootLuck < 1.2) {
     return `Loot Luck - Good - ${lootLuckAsPercentage.value}%`
   }
 
