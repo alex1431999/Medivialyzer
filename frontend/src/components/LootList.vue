@@ -23,6 +23,16 @@ const lootDataStore = useLootDataStore()
 const itemToAddName = ref<string | null>(null)
 const itemToEdit = ref<LootEntry | null>(null)
 
+const creatures = computed(() => {
+  const lootParser = new LootParser(lootDataStore.lootData)
+  return lootParser.getCreatures(configStore.config.since)
+})
+
+const creaturesAverageLoot = computed(() => {
+  const lootParser = new LootParser(lootDataStore.lootData)
+  return lootParser.getCreaturesAverageLootValue()
+})
+
 const loot = computed(() => {
   const lootParser = new LootParser(lootDataStore.lootData)
   return lootParser.getLoot(configStore.config.since)
@@ -64,6 +74,23 @@ const profit = computed(() => {
   return totalLootValue.value - suppliesStore.totalSuppliesUsed
 })
 
+const lootLuck = computed(() => {
+  let expectedTotalValue = 0
+
+  creatures.value.forEach((creature) => {
+    const creatureAverageLootFound = creaturesAverageLoot.value.find(
+      (creatureAverageLoot) =>
+        creatureAverageLoot.creature.name === creature.name,
+    )
+
+    if (creatureAverageLootFound) {
+      expectedTotalValue += creatureAverageLootFound.averageLootValue
+    }
+  })
+
+  return expectedTotalValue ? totalLootValue.value / expectedTotalValue : 1
+})
+
 function onReset() {
   configStore.setConfig({ since: Date.now() })
 }
@@ -102,7 +129,7 @@ function onLootItemEdit(entry: LootEntry) {
       :since="configStore.config.since"
     />
     <div class="d-flex ga-2">
-      <LootLuckDisplay />
+      <LootLuckDisplay :lootLuck="lootLuck" />
       <LootProfitDisplay :profit="profit" />
     </div>
   </div>
