@@ -4,6 +4,8 @@ import { computed } from 'vue'
 
 const { lootLuck } = defineProps<{ lootLuck: number }>()
 
+const lootLuckAsPercentage = computed(() => (lootLuck * 100).toFixed(0))
+
 const color = computed(() => {
   if (lootLuck < 0.5) {
     return 'red'
@@ -19,10 +21,26 @@ const color = computed(() => {
 
   return '#00FFFF' // Cyan
 })
+
+const tooltipText = computed(() => {
+  if (lootLuck < 0.5) {
+    return `Loot Luck - Very bad - ${lootLuckAsPercentage.value}%`
+  }
+
+  if (lootLuck < 0.75) {
+    return `Loot Luck - Bad - ${lootLuckAsPercentage.value}%`
+  }
+
+  if (lootLuck < 1.25) {
+    return `Loot Luck - Good - ${lootLuckAsPercentage.value}%`
+  }
+
+  return `Loot Luck - Insanely good - ${lootLuckAsPercentage.value}%`
+})
 </script>
 
 <template>
-  <v-tooltip text="Loot Luck">
+  <v-tooltip :text="tooltipText">
     <template v-slot:activator="{ props }">
       <v-chip v-bind="props" :color="color">
         <v-icon icon="mdi-clover"></v-icon>
