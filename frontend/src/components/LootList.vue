@@ -14,6 +14,7 @@ import { LootEntry } from '../utils/loot/loot.types.ts'
 import AddItemModal from './AddItemModal.vue'
 import EditItemModal from './EditItemModal.vue'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
+import LootLuckDisplay from './LootLuckDisplay.vue'
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
@@ -100,7 +101,10 @@ function onLootItemEdit(entry: LootEntry) {
       class="loot-list__time-display"
       :since="configStore.config.since"
     />
-    <LootProfitDisplay :profit="profit" />
+    <div class="d-flex ga-2">
+      <LootLuckDisplay />
+      <LootProfitDisplay :profit="profit" />
+    </div>
   </div>
 
   <div class="loot-list__items">
