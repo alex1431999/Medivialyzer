@@ -9,6 +9,10 @@ export class LootDataTypeCreature extends LootDataType {
     return line.trim().toLowerCase().includes('loot of')
   }
 
+  public matchesBag(line: string): boolean {
+    return line.trim().toLowerCase().includes('content of a bag')
+  }
+
   public toValue(line: string): Creature {
     const parts = line.toLowerCase().split('loot of')
     const creaturePart = parts[1]

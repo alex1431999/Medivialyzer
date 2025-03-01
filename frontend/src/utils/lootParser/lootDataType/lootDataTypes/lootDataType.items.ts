@@ -52,7 +52,7 @@ export class LootDataTypeItems extends LootDataType {
     }
 
     if (line.toLowerCase().includes('content of a bag')) {
-      return 'CREATURE'
+      return 'BAG'
     }
 
     return null
