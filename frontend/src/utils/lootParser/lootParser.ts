@@ -75,15 +75,11 @@ export class LootParser {
         lootDataTypeCreature.matchesBag(line)
       ) {
         const itemsLooted = lootDataTypeItems.toValue(line)
-        const typeOfLootMessage = lootDataTypeItems.typeOfLootMessage(line)
+        const isBagLoot = lootDataTypeCreature.matchesBag(line)
 
-        if (typeOfLootMessage === null)
-          throw new Error('typeOfLootMessage is null')
-
-        const creature =
-          typeOfLootMessage === 'CREATURE'
-            ? lootDataTypeCreature.toValue(line)
-            : lootDataTypeCreature.toValueForBag(line)
+        const creature = isBagLoot
+          ? lootDataTypeCreature.toValueForBag(line)
+          : lootDataTypeCreature.toValue(line)
 
         const creatureAlreadyExists = Object.keys(creaturesToLootMap).includes(
           creature.name,
@@ -99,8 +95,7 @@ export class LootParser {
           const { items, count } = creaturesToLootMap[creature.name]
 
           // If the loot came in a bag, then we don't count the extra kill
-          const countUpdate =
-            typeOfLootMessage === 'CREATURE' ? count + 1 : count
+          const countUpdate = isBagLoot ? count : count + 1
 
           creaturesToLootMap[creature.name] = {
             creature,
