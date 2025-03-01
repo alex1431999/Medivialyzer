@@ -19,6 +19,19 @@ export class LootDataTypeCreature extends LootDataType {
 
     return creatureFound || unknownCreature
   }
+
+  public toValueForBag(line: string): Creature {
+    const parts = line
+      .toLowerCase()
+      .split('content of a bag within the corpse of')
+    const creaturePart = parts[1]
+    const creatureName = creaturePart.split(':')[0].trim()
+
+    const creatureFound = getCreature(creatureName)
+    const unknownCreature: Creature = { name: creatureName }
+
+    return creatureFound || unknownCreature
+  }
 }
 
 export const lootDataTypeCreature = new LootDataTypeCreature()

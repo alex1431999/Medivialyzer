@@ -71,12 +71,16 @@ export class LootParser {
       //  extracted from a line that shows the content of a bag. We also need to make sure that that line
       //  is not counted as an additional kill, but instead just added to the sum of loot for that monster.
       if (lootDataTypeCreature.matches(line)) {
-        const creature: Creature = lootDataTypeCreature.toValue(line)
         const itemsLooted = lootDataTypeItems.toValue(line)
         const typeOfLootMessage = lootDataTypeItems.typeOfLootMessage(line)
 
         if (typeOfLootMessage === null)
           throw new Error('typeOfLootMessage is null')
+
+        const creature =
+          typeOfLootMessage === 'CREATURE'
+            ? lootDataTypeCreature.toValue(line)
+            : lootDataTypeCreature.toValueForBag(line)
 
         const creatureAlreadyExists = Object.keys(creaturesToLootMap).includes(
           creature.name,
