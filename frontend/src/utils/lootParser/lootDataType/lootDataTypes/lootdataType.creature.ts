@@ -6,7 +6,7 @@ export class LootDataTypeCreature extends LootDataType {
   public type = 'timestamp'
 
   public matches(line: string): boolean {
-    return line.trim().toLowerCase().includes('loot of')
+    return this.matchesLootOf(line)
   }
 
   public matchesBag(line: string): boolean {
