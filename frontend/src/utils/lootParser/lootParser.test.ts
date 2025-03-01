@@ -214,5 +214,24 @@ describe('lootParser', () => {
         },
       ])
     })
+
+    test('bag', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        19:19 Loot of giant cobra: 7 gold coins.
+        19:33 Content of a bag within the corpse of giant cobra: 12 gold coins.
+        `
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.getCreaturesAverageLootValue()).toEqual([
+        {
+          averageLootValue: 19,
+          confidence: expect.any(Number),
+          creature: {
+            name: 'giant cobra',
+          },
+        },
+      ])
+    })
   })
 })
