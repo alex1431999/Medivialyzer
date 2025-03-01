@@ -50,7 +50,7 @@ export class LootParser {
         currentTimeStamp = lootDataTypeTimestamp.toValue(line)
       }
 
-      if (lootDataTypeItems.matches(line) && since < currentTimeStamp) {
+      if (lootDataTypeCreature.matches(line) && since < currentTimeStamp) {
         const creature: Creature = lootDataTypeCreature.toValue(line)
         creatures.push({ ...creature, timestamp: currentTimeStamp })
       }
@@ -66,7 +66,11 @@ export class LootParser {
     > = {}
 
     this.forEachLine((line) => {
-      if (lootDataTypeItems.matches(line)) {
+      // TODO we are missing items from bags here so the calculation isn't exactly right.
+      //  We need to check if the ITEM type matches, and then make sure that the creature can be properly
+      //  extracted from a line that shows the content of a bag. We also need to make sure that that line
+      //  is not counted as an additional kill, but instead just added to the sum of loot for that monster.
+      if (lootDataTypeCreature.matches(line)) {
         const creature: Creature = lootDataTypeCreature.toValue(line)
         const itemsLooted = lootDataTypeItems.toValue(line)
 

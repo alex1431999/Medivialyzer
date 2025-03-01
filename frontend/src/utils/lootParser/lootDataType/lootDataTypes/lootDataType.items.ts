@@ -10,7 +10,7 @@ export class LootDataTypeItems extends LootDataType {
   public type = 'loot'
 
   public matches(line: string): boolean {
-    return line.toLowerCase().includes('loot of')
+    return line.toLowerCase().includes('loot of') || line.toLowerCase().includes('content of a bag')
   }
 
   public toValue(line: string): ItemLooted[] {
