@@ -6,6 +6,8 @@ import { singularize } from '../../../string.ts'
 // These items you can always ignore since they are special cases and don't represent and actual item
 const LOOT_TO_ALWAYS_IGNORE = ['empty', 'bag']
 
+export type TypeOfLootMessage = 'CREATURE' | 'BAG'
+
 export class LootDataTypeItems extends LootDataType {
   public type = 'loot'
 
@@ -42,6 +44,18 @@ export class LootDataTypeItems extends LootDataType {
         return { ...item, amount }
       })
       .flat()
+  }
+
+  public typeOfLootMessage(line: string): TypeOfLootMessage | null {
+    if (line.toLowerCase().includes('loot of')) {
+      return 'CREATURE'
+    }
+
+    if (line.toLowerCase().includes('content of a bag')) {
+      return 'CREATURE'
+    }
+
+    return null
   }
 
   private sanitiseValue(lootValue: string): string {
