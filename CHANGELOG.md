@@ -6,6 +6,7 @@
 - Add number formatting (thousand separator)
 - Supplies are saved after client is closed
 - Show number of monsters killed in a hunt
+- Add a loot luck indicator
 
 # V1.1.1
 - Added ability to define your own loot file path
