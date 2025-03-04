@@ -24,9 +24,8 @@ export const useSuppliesStore = defineStore('supplies', {
     const storedSupplies = _.cloneDeep(configStore.$state.config.supplies)
     const defaultSupplies = _.cloneDeep(DEFAULT_SUPPLIES_DATA)
 
-    const suppliesEffective = Object.keys(storedSupplies).length > 0
-      ? storedSupplies
-      : defaultSupplies
+    const suppliesEffective =
+      Object.keys(storedSupplies).length > 0 ? storedSupplies : defaultSupplies
 
     return { supplies: suppliesEffective }
   },
@@ -40,6 +39,8 @@ export const useSuppliesStore = defineStore('supplies', {
         if (
           before === undefined ||
           after === undefined ||
+          before === null ||
+          after === null ||
           before === '' ||
           after === ''
         )
