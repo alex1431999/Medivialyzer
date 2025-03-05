@@ -7,20 +7,16 @@ import {
   VCardTitle,
   VDialog,
 } from 'vuetify/components'
-import { useConfigStore } from '../stores/configStore.ts'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import { computed } from 'vue'
-import { LootParser } from '../utils/lootParser/lootParser.ts'
 import CreatureKilled from './CreatureKilled.vue'
 import { groupCreatures } from '../utils/creature/creature.helpers.ts'
 import _ from 'lodash'
 
-const configStore = useConfigStore()
 const lootDataStore = useLootDataStore()
 
 const creatures = computed(() => {
-  const lootParser = new LootParser(lootDataStore.lootData)
-  const creaturesParsed = lootParser.getCreatures(configStore.config.since)
+  const creaturesParsed = lootDataStore.lootDataParsed.creatures
   const creaturesGrouped = groupCreatures(creaturesParsed)
   return _.sortBy(creaturesGrouped, ['amount']).reverse()
 })

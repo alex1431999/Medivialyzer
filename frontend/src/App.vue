@@ -10,14 +10,16 @@ import { useConfigStore } from './stores/configStore.ts'
 const lootDataStore = useLootDataStore()
 const configStore = useConfigStore()
 
+lootDataStore.update({ since: configStore.config.since })
+
 setInterval(() => {
-  lootDataStore.update()
+  lootDataStore.update({ since: configStore.config.since })
 }, FIVE_SECONDS)
 
 watch(
   () => configStore.config.lootFilePath,
   () => {
-    lootDataStore.update()
+    lootDataStore.update({ since: configStore.config.since })
   },
 )
 </script>

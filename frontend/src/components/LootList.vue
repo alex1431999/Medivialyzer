@@ -4,7 +4,6 @@ import LootListItem from './LootListItem.vue'
 import { groupLoot } from '../utils/loot/loot.helpers.ts'
 import LootListMenu from './LootListMenu.vue'
 import * as _ from 'lodash'
-import { LootParser } from '../utils/lootParser/lootParser.ts'
 import { useConfigStore } from '../stores/configStore.ts'
 import { THIRTY_MINUTES } from '../constants/time.ts'
 import LootTimeDisplay from './LootTimeDisplay.vue'
@@ -23,20 +22,11 @@ const lootDataStore = useLootDataStore()
 const itemToAddName = ref<string | null>(null)
 const itemToEdit = ref<LootEntry | null>(null)
 
-const creatures = computed(() => {
-  const lootParser = new LootParser(lootDataStore.lootData)
-  return lootParser.getCreatures(configStore.config.since)
-})
-
-const creaturesAverageLoot = computed(() => {
-  const lootParser = new LootParser(lootDataStore.lootData)
-  return lootParser.getCreaturesAverageLootValue()
-})
-
-const loot = computed(() => {
-  const lootParser = new LootParser(lootDataStore.lootData)
-  return lootParser.getLoot(configStore.config.since)
-})
+const creatures = computed(() => lootDataStore.lootDataParsed.creatures)
+const creaturesAverageLoot = computed(
+  () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
+)
+const loot = computed(() => lootDataStore.lootDataParsed.loot)
 
 const lootFiltered = computed(() => {
   const lootWithoutIgnoredItems = loot.value.filter(
