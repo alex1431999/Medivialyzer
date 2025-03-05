@@ -10,11 +10,48 @@ import {
 import { lootDataTypeCreature } from './lootDataType/lootDataTypes/lootdataType.creature.ts'
 import _ from 'lodash'
 
+export type LootDataParsed = {
+  loot: LootEntry[]
+}
+
+export type LootParserOptions = {
+  since?: number
+}
+
 export class LootParser {
   private readonly lootData: string
 
   constructor(lootData: string) {
     this.lootData = lootData
+  }
+
+  public parse(options?: LootParserOptions): LootDataParsed {
+    const since = options?.since || 0
+    const lootDataParsed: LootDataParsed = {
+      loot: [],
+    }
+
+    let currentTimestamp = 0
+    this.forEachLine((line) => {
+      // Timestamp
+      if (lootDataTypeTimestamp.matches(line)) {
+        currentTimestamp = lootDataTypeTimestamp.toValue(line)
+      }
+
+      // Items
+      if (lootDataTypeItems.matches(line) && since < currentTimestamp) {
+        const items: ItemLooted[] = lootDataTypeItems.toValue(line)
+        const lootToAdd = items.map(({ amount, ...item }) => ({
+          item,
+          amount,
+          timestamp: currentTimestamp,
+        }))
+
+        lootDataParsed.loot = lootDataParsed.loot.concat(lootToAdd)
+      }
+    })
+
+    return lootDataParsed
   }
 
   public getLoot(since: number): LootEntry[] {

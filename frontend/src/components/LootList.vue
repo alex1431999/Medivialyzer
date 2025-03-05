@@ -33,10 +33,7 @@ const creaturesAverageLoot = computed(() => {
   return lootParser.getCreaturesAverageLootValue()
 })
 
-const loot = computed(() => {
-  const lootParser = new LootParser(lootDataStore.lootData)
-  return lootParser.getLoot(configStore.config.since)
-})
+const loot = computed(() => lootDataStore.lootDataParsed.loot)
 
 const lootFiltered = computed(() => {
   const lootWithoutIgnoredItems = loot.value.filter(
