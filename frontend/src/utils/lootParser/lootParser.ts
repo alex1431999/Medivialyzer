@@ -13,6 +13,7 @@ import _ from 'lodash'
 export type LootDataParsed = {
   loot: LootEntry[]
   creatures: CreatureEntry[]
+  creaturesWithAverageLoot: CreatureWithAverageLoot[]
 }
 
 export type LootParserOptions = {
@@ -31,7 +32,13 @@ export class LootParser {
     const lootDataParsed: LootDataParsed = {
       loot: [],
       creatures: [],
+      creaturesWithAverageLoot: [],
     }
+
+    const creaturesToLootMap: Record<
+      string,
+      { creature: Creature; items: ItemLooted[]; count: number }
+    > = {}
 
     let currentTimestamp = 0
     this.forEachLine((line) => {
@@ -60,6 +67,54 @@ export class LootParser {
           timestamp: currentTimestamp,
         })
       }
+
+      // Creatures with average loot
+      if (
+        lootDataTypeCreature.matches(line) ||
+        lootDataTypeCreature.matchesBag(line)
+      ) {
+        const itemsLooted = lootDataTypeItems.toValue(line)
+        const isBagLoot = lootDataTypeCreature.matchesBag(line)
+
+        const creature = isBagLoot
+          ? lootDataTypeCreature.toValueForBag(line)
+          : lootDataTypeCreature.toValue(line)
+
+        const creatureAlreadyExists = Object.keys(creaturesToLootMap).includes(
+          creature.name,
+        )
+
+        if (!creatureAlreadyExists) {
+          creaturesToLootMap[creature.name] = {
+            creature,
+            items: itemsLooted,
+            count: 1,
+          }
+        } else {
+          const { items, count } = creaturesToLootMap[creature.name]
+
+          // If the loot came in a bag, then we don't count the extra kill
+          const countUpdate = isBagLoot ? count : count + 1
+
+          creaturesToLootMap[creature.name] = {
+            creature,
+            items: [...items, ...itemsLooted],
+            count: countUpdate,
+          }
+        }
+      }
+    })
+
+    lootDataParsed.creaturesWithAverageLoot = Object.values(
+      creaturesToLootMap,
+    ).map((entry) => {
+      const totalLootValue = _.sum(
+        _.map(entry.items, (item) => (item.value || 0) * item.amount),
+      )
+      const averageLootValue = totalLootValue / entry.count
+
+      // TODO calculate confidence
+      return { averageLootValue, creature: entry.creature, confidence: 1 }
     })
 
     return lootDataParsed

@@ -24,12 +24,9 @@ const itemToAddName = ref<string | null>(null)
 const itemToEdit = ref<LootEntry | null>(null)
 
 const creatures = computed(() => lootDataStore.lootDataParsed.creatures)
-
-const creaturesAverageLoot = computed(() => {
-  const lootParser = new LootParser(lootDataStore.lootData)
-  return lootParser.getCreaturesAverageLootValue()
-})
-
+const creaturesAverageLoot = computed(
+  () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
+)
 const loot = computed(() => lootDataStore.lootDataParsed.loot)
 
 const lootFiltered = computed(() => {

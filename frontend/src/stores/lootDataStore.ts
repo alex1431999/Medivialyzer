@@ -16,6 +16,7 @@ const DEFAULT_DATA: LootDataStoreData = {
   lootDataParsed: {
     loot: [],
     creatures: [],
+    creaturesWithAverageLoot: [],
   },
 }
 
