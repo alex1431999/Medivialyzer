@@ -40,7 +40,7 @@ export class LootParser {
       creaturesWithAverageLoot: [],
     }
 
-    const creaturesToLootMap: CreaturesToLootMap = {}
+    let creaturesToLootMap: CreaturesToLootMap = {}
 
     let currentTimestamp = 0
     this.forEachLine((line) => {
@@ -51,23 +51,14 @@ export class LootParser {
 
       // Items
       if (lootDataTypeItems.matches(line) && since < currentTimestamp) {
-        const items: ItemLooted[] = lootDataTypeItems.toValue(line)
-        const lootToAdd = items.map(({ amount, ...item }) => ({
-          item,
-          amount,
-          timestamp: currentTimestamp,
-        }))
-
-        lootDataParsed.loot = lootDataParsed.loot.concat(lootToAdd)
+        const items = this.handleItems(line, currentTimestamp)
+        lootDataParsed.loot = lootDataParsed.loot.concat(items)
       }
 
       // Creature
       if (lootDataTypeCreature.matches(line) && since < currentTimestamp) {
-        const creature: Creature = lootDataTypeCreature.toValue(line)
-        lootDataParsed.creatures.push({
-          ...creature,
-          timestamp: currentTimestamp,
-        })
+        const creature = this.handleCreature(line, currentTimestamp)
+        lootDataParsed.creatures.push(creature)
       }
 
       // Creatures with average loot
@@ -75,35 +66,7 @@ export class LootParser {
         lootDataTypeCreature.matches(line) ||
         lootDataTypeCreature.matchesBag(line)
       ) {
-        const itemsLooted = lootDataTypeItems.toValue(line)
-        const isBagLoot = lootDataTypeCreature.matchesBag(line)
-
-        const creature = isBagLoot
-          ? lootDataTypeCreature.toValueForBag(line)
-          : lootDataTypeCreature.toValue(line)
-
-        const creatureAlreadyExists = Object.keys(creaturesToLootMap).includes(
-          creature.name,
-        )
-
-        if (!creatureAlreadyExists) {
-          creaturesToLootMap[creature.name] = {
-            creature,
-            items: itemsLooted,
-            count: 1,
-          }
-        } else {
-          const { items, count } = creaturesToLootMap[creature.name]
-
-          // If the loot came in a bag, then we don't count the extra kill
-          const countUpdate = isBagLoot ? count : count + 1
-
-          creaturesToLootMap[creature.name] = {
-            creature,
-            items: [...items, ...itemsLooted],
-            count: countUpdate,
-          }
-        }
+        creaturesToLootMap = this.handleAverageLoot(line, creaturesToLootMap)
       }
     })
 
@@ -111,6 +74,63 @@ export class LootParser {
       this.calculateCreaturesWithAverageLoot(creaturesToLootMap)
 
     return lootDataParsed
+  }
+
+  private handleItems(line: string, currentTimestamp: number): LootEntry[] {
+    const items: ItemLooted[] = lootDataTypeItems.toValue(line)
+    return items.map(({ amount, ...item }) => ({
+      item,
+      amount,
+      timestamp: currentTimestamp,
+    }))
+  }
+
+  private handleCreature(
+    line: string,
+    currentTimestamp: number,
+  ): CreatureEntry {
+    const creature: Creature = lootDataTypeCreature.toValue(line)
+    return {
+      ...creature,
+      timestamp: currentTimestamp,
+    }
+  }
+
+  private handleAverageLoot(
+    line: string,
+    creaturesToLootMap: CreaturesToLootMap,
+  ): CreaturesToLootMap {
+    const itemsLooted = lootDataTypeItems.toValue(line)
+    const isBagLoot = lootDataTypeCreature.matchesBag(line)
+
+    const creature = isBagLoot
+      ? lootDataTypeCreature.toValueForBag(line)
+      : lootDataTypeCreature.toValue(line)
+
+    const creatureAlreadyExists = Object.keys(creaturesToLootMap).includes(
+      creature.name,
+    )
+
+    if (!creatureAlreadyExists) {
+      creaturesToLootMap[creature.name] = {
+        creature,
+        items: itemsLooted,
+        count: 1,
+      }
+    } else {
+      const { items, count } = creaturesToLootMap[creature.name]
+
+      // If the loot came in a bag, then we don't count the extra kill
+      const countUpdate = isBagLoot ? count : count + 1
+
+      creaturesToLootMap[creature.name] = {
+        creature,
+        items: [...items, ...itemsLooted],
+        count: countUpdate,
+      }
+    }
+
+    return creaturesToLootMap
   }
 
   private calculateCreaturesWithAverageLoot(
