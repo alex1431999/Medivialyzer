@@ -148,6 +148,12 @@ export class LootParser {
   }
 
   private forEachLine(callback: (line: string) => void) {
-    this.lootData.split('\n').forEach(callback)
+    const lines = this.lootData.split('\n')
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i]
+
+      callback(line)
+    }
   }
 }
