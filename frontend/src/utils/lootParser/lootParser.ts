@@ -120,24 +120,6 @@ export class LootParser {
     return lootDataParsed
   }
 
-  public getCreatures(since: number): CreatureEntry[] {
-    const creatures: CreatureEntry[] = []
-    let currentTimeStamp = 0
-
-    this.forEachLine((line) => {
-      if (lootDataTypeTimestamp.matches(line)) {
-        currentTimeStamp = lootDataTypeTimestamp.toValue(line)
-      }
-
-      if (lootDataTypeCreature.matches(line) && since < currentTimeStamp) {
-        const creature: Creature = lootDataTypeCreature.toValue(line)
-        creatures.push({ ...creature, timestamp: currentTimeStamp })
-      }
-    })
-
-    return creatures
-  }
-
   private forEachLine(callback: (line: string) => void) {
     this.lootData.split('\n').forEach(callback)
   }
