@@ -20,6 +20,11 @@ export type LootParserOptions = {
   since?: number
 }
 
+type CreaturesToLootMap = Record<
+  string,
+  { creature: Creature; items: ItemLooted[]; count: number }
+>
+
 export class LootParser {
   private readonly lootData: string
 
@@ -35,10 +40,7 @@ export class LootParser {
       creaturesWithAverageLoot: [],
     }
 
-    const creaturesToLootMap: Record<
-      string,
-      { creature: Creature; items: ItemLooted[]; count: number }
-    > = {}
+    const creaturesToLootMap: CreaturesToLootMap = {}
 
     let currentTimestamp = 0
     this.forEachLine((line) => {
@@ -105,9 +107,16 @@ export class LootParser {
       }
     })
 
-    lootDataParsed.creaturesWithAverageLoot = Object.values(
-      creaturesToLootMap,
-    ).map((entry) => {
+    lootDataParsed.creaturesWithAverageLoot =
+      this.calculateCreaturesWithAverageLoot(creaturesToLootMap)
+
+    return lootDataParsed
+  }
+
+  private calculateCreaturesWithAverageLoot(
+    creaturesToLootMap: CreaturesToLootMap,
+  ): CreatureWithAverageLoot[] {
+    return Object.values(creaturesToLootMap).map((entry) => {
       const totalLootValue = _.sum(
         _.map(entry.items, (item) => (item.value || 0) * item.amount),
       )
@@ -116,8 +125,6 @@ export class LootParser {
       // TODO calculate confidence
       return { averageLootValue, creature: entry.creature, confidence: 1 }
     })
-
-    return lootDataParsed
   }
 
   private forEachLine(callback: (line: string) => void) {
