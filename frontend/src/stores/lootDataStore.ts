@@ -15,6 +15,7 @@ const DEFAULT_DATA: LootDataStoreData = {
   lootData: electron.getLootData(),
   lootDataParsed: {
     loot: [],
+    creatures: [],
   },
 }
 

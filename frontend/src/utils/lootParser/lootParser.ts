@@ -12,6 +12,7 @@ import _ from 'lodash'
 
 export type LootDataParsed = {
   loot: LootEntry[]
+  creatures: CreatureEntry[]
 }
 
 export type LootParserOptions = {
@@ -29,6 +30,7 @@ export class LootParser {
     const since = options?.since || 0
     const lootDataParsed: LootDataParsed = {
       loot: [],
+      creatures: [],
     }
 
     let currentTimestamp = 0
@@ -48,6 +50,15 @@ export class LootParser {
         }))
 
         lootDataParsed.loot = lootDataParsed.loot.concat(lootToAdd)
+      }
+
+      // Creature
+      if (lootDataTypeCreature.matches(line) && since < currentTimestamp) {
+        const creature: Creature = lootDataTypeCreature.toValue(line)
+        lootDataParsed.creatures.push({
+          ...creature,
+          timestamp: currentTimestamp,
+        })
       }
     })
 
