@@ -5,19 +5,22 @@ import {
   LootParser,
   LootParserOptions,
 } from '../utils/lootParser/lootParser.ts'
+import _ from 'lodash'
 
 export type LootDataStoreData = {
   lootData: string
   lootDataParsed: LootDataParsed
+  previousOptions: LootParserOptions
 }
 
 const DEFAULT_DATA: LootDataStoreData = {
-  lootData: electron.getLootData(),
+  lootData: '',
   lootDataParsed: {
     loot: [],
     creatures: [],
     creaturesWithAverageLoot: [],
   },
+  previousOptions: {},
 }
 
 export const useLootDataStore = defineStore('lootData', {
@@ -27,8 +30,14 @@ export const useLootDataStore = defineStore('lootData', {
       const lootData = electron.getLootData()
       const lootParser = new LootParser(lootData)
 
-      this.lootData = lootData
-      this.lootDataParsed = lootParser.parse(options)
+      const hasLootDataChanged = lootData !== this.lootData
+      const hasOptionsChanged = !_.isEqual(options, this.previousOptions)
+
+      if (hasLootDataChanged || hasOptionsChanged) {
+        this.lootData = lootData
+        this.lootDataParsed = lootParser.parse(options)
+        this.previousOptions = options || {}
+      }
     },
   },
 })
