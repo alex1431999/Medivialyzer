@@ -16,8 +16,17 @@ setInterval(() => {
   lootDataStore.update({ since: configStore.config.since })
 }, FIVE_SECONDS)
 
+// Update when the loot path changes
 watch(
   () => configStore.config.lootFilePath,
+  () => {
+    lootDataStore.update({ since: configStore.config.since })
+  },
+)
+
+// Update when since changes
+watch(
+  () => configStore.config.since,
   () => {
     lootDataStore.update({ since: configStore.config.since })
   },
