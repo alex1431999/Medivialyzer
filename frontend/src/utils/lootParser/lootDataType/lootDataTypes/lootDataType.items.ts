@@ -1,5 +1,5 @@
 import { LootDataType } from '../lootDataType.ts'
-import { ItemLooted } from '../../../item/item.types.ts'
+import { Item, ItemLooted } from '../../../item/item.types.ts'
 import { getItem } from '../../../item/item.helpers.ts'
 import { singularize } from '../../../string.ts'
 
@@ -13,7 +13,7 @@ export class LootDataTypeItems extends LootDataType {
     return this.matchesLootOf(line) || this.matchesBag(line)
   }
 
-  public toValue(line: string): ItemLooted[] {
+  public toValue(line: string, items?: Item[]): ItemLooted[] {
     const lootString = line.toLowerCase().split(':')[2]
     const lootValues = lootString.split(',')
 
@@ -32,7 +32,7 @@ export class LootDataTypeItems extends LootDataType {
         if (LOOT_TO_ALWAYS_IGNORE.includes(name)) return []
 
         // If it is a known item, great! Return it, otherwise return it as an unknown item
-        const knownItem = getItem(name)
+        const knownItem = getItem(name, items)
         const unknownItem: ItemLooted = { name: nameSingular, amount } // For unknown items we will always assume the singular name
         const item = knownItem || unknownItem
 

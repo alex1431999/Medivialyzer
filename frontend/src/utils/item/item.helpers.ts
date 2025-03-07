@@ -12,8 +12,8 @@ export function getAllItems() {
   return [...configStore.config.customItems, ...ITEMS]
 }
 
-export function getItem(itemName: ItemName) {
-  const allItems = getAllItems()
+export function getItem(itemName: ItemName, items?: Item[]) {
+  const allItems = items || getAllItems()
   const itemNameSingularised = singularize(itemName)
 
   return allItems.find((item: Item) => {
