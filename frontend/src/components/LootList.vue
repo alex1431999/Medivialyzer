@@ -14,6 +14,7 @@ import AddItemModal from './AddItemModal.vue'
 import EditItemModal from './EditItemModal.vue'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import LootLuckDisplay from './LootLuckDisplay.vue'
+import Loader from './Loader.vue'
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
@@ -21,6 +22,8 @@ const lootDataStore = useLootDataStore()
 
 const itemToAddName = ref<string | null>(null)
 const itemToEdit = ref<LootEntry | null>(null)
+
+const isLootLoading = computed(() => lootDataStore.isParsingLootData)
 
 const creatures = computed(() => lootDataStore.lootDataParsed.creatures)
 const creaturesAverageLoot = computed(
@@ -126,6 +129,7 @@ function onLootItemEdit(entry: LootEntry) {
 
   <div class="loot-list__items">
     <LootListItem
+      v-if="!isLootLoading"
       v-for="lootEntry in lootSorted"
       class="loot-list__list-item"
       :key="lootEntry.item.name"
@@ -135,6 +139,7 @@ function onLootItemEdit(entry: LootEntry) {
       @edit="onLootItemEdit(lootEntry)"
     >
     </LootListItem>
+    <Loader class="d-flex justify-center align-center h-100" v-else />
   </div>
 
   <LootListMenu
