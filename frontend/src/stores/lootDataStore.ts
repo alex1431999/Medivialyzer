@@ -2,15 +2,18 @@ import { defineStore } from 'pinia'
 import { electron } from '../utils/electron/electron.constants.ts'
 import {
   LootDataParsed,
-  LootParser,
   LootParserOptions,
 } from '../utils/lootParser/lootParser.ts'
 import _ from 'lodash'
+import { runWorkerLootParser } from '../workers/worker.utils.ts'
+import { getAllItems } from '../utils/item/item.helpers.ts'
 
 export type LootDataStoreData = {
   lootData: string
   lootDataParsed: LootDataParsed
   previousOptions: LootParserOptions
+  isParsingLootData: boolean
+  ongoingParsingCalls: number
 }
 
 const DEFAULT_DATA: LootDataStoreData = {
@@ -21,6 +24,8 @@ const DEFAULT_DATA: LootDataStoreData = {
     creaturesWithAverageLoot: [],
   },
   previousOptions: {},
+  isParsingLootData: false,
+  ongoingParsingCalls: 0,
 }
 
 export const useLootDataStore = defineStore('lootData', {
@@ -28,15 +33,32 @@ export const useLootDataStore = defineStore('lootData', {
   actions: {
     update(options?: LootParserOptions) {
       const lootData = electron.getLootData()
-      const lootParser = new LootParser(lootData)
 
       const hasLootDataChanged = lootData !== this.lootData
       const hasOptionsChanged = !_.isEqual(options, this.previousOptions)
 
       if (hasLootDataChanged || hasOptionsChanged) {
         this.lootData = lootData
-        this.lootDataParsed = lootParser.parse(options)
         this.previousOptions = options || {}
+        this.isParsingLootData = true
+        this.ongoingParsingCalls += 1
+
+        runWorkerLootParser(lootData, {
+          ...options,
+          items: getAllItems(),
+        })
+          .then((lootDataParsed) => {
+            this.lootDataParsed = lootDataParsed
+            this.ongoingParsingCalls -= 1
+          })
+          .catch(() => {
+            this.ongoingParsingCalls -= 1
+          })
+          .finally(() => {
+            if (this.ongoingParsingCalls === 0) {
+              this.isParsingLootData = false
+            }
+          })
       }
     },
   },

@@ -1,6 +1,6 @@
 import { lootDataTypeItems } from './lootDataType/lootDataTypes/lootDataType.items.ts'
 import { lootDataTypeTimestamp } from './lootDataType/lootDataTypes/lootDataType.timestamp.ts'
-import { ItemLooted } from '../item/item.types.ts'
+import { Item, ItemLooted } from '../item/item.types.ts'
 import { LootEntry } from '../loot/loot.types.ts'
 import {
   Creature,
@@ -9,6 +9,7 @@ import {
 } from '../creature/creature.types.ts'
 import { lootDataTypeCreature } from './lootDataType/lootDataTypes/lootdataType.creature.ts'
 import _ from 'lodash'
+import { getAllItems } from '../item/item.helpers.ts'
 
 export type LootDataParsed = {
   loot: LootEntry[]
@@ -18,6 +19,7 @@ export type LootDataParsed = {
 
 export type LootParserOptions = {
   since?: number
+  items?: Item[]
 }
 
 type CreaturesToLootMap = Record<
@@ -34,6 +36,7 @@ export class LootParser {
 
   public parse(options?: LootParserOptions): LootDataParsed {
     const since = options?.since || 0
+    const allItems = options?.items || getAllItems()
     const lootDataParsed: LootDataParsed = {
       loot: [],
       creatures: [],
@@ -51,7 +54,7 @@ export class LootParser {
 
       // Items
       if (lootDataTypeItems.matches(line) && since < currentTimestamp) {
-        const items = this.handleItems(line, currentTimestamp)
+        const items = this.handleItems(line, currentTimestamp, allItems)
         lootDataParsed.loot = lootDataParsed.loot.concat(items)
       }
 
@@ -66,7 +69,11 @@ export class LootParser {
         lootDataTypeCreature.matches(line) ||
         lootDataTypeCreature.matchesBag(line)
       ) {
-        creaturesToLootMap = this.handleAverageLoot(line, creaturesToLootMap)
+        creaturesToLootMap = this.handleAverageLoot(
+          line,
+          creaturesToLootMap,
+          allItems,
+        )
       }
     })
 
@@ -76,8 +83,12 @@ export class LootParser {
     return lootDataParsed
   }
 
-  private handleItems(line: string, currentTimestamp: number): LootEntry[] {
-    const items: ItemLooted[] = lootDataTypeItems.toValue(line)
+  private handleItems(
+    line: string,
+    currentTimestamp: number,
+    allItems: Item[],
+  ): LootEntry[] {
+    const items: ItemLooted[] = lootDataTypeItems.toValue(line, allItems)
     return items.map(({ amount, ...item }) => ({
       item,
       amount,
@@ -99,8 +110,9 @@ export class LootParser {
   private handleAverageLoot(
     line: string,
     creaturesToLootMap: CreaturesToLootMap,
+    allItems: Item[],
   ): CreaturesToLootMap {
-    const itemsLooted = lootDataTypeItems.toValue(line)
+    const itemsLooted = lootDataTypeItems.toValue(line, allItems)
     const isBagLoot = lootDataTypeCreature.matchesBag(line)
 
     const creature = isBagLoot
