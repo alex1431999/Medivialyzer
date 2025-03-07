@@ -12,6 +12,8 @@ export type LootDataStoreData = {
   lootData: string
   lootDataParsed: LootDataParsed
   previousOptions: LootParserOptions
+  isParsingLootData: boolean
+  ongoingParsingCalls: number
 }
 
 const DEFAULT_DATA: LootDataStoreData = {
@@ -22,6 +24,8 @@ const DEFAULT_DATA: LootDataStoreData = {
     creaturesWithAverageLoot: [],
   },
   previousOptions: {},
+  isParsingLootData: false,
+  ongoingParsingCalls: 0,
 }
 
 export const useLootDataStore = defineStore('lootData', {
@@ -36,11 +40,25 @@ export const useLootDataStore = defineStore('lootData', {
       if (hasLootDataChanged || hasOptionsChanged) {
         this.lootData = lootData
         this.previousOptions = options || {}
+        this.isParsingLootData = true
+        this.ongoingParsingCalls += 1
 
         runWorkerLootParser(lootData, {
           ...options,
           items: getAllItems(),
-        }).then((lootDataParsed) => (this.lootDataParsed = lootDataParsed))
+        })
+          .then((lootDataParsed) => {
+            this.lootDataParsed = lootDataParsed
+            this.ongoingParsingCalls -= 1
+          })
+          .catch(() => {
+            this.ongoingParsingCalls -= 1
+          })
+          .finally(() => {
+            if (this.ongoingParsingCalls === 0) {
+              this.isParsingLootData = false
+            }
+          })
       }
     },
   },
