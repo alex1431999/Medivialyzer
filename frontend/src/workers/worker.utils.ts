@@ -3,15 +3,14 @@ import {
   LootParserOptions,
 } from '../utils/lootParser/lootParser.ts'
 
+import WorkerLootParser from './worker.lootParser.ts?worker'
+
 export function runWorker<Input extends any, Output extends any>(
-  path: string,
   input?: Input,
 ): Promise<Output> {
   return new Promise((resolve, reject) => {
     if (window.Worker) {
-      const worker = new Worker(new URL(path, import.meta.url), {
-        type: 'module',
-      })
+      const worker = new WorkerLootParser()
 
       worker.onmessage = (event: MessageEvent) => {
         resolve(event.data as Output)
@@ -31,7 +30,7 @@ export function runWorkerLootParser(
   return runWorker<
     { lootData: string; options?: LootParserOptions },
     LootDataParsed
-  >('../workers/worker.lootParser.ts', {
+  >({
     lootData,
     options,
   })
