@@ -51,8 +51,9 @@ export const useLootDataStore = defineStore('lootData', {
             this.lootDataParsed = lootDataParsed
             this.ongoingParsingCalls -= 1
           })
-          .catch(() => {
+          .catch((error) => {
             this.ongoingParsingCalls -= 1
+            throw error
           })
           .finally(() => {
             if (this.ongoingParsingCalls === 0) {
