@@ -16,7 +16,7 @@ export function runWorker<Input extends any, Output extends any>(
         resolve(event.data as Output)
       }
 
-      worker.postMessage(input)
+      worker.postMessage(JSON.parse(JSON.stringify(input)))
     } else {
       reject(new Error('Worker not supported'))
     }
