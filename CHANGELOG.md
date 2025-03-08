@@ -1,4 +1,4 @@
-# V1.3.0 - unreleased
+# V1.2.1
 - Improve performance
 
 # V1.2.0
