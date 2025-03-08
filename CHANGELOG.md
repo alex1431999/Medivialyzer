@@ -1,3 +1,6 @@
+# V1.3.0 - unreleased
+- Improve performance
+
 # V1.2.0
 - Added Falcon NPCs
 - Add NPC Omar
