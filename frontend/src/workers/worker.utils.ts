@@ -3,7 +3,7 @@ import {
   LootParserOptions,
 } from '../utils/lootParser/lootParser.ts'
 
-import WorkerLootParser from './worker.lootParser.ts?worker'
+import WorkerLootParser from './worker.lootParser.ts?worker&inline'
 
 export function runWorker<Input extends any, Output extends any>(
   input?: Input,
