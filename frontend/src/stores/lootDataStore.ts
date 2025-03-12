@@ -6,7 +6,6 @@ import {
 } from '../utils/lootParser/lootParser.ts'
 import _ from 'lodash'
 import { runWorkerLootParser } from '../workers/worker.utils.ts'
-import { getAllItems } from '../utils/item/item.helpers.ts'
 
 export type LootDataStoreData = {
   lootData: string
@@ -43,10 +42,7 @@ export const useLootDataStore = defineStore('lootData', {
         this.isParsingLootData = true
         this.ongoingParsingCalls += 1
 
-        runWorkerLootParser(lootData, {
-          ...options,
-          items: getAllItems(),
-        })
+        runWorkerLootParser(lootData, options)
           .then((lootDataParsed) => {
             this.lootDataParsed = lootDataParsed
             this.ongoingParsingCalls -= 1

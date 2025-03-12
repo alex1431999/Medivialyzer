@@ -6,21 +6,28 @@ import { FIVE_SECONDS } from './constants/time.ts'
 import { watch } from 'vue'
 import { useLootDataStore } from './stores/lootDataStore.ts'
 import { useConfigStore } from './stores/configStore.ts'
+import { getAllItems } from './utils/item/item.helpers.ts'
 
 const lootDataStore = useLootDataStore()
 const configStore = useConfigStore()
 
-lootDataStore.update({ since: configStore.config.since })
+lootDataStore.update({ since: configStore.config.since, items: getAllItems() })
 
 setInterval(() => {
-  lootDataStore.update({ since: configStore.config.since })
+  lootDataStore.update({
+    since: configStore.config.since,
+    items: getAllItems(),
+  })
 }, FIVE_SECONDS)
 
 // Update when the loot path changes
 watch(
   () => configStore.config.lootFilePath,
   () => {
-    lootDataStore.update({ since: configStore.config.since })
+    lootDataStore.update({
+      since: configStore.config.since,
+      items: getAllItems(),
+    })
   },
 )
 
@@ -28,8 +35,23 @@ watch(
 watch(
   () => configStore.config.since,
   () => {
-    lootDataStore.update({ since: configStore.config.since })
+    lootDataStore.update({
+      since: configStore.config.since,
+      items: getAllItems(),
+    })
   },
+)
+
+// Update when custom items change
+watch(
+  () => configStore.config.customItems,
+  () => {
+    lootDataStore.update({
+      since: configStore.config.since,
+      items: getAllItems(),
+    })
+  },
+  { deep: true },
 )
 </script>
 
