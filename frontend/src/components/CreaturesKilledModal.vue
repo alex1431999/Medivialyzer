@@ -6,20 +6,59 @@ import {
   VCardText,
   VCardTitle,
   VDialog,
+  VTabs,
+  VTab,
+  VTabsWindow,
+  VTabsWindowItem,
+  VAutocomplete,
 } from 'vuetify/components'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import CreatureKilled from './CreatureKilled.vue'
-import { groupCreatures } from '../utils/creature/creature.helpers.ts'
+import {
+  getCreatureWithAverageLoot,
+  groupCreatures,
+} from '../utils/creature/creature.helpers.ts'
 import _ from 'lodash'
-
+import { CreatureGrouped } from '../utils/creature/creature.types.ts'
 const lootDataStore = useLootDataStore()
 
-const creatures = computed(() => {
+const tab = ref<string>('current')
+const creaturesSearchValue = ref<string | null>(null)
+
+const creaturesCurrentHunt = computed(() => {
+  const creaturesParsed = lootDataStore.lootDataParsed.creaturesCurrentHunt
+  const creaturesGrouped = groupCreatures(creaturesParsed)
+  const creaturesFiltered = filterCreatures(creaturesGrouped)
+  return _.sortBy(creaturesFiltered, ['amount']).reverse()
+})
+
+const creaturesGeneral = computed(() => {
   const creaturesParsed = lootDataStore.lootDataParsed.creatures
   const creaturesGrouped = groupCreatures(creaturesParsed)
-  return _.sortBy(creaturesGrouped, ['amount']).reverse()
+  const creaturesFiltered = filterCreatures(creaturesGrouped)
+  return _.sortBy(creaturesFiltered, ['amount']).reverse()
 })
+
+const creaturesWithAverageLootCurrentHunt = computed(
+  () => lootDataStore.lootDataParsed.creaturesWithAverageLootCurrentHunt,
+)
+
+const creaturesWithAverageLootGeneral = computed(
+  () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
+)
+
+const creatureNames = computed(() =>
+  creaturesGeneral.value.map((creature) => creature.name),
+)
+
+function filterCreatures(creatures: CreatureGrouped[]) {
+  return creatures.filter((creature) =>
+    creaturesSearchValue.value !== null
+      ? creature.name.toLowerCase().includes(creaturesSearchValue.value)
+      : true,
+  )
+}
 </script>
 
 <template>
@@ -36,13 +75,55 @@ const creatures = computed(() => {
     <template v-slot:default="{ isActive }">
       <v-card>
         <v-card-title> Creatures killed </v-card-title>
+
+        <v-tabs color="secondary" v-model="tab">
+          <v-tab value="current">Current Hunt</v-tab>
+          <v-tab value="general">General</v-tab>
+        </v-tabs>
+
         <v-card-text>
-          <CreatureKilled
-            class="mb-2"
-            v-for="creature in creatures"
-            :key="creature.name"
-            :creature="creature"
-          ></CreatureKilled>
+          <v-tabs-window v-model="tab">
+            <v-autocomplete
+              class="mb-2"
+              label="Search creature"
+              :items="creatureNames"
+              v-model="creaturesSearchValue"
+            />
+
+            <v-tabs-window-item value="current">
+              <div class="creatures-list">
+                <CreatureKilled
+                  class="mb-2"
+                  v-for="creature in creaturesCurrentHunt"
+                  :key="creature.name"
+                  :creature="creature"
+                  :creature-with-average-loot="
+                    getCreatureWithAverageLoot(
+                      creaturesWithAverageLootCurrentHunt,
+                      creature,
+                    )
+                  "
+                ></CreatureKilled>
+              </div>
+            </v-tabs-window-item>
+
+            <v-tabs-window-item value="general">
+              <div class="creatures-list">
+                <CreatureKilled
+                  class="mb-2"
+                  v-for="creature in creaturesGeneral"
+                  :key="creature.name"
+                  :creature="creature"
+                  :creature-with-average-loot="
+                    getCreatureWithAverageLoot(
+                      creaturesWithAverageLootGeneral,
+                      creature,
+                    )
+                  "
+                ></CreatureKilled>
+              </div>
+            </v-tabs-window-item>
+          </v-tabs-window>
         </v-card-text>
 
         <v-card-actions>
@@ -52,3 +133,10 @@ const creatures = computed(() => {
     </template>
   </v-dialog>
 </template>
+
+<style scoped>
+.creatures-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+</style>

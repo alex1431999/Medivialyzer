@@ -25,7 +25,9 @@ const itemToEdit = ref<LootEntry | null>(null)
 
 const isLootLoading = computed(() => lootDataStore.isParsingLootData)
 
-const creatures = computed(() => lootDataStore.lootDataParsed.creatures)
+const creatures = computed(
+  () => lootDataStore.lootDataParsed.creaturesCurrentHunt,
+)
 const creaturesAverageLoot = computed(
   () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
 )

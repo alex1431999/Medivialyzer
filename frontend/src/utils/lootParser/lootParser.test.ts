@@ -105,7 +105,7 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creatures).toEqual([])
+      expect(lootParser.parse({ since: 0 }).creaturesCurrentHunt).toEqual([])
     })
 
     test('one creature', () => {
@@ -115,7 +115,7 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creatures).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesCurrentHunt).toEqual([
         {
           name: 'giant cobra',
           timestamp: new Date('Wed Dec 04 19:29:20 2024').getTime(),
@@ -131,7 +131,7 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creatures).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesCurrentHunt).toEqual([
         {
           name: 'giant cobra',
           timestamp: new Date('Wed Dec 04 19:29:20 2024').getTime(),
