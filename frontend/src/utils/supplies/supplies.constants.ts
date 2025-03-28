@@ -48,6 +48,10 @@ export const SUPPLIES = [
     value: 4,
   },
   {
+    name: 'Piercing arrow',
+    value: 12,
+  },
+  {
     name: 'Bolt',
     value: 3,
   },
