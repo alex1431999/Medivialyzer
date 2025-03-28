@@ -14,9 +14,11 @@ import {
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import { computed, ref } from 'vue'
 import CreatureKilled from './CreatureKilled.vue'
-import { groupCreatures } from '../utils/creature/creature.helpers.ts'
+import {
+  getCreatureWithAverageLoot,
+  groupCreatures,
+} from '../utils/creature/creature.helpers.ts'
 import _ from 'lodash'
-
 const lootDataStore = useLootDataStore()
 
 const tab = ref<string>('current')
@@ -32,6 +34,14 @@ const creaturesGeneral = computed(() => {
   const creaturesGrouped = groupCreatures(creaturesParsed)
   return _.sortBy(creaturesGrouped, ['amount']).reverse()
 })
+
+const creaturesWithAverageLootCurrentHunt = computed(
+  () => lootDataStore.lootDataParsed.creaturesWithAverageLootCurrentHunt,
+)
+
+const creaturesWithAverageLootGeneral = computed(
+  () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
+)
 </script>
 
 <template>
@@ -62,6 +72,12 @@ const creaturesGeneral = computed(() => {
                 v-for="creature in creaturesCurrentHunt"
                 :key="creature.name"
                 :creature="creature"
+                :creature-with-average-loot="
+                  getCreatureWithAverageLoot(
+                    creaturesWithAverageLootCurrentHunt,
+                    creature,
+                  )
+                "
               ></CreatureKilled>
             </v-tabs-window-item>
 
@@ -71,6 +87,12 @@ const creaturesGeneral = computed(() => {
                 v-for="creature in creaturesGeneral"
                 :key="creature.name"
                 :creature="creature"
+                :creature-with-average-loot="
+                  getCreatureWithAverageLoot(
+                    creaturesWithAverageLootGeneral,
+                    creature,
+                  )
+                "
               ></CreatureKilled>
             </v-tabs-window-item>
           </v-tabs-window>

@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { CreatureGrouped } from '../utils/creature/creature.types.ts'
+import {
+  CreatureGrouped,
+  CreatureWithAverageLoot,
+} from '../utils/creature/creature.types.ts'
 import { VChip, VBadge, VCard, VCardText } from 'vuetify/components'
 
-const { creature } = defineProps<{ creature: CreatureGrouped }>()
+const { creature } = defineProps<{
+  creature: CreatureGrouped
+  creatureWithAverageLoot: CreatureWithAverageLoot
+}>()
 </script>
 
 <template>
