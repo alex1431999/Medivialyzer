@@ -16,6 +16,7 @@ export type LootDataParsed = {
   creatures: CreatureEntry[]
   creaturesCurrentHunt: CreatureEntry[]
   creaturesWithAverageLoot: CreatureWithAverageLoot[]
+  creaturesWithAverageLootCurrentHunt: CreatureWithAverageLoot[]
 }
 
 export type LootParserOptions = {
@@ -43,9 +44,11 @@ export class LootParser {
       creatures: [],
       creaturesCurrentHunt: [],
       creaturesWithAverageLoot: [],
+      creaturesWithAverageLootCurrentHunt: [],
     }
 
     let creaturesToLootMap: CreaturesToLootMap = {}
+    let creaturesCurrentHuntToLootMap: CreaturesToLootMap = {}
 
     let currentTimestamp = 0
     this.forEachLine((line) => {
@@ -81,11 +84,22 @@ export class LootParser {
           creaturesToLootMap,
           allItems,
         )
+
+        if (since < currentTimestamp) {
+          creaturesCurrentHuntToLootMap = this.handleAverageLoot(
+            line,
+            creaturesToLootMap,
+            allItems,
+          )
+        }
       }
     })
 
     lootDataParsed.creaturesWithAverageLoot =
       this.calculateCreaturesWithAverageLoot(creaturesToLootMap)
+
+    lootDataParsed.creaturesWithAverageLootCurrentHunt =
+      this.calculateCreaturesWithAverageLoot(creaturesCurrentHuntToLootMap)
 
     return lootDataParsed
   }
