@@ -10,6 +10,7 @@ import {
   VTab,
   VTabsWindow,
   VTabsWindowItem,
+  VAutocomplete,
 } from 'vuetify/components'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import { computed, ref } from 'vue'
@@ -19,20 +20,24 @@ import {
   groupCreatures,
 } from '../utils/creature/creature.helpers.ts'
 import _ from 'lodash'
+import { CreatureGrouped } from '../utils/creature/creature.types.ts'
 const lootDataStore = useLootDataStore()
 
 const tab = ref<string>('current')
+const creaturesSearchValue = ref<string | null>(null)
 
 const creaturesCurrentHunt = computed(() => {
   const creaturesParsed = lootDataStore.lootDataParsed.creaturesCurrentHunt
   const creaturesGrouped = groupCreatures(creaturesParsed)
-  return _.sortBy(creaturesGrouped, ['amount']).reverse()
+  const creaturesFiltered = filterCreatures(creaturesGrouped)
+  return _.sortBy(creaturesFiltered, ['amount']).reverse()
 })
 
 const creaturesGeneral = computed(() => {
   const creaturesParsed = lootDataStore.lootDataParsed.creatures
   const creaturesGrouped = groupCreatures(creaturesParsed)
-  return _.sortBy(creaturesGrouped, ['amount']).reverse()
+  const creaturesFiltered = filterCreatures(creaturesGrouped)
+  return _.sortBy(creaturesFiltered, ['amount']).reverse()
 })
 
 const creaturesWithAverageLootCurrentHunt = computed(
@@ -42,6 +47,18 @@ const creaturesWithAverageLootCurrentHunt = computed(
 const creaturesWithAverageLootGeneral = computed(
   () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
 )
+
+const creatureNames = computed(() =>
+  creaturesGeneral.value.map((creature) => creature.name),
+)
+
+function filterCreatures(creatures: CreatureGrouped[]) {
+  return creatures.filter((creature) =>
+    creaturesSearchValue.value !== null
+      ? creature.name.toLowerCase().includes(creaturesSearchValue.value)
+      : true,
+  )
+}
 </script>
 
 <template>
@@ -66,6 +83,13 @@ const creaturesWithAverageLootGeneral = computed(
 
         <v-card-text>
           <v-tabs-window v-model="tab">
+            <v-autocomplete
+              class="mb-2"
+              label="Search creature"
+              :items="creatureNames"
+              v-model="creaturesSearchValue"
+            />
+
             <v-tabs-window-item value="current">
               <CreatureKilled
                 class="mb-2"
