@@ -6,14 +6,20 @@ import {
   VCardText,
   VCardTitle,
   VDialog,
+  VTabs,
+  VTab,
+  VTabsWindow,
+  VTabsWindowItem,
 } from 'vuetify/components'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import CreatureKilled from './CreatureKilled.vue'
 import { groupCreatures } from '../utils/creature/creature.helpers.ts'
 import _ from 'lodash'
 
 const lootDataStore = useLootDataStore()
+
+const tab = ref<string>('current')
 
 const creatures = computed(() => {
   const creaturesParsed = lootDataStore.lootDataParsed.creatures
@@ -36,13 +42,32 @@ const creatures = computed(() => {
     <template v-slot:default="{ isActive }">
       <v-card>
         <v-card-title> Creatures killed </v-card-title>
+
+        <v-tabs color="secondary" v-model="tab">
+          <v-tab value="current">Current Hunt</v-tab>
+          <v-tab value="general">General</v-tab>
+        </v-tabs>
+
         <v-card-text>
-          <CreatureKilled
-            class="mb-2"
-            v-for="creature in creatures"
-            :key="creature.name"
-            :creature="creature"
-          ></CreatureKilled>
+          <v-tabs-window v-model="tab">
+            <v-tabs-window-item value="current">
+              <CreatureKilled
+                class="mb-2"
+                v-for="creature in creatures"
+                :key="creature.name"
+                :creature="creature"
+              ></CreatureKilled>
+            </v-tabs-window-item>
+
+            <v-tabs-window-item value="general">
+              <CreatureKilled
+                class="mb-2"
+                v-for="creature in creatures"
+                :key="creature.name"
+                :creature="creature"
+              ></CreatureKilled>
+            </v-tabs-window-item>
+          </v-tabs-window>
         </v-card-text>
 
         <v-card-actions>
