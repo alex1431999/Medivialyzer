@@ -91,33 +91,37 @@ function filterCreatures(creatures: CreatureGrouped[]) {
             />
 
             <v-tabs-window-item value="current">
-              <CreatureKilled
-                class="mb-2"
-                v-for="creature in creaturesCurrentHunt"
-                :key="creature.name"
-                :creature="creature"
-                :creature-with-average-loot="
-                  getCreatureWithAverageLoot(
-                    creaturesWithAverageLootCurrentHunt,
-                    creature,
-                  )
-                "
-              ></CreatureKilled>
+              <div class="creatures-list">
+                <CreatureKilled
+                  class="mb-2"
+                  v-for="creature in creaturesCurrentHunt"
+                  :key="creature.name"
+                  :creature="creature"
+                  :creature-with-average-loot="
+                    getCreatureWithAverageLoot(
+                      creaturesWithAverageLootCurrentHunt,
+                      creature,
+                    )
+                  "
+                ></CreatureKilled>
+              </div>
             </v-tabs-window-item>
 
             <v-tabs-window-item value="general">
-              <CreatureKilled
-                class="mb-2"
-                v-for="creature in creaturesGeneral"
-                :key="creature.name"
-                :creature="creature"
-                :creature-with-average-loot="
-                  getCreatureWithAverageLoot(
-                    creaturesWithAverageLootGeneral,
-                    creature,
-                  )
-                "
-              ></CreatureKilled>
+              <div class="creatures-list">
+                <CreatureKilled
+                  class="mb-2"
+                  v-for="creature in creaturesGeneral"
+                  :key="creature.name"
+                  :creature="creature"
+                  :creature-with-average-loot="
+                    getCreatureWithAverageLoot(
+                      creaturesWithAverageLootGeneral,
+                      creature,
+                    )
+                  "
+                ></CreatureKilled>
+              </div>
             </v-tabs-window-item>
           </v-tabs-window>
         </v-card-text>
@@ -129,3 +133,10 @@ function filterCreatures(creatures: CreatureGrouped[]) {
     </template>
   </v-dialog>
 </template>
+
+<style scoped>
+.creatures-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+</style>
