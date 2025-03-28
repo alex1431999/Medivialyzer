@@ -21,7 +21,13 @@ const lootDataStore = useLootDataStore()
 
 const tab = ref<string>('current')
 
-const creatures = computed(() => {
+const creaturesCurrentHunt = computed(() => {
+  const creaturesParsed = lootDataStore.lootDataParsed.creaturesCurrentHunt
+  const creaturesGrouped = groupCreatures(creaturesParsed)
+  return _.sortBy(creaturesGrouped, ['amount']).reverse()
+})
+
+const creaturesGeneral = computed(() => {
   const creaturesParsed = lootDataStore.lootDataParsed.creatures
   const creaturesGrouped = groupCreatures(creaturesParsed)
   return _.sortBy(creaturesGrouped, ['amount']).reverse()
@@ -53,7 +59,7 @@ const creatures = computed(() => {
             <v-tabs-window-item value="current">
               <CreatureKilled
                 class="mb-2"
-                v-for="creature in creatures"
+                v-for="creature in creaturesCurrentHunt"
                 :key="creature.name"
                 :creature="creature"
               ></CreatureKilled>
@@ -62,7 +68,7 @@ const creatures = computed(() => {
             <v-tabs-window-item value="general">
               <CreatureKilled
                 class="mb-2"
-                v-for="creature in creatures"
+                v-for="creature in creaturesGeneral"
                 :key="creature.name"
                 :creature="creature"
               ></CreatureKilled>
