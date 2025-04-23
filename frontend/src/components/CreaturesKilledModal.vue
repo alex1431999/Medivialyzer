@@ -21,6 +21,7 @@ import {
 } from '../utils/creature/creature.helpers.ts'
 import _ from 'lodash'
 import { CreatureGrouped } from '../utils/creature/creature.types.ts'
+import CreaturesKilledEmptyPlaceholder from './CreaturesKilledEmptyPlaceholder.vue'
 const lootDataStore = useLootDataStore()
 
 const tab = ref<string>('current')
@@ -91,7 +92,7 @@ function filterCreatures(creatures: CreatureGrouped[]) {
             />
 
             <v-tabs-window-item value="current">
-              <div class="creatures-list">
+              <div v-if="creaturesCurrentHunt.length" class="creatures-list">
                 <CreatureKilled
                   class="mb-2"
                   v-for="creature in creaturesCurrentHunt"
@@ -105,10 +106,11 @@ function filterCreatures(creatures: CreatureGrouped[]) {
                   "
                 ></CreatureKilled>
               </div>
+              <CreaturesKilledEmptyPlaceholder v-else />
             </v-tabs-window-item>
 
             <v-tabs-window-item value="general">
-              <div class="creatures-list">
+              <div v-if="creaturesGeneral.length" class="creatures-list">
                 <CreatureKilled
                   class="mb-2"
                   v-for="creature in creaturesGeneral"
@@ -122,6 +124,7 @@ function filterCreatures(creatures: CreatureGrouped[]) {
                   "
                 ></CreatureKilled>
               </div>
+              <CreaturesKilledEmptyPlaceholder v-else />
             </v-tabs-window-item>
           </v-tabs-window>
         </v-card-text>
