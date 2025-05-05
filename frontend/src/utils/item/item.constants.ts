@@ -60,22 +60,22 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Angelic Boots',
-    value: 95000,
+    value: 166000,
     NPCs: ['Drolgruth'],
   },
   {
     name: 'Angelic Helmet',
-    value: 152000,
+    value: 250000,
     NPCs: ['Drolgruth'],
   },
   {
     name: 'Angelic Plate Armor',
-    value: 222000,
+    value: 500000,
     NPCs: ['Drolgruth'],
   },
   {
     name: 'Angelic Platemail',
-    value: 222000,
+    value: 500000,
     NPCs: ['Drolgruth'],
   },
   {
@@ -170,7 +170,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Black Crystal',
-    value: 0,
+    value: 100000,
     NPCs: ['Players'],
   },
   {
@@ -235,7 +235,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Blue Hood',
-    value: 0,
+    value: 22000,
     NPCs: ['Players'],
   },
   {
@@ -410,7 +410,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Dawnlight',
-    value: 0,
+    value: 800000,
     NPCs: ['Players'],
   },
   {
@@ -599,7 +599,7 @@ export const ITEMS: Item[] = [
     NPCs: ['Aremis'],
   },
   {
-    name: "Executioner's Sword",
+    name: 'Executioners Sword',
     value: 0,
     NPCs: ['Players'],
   },
@@ -800,7 +800,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Hellforged Armor',
-    value: 10000000,
+    value: 600000,
     NPCs: ['Drolgruth'],
   },
   {
@@ -835,7 +835,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Hunting Bolt',
-    value: 5,
+    value: 4,
     NPCs: ['Players'],
   },
   {
@@ -845,7 +845,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Huntsman Armor',
-    value: 0,
+    value: 25000,
     NPCs: ['Players'],
   },
   {
@@ -900,7 +900,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Knight Helmet',
-    value: 2500,
+    value: 2300,
     NPCs: ['Alesar'],
   },
   {
@@ -915,7 +915,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Life Ring',
-    value: 700,
+    value: 400,
     NPCs: ['Players'],
   },
   {
@@ -1175,7 +1175,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Red Robe',
-    value: 30000,
+    value: 12000,
     NPCs: ['Players'],
   },
   {
@@ -1195,7 +1195,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Ring of Healing',
-    value: 2000,
+    value: 1000,
     NPCs: ['Players'],
   },
   {
@@ -1295,7 +1295,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Shakirian Shield',
-    value: 3000,
+    value: 11300,
     NPCs: ['Wulkan'],
   },
   {
@@ -1510,7 +1510,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Stone Skin Amulet',
-    value: 4500,
+    value: 500,
     NPCs: ['Players'],
   },
   {
@@ -1525,7 +1525,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Strange Symbol',
-    value: 200,
+    value: 600,
     NPCs: ['Haffnal'],
   },
   {
@@ -1610,17 +1610,17 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Umbral Plate Armor',
-    value: 0,
+    value: 688000,
     NPCs: ['Players'],
   },
   {
     name: 'Umbral Platemail',
-    value: 0,
+    value: 688000,
     NPCs: ['Players'],
   },
   {
     name: 'Umbral Robe',
-    value: 0,
+    value: 688000,
     NPCs: ['Players'],
   },
   {
@@ -1640,7 +1640,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Vanadinite Armor',
-    value: 0,
+    value: 90000,
     NPCs: ['Players'],
   },
   {
@@ -1745,12 +1745,12 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Watcher Legs',
-    value: 110000,
+    value: 110500,
     NPCs: ['Drolgruth'],
   },
   {
     name: 'Watcher Shield',
-    value: 7000,
+    value: 1200,
   },
   {
     name: 'Webcrawler Boots',
@@ -1929,7 +1929,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Eyes of Abysmor',
-    value: 8000,
+    value: 6000,
     NPCs: ['Drolgruth'],
   },
   {
@@ -2012,7 +2012,7 @@ export const ITEMS: Item[] = [
   },
   {
     name: 'Frozen Ham',
-    value: 60,
+    value: 55,
   },
   {
     name: 'Frost Dragon Heart',
@@ -2142,5 +2142,377 @@ export const ITEMS: Item[] = [
     name: 'Bow',
     value: 130,
     NPCs: ['Risdarick'],
+  },
+  {
+    name: 'Barbel Feast Recipe',
+    value: 40000,
+  },
+  {
+    name: 'Nether Spider Doll',
+    value: 8000,
+  },
+  {
+    name: 'Phoenix Shield',
+    value: 16000,
+  },
+  {
+    name: 'Golden Wand',
+    value: 1500,
+  },
+  {
+    name: 'Naginata',
+    value: 1500,
+  },
+  {
+    name: 'Watcher Helmet',
+    value: 2500,
+  },
+  {
+    name: 'Tortoise Boots',
+    value: 3500,
+  },
+  {
+    name: 'Castle Shield',
+    value: 35000,
+  },
+  {
+    name: 'Heavy Mace',
+    value: 35000,
+  },
+  {
+    name: "Executioner's Sword",
+    value: 130000,
+  },
+  {
+    name: 'Bone Basher',
+    value: 5500,
+  },
+  {
+    name: 'Helmet of the Fallen King',
+    value: 40000,
+  },
+  {
+    name: 'Demon Helmet',
+    value: 45000,
+  },
+  {
+    name: 'Demonbone Legs',
+    value: 60000,
+  },
+  {
+    name: 'Demon Armor',
+    value: 150000,
+  },
+  {
+    name: 'Magic Sword',
+    value: 150000,
+  },
+  {
+    name: 'Stonecutter Axe',
+    value: 150000,
+  },
+  {
+    name: 'Red Scale Armor',
+    value: 190000,
+  },
+  {
+    name: 'Frostwind',
+    value: 230000,
+  },
+  {
+    name: 'Icebound Armor',
+    value: 230000,
+  },
+  {
+    name: 'Icebound Legs',
+    value: 230000,
+  },
+  {
+    name: 'Alpha Wolf Tooth Chain',
+    value: 1000,
+  },
+  {
+    name: 'Pirate Eye Patch',
+    value: 1000,
+  },
+  {
+    name: 'Pirate Hand Hook',
+    value: 1500,
+  },
+  {
+    name: 'Pirate Skull Belt',
+    value: 3000,
+  },
+  {
+    name: 'Crystallized Sword',
+    value: 10000,
+  },
+  {
+    name: 'Crystallized Axe',
+    value: 11000,
+  },
+  {
+    name: 'Crystallized Hammer',
+    value: 13000,
+  },
+  {
+    name: 'Pirate Bandana',
+    value: 15000,
+  },
+  {
+    name: 'Pirate Hat',
+    value: 20000,
+  },
+  {
+    name: 'Necromantic Bloodrobe',
+    value: 140000,
+  },
+  {
+    name: 'Elven Bow',
+    value: 500,
+  },
+  {
+    name: 'Elven Crossbow',
+    value: 7500,
+  },
+  {
+    name: 'Enhanced Crossbow',
+    value: 24000,
+  },
+  {
+    name: 'Life Crystal',
+    value: 400,
+  },
+  {
+    name: 'Void Essence',
+    value: 20000,
+  },
+  {
+    name: 'Spicy Maris Feast',
+    value: 3000,
+  },
+  {
+    name: 'Triangle Emerald',
+    value: 400,
+  },
+  {
+    name: 'Cursed Gold Coin',
+    value: 250,
+  },
+  {
+    name: 'Titan Horn',
+    value: 1000,
+  },
+  {
+    name: 'Potion of Power',
+    value: 60000,
+  },
+  {
+    name: 'Exquisite Perch Meal',
+    value: 4000,
+  },
+  {
+    name: 'Royal Dress',
+    value: 20000,
+  },
+  {
+    name: 'Pile of Bones',
+    value: 20000,
+  },
+  {
+    name: 'Ancient Bone',
+    value: 0,
+  },
+  {
+    name: 'Healing Crystal',
+    value: 2000,
+  },
+  {
+    name: 'Void Bone',
+    value: 20000,
+  },
+  {
+    name: 'Decaying Vine',
+    value: 2700,
+  },
+  {
+    name: 'Plague Seed',
+    value: 2300,
+  },
+  {
+    name: 'Wormqueen Tooth',
+    value: 1100,
+  },
+  {
+    name: 'Exquisite Bluegill Feast',
+    value: 10000,
+  },
+  {
+    name: 'Black Tapestry',
+    value: 4000,
+  },
+  {
+    name: 'Purple Tome',
+    value: 3000,
+  },
+  {
+    name: 'Skeleton Legs',
+    value: 62000,
+  },
+  {
+    name: 'Skeleton Armor',
+    value: 70000,
+  },
+  {
+    name: 'Explorer Boots',
+    value: 13200,
+  },
+  {
+    name: 'Magician Hood',
+    value: 6000,
+  },
+  {
+    name: 'Hydra Scale Legs',
+    value: 0,
+  },
+  {
+    name: 'Giant Revenant Bone',
+    value: 400,
+  },
+  {
+    name: 'Giant Skeleton Bone',
+    value: 185,
+  },
+  {
+    name: 'Skeleton Boots',
+    value: 55000,
+  },
+  {
+    name: 'Skeleton Mask',
+    value: 58000,
+  },
+  {
+    name: 'Oil Flask',
+    value: 400,
+  },
+  {
+    name: 'Blazing Core',
+    value: 80000,
+  },
+  {
+    name: 'Agavan Legs',
+    value: 0,
+  },
+  {
+    name: 'Broken Centaur Shield',
+    value: 540,
+  },
+  {
+    name: 'Broken Centaur Helmet',
+    value: 2000,
+  },
+  {
+    name: 'Centaur Shield',
+    value: 90000,
+  },
+  {
+    name: 'Centaur Dreadlocks',
+    value: 1150,
+  },
+  {
+    name: 'Centraur Skirt',
+    value: 600,
+  },
+  {
+    name: 'Centaur Mystic Wand',
+    value: 550,
+  },
+  {
+    name: 'Enchanted Piece of Cloth',
+    value: 1540,
+  },
+  {
+    name: 'Sapphire Bangle',
+    value: 2230,
+  },
+  {
+    name: 'Pixie Dust',
+    value: 1760,
+  },
+  {
+    name: 'Fairy Wand',
+    value: 1460,
+  },
+  {
+    name: 'Azure Gem',
+    value: 30000,
+  },
+  {
+    name: 'Pink Pearl',
+    value: 460,
+  },
+  {
+    name: 'Rose Gem',
+    value: 40000,
+  },
+  {
+    name: 'Pink Talon',
+    value: 540,
+  },
+  {
+    name: 'Small Zircon',
+    value: 380,
+  },
+  {
+    name: 'Magma Dragon Scale',
+    value: 2700,
+  },
+  {
+    name: 'Obsidian Dragon Scale',
+    value: 4800,
+  },
+  {
+    name: 'Firestorm Essence',
+    value: 14000,
+  },
+  {
+    name: 'Ancient Dragon Scale',
+    value: 5400,
+  },
+  {
+    name: 'Storm Crystals',
+    value: 2240,
+  },
+  {
+    name: 'Spirit Of Fire',
+    value: 8000,
+  },
+  {
+    name: 'Nightbane',
+    value: 340000,
+  },
+  {
+    name: 'Tome of Shadows',
+    value: 425000,
+  },
+  {
+    name: 'Hexfire Soulscepter',
+    value: 425000,
+  },
+  {
+    name: 'Zephyr Wand',
+    value: 240000,
+  },
+  {
+    name: "Hangman's Rope",
+    value: 2000,
+  },
+  {
+    name: 'Exquisite Perch Feast',
+    value: 10000,
+  },
+  {
+    name: 'Infernoscale Armor',
+    value: 360000,
   },
 ]
