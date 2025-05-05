@@ -1,0 +1,1506 @@
+[
+  {
+    "name": "Dawnlight",
+    "value": 800000
+  },
+  {
+    "name": "Barbel Feast Recipe",
+    "value": 40000
+  },
+  {
+    "name": "Nether Spider Doll",
+    "value": 8000
+  },
+  {
+    "name": "Ankh",
+    "value": 100
+  },
+  {
+    "name": "Watcher Shield",
+    "value": 1200
+  },
+  {
+    "name": "Guardian Shield",
+    "value": 2000
+  },
+  {
+    "name": "Scorpid Hood",
+    "value": 2300
+  },
+  {
+    "name": "Crown Helmet",
+    "value": 2500
+  },
+  {
+    "name": "Dragon Shield",
+    "value": 4000
+  },
+  {
+    "name": "Fire Sword",
+    "value": 4000
+  },
+  {
+    "name": "Electric Helmet",
+    "value": 5000
+  },
+  {
+    "name": "Crusader Helmet",
+    "value": 6000
+  },
+  {
+    "name": "Electric Legs",
+    "value": 7000
+  },
+  {
+    "name": "Crown Shield",
+    "value": 8000
+  },
+  {
+    "name": "Fire Axe",
+    "value": 8000
+  },
+  {
+    "name": "Dragon Lance",
+    "value": 9000
+  },
+  {
+    "name": "Blue Robe",
+    "value": 10000
+  },
+  {
+    "name": "Electric Armor",
+    "value": 10000
+  },
+  {
+    "name": "Crown Armor",
+    "value": 12000
+  },
+  {
+    "name": "Crown Legs",
+    "value": 12000
+  },
+  {
+    "name": "Phoenix Shield",
+    "value": 16000
+  },
+  {
+    "name": "Boots of Haste",
+    "value": 30000
+  },
+  {
+    "name": "Royal Helmet",
+    "value": 30000
+  },
+  {
+    "name": "Living Thunder",
+    "value": 1000
+  },
+  {
+    "name": "Golden Wand",
+    "value": 1500
+  },
+  {
+    "name": "Serpent Scepter",
+    "value": 1500
+  },
+  {
+    "name": "Fireweaver",
+    "value": 4000
+  },
+  {
+    "name": "Red Spellwand",
+    "value": 5000
+  },
+  {
+    "name": "Blue Spellwand",
+    "value": 5000
+  },
+  {
+    "name": "Green Spellwand",
+    "value": 5000
+  },
+  {
+    "name": "Staff of Might",
+    "value": 5000
+  },
+  {
+    "name": "Stormcaller",
+    "value": 8000
+  },
+  {
+    "name": "Shadowfall",
+    "value": 15000
+  },
+  {
+    "name": "Frostwarden",
+    "value": 30000
+  },
+  {
+    "name": "Curved Axe",
+    "value": 1200
+  },
+  {
+    "name": "Dwarven Axe",
+    "value": 1500
+  },
+  {
+    "name": "Naginata",
+    "value": 1500
+  },
+  {
+    "name": "Dragon Hammer",
+    "value": 2000
+  },
+  {
+    "name": "Knight Axe",
+    "value": 2000
+  },
+  {
+    "name": "Spider Silk Armor",
+    "value": 2000
+  },
+  {
+    "name": "Knight Helmet",
+    "value": 2300
+  },
+  {
+    "name": "Spiked Club",
+    "value": 3200
+  },
+  {
+    "name": "Knight Armor",
+    "value": 5000
+  },
+  {
+    "name": "Knight Legs",
+    "value": 5000
+  },
+  {
+    "name": "Warrior Helmet",
+    "value": 5000
+  },
+  {
+    "name": "Skull Staff",
+    "value": 6000
+  },
+  {
+    "name": "Tower Shield",
+    "value": 8000
+  },
+  {
+    "name": "Vampire Shield",
+    "value": 15000
+  },
+  {
+    "name": "The Sky Piercer",
+    "value": 16500
+  },
+  {
+    "name": "Giant Sword",
+    "value": 17000
+  },
+  {
+    "name": "Assassin Dagger",
+    "value": 1000
+  },
+  {
+    "name": "Shakirian Waraxe",
+    "value": 1000
+  },
+  {
+    "name": "Devil Helmet",
+    "value": 1000
+  },
+  {
+    "name": "Mystic Turban",
+    "value": 1000
+  },
+  {
+    "name": "Shakirian Spellbook",
+    "value": 1350
+  },
+  {
+    "name": "Platinum Amulet",
+    "value": 1500
+  },
+  {
+    "name": "Scarab Shield",
+    "value": 1500
+  },
+  {
+    "name": "Golden Amulet",
+    "value": 1600
+  },
+  {
+    "name": "Watcher Helmet",
+    "value": 2500
+  },
+  {
+    "name": "Imperial Soldier Shield",
+    "value": 3000
+  },
+  {
+    "name": "Tortoise Boots",
+    "value": 3500
+  },
+  {
+    "name": "Gatecrasher",
+    "value": 4000
+  },
+  {
+    "name": "Wand of Light",
+    "value": 4000
+  },
+  {
+    "name": "Light Sword",
+    "value": 4500
+  },
+  {
+    "name": "Imperial Soldier Armor",
+    "value": 5500
+  },
+  {
+    "name": "Shakirian Wand",
+    "value": 6000
+  },
+  {
+    "name": "Nether Shield",
+    "value": 6600
+  },
+  {
+    "name": "The Stinger",
+    "value": 7000
+  },
+  {
+    "name": "Medusa Shield",
+    "value": 8000
+  },
+  {
+    "name": "Bright Sword",
+    "value": 8000
+  },
+  {
+    "name": "Gold Ring",
+    "value": 8000
+  },
+  {
+    "name": "Guardian Halberd",
+    "value": 8000
+  },
+  {
+    "name": "Shakirian Shield",
+    "value": 11300
+  },
+  {
+    "name": "Grim Boots",
+    "value": 10000
+  },
+  {
+    "name": "Swinging Demolisher",
+    "value": 16000
+  },
+  {
+    "name": "Crystallized Shield",
+    "value": 16000
+  },
+  {
+    "name": "Imperial Soldier Legs",
+    "value": 20000
+  },
+  {
+    "name": "Arming Sword",
+    "value": 20000
+  },
+  {
+    "name": "Golden Armor",
+    "value": 20000
+  },
+  {
+    "name": "Ring of the Sky",
+    "value": 20000
+  },
+  {
+    "name": "Bascinet",
+    "value": 24000
+  },
+  {
+    "name": "Huntsman Armor",
+    "value": 25000
+  },
+  {
+    "name": "Frozen Shield",
+    "value": 29000
+  },
+  {
+    "name": "Steel Boots",
+    "value": 30000
+  },
+  {
+    "name": "Dragon Scale Mail",
+    "value": 30000
+  },
+  {
+    "name": "Demon Shield",
+    "value": 30000
+  },
+  {
+    "name": "Grim Legs",
+    "value": 30000
+  },
+  {
+    "name": "Castle Shield",
+    "value": 35000
+  },
+  {
+    "name": "Heavy Halberd",
+    "value": 35000
+  },
+  {
+    "name": "Heavy Mace",
+    "value": 35000
+  },
+  {
+    "name": "Shakirian Blade",
+    "value": 35000
+  },
+  {
+    "name": "Hellforged Shield",
+    "value": 36000
+  },
+  {
+    "name": "Dragon Slayer",
+    "value": 40000
+  },
+  {
+    "name": "Elite Knight Boots",
+    "value": 40000
+  },
+  {
+    "name": "Executioner's Sword",
+    "value": 130000
+  },
+  {
+    "name": "Mercenary Sword",
+    "value": 45000
+  },
+  {
+    "name": "Holy Scepter",
+    "value": 50000
+  },
+  {
+    "name": "Elite Knight Helmet",
+    "value": 52000
+  },
+  {
+    "name": "Crescent Axe",
+    "value": 60000
+  },
+  {
+    "name": "Crescent Mace",
+    "value": 60000
+  },
+  {
+    "name": "Crescent Sword",
+    "value": 60000
+  },
+  {
+    "name": "Elite Knight Legs",
+    "value": 60000
+  },
+  {
+    "name": "Venomous Mace",
+    "value": 75000
+  },
+  {
+    "name": "Elite Knight Armor",
+    "value": 80000
+  },
+  {
+    "name": "Wooden Maul",
+    "value": 2000
+  },
+  {
+    "name": "Ancient Boots",
+    "value": 5000
+  },
+  {
+    "name": "Bone Basher",
+    "value": 5500
+  },
+  {
+    "name": "Unholy Halberd",
+    "value": 5500
+  },
+  {
+    "name": "Assassin Blade",
+    "value": 6300
+  },
+  {
+    "name": "Fiery Armor",
+    "value": 7500
+  },
+  {
+    "name": "Fiery Helmet",
+    "value": 7500
+  },
+  {
+    "name": "Demonbone Helmet",
+    "value": 9000
+  },
+  {
+    "name": "Torn Quicksand Boots",
+    "value": 10000
+  },
+  {
+    "name": "Crown Boots",
+    "value": 12000
+  },
+  {
+    "name": "Light Armor",
+    "value": 13000
+  },
+  {
+    "name": "Demonbone Boots",
+    "value": 14000
+  },
+  {
+    "name": "Unholy Plate Armor",
+    "value": 15000
+  },
+  {
+    "name": "Silver Mace",
+    "value": 16500
+  },
+  {
+    "name": "Royal Plate Armor",
+    "value": 35000
+  },
+  {
+    "name": "Hellforged Shield",
+    "value": 36000
+  },
+  {
+    "name": "Vanadinite Helmet",
+    "value": 36000
+  },
+  {
+    "name": "Shield of the Heroes",
+    "value": 38000
+  },
+  {
+    "name": "Ancient Sword",
+    "value": 40000
+  },
+  {
+    "name": "Demonbone Armor",
+    "value": 40000
+  },
+  {
+    "name": "Helmet of the Fallen King",
+    "value": 40000
+  },
+  {
+    "name": "Ancient Helmet",
+    "value": 42000
+  },
+  {
+    "name": "Ancient Legs",
+    "value": 45000
+  },
+  {
+    "name": "Demon Helmet",
+    "value": 45000
+  },
+  {
+    "name": "Golden Legs",
+    "value": 50000
+  },
+  {
+    "name": "Hellforged Axe",
+    "value": 50000
+  },
+  {
+    "name": "Mastermind Shield",
+    "value": 50000
+  },
+  {
+    "name": "Vanadinite Legs",
+    "value": 55000
+  },
+  {
+    "name": "Demonbone Legs",
+    "value": 60000
+  },
+  {
+    "name": "Icebound Helmet",
+    "value": 60000
+  },
+  {
+    "name": "Ancient Armor",
+    "value": 75000
+  },
+  {
+    "name": "Magic Plate Boots",
+    "value": 80000
+  },
+  {
+    "name": "Vanadinite Armor",
+    "value": 90000
+  },
+  {
+    "name": "Vanquisher",
+    "value": 100000
+  },
+  {
+    "name": "Magic Plate Legs",
+    "value": 120000
+  },
+  {
+    "name": "Demon Armor",
+    "value": 150000
+  },
+  {
+    "name": "Magic Sword",
+    "value": 150000
+  },
+  {
+    "name": "Stonecutter Axe",
+    "value": 150000
+  },
+  {
+    "name": "Void Mace",
+    "value": 150000
+  },
+  {
+    "name": "Red Scale Armor",
+    "value": 190000
+  },
+  {
+    "name": "Magic Plate Armor",
+    "value": 200000
+  },
+  {
+    "name": "Frostwind",
+    "value": 230000
+  },
+  {
+    "name": "Icebound Armor",
+    "value": 230000
+  },
+  {
+    "name": "Icebound Legs",
+    "value": 230000
+  },
+  {
+    "name": "Chaos Sword",
+    "value": 300000
+  },
+  {
+    "name": "Chaos Shield",
+    "value": 500000
+  },
+  {
+    "name": "Draculd",
+    "value": ""
+  },
+  {
+    "name": "Frost Dagger",
+    "value": 800
+  },
+  {
+    "name": "Permafrost Longsword",
+    "value": 900
+  },
+  {
+    "name": "Wendigo Staff",
+    "value": 900
+  },
+  {
+    "name": "Alpha Wolf Tooth Chain",
+    "value": 1000
+  },
+  {
+    "name": "Pirate Eye Patch",
+    "value": 1000
+  },
+  {
+    "name": "Pirate Hand Hook",
+    "value": 1500
+  },
+  {
+    "name": "Permafrost Morningstar",
+    "value": 1600
+  },
+  {
+    "name": "Plaguespreader Rod",
+    "value": 2000
+  },
+  {
+    "name": "Permafrost Crystal",
+    "value": 3000
+  },
+  {
+    "name": "Pirate Skull Belt",
+    "value": 3000
+  },
+  {
+    "name": "Red Tunic",
+    "value": 5000
+  },
+  {
+    "name": "Permafrost Stone",
+    "value": 7000
+  },
+  {
+    "name": "Soul Reaper",
+    "value": 7500
+  },
+  {
+    "name": "Crystallized Sword",
+    "value": 10000
+  },
+  {
+    "name": "Crystallized Axe",
+    "value": 11000
+  },
+  {
+    "name": "Crystallized Hammer",
+    "value": 13000
+  },
+  {
+    "name": "Pirate Bandana",
+    "value": 15000
+  },
+  {
+    "name": "Yellow Robe",
+    "value": 18000
+  },
+  {
+    "name": "Golden Staff",
+    "value": 20000
+  },
+  {
+    "name": "Fire Hammer",
+    "value": 20000
+  },
+  {
+    "name": "Pirate Hat",
+    "value": 20000
+  },
+  {
+    "name": "Permafrost Robe",
+    "value": 26000
+  },
+  {
+    "name": "Plaguespreader Robe",
+    "value": 26000
+  },
+  {
+    "name": "Lightbringer Helmet",
+    "value": 40000
+  },
+  {
+    "name": "Necromantic Bloodrobe",
+    "value": 140000
+  },
+  {
+    "name": "Venerator Mask",
+    "value": 500
+  },
+  {
+    "name": "Double Axe Head",
+    "value": 3000
+  },
+  {
+    "name": "Ritual Dagger",
+    "value": 6000
+  },
+  {
+    "name": "Webcrawler Shield",
+    "value": 12000
+  },
+  {
+    "name": "Angry Soul",
+    "value": 20000
+  },
+  {
+    "name": "Broken Whip",
+    "value": 23500
+  },
+  {
+    "name": "Tainted Soul",
+    "value": 25000
+  },
+  {
+    "name": "Forgotten Soul",
+    "value": 30000
+  },
+  {
+    "name": "Arcane Shoes",
+    "value": 35000
+  },
+  {
+    "name": "Ashlord Shield",
+    "value": 40000
+  },
+  {
+    "name": "Red Heels",
+    "value": 41500
+  },
+  {
+    "name": "Warlord Helmet",
+    "value": 42000
+  },
+  {
+    "name": "Arcane Cowl",
+    "value": 45000
+  },
+  {
+    "name": "Arcane Kilt",
+    "value": 50000
+  },
+  {
+    "name": "Webcrawler Boots",
+    "value": 53000
+  },
+  {
+    "name": "Arcane Robe",
+    "value": 64500
+  },
+  {
+    "name": "Observer Helmet",
+    "value": 67000
+  },
+  {
+    "name": "Skullbreaker",
+    "value": 78000
+  },
+  {
+    "name": "War Axe",
+    "value": 80000
+  },
+  {
+    "name": "Observer Shield",
+    "value": 82000
+  },
+  {
+    "name": "High Heels of Seduction",
+    "value": 84000
+  },
+  {
+    "name": "Watcher Boots",
+    "value": 85000
+  },
+  {
+    "name": "Angelic Boots",
+    "value": 166000
+  },
+  {
+    "name": "Virulent Clawboots",
+    "value": 100000
+  },
+  {
+    "name": "Lich Grimoire",
+    "value": 108000
+  },
+  {
+    "name": "Watcher Legs",
+    "value": 110500
+  },
+  {
+    "name": "Arcane Tunic",
+    "value": 125000
+  },
+  {
+    "name": "Watcher Armor",
+    "value": 125000
+  },
+  {
+    "name": "Virulent Helmet",
+    "value": 130000
+  },
+  {
+    "name": "Emberwake Tunic",
+    "value": 142000
+  },
+  {
+    "name": "Plague Mask",
+    "value": 145000
+  },
+  {
+    "name": "Angelic Helmet",
+    "value": 250000
+  },
+  {
+    "name": "Jade Tear",
+    "value": 165000
+  },
+  {
+    "name": "Ruby Tear",
+    "value": 165000
+  },
+  {
+    "name": "Jadeite Boots",
+    "value": 178000
+  },
+  {
+    "name": "Deepshadow Boots",
+    "value": 200000
+  },
+  {
+    "name": "Shadowfall Crossbow",
+    "value": 200000
+  },
+  {
+    "name": "Demonic Axe",
+    "value": 215000
+  },
+  {
+    "name": "Soulstealer Armor",
+    "value": 218000
+  },
+  {
+    "name": "Fire Whip",
+    "value": 220000
+  },
+  {
+    "name": "Angelic Plate Armor",
+    "value": 500000
+  },
+  {
+    "name": "Angelic Platemail",
+    "value": 500000
+  },
+  {
+    "name": "Virulent Legs",
+    "value": 225000
+  },
+  {
+    "name": "The Deathraze",
+    "value": 235000
+  },
+  {
+    "name": "Deepshadow Mask",
+    "value": 245000
+  },
+  {
+    "name": "Artifact of Penance",
+    "value": 250000
+  },
+  {
+    "name": "The Bloodcurser",
+    "value": 280000
+  },
+  {
+    "name": "Deepshadow Legs",
+    "value": 285000
+  },
+  {
+    "name": "Blazing Greatsword",
+    "value": 300000
+  },
+  {
+    "name": "Heavy Truncheon",
+    "value": 300000
+  },
+  {
+    "name": "Hellforged Legs",
+    "value": 300000
+  },
+  {
+    "name": "Umbral Boots",
+    "value": 300000
+  },
+  {
+    "name": "Umbral Helmet",
+    "value": 300000
+  },
+  {
+    "name": "Mirror Shield",
+    "value": 310000
+  },
+  {
+    "name": "Virulent Armor",
+    "value": 320000
+  },
+  {
+    "name": "Deepshadow Robe",
+    "value": 325000
+  },
+  {
+    "name": "Umbral Legs",
+    "value": 335000
+  },
+  {
+    "name": "Deepshadow Amulet",
+    "value": 340000
+  },
+  {
+    "name": "Flaming Aegis",
+    "value": 375000
+  },
+  {
+    "name": "Emberwake Ring",
+    "value": 400000
+  },
+  {
+    "name": "Chaos Axe",
+    "value": 600000
+  },
+  {
+    "name": "Chaos Mace",
+    "value": 600000
+  },
+  {
+    "name": "Chaos Sword",
+    "value": 600000
+  },
+  {
+    "name": "The Dawnbringer",
+    "value": 600000
+  },
+  {
+    "name": "Dreadweave Robe",
+    "value": 600000
+  },
+  {
+    "name": "Hellforged Armor",
+    "value": 600000
+  },
+  {
+    "name": "The Lightbane",
+    "value": 600000
+  },
+  {
+    "name": "The Twilight",
+    "value": 600000
+  },
+  {
+    "name": "The Ward of Sheol",
+    "value": 625000
+  },
+  {
+    "name": "Solar Amulet",
+    "value": 666000
+  },
+  {
+    "name": "Umbral Plate Armor",
+    "value": 688000
+  },
+  {
+    "name": "Umbral Platemail",
+    "value": 688000
+  },
+  {
+    "name": "Umbral Robe",
+    "value": 688000
+  },
+  {
+    "name": "Elven Bow",
+    "value": 500
+  },
+  {
+    "name": "Hunting Bow",
+    "value": 1000
+  },
+  {
+    "name": "Ignited Bow",
+    "value": 5000
+  },
+  {
+    "name": "Elven Crossbow",
+    "value": 7500
+  },
+  {
+    "name": "Poisoned Bow",
+    "value": 16000
+  },
+  {
+    "name": "Flaming Bow",
+    "value": 18000
+  },
+  {
+    "name": "Enhanced Crossbow",
+    "value": 24000
+  },
+  {
+    "name": "Shakirian Bow",
+    "value": 32000
+  },
+  {
+    "name": "Crystallized Bow",
+    "value": 40000
+  },
+  {
+    "name": "Fiery Bow",
+    "value": 46000
+  },
+  {
+    "name": "Crystallized Crossbow",
+    "value": 55000
+  },
+  {
+    "name": "Crescent Bow",
+    "value": 60000
+  },
+  {
+    "name": "Envenomed Crossbow",
+    "value": 65000
+  },
+  {
+    "name": "Blazing Crossbow",
+    "value": 70000
+  },
+  {
+    "name": "Spider Silk",
+    "value": 40
+  },
+  {
+    "name": "Life Crystal",
+    "value": 400
+  },
+  {
+    "name": "Life Ring",
+    "value": 400
+  },
+  {
+    "name": "Frozen Ham",
+    "value": 55
+  },
+  {
+    "name": "Ring of Healing",
+    "value": 1000
+  },
+  {
+    "name": "Void Essence",
+    "value": 20000
+  },
+  {
+    "name": "Golden Mug",
+    "value": 1000
+  },
+  {
+    "name": "Spicy Maris Feast",
+    "value": 3000
+  },
+  {
+    "name": "Black Pearl",
+    "value": 280
+  },
+  {
+    "name": "White Pearl",
+    "value": 160
+  },
+  {
+    "name": "Small Amethyst",
+    "value": 200
+  },
+  {
+    "name": "Small Diamond",
+    "value": 300
+  },
+  {
+    "name": "Small Emerald",
+    "value": 250
+  },
+  {
+    "name": "Small Ruby",
+    "value": 250
+  },
+  {
+    "name": "Small Sapphire",
+    "value": 250
+  },
+  {
+    "name": "Aquamarine",
+    "value": 350
+  },
+  {
+    "name": "Small Topaz",
+    "value": 440
+  },
+  {
+    "name": "Small Onyx",
+    "value": 460
+  },
+  {
+    "name": "Triangle Emerald",
+    "value": 400
+  },
+  {
+    "name": "Talon",
+    "value": 320
+  },
+  {
+    "name": "Red Gem",
+    "value": 1000
+  },
+  {
+    "name": "Yellow Gem",
+    "value": 2000
+  },
+  {
+    "name": "Blue Gem",
+    "value": 25000
+  },
+  {
+    "name": "Green Gem",
+    "value": 25000
+  },
+  {
+    "name": "Violet Gem",
+    "value": 50000
+  },
+  {
+    "name": "Ruby Necklace",
+    "value": 900
+  },
+  {
+    "name": "Ember Coin",
+    "value": 500
+  },
+  {
+    "name": "Cursed Gold Coin",
+    "value": 250
+  },
+  {
+    "name": "Scarab Coin",
+    "value": 150
+  },
+  {
+    "name": "Polished Amethyst",
+    "value": 2500
+  },
+  {
+    "name": "Polished Emerald",
+    "value": 3000
+  },
+  {
+    "name": "Polished Ruby",
+    "value": 3000
+  },
+  {
+    "name": "Polished Sapphire",
+    "value": 3000
+  },
+  {
+    "name": "Polished Topaz",
+    "value": 5000
+  },
+  {
+    "name": "Blue Hood",
+    "value": 22000
+  },
+  {
+    "name": "Strange Symbol",
+    "value": 600
+  },
+  {
+    "name": "Frost Dragon Heart",
+    "value": 1600
+  },
+  {
+    "name": "Titan Horn",
+    "value": 1000
+  },
+  {
+    "name": "Potion of Power",
+    "value": 60000
+  },
+  {
+    "name": "Red Robe",
+    "value": 12000
+  },
+  {
+    "name": "Soul Dagger",
+    "value": 200
+  },
+  {
+    "name": "Exquisite Perch Meal",
+    "value": 4000
+  },
+  {
+    "name": "Royal Dress",
+    "value": 20000
+  },
+  {
+    "name": "Pile of Bones",
+    "value": 20000
+  },
+  {
+    "name": "Ancient Bone",
+    "value": 0
+  },
+  {
+    "name": "Healing Crystal",
+    "value": 2000
+  },
+  {
+    "name": "Void Bone",
+    "value": 20000
+  },
+  {
+    "name": "Decaying Vine",
+    "value": 2700
+  },
+  {
+    "name": "Plague Seed",
+    "value": 2300
+  },
+  {
+    "name": "Wormqueen Tooth",
+    "value": 1100
+  },
+  {
+    "name": "Exquisite Bluegill Feast",
+    "value": 10000
+  },
+  {
+    "name": "Black Tapestry",
+    "value": 4000
+  },
+  {
+    "name": "Purple Tome",
+    "value": 3000
+  },
+  {
+    "name": "Black Crystal",
+    "value": 100000
+  },
+  {
+    "name": "Skeleton Legs",
+    "value": 62000
+  },
+  {
+    "name": "Skeleton Armor",
+    "value": 70000
+  },
+  {
+    "name": "Explorer Boots",
+    "value": 13200
+  },
+  {
+    "name": "Magician Hood",
+    "value": 6000
+  },
+  {
+    "name": "Hydra Scale Legs",
+    "value": 0
+  },
+  {
+    "name": "Bonecrusher",
+    "value": 40000
+  },
+  {
+    "name": "Giant Revenant Bone",
+    "value": 400
+  },
+  {
+    "name": "Giant Skeleton Bone",
+    "value": 185
+  },
+  {
+    "name": "Mind Stone",
+    "value": 170
+  },
+  {
+    "name": "Skeleton Boots",
+    "value": 55000
+  },
+  {
+    "name": "Skeleton Mask",
+    "value": 58000
+  },
+  {
+    "name": "Oil Flask",
+    "value": 400
+  },
+  {
+    "name": "Orb",
+    "value": 750
+  },
+  {
+    "name": "Blazing Core",
+    "value": 80000
+  },
+  {
+    "name": "Agavan Legs",
+    "value": 0
+  },
+  {
+    "name": "Prismatic Shard",
+    "value": 5000
+  },
+  {
+    "name": "Abysmor Claw",
+    "value": 8000
+  },
+  {
+    "name": "Abyssal Fang",
+    "value": 5000
+  },
+  {
+    "name": "Abyssal Scriptures",
+    "value": 8000
+  },
+  {
+    "name": "Hallowed Flame",
+    "value": 145000
+  },
+  {
+    "name": "Broken Centaur Shield",
+    "value": 540
+  },
+  {
+    "name": "Broken Centaur Helmet",
+    "value": 2000
+  },
+  {
+    "name": "Centaur Shield",
+    "value": 90000
+  },
+  {
+    "name": "Centaur Dreadlocks",
+    "value": 1150
+  },
+  {
+    "name": "Centraur Skirt",
+    "value": 600
+  },
+  {
+    "name": "Centaur Mystic Wand",
+    "value": 550
+  },
+  {
+    "name": "Enchanted Piece of Cloth",
+    "value": 1540
+  },
+  {
+    "name": "Sapphire Bangle",
+    "value": 2230
+  },
+  {
+    "name": "Pixie Dust",
+    "value": 1760
+  },
+  {
+    "name": "Fairy Wand",
+    "value": 1460
+  },
+  {
+    "name": "Azure Gem",
+    "value": 30000
+  },
+  {
+    "name": "Pink Pearl",
+    "value": 460
+  },
+  {
+    "name": "Rose Gem",
+    "value": 40000
+  },
+  {
+    "name": "Pink Talon",
+    "value": 540
+  },
+  {
+    "name": "Small Zircon",
+    "value": 380
+  },
+  {
+    "name": "Magma Dragon Scale",
+    "value": 2700
+  },
+  {
+    "name": "Obsidian Dragon Scale",
+    "value": 4800
+  },
+  {
+    "name": "Firestorm Essence",
+    "value": 14000
+  },
+  {
+    "name": "Ancient Dragon Scale",
+    "value": 5400
+  },
+  {
+    "name": "Glacial Chakram",
+    "value": 1800
+  },
+  {
+    "name": "Blizzard Core",
+    "value": 3200
+  },
+  {
+    "name": "Storm Crystals",
+    "value": 2240
+  },
+  {
+    "name": "Spirit Of Fire",
+    "value": 8000
+  },
+  {
+    "name": "Inferno Bangle",
+    "value": 1470
+  },
+  {
+    "name": "Blazing Crystal",
+    "value": 3200
+  },
+  {
+    "name": "Nightbane",
+    "value": 340000
+  },
+  {
+    "name": "Tome of Shadows",
+    "value": 425000
+  },
+  {
+    "name": "Hexfire Soulscepter",
+    "value": 425000
+  },
+  {
+    "name": "Hallowed Piece of Cloth",
+    "value": 6000
+  },
+  {
+    "name": "Eyes of Abysmor",
+    "value": 6000
+  },
+  {
+    "name": "Hunting Bolt",
+    "value": 4
+  },
+  {
+    "name": "Energy Ring",
+    "value": 100
+  },
+  {
+    "name": "Stone Skin Amulet",
+    "value": 500
+  },
+  {
+    "name": "Red Skirt",
+    "value": 150
+  },
+  {
+    "name": "Zephyr Wand",
+    "value": 240000
+  },
+  {
+    "name": "Hangman's Rope",
+    "value": 2000
+  },
+  {
+    "name": "Pyroweave Mask",
+    "value": 265000
+  },
+  {
+    "name": "Exquisite Perch Feast",
+    "value": 10000
+  },
+  {
+    "name": "Infernoscale Armor",
+    "value": 360000
+  }
+]
