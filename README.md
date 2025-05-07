@@ -3,7 +3,7 @@
 
 ## Getting started
 ### Install the client
-- Download the client [here](https://github.com/alex1431999/Medivialyzer/releases/download/1.2.1/medivialyzer-1.2.1.zip).
+- Download the client [here](https://github.com/alex1431999/Medivialyzer/releases/download/1.3.0/medivialyzer-1.3.0.zip).
 - Unzip the archive
 - Run `Medivialyzer Setup <version>.exe`
 
