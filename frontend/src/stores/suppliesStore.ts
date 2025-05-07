@@ -25,7 +25,9 @@ export const useSuppliesStore = defineStore('supplies', {
     const defaultSupplies = _.cloneDeep(DEFAULT_SUPPLIES_DATA)
 
     const suppliesEffective =
-      Object.keys(storedSupplies).length > 0 ? storedSupplies : defaultSupplies
+      Object.keys(storedSupplies).length === Object.keys(defaultSupplies).length
+        ? storedSupplies
+        : defaultSupplies
 
     return { supplies: suppliesEffective }
   },
