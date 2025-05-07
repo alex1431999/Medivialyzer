@@ -98,6 +98,7 @@ function filterCreatures(creatures: CreatureGrouped[]) {
                   v-for="creature in creaturesCurrentHunt"
                   :key="creature.name"
                   :creature="creature"
+                  :creature-kills-per-hour="2"
                   :creature-with-average-loot="
                     getCreatureWithAverageLoot(
                       creaturesWithAverageLootCurrentHunt,
