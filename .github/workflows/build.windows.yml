@@ -1,0 +1,27 @@
+name: Build - Windows
+
+on: [push]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install electron dependencies
+        run: yarn install
+        working-directory: ./electron
+
+      - name: Install frontend dependencies
+        run: yarn install
+        working-directory: ./frontend
+
+      - name: Build the project
+        run: yarn build:ci
