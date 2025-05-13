@@ -30,7 +30,7 @@ const tab = ref<string>('general')
         <v-card-title> Settings </v-card-title>
 
         <v-tabs color="secondary" v-model="tab">
-          <v-tab val="general">General</v-tab>
+          <v-tab value="general">General</v-tab>
           <v-tab value="ignoredItems">Ignored items</v-tab>
           <v-tab value="customItems">Custom items</v-tab>
         </v-tabs>

@@ -1,44 +1,37 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import LootListItem from './LootListItem.vue'
 import { groupLoot } from '../utils/loot/loot.helpers.ts'
 import LootListMenu from './LootListMenu.vue'
 import * as _ from 'lodash'
-import { LootParser } from '../utils/lootParser/lootParser.ts'
-import { electron } from '../utils/electron/electron.constants.ts'
 import { useConfigStore } from '../stores/configStore.ts'
-import { FIVE_SECONDS, THIRTY_MINUTES } from '../constants/time.ts'
+import { THIRTY_MINUTES } from '../constants/time.ts'
 import LootTimeDisplay from './LootTimeDisplay.vue'
 import LootProfitDisplay from './LootProfitDisplay.vue'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
 import { LootEntry } from '../utils/loot/loot.types.ts'
 import AddItemModal from './AddItemModal.vue'
 import EditItemModal from './EditItemModal.vue'
+import { useLootDataStore } from '../stores/lootDataStore.ts'
+import LootLuckDisplay from './LootLuckDisplay.vue'
+import Loader from './Loader.vue'
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
+const lootDataStore = useLootDataStore()
 
 const itemToAddName = ref<string | null>(null)
 const itemToEdit = ref<LootEntry | null>(null)
 
-const lootData = ref<string>(electron.getLootData())
+const isLootLoading = computed(() => lootDataStore.isParsingLootData)
 
-// Update the loot data regularly
-setInterval(() => {
-  lootData.value = electron.getLootData()
-}, FIVE_SECONDS)
-
-watch(
-  () => configStore.config.lootFilePath,
-  () => {
-    lootData.value = electron.getLootData()
-  },
+const creatures = computed(
+  () => lootDataStore.lootDataParsed.creaturesCurrentHunt,
 )
-
-const loot = computed(() => {
-  const lootParser = new LootParser(lootData.value)
-  return lootParser.getLoot(configStore.config.since)
-})
+const creaturesAverageLoot = computed(
+  () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
+)
+const loot = computed(() => lootDataStore.lootDataParsed.loot)
 
 const lootFiltered = computed(() => {
   const lootWithoutIgnoredItems = loot.value.filter(
@@ -74,6 +67,23 @@ const totalLootValue = computed(() => {
 
 const profit = computed(() => {
   return totalLootValue.value - suppliesStore.totalSuppliesUsed
+})
+
+const lootLuck = computed(() => {
+  let expectedTotalValue = 0
+
+  creatures.value.forEach((creature) => {
+    const creatureAverageLootFound = creaturesAverageLoot.value.find(
+      (creatureAverageLoot) =>
+        creatureAverageLoot.creature.name === creature.name,
+    )
+
+    if (creatureAverageLootFound) {
+      expectedTotalValue += creatureAverageLootFound.averageLootValue
+    }
+  })
+
+  return expectedTotalValue ? totalLootValue.value / expectedTotalValue : 1
 })
 
 function onReset() {
@@ -113,11 +123,15 @@ function onLootItemEdit(entry: LootEntry) {
       class="loot-list__time-display"
       :since="configStore.config.since"
     />
-    <LootProfitDisplay :profit="profit" />
+    <div class="d-flex ga-2">
+      <LootLuckDisplay :lootLuck="lootLuck" />
+      <LootProfitDisplay :profit="profit" />
+    </div>
   </div>
 
   <div class="loot-list__items">
     <LootListItem
+      v-if="!isLootLoading"
       v-for="lootEntry in lootSorted"
       class="loot-list__list-item"
       :key="lootEntry.item.name"
@@ -127,6 +141,7 @@ function onLootItemEdit(entry: LootEntry) {
       @edit="onLootItemEdit(lootEntry)"
     >
     </LootListItem>
+    <Loader class="d-flex justify-center align-center h-100" v-else />
   </div>
 
   <LootListMenu
