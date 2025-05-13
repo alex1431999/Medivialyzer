@@ -11,7 +11,6 @@ async function createWindow() {
         minWidth: 900,
         height: 750,
         minHeight: 600,
-
         webPreferences: {
             preload: __dirname + "/preload.js",
             devTools: isDev,
@@ -20,6 +19,7 @@ async function createWindow() {
         show: false,
         alwaysOnTop: true,
         frame: true,
+        icon: './assets/logo.png'
     };
 
     if (appBounds !== undefined && appBounds !== null) Object.assign(BrowserWindowOptions, appBounds);
