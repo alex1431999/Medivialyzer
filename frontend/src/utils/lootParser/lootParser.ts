@@ -88,7 +88,7 @@ export class LootParser {
         if (since < currentTimestamp) {
           creaturesCurrentHuntToLootMap = this.handleAverageLoot(
             line,
-            creaturesToLootMap,
+            creaturesCurrentHuntToLootMap,
             allItems,
           )
         }
