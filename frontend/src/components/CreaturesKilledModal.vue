@@ -16,6 +16,7 @@ import { useLootDataStore } from '../stores/lootDataStore.ts'
 import { computed, ref } from 'vue'
 import CreatureKilled from './CreatureKilled.vue'
 import {
+  getCreatureKillsPerHour,
   getCreatureWithAverageLoot,
   groupCreatures,
 } from '../utils/creature/creature.helpers.ts'
@@ -61,32 +62,6 @@ function filterCreatures(creatures: CreatureGrouped[]) {
       : true,
   )
 }
-
-function getCreatureKillsPerHour(
-  creature: CreatureGrouped,
-): number | undefined {
-  const creatures = _.sortBy(
-    lootDataStore.lootDataParsed.creaturesCurrentHunt,
-    'timestamp',
-  )
-  const firstKill = creatures.find(
-    (creatureCurrent) => creatureCurrent.name === creature.name,
-  )
-
-  const lastKill = creatures
-    .reverse()
-    .find((creatureCurrent) => creatureCurrent.name === creature.name)
-
-  const start = firstKill?.timestamp || Date.now()
-  const end = lastKill?.timestamp || Date.now()
-
-  const kills = creature.amount
-
-  // We need at least 2 kills to get an understanding of how many kills an hour you get
-  if (start === end) return undefined
-
-  return Math.ceil((kills / (end - start)) * 1000 * 60 * 60)
-}
 </script>
 
 <template>
@@ -125,7 +100,12 @@ function getCreatureKillsPerHour(
                   v-for="creature in creaturesCurrentHunt"
                   :key="creature.name"
                   :creature="creature"
-                  :creature-kills-per-hour="getCreatureKillsPerHour(creature)"
+                  :creature-kills-per-hour="
+                    getCreatureKillsPerHour(
+                      creature,
+                      lootDataStore.lootDataParsed.creaturesCurrentHunt,
+                    )
+                  "
                   :creature-with-average-loot="
                     getCreatureWithAverageLoot(
                       creaturesWithAverageLootCurrentHunt,
