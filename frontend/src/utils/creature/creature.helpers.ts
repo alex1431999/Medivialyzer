@@ -56,8 +56,7 @@ export function getCreatureKillsPerHour(
 
   const kills = creature.amount
 
-  // We need at least 2 kills to get an understanding of how many kills an hour you get
-  if (start === end) return undefined
+  if (start === end) return kills
 
   return Math.ceil((kills / (end - start)) * 1000 * 60 * 60)
 }
