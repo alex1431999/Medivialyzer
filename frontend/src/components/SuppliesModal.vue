@@ -16,6 +16,7 @@ import { useSuppliesStore } from '../stores/suppliesStore.ts'
 import { computed, watch } from 'vue'
 import { formatNumber } from '../utils/number.ts'
 import { useConfigStore } from '../stores/configStore.ts'
+import VocationFilter from './VocationFilter.vue'
 
 const suppliesStore = useSuppliesStore()
 const configStore = useConfigStore()
@@ -58,6 +59,7 @@ function onReset() {
           </v-chip>
         </v-card-title>
         <v-card-text>
+          <VocationFilter class="mb-2 mt-2" />
           <v-table class="supplies-modal__table">
             <thead>
               <tr>
