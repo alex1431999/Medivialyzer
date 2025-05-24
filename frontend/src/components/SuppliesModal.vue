@@ -59,7 +59,12 @@ function onReset() {
           </v-chip>
         </v-card-title>
         <v-card-text>
-          <VocationFilter class="mb-2 mt-2" active-vocation-id="KNIGHT" />
+          <VocationFilter
+            class="mb-2 mt-2"
+            :active-vocation-id="
+              configStore.config.supplyFilter.vocationSelected
+            "
+          />
           <v-table class="supplies-modal__table">
             <thead>
               <tr>
