@@ -1,14 +1,25 @@
 <script setup lang="ts">
 import { VBtn } from 'vuetify/components'
 import { VOCATIONS } from '../constants/vocations.ts'
+import { VocationIdentifier } from '../types/vocation.types.ts'
 
 const vocations = Object.values(VOCATIONS)
+
+const { activeVocationId } = defineProps<{
+  activeVocationId: VocationIdentifier
+}>()
+
+function isActive(id: VocationIdentifier) {
+  return id === activeVocationId
+}
 </script>
 
 <template>
   <div class="d-flex justify-space-between">
     <div v-for="vocation in vocations" :key="vocation.name">
-      <v-btn>{{ vocation.name }}</v-btn>
+      <v-btn :active="isActive(vocation.id)" active-color="secondary">
+        {{ vocation.name }}
+      </v-btn>
     </div>
   </div>
 </template>

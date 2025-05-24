@@ -59,7 +59,7 @@ function onReset() {
           </v-chip>
         </v-card-title>
         <v-card-text>
-          <VocationFilter class="mb-2 mt-2" />
+          <VocationFilter class="mb-2 mt-2" active-vocation-id="KNIGHT" />
           <v-table class="supplies-modal__table">
             <thead>
               <tr>
