@@ -17,6 +17,7 @@ import { computed, watch } from 'vue'
 import { formatNumber } from '../utils/number.ts'
 import { useConfigStore } from '../stores/configStore.ts'
 import VocationFilter from './VocationFilter.vue'
+import { VocationIdentifier } from '../types/vocation.types.ts'
 
 const suppliesStore = useSuppliesStore()
 const configStore = useConfigStore()
@@ -35,6 +36,12 @@ watch(
 
 function onReset() {
   suppliesStore.reset()
+}
+
+function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
+  configStore.setConfig({
+    supplyFilter: { vocationSelected: vocationIdentifier },
+  })
 }
 </script>
 
@@ -64,6 +71,7 @@ function onReset() {
             :active-vocation-id="
               configStore.config.supplyFilter.vocationSelected
             "
+            @update="onVocationFilterUpdate"
           />
           <v-table class="supplies-modal__table">
             <thead>

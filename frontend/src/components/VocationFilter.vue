@@ -9,6 +9,8 @@ const { activeVocationId } = defineProps<{
   activeVocationId: VocationIdentifier
 }>()
 
+const emit = defineEmits(['update'])
+
 function isActive(id: VocationIdentifier) {
   return id === activeVocationId
 }
@@ -17,7 +19,11 @@ function isActive(id: VocationIdentifier) {
 <template>
   <div class="d-flex justify-space-between">
     <div v-for="vocation in vocations" :key="vocation.name">
-      <v-btn :active="isActive(vocation.id)" active-color="secondary">
+      <v-btn
+        :active="isActive(vocation.id)"
+        active-color="secondary"
+        @click="emit('update', vocation.id)"
+      >
         {{ vocation.name }}
       </v-btn>
     </div>
