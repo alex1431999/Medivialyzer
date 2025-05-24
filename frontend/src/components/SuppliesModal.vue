@@ -17,13 +17,27 @@ import { computed, watch } from 'vue'
 import { formatNumber } from '../utils/number.ts'
 import { useConfigStore } from '../stores/configStore.ts'
 import VocationFilter from './VocationFilter.vue'
-import { VocationIdentifier } from '../types/vocation.types.ts'
+import { Vocation, VocationIdentifier } from '../types/vocation.types.ts'
+import { VOCATIONS } from '../constants/vocations.ts'
 
 const suppliesStore = useSuppliesStore()
 const configStore = useConfigStore()
 
 const totalSuppliesUsedFormatted = computed(() =>
   formatNumber(suppliesStore.totalSuppliesUsed),
+)
+
+const vocationSelected = computed(
+  () =>
+    VOCATIONS[
+      configStore.config.supplyFilter.vocationSelected as VocationIdentifier
+    ] as Vocation,
+)
+
+const suppliesFiltered = computed(() =>
+  SUPPLIES.filter((supply) =>
+    vocationSelected.value.supplies.includes(supply.name),
+  ),
 )
 
 watch(
@@ -68,9 +82,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
         <v-card-text>
           <VocationFilter
             class="mb-2 mt-2"
-            :active-vocation-id="
-              configStore.config.supplyFilter.vocationSelected
-            "
+            :active-vocation-id="vocationSelected.id"
             @update="onVocationFilterUpdate"
           />
           <v-table class="supplies-modal__table">
@@ -82,7 +94,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="supply in SUPPLIES">
+              <tr v-for="supply in suppliesFiltered">
                 <td>{{ supply.name }}</td>
                 <td>
                   <v-text-field
