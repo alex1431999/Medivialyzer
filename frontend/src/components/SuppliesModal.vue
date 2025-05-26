@@ -10,6 +10,7 @@ import {
   VCardTitle,
   VCardActions,
   VTextField,
+  VDivider,
 } from 'vuetify/components'
 import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
@@ -81,10 +82,11 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
         </v-card-title>
         <v-card-text>
           <VocationFilter
-            class="mb-2 mt-2"
+            class="mb-3 mt-3"
             :active-vocation-id="vocationSelected.id"
             @update="onVocationFilterUpdate"
           />
+          <v-divider />
           <v-table class="supplies-modal__table">
             <thead>
               <tr>
