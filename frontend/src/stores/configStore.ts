@@ -4,8 +4,10 @@ import { Item } from '../utils/item/item.types.ts'
 import _ from 'lodash'
 import { SuppliesData } from './suppliesStore.ts'
 import { VocationIdentifier } from '../types/vocation.types.ts'
+import { generateId } from '../utils/string.ts'
 
 export type Config = {
+  clientId: string
   since: number
   ignoredItems: string[]
   customItems: Item[]
@@ -20,6 +22,7 @@ export type Config = {
 }
 
 const DEFAULT_CONFIG: Config = {
+  clientId: generateId(),
   since: 0,
   ignoredItems: [],
   customItems: [],
@@ -36,6 +39,10 @@ export const useConfigStore = defineStore('config', {
     return { config: { ...DEFAULT_CONFIG, ...electron.getConfig() } }
   },
   actions: {
+    onBoot() {
+      // Store default values when the client boots
+      this.setConfig({})
+    },
     setConfig(config: Partial<Config>) {
       this.config = { ...this.config, ...config }
       electron.setConfig(JSON.stringify(this.config))
