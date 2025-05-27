@@ -7,9 +7,13 @@ import { watch } from 'vue'
 import { useLootDataStore } from './stores/lootDataStore.ts'
 import { useConfigStore } from './stores/configStore.ts'
 import { getAllItems } from './utils/item/item.helpers.ts'
+import { baserowPing } from './utils/baserow/baserow.requests.ts'
 
 const lootDataStore = useLootDataStore()
 const configStore = useConfigStore()
+
+// When the client boots up we want to send a ping
+baserowPing(configStore.config.clientId)
 
 configStore.onBoot()
 

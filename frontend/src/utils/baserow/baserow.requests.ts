@@ -22,6 +22,23 @@ export function baserowSubmitItem(item: Item, isEdit: boolean) {
   })
 }
 
+export function baserowPing(clientId: string) {
+  const url =
+    'https://api.baserow.io/api/database/views/form/hZxFSadGlDLaChlEpTPoW4P5jKGOnG54RH3-Zx3n7Ws/submit/'
+  const payload = {
+    field_4433532: clientId,
+  }
+
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+}
+
 export type AppRemoteConfig = {
   version: string
   downloadLink: string
