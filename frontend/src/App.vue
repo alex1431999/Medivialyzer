@@ -11,6 +11,8 @@ import { getAllItems } from './utils/item/item.helpers.ts'
 const lootDataStore = useLootDataStore()
 const configStore = useConfigStore()
 
+configStore.onBoot()
+
 lootDataStore.update({ since: configStore.config.since, items: getAllItems() })
 
 setInterval(() => {
