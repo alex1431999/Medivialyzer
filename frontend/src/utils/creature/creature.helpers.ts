@@ -1,8 +1,10 @@
 import {
   Creature,
+  CreatureEntry,
   CreatureGrouped,
   CreatureWithAverageLoot,
 } from './creature.types.ts'
+import _ from 'lodash'
 
 export function groupCreatures(creatures: Creature[]): CreatureGrouped[] {
   const creaturesMap: Record<Creature['name'], CreatureGrouped> = {}
@@ -33,4 +35,28 @@ export function getCreatureWithAverageLoot(
     )
 
   return creatureWithAverageLoot
+}
+
+export function getCreatureKillsPerHour(
+  creature: CreatureGrouped,
+  creatures: CreatureEntry[],
+): number | undefined {
+  const creaturesSorted = _.sortBy(creatures, 'timestamp')
+
+  const firstKill = creaturesSorted.find(
+    (creatureCurrent) => creatureCurrent.name === creature.name,
+  )
+
+  const lastKill = creaturesSorted
+    .reverse()
+    .find((creatureCurrent) => creatureCurrent.name === creature.name)
+
+  const start = firstKill?.timestamp || Date.now()
+  const end = lastKill?.timestamp || Date.now()
+
+  const kills = creature.amount
+
+  if (start === end) return kills
+
+  return Math.ceil((kills / (end - start)) * 1000 * 60 * 60)
 }

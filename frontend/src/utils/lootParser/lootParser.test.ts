@@ -235,5 +235,41 @@ describe('lootParser', () => {
         },
       ])
     })
+
+    // We had a bug where the current hunt would always show the same average
+    // loot per creature as the general chat
+    test('current hunt vs general', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 01:03:00 2024
+        01:05 Loot of giant cobra: 10 gold coins.
+        Channel saved at Wed Dec 04 02:03:00 2024
+        02:05 Loot of giant cobra: 5 gold coins.
+        `
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+        {
+          averageLootValue: 7.5,
+          confidence: expect.any(Number),
+          creature: {
+            name: 'giant cobra',
+          },
+        },
+      ])
+
+      expect(
+        lootParser.parse({
+          since: new Date('Wed Dec 04 02:00:00 2024').getTime(),
+        }).creaturesWithAverageLootCurrentHunt,
+      ).toEqual([
+        {
+          averageLootValue: 5,
+          confidence: expect.any(Number),
+          creature: {
+            name: 'giant cobra',
+          },
+        },
+      ])
+    })
   })
 })

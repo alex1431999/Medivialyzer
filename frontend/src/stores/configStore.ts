@@ -3,6 +3,7 @@ import { electron } from '../utils/electron/electron.constants.ts'
 import { Item } from '../utils/item/item.types.ts'
 import _ from 'lodash'
 import { SuppliesData } from './suppliesStore.ts'
+import { VocationIdentifier } from '../types/vocation.types.ts'
 
 export type Config = {
   since: number
@@ -13,6 +14,9 @@ export type Config = {
   lootFilePath?: string
   skipVersionUpgrade?: string
   supplies?: SuppliesData
+  supplyFilter: {
+    vocationSelected: VocationIdentifier
+  }
 }
 
 const DEFAULT_CONFIG: Config = {
@@ -22,6 +26,9 @@ const DEFAULT_CONFIG: Config = {
   ignoreItemsWithNoValue: false,
   consentToSubmitItem: false,
   supplies: {},
+  supplyFilter: {
+    vocationSelected: 'KNIGHT',
+  },
 }
 
 export const useConfigStore = defineStore('config', {
