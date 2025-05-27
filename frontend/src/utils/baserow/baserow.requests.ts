@@ -12,14 +12,7 @@ export function baserowSubmitItem(item: Item, isEdit: boolean) {
     field_3310678: isEdit,
   }
 
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  })
+  return submitForm(url, payload)
 }
 
 export function baserowPing(clientId: string) {
@@ -29,14 +22,7 @@ export function baserowPing(clientId: string) {
     field_4433532: clientId,
   }
 
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  })
+  return submitForm(url, payload)
 }
 
 export type AppRemoteConfig = {
@@ -48,6 +34,12 @@ export async function getRemoteConfig(): Promise<AppRemoteConfig> {
   const url =
     'https://api.baserow.io/api/database/rows/table/433953/?user_field_names=true'
 
+  const rows = await getRows(url)
+
+  return rows[0]
+}
+
+async function getRows(url: string) {
   const reponse = await fetch(url, {
     method: 'GET',
     headers: {
@@ -57,5 +49,16 @@ export async function getRemoteConfig(): Promise<AppRemoteConfig> {
 
   const data: any = await reponse.json()
 
-  return data.results[0]
+  return data.results
+}
+
+function submitForm(url: string, payload: Record<string, any>) {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
 }
