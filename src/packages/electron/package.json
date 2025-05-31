@@ -5,6 +5,9 @@
   "license": "MIT",
   "author": "alex1431999",
   "packageManager": "yarn@4.8.0",
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "scripts": {
     "build": "tsc",
     "serve": "yarn build && wait-on tcp:3000 && yarn electron",
