@@ -15,8 +15,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install frontend dependencies
-        run: yarn --cwd ./frontend install
+      - name: Install dependencies
+        run: yarn install
 
-      - name: Test the project
-        run: yarn --cwd ./frontend test
+      - name: Lint the project
+        run: yarn workspace medivialyzer-frontend test

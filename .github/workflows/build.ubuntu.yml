@@ -15,11 +15,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install electron dependencies
-        run: yarn --cwd ./electron install
-
-      - name: Install frontend dependencies
-        run: yarn --cwd ./frontend install
+      - name: Install dependencies
+        run: yarn install
 
       - name: Build the project
         run: yarn build:ci
