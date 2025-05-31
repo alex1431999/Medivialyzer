@@ -15,8 +15,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install frontend dependencies
-        run: yarn --cwd ./frontend install
+      - name: Install Yarn 4
+        run: |
+          corepack enable
+          corepack prepare yarn@4.8.0 --activate
+
+      - name: Install dependencies
+        run: yarn install
 
       - name: Lint the project
-        run: yarn --cwd ./frontend lint
+        run: yarn workspace medivialyzer-frontend lint

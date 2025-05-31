@@ -1,10 +1,15 @@
 {
   "name": "medivialyzer",
   "author": "alex1431999",
+  "version": "0.0.0",
   "license": "MIT",
+  "workspaces": [
+    "src/packages/*"
+  ],
   "scripts": {
-    "build": "yarn --cwd ./frontend build && yarn --cwd ./electron build && yarn --cwd ./electron builder",
-    "build:ci": "yarn --cwd ./frontend build && yarn --cwd ./electron build && yarn --cwd ./electron builder:ci",
-    "serve": "yarn --cwd ./frontend serve & yarn --cwd ./electron watch"
-  }
+    "build": "yarn workspace medivialyzer-frontend build && yarn workspace medivialyzer-electron build && yarn workspace medivialyzer-electron builder",
+    "build:ci": "yarn workspace medivialyzer-frontend build && yarn workspace medivialyzer-electron build && yarn workspace medivialyzer-electron builder:ci",
+    "serve": "yarn workspace medivialyzer-frontend serve & yarn workspace medivialyzer-electron serve"
+  },
+  "packageManager": "yarn@4.8.0"
 }

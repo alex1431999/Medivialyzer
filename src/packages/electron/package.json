@@ -4,14 +4,16 @@
   "main": "./dist/main.js",
   "license": "MIT",
   "author": "alex1431999",
+  "packageManager": "yarn@4.8.0",
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "scripts": {
     "build": "tsc",
-    "watch": "nodemon --exec yarn serve",
     "serve": "yarn build && wait-on tcp:3000 && yarn electron",
-    "electron": "node_modules/.bin/electron ./dist/main.js --dev",
+    "electron": "electron ./dist/main.js --dev",
     "builder": "electron-builder",
     "builder:ci": "electron-builder --publish never",
-    "electron-rebuild": "./node_modules/.bin/electron-rebuild",
     "postinstall": "electron-builder install-app-deps"
   },
   "devDependencies": {
