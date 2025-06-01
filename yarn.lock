@@ -2527,6 +2527,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/ajv@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@types/ajv@npm:1.0.4"
+  dependencies:
+    ajv: "npm:*"
+  checksum: 10c0/a700e2505be8222beeb6d123dac1986f93686a80a3b2d00f6481c2c00bd1b261f9f93880fda28816cec09511c7f2bcf817f73c9d3e1b7a89d9a06dbe55ad8acc
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.1.14":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -2802,7 +2811,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^22.10.7":
+"@types/node@npm:*, @types/node@npm:^22.10.7, @types/node@npm:^22.15.29":
   version: 22.15.29
   resolution: "@types/node@npm:22.15.29"
   dependencies:
@@ -3785,7 +3794,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ajv@npm:8.17.1, ajv@npm:^8.0.0, ajv@npm:^8.6.3, ajv@npm:^8.9.0":
+"ajv@npm:*, ajv@npm:8.17.1, ajv@npm:^8.0.0, ajv@npm:^8.6.3, ajv@npm:^8.9.0":
   version: 8.17.1
   resolution: "ajv@npm:8.17.1"
   dependencies:
@@ -4585,7 +4594,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:*, chokidar@npm:4.0.3, chokidar@npm:^4.0.1":
+"chokidar@npm:*, chokidar@npm:4.0.3, chokidar@npm:^4.0.1, chokidar@npm:^4.0.3":
   version: 4.0.3
   resolution: "chokidar@npm:4.0.3"
   dependencies:
@@ -8616,6 +8625,17 @@ __metadata:
 "medivialyzer@workspace:.":
   version: 0.0.0-use.local
   resolution: "medivialyzer@workspace:."
+  dependencies:
+    "@types/ajv": "npm:^1.0.4"
+    "@types/chokidar": "npm:^2.1.7"
+    "@types/node": "npm:^22.15.29"
+    "@types/typescript": "npm:^2.0.0"
+    "@types/webpack": "npm:^5.28.5"
+    chokidar: "npm:^4.0.3"
+    supports-color: "npm:^10.0.0"
+    typescript: "npm:^5.8.3"
+    webpack: "npm:^5.99.9"
+    webpack-cli: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
