@@ -4,3 +4,4 @@ dist_electron.zip
 node_modules
 .idea
 .vite
+.yarn
