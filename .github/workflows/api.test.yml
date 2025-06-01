@@ -21,7 +21,7 @@ jobs:
           corepack prepare yarn@4.8.0 --activate
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
 
       - name: Lint the project
         run: yarn workspace medivialyzer-api test
