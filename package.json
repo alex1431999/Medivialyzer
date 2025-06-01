@@ -11,5 +11,8 @@
     "build:ci": "yarn workspace medivialyzer-frontend build && yarn workspace medivialyzer-electron build && yarn workspace medivialyzer-electron builder:ci",
     "serve": "yarn workspace medivialyzer-frontend serve & yarn workspace medivialyzer-electron serve"
   },
+  "resolutions": {
+    "@types/webpack-cli": "@types/webpack"
+  },
   "packageManager": "yarn@4.8.0"
 }
