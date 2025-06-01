@@ -1,9 +1,9 @@
-name: Build - Ubuntu
+name: Client - Build - Ubuntu
 
 on : ['push']
 
 jobs:
-  build-ubuntu:
+  client-build-ubuntu:
     runs-on: ubuntu-latest
 
     steps:

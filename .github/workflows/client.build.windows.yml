@@ -1,9 +1,9 @@
-name: Build - Windows
+name: Client - Build - Windows
 
 on: [push]
 
 jobs:
-  build-windows:
+  client-build-windows:
     runs-on: windows-latest
 
     steps:
