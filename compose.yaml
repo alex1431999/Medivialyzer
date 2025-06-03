@@ -9,3 +9,15 @@ services:
       - /app/node_modules # Prevent host node_modules from overwriting container's
     environment:
       - NODE_ENV=development
+    depends_on:
+      - database
+
+  database:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: medivialyzer
+    ports:
+      - "5432:5432"
