@@ -9,7 +9,7 @@
   "scripts": {
     "build": "yarn workspace medivialyzer-frontend build && yarn workspace medivialyzer-electron build && yarn workspace medivialyzer-electron builder",
     "build:ci": "yarn workspace medivialyzer-frontend build && yarn workspace medivialyzer-electron build && yarn workspace medivialyzer-electron builder:ci",
-    "serve": "yarn workspace medivialyzer-frontend serve & yarn workspace medivialyzer-electron serve & yarn workspace medivialyzer-api start"
+    "serve": "yarn workspace medivialyzer-frontend serve & yarn workspace medivialyzer-electron serve & yarn workspace medivialyzer-api start:dev"
   },
   "packageManager": "yarn@4.8.0"
 }
