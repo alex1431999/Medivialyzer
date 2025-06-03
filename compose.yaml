@@ -1,0 +1,11 @@
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    command: yarn workspace medivialyzer-api start:dev
+    volumes:
+      - .:/app
+      - /app/node_modules # Prevent host node_modules from overwriting container's
+    environment:
+      - NODE_ENV=development
