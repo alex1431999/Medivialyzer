@@ -1,10 +1,10 @@
-name: Frontend lint
+name: Client - Build - Windows
 
-on : ['push']
+on: [push]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
+  client-build-windows:
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -23,5 +23,5 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Lint the project
-        run: yarn workspace medivialyzer-frontend lint
+      - name: Build the project
+        run: yarn build:ci

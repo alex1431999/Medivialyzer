@@ -1,9 +1,9 @@
-name: Frontend lint
+name: Api test
 
 on : ['push']
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,4 +24,4 @@ jobs:
         run: yarn install --immutable
 
       - name: Lint the project
-        run: yarn workspace medivialyzer-frontend lint
+        run: yarn workspace medivialyzer-api test
