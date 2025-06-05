@@ -13,5 +13,5 @@ jobs:
       - name: Build image
         run: docker build -t medivialyzer .
 
-      - name: Lint the project
+      - name: Test the project
         run: docker run medivialyzer sh -c "yarn workspace medivialyzer-frontend test"
