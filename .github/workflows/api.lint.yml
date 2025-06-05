@@ -14,4 +14,4 @@ jobs:
         run: docker build -t medivialyzer .
 
       - name: Lint the project
-        run: docker exec medivialyzer -c "yarn workspace medivialyzer-api lint"
+        run: docker run medivialyzer sh -c "yarn workspace medivialyzer-api lint"
