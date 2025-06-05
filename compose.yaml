@@ -1,8 +1,19 @@
 services:
-  api:
+  frontend:
     build: .
     ports:
       - "3000:3000"
+    command: yarn workspace medivialyzer-frontend serve
+    volumes:
+      - .:/app
+      - /app/node_modules # Prevent host node_modules from overwriting container's
+    depends_on:
+      - api
+
+  api:
+    build: .
+    ports:
+      - "3001:3001"
     command: yarn workspace medivialyzer-api start:dev
     volumes:
       - .:/app

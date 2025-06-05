@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "yarn@4.8.0",
   "scripts": {
-    "serve": "vite",
+    "serve": "vite --host",
     "build": "vue-tsc --noEmit &&  vite build --emptyOutDir",
     "lint": "eslint '**/*.{js,ts,vue}'",
     "lint:fix": "eslint '**/*.{js,ts,vue}' --fix",
