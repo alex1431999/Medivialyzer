@@ -10,18 +10,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+      - name: Build image
+        run: docker build -t medivialyzer .
 
-      - name: Install Yarn 4
-        run: |
-            corepack enable
-            corepack prepare yarn@4.8.0 --activate
-
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Lint the project
-        run: yarn workspace medivialyzer-frontend test
+      - name: Test the project
+        run: docker run medivialyzer sh -c "yarn workspace medivialyzer-frontend test:once"

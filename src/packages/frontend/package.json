@@ -10,6 +10,7 @@
     "lint": "eslint '**/*.{js,ts,vue}'",
     "lint:fix": "eslint '**/*.{js,ts,vue}' --fix",
     "test": "vitest",
+    "test:once": "vitest run",
     "preview": "vite preview"
   },
   "dependencies": {
