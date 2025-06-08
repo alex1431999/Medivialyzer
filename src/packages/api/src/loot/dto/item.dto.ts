@@ -5,5 +5,5 @@ export class ItemDto {
   name: string;
 
   @IsNumber()
-  amount: string;
+  amount: number;
 }

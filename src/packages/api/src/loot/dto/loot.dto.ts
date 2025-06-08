@@ -2,7 +2,7 @@ import { IsArray, IsDate, IsString, ValidateNested } from 'class-validator';
 import { ItemDto } from './item.dto';
 import { Type } from 'class-transformer';
 
-export class CreateLootDto {
+export class LootDto {
   @IsString()
   clientId: string;
 
