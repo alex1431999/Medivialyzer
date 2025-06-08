@@ -15,7 +15,7 @@ export class LootController {
   constructor(private readonly lootService: LootService) {}
 
   @Post()
-  create(@Body() createLootDto: CreateLootDto) {
-    return this.lootService.create(createLootDto);
+  createMany(@Body() createLootDtos: CreateLootDto[]) {
+    return this.lootService.createMany(createLootDtos);
   }
 }
