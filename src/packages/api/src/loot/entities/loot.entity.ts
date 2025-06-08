@@ -1,6 +1,6 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Item } from './item.entity';
 
-// TODO items are ignored for now
 export class Loot {
   @PrimaryGeneratedColumn()
   id: number;
@@ -10,4 +10,7 @@ export class Loot {
 
   @Column()
   timestamp: number;
+
+  @OneToMany(() => Item, (item) => item.loot, { cascade: true, eager: true })
+  items: Item[];
 }
