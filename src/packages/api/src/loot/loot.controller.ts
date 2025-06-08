@@ -6,7 +6,7 @@ import { LootDto } from './dto/loot.dto';
 export class LootController {
   constructor(private readonly lootService: LootService) {}
 
-  @Post()
+  @Post('createMany')
   createMany(@Body() lootDtos: LootDto[]) {
     return this.lootService.createMany(lootDtos);
   }
