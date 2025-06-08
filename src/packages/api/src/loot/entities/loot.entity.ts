@@ -7,6 +7,9 @@ export class Loot {
   id: number;
 
   @Column()
+  clientId: string;
+
+  @Column()
   creatureName: string;
 
   @Column()
