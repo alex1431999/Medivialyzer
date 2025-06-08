@@ -1,5 +1,6 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
+import { LootModule } from './loot/loot.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { Module } from '@nestjs/common';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, // turn off in production
     }),
+    LootModule,
   ],
 })
 export class AppModule {}
