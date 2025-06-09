@@ -16,7 +16,7 @@ export class LootService {
   ) {}
 
   async createMany(lootDtos: LootDto[]): Promise<void> {
-    const promises = lootDtos.map(this.create.bind(this));
+    const promises = lootDtos.map((lootDto) => this.create(lootDto));
     await Promise.all(promises);
   }
 
