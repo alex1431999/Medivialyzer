@@ -9,7 +9,7 @@ import { Item } from './entities/item.entity';
 export class LootService {
   constructor(
     @InjectRepository(Loot)
-    private lootRepository: Repository<LootDto>,
+    private lootRepository: Repository<Loot>,
 
     @InjectRepository(Item)
     private itemRepository: Repository<Item>,
@@ -31,5 +31,9 @@ export class LootService {
     });
 
     await this.lootRepository.save(lootEntity);
+  }
+
+  async findAllByClientId(clientId: string): Promise<Loot[]> {
+    return this.lootRepository.findBy({ clientId });
   }
 }
