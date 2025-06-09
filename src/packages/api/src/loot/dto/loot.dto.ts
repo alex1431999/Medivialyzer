@@ -10,7 +10,7 @@ export class LootDto {
   creatureName: string;
 
   @IsDate()
-  timestamp: string;
+  timestamp: number;
 
   @IsArray()
   @ValidateNested({ each: true })
