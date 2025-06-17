@@ -1,0 +1,34 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    command: yarn workspace medivialyzer-frontend serve
+    volumes:
+      - .:/app
+      - /app/node_modules # Prevent host node_modules from overwriting container's
+    depends_on:
+      - api
+
+  api:
+    build: .
+    ports:
+      - "3001:3001"
+    command: yarn workspace medivialyzer-api start:dev
+    volumes:
+      - .:/app
+      - /app/node_modules # Prevent host node_modules from overwriting container's
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - database
+
+  database:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: medivialyzer
+    ports:
+      - "5432:5432"

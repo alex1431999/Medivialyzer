@@ -1,9 +1,9 @@
-name: Frontend lint
+name: Api test
 
 on : ['push']
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,5 +13,5 @@ jobs:
       - name: Build image
         run: docker build -t medivialyzer .
 
-      - name: Lint the project
-        run: docker run medivialyzer sh -c "yarn workspace medivialyzer-frontend lint"
+      - name: Test the project
+        run: docker run medivialyzer sh -c "yarn workspace medivialyzer-api test"

@@ -10,13 +10,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install frontend dependencies
-        run: yarn --cwd ./frontend install
+      - name: Build image
+        run: docker build -t medivialyzer .
 
       - name: Test the project
-        run: yarn --cwd ./frontend test
+        run: docker run medivialyzer sh -c "yarn workspace medivialyzer-frontend test:once"

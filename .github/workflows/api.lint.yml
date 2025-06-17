@@ -1,4 +1,4 @@
-name: Frontend lint
+name: Api lint
 
 on : ['push']
 
@@ -14,4 +14,4 @@ jobs:
         run: docker build -t medivialyzer .
 
       - name: Lint the project
-        run: docker run medivialyzer sh -c "yarn workspace medivialyzer-frontend lint"
+        run: docker run medivialyzer sh -c "yarn workspace medivialyzer-api lint"
