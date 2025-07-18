@@ -7,7 +7,7 @@ const { profit } = defineProps<{ profit: number }>()
 
 const profitFormatted = computed(() => formatNumber(profit))
 
-const color = computed(() => (profit > 0 ? 'success' : 'error'))
+const color = computed(() => (profit >= 0 ? 'success' : 'error'))
 </script>
 
 <template>
