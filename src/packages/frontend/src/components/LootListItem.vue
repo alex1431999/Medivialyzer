@@ -26,8 +26,12 @@ const NPC = computed(() => {
 const totalValue = computed(
   () => (lootEntry.item.value || 0) * lootEntry.amount,
 )
-
 const totalValueFormatted = computed(() => formatNumber(totalValue.value))
+
+const individualValue = computed(() => lootEntry.item.value || 0)
+const invdividualValueFormatted = computed(() =>
+  formatNumber(individualValue.value),
+)
 
 const valueColor = computed(() =>
   isUnknownItem.value ? 'warning' : 'secondary',
@@ -69,13 +73,20 @@ function onClick() {
         </v-tooltip>
 
         <!-- Total value -->
-        <v-chip :color="valueColor">
-          <span class="mr-1" v-if="isUnknownItem"> unknown </span>
-          <span class="mr-1" v-else>
-            {{ totalValueFormatted }}
-          </span>
-          <v-icon icon="mdi-gold" />
-        </v-chip>
+        <v-tooltip
+          location="top"
+          :text="`${invdividualValueFormatted} Gold each`"
+        >
+          <template v-slot:activator="{ props }">
+            <v-chip :color="valueColor" v-bind="props">
+              <span class="mr-1" v-if="isUnknownItem"> unknown </span>
+              <span class="mr-1" v-else>
+                {{ totalValueFormatted }}
+              </span>
+              <v-icon icon="mdi-gold" />
+            </v-chip>
+          </template>
+        </v-tooltip>
       </div>
     </VCardText>
   </VCard>
