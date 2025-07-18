@@ -91,22 +91,14 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
             <thead>
               <tr>
                 <th>Item</th>
-                <th>Value</th>
                 <th>Before</th>
                 <th>After</th>
+                <th>Cost</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="supply in suppliesFiltered">
                 <td>{{ supply.name }}</td>
-                <td>
-                  <v-chip color="warning">
-                    <span class="mr-1">
-                      {{ supply.value }}
-                    </span>
-                    <v-icon icon="mdi-gold" />
-                  </v-chip>
-                </td>
                 <td>
                   <v-text-field
                     v-model="suppliesStore.supplies[supply.name].before"
@@ -120,6 +112,14 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
                     type="number"
                     variant="solo"
                   />
+                </td>
+                <td>
+                  <v-chip color="warning">
+                    <span class="mr-1">
+                      {{ supply.value }}
+                    </span>
+                    <v-icon icon="mdi-gold" />
+                  </v-chip>
                 </td>
               </tr>
             </tbody>
