@@ -11,6 +11,7 @@ describe('string', () => {
 
     test('special items', () => {
       expect(singularize('Onyxes')).toEqual('Onyx')
+      expect(singularize('Topazez')).toEqual('Topaz')
     })
   })
 })
