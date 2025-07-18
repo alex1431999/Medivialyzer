@@ -61,7 +61,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
 </script>
 
 <template>
-  <v-dialog max-width="600">
+  <v-dialog max-width="700">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
@@ -91,6 +91,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
             <thead>
               <tr>
                 <th>Item</th>
+                <th>Value</th>
                 <th>Before</th>
                 <th>After</th>
               </tr>
@@ -98,6 +99,14 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
             <tbody>
               <tr v-for="supply in suppliesFiltered">
                 <td>{{ supply.name }}</td>
+                <td>
+                  <v-chip color="warning">
+                    <span class="mr-1">
+                      {{ supply.value }}
+                    </span>
+                    <v-icon icon="mdi-gold" />
+                  </v-chip>
+                </td>
                 <td>
                   <v-text-field
                     v-model="suppliesStore.supplies[supply.name].before"
