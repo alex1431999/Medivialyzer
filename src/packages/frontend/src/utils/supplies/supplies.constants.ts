@@ -13,7 +13,7 @@ export const SUPPLIES = [
   },
   {
     name: 'Ice Heavy magic missile rune',
-    value: 120,
+    value: 110,
   },
   {
     name: 'Sudden death rune',
@@ -21,7 +21,7 @@ export const SUPPLIES = [
   },
   {
     name: 'Great fireball rune',
-    value: 175,
+    value: 195,
   },
   {
     name: 'Ring of healing',
