@@ -25,9 +25,3 @@ jobs:
 
       - name: Build the project
         run: yarn build:ci
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: src/packages/electron/dist_electron/
