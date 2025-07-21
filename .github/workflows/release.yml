@@ -1,7 +1,8 @@
 name: Release
 
-# TODO change trigger
-on: [push]
+on:
+  push:
+    tags:
 
 jobs:
   release:
