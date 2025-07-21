@@ -27,8 +27,13 @@ jobs:
       - name: Build the project
         run: yarn build:ci
 
-      - name: Zip folder using PowerShell
-        run: Compress-Archive -Path src/packages/electron/dist_electron/* -DestinationPath todo.zip
+      - name: Extract version from tag
+        run: |
+          echo "VERSION=${{ github.ref_name }}" >> $env:GITHUB_ENV
+        shell: pwsh
+
+      - name: Zip folder using dynamic name
+        run: Compress-Archive -Path src/packages/electron/dist_electron/* -DestinationPath "medivialyzer-$env:VERSION.zip"
         shell: pwsh
 
       - name: Create GitHub Release
@@ -44,6 +49,6 @@ jobs:
       - name: Upload release assets
         uses: softprops/action-gh-release@v2
         with:
-          files: todo.zip
+          files: "medivialyzer-${{ env.VERSION }}.zip"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
