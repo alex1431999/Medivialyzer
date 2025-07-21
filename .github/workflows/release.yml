@@ -27,8 +27,9 @@ jobs:
       - name: Build the project
         run: yarn build:ci
 
-      - name: Zip build
-        run: zip -r todo.zip src/packages/electron/dist_electron/
+      - name: Zip folder using PowerShell
+        run: Compress-Archive -Path src/packages/electron/dist_electron/* -DestinationPath todo.zip
+        shell: pwsh
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
