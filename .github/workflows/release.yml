@@ -27,18 +27,22 @@ jobs:
       - name: Build the project
         run: yarn build:ci
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: src/packages/electron/dist_electron/
+      - name: Zip build
+        run: zip -r todo.zip src/packages/electron/dist_electron/
 
-      - name: Create release
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
-        run: |
-          gh release create "$tag" \
-              --repo="$GITHUB_REPOSITORY" \
-              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-              --generate-notes
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: todo.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
