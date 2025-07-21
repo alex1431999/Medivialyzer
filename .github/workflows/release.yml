@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Yarn 4
+        run: |
+          corepack enable
+          corepack prepare yarn@4.8.0 --activate
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build the project
+        run: yarn build:ci
+
+      - name: Extract version from tag
+        run: |
+          echo "VERSION=${{ github.ref_name }}" >> $env:GITHUB_ENV
+        shell: pwsh
+
+      - name: Zip folder using dynamic name
+        run: Compress-Archive -Path src/packages/electron/dist_electron/* -DestinationPath "medivialyzer-$env:VERSION.zip"
+        shell: pwsh
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "medivialyzer-${{ env.VERSION }}.zip"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
