@@ -1,24 +1,20 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { defineProps, defineEmits } from 'vue'
+import { defineProps } from 'vue'
 import moment from 'moment'
 import { useConfigStore } from '../stores/configStore.ts'
+import { VTextField } from 'vuetify/components'
 
 const props = defineProps<{ since: number }>()
-const emit = defineEmits<{
-  (e: 'update:since', value: number): void
-}>()
 
 const configStore = useConfigStore()
 
-// Initialize date and time strings from props.since
 const dateString = ref(moment(props.since).format('YYYY-MM-DD'))
 const timeString = ref(moment(props.since).format('HH:mm'))
 
 watch([dateString, timeString], ([d, t]) => {
   if (!d || !t) return
   const combined = moment(`${d}T${t}`)
-
   if (combined.isValid()) {
     configStore.setConfig({ since: combined.valueOf() })
   }
@@ -26,13 +22,27 @@ watch([dateString, timeString], ([d, t]) => {
 </script>
 
 <template>
-  <div class="d-flex gap-2 align-center">
-    <input type="date" class="v-input__control" v-model="dateString" />
-    <input
-      type="time"
-      class="v-input__control"
+  <div class="d-flex gap-4 align-center" style="max-width: 300px">
+    <v-text-field
+      v-model="dateString"
+      label="Date"
+      type="date"
+      density="compact"
+      variant="solo"
+      rounded
+      hide-details
+      class="flex-grow-1"
+    />
+    <v-text-field
       v-model="timeString"
+      label="Time"
+      type="time"
       step="60"
+      density="compact"
+      variant="solo"
+      rounded
+      hide-details
+      class="flex-grow-1 ml-2"
     />
   </div>
 </template>
