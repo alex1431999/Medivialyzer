@@ -4,7 +4,7 @@ name: Release
 on: [push]
 
 jobs:
-  build:
+  release:
     runs-on: windows-latest
 
     steps:
