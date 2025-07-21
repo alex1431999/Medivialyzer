@@ -19,6 +19,15 @@ watch([dateString, timeString], ([d, t]) => {
     configStore.setConfig({ since: combined.valueOf() })
   }
 })
+
+// Watch for external prop changes
+watch(
+  () => props.since,
+  (newSince) => {
+    dateString.value = moment(newSince).format('YYYY-MM-DD')
+    timeString.value = moment(newSince).format('HH:mm')
+  },
+)
 </script>
 
 <template>
