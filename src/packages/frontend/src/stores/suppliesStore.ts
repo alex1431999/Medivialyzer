@@ -2,10 +2,11 @@ import { defineStore } from 'pinia'
 import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
 import _ from 'lodash'
 import { useConfigStore } from './configStore.ts'
+import { getSupplyByNameSafe } from '../utils/supplies/supplies.utils.ts'
 
 export type SuppliesData = Record<
   string,
-  { before: number | ''; after: number | '' }
+  { before: number | ''; after: number | ''; cost: number }
 >
 
 export type SuppliesStoreData = {
@@ -13,7 +14,14 @@ export type SuppliesStoreData = {
 }
 
 const DEFAULT_SUPPLIES_DATA: SuppliesData = SUPPLIES.reduce(
-  (data, supply) => ({ ...data, [supply.name]: { before: null, after: null } }),
+  (data, supply) => ({
+    ...data,
+    [supply.name]: {
+      before: null,
+      after: null,
+      cost: supply.cost,
+    },
+  }),
   {},
 )
 
@@ -21,7 +29,9 @@ export const useSuppliesStore = defineStore('supplies', {
   state: () => {
     const configStore = useConfigStore()
 
-    const storedSupplies = _.cloneDeep(configStore.$state.config.supplies)
+    const storedSupplies: SuppliesData = _.cloneDeep(
+      configStore.$state.config.supplies,
+    )
     const defaultSupplies = _.cloneDeep(DEFAULT_SUPPLIES_DATA)
 
     const suppliesEffective =
@@ -29,13 +39,24 @@ export const useSuppliesStore = defineStore('supplies', {
         ? storedSupplies
         : defaultSupplies
 
-    return { supplies: suppliesEffective }
+    const suppliesEffectiveWithCost = Object.keys(suppliesEffective).reduce(
+      (result, supplyName) => {
+        const cost = getSupplyByNameSafe(supplyName).cost
+        result[supplyName] = { ...suppliesEffective[supplyName], cost }
+        return result
+      },
+      {} as SuppliesData,
+    )
+
+    console.log(suppliesEffectiveWithCost)
+
+    return { supplies: suppliesEffectiveWithCost }
   },
   getters: {
     totalSuppliesUsed: (state) => {
       return SUPPLIES.reduce((total, supply) => {
-        const before = _.get(state.supplies, `${supply.name}.before`)
-        const after = _.get(state.supplies, `${supply.name}.after`)
+        const before = _.get(state.supplies, `${supply.name}`).before
+        const after = _.get(state.supplies, `${supply.name}`).after
 
         // This means the supply either wasn't used or we haven't entered the after value yet
         if (
@@ -49,7 +70,7 @@ export const useSuppliesStore = defineStore('supplies', {
           return total
 
         const amountUsed = before - after
-        const totalSupplyValue = amountUsed * supply.value
+        const totalSupplyValue = amountUsed * supply.cost
 
         return total + totalSupplyValue
       }, 0)

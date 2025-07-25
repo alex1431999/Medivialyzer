@@ -11,18 +11,22 @@ import {
   VCardActions,
   VTextField,
   VDivider,
+  VBadge,
 } from 'vuetify/components'
 import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { formatNumber } from '../utils/number.ts'
 import { useConfigStore } from '../stores/configStore.ts'
 import VocationFilter from './VocationFilter.vue'
 import { Vocation, VocationIdentifier } from '../types/vocation.types.ts'
 import { VOCATIONS } from '../constants/vocations.ts'
+import { Supply } from '../utils/supplies/supplies.types.ts'
 
 const suppliesStore = useSuppliesStore()
 const configStore = useConfigStore()
+
+const supplyToEdit = ref<Supply | null>(null)
 
 const totalSuppliesUsedFormatted = computed(() =>
   formatNumber(suppliesStore.totalSuppliesUsed),
@@ -114,12 +118,29 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
                   />
                 </td>
                 <td>
-                  <v-chip color="warning">
-                    <span class="mr-1">
-                      {{ supply.value }}
-                    </span>
-                    <v-icon icon="mdi-gold" />
-                  </v-chip>
+                  <div v-if="supplyToEdit?.name === supply.name">
+                    <v-text-field
+                      :value="suppliesStore.supplies[supply.name].cost"
+                      type="number"
+                      variant="solo"
+                      :width="80"
+                    />
+                  </div>
+                  <v-badge
+                    v-else
+                    location="top left"
+                    icon="mdi-pencil"
+                    color="warning"
+                    class="cursor-pointer"
+                    @click="supplyToEdit = supply"
+                  >
+                    <v-chip class="cursor-auto" color="warning">
+                      <span class="mr-1">
+                        {{ supply.cost }}
+                      </span>
+                      <v-icon icon="mdi-gold" />
+                    </v-chip>
+                  </v-badge>
                 </td>
               </tr>
             </tbody>
