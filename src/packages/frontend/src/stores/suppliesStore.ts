@@ -48,8 +48,6 @@ export const useSuppliesStore = defineStore('supplies', {
       {} as SuppliesData,
     )
 
-    console.log(suppliesEffectiveWithCost)
-
     return { supplies: suppliesEffectiveWithCost }
   },
   getters: {
