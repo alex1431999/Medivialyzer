@@ -1,74 +1,74 @@
 export const SUPPLIES = [
   {
     name: 'Ultimate healing rune',
-    value: 145,
+    cost: 145,
   },
   {
     name: 'Explosion rune',
-    value: 260,
+    cost: 260,
   },
   {
     name: 'Heavy magic missile rune',
-    value: 75,
+    cost: 75,
   },
   {
     name: 'Ice Heavy magic missile rune',
-    value: 110,
+    cost: 110,
   },
   {
     name: 'Sudden death rune',
-    value: 300,
+    cost: 300,
   },
   {
     name: 'Great fireball rune',
-    value: 195,
+    cost: 195,
   },
   {
     name: 'Ring of healing',
-    value: 2000,
+    cost: 2000,
   },
   {
     name: 'Backpacks of Mana fluids',
-    value: 2000,
+    cost: 2000,
   },
   {
     name: 'Big mana Potion',
-    value: 850,
+    cost: 850,
   },
   {
     name: 'Ring of purity minutes',
-    value: 233.33,
+    cost: 233.33,
   },
   {
     name: 'Arrow',
-    value: 2,
+    cost: 2,
   },
   {
     name: 'Hunting arrow',
-    value: 4,
+    cost: 4,
   },
   {
     name: 'Piercing arrow',
-    value: 12,
+    cost: 12,
   },
   {
     name: 'Bolt',
-    value: 3,
+    cost: 3,
   },
   {
     name: 'Hunting bolt',
-    value: 5,
+    cost: 5,
   },
   {
     name: 'Small explosive rune',
-    value: 55,
+    cost: 55,
   },
   {
     name: 'Burst Arrow',
-    value: 55,
+    cost: 55,
   },
   {
     name: 'Lionfish meal tier 1',
-    value: 900,
+    cost: 900,
   },
 ]

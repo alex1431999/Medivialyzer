@@ -11,18 +11,22 @@ import {
   VCardActions,
   VTextField,
   VDivider,
+  VBadge,
 } from 'vuetify/components'
 import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { formatNumber } from '../utils/number.ts'
 import { useConfigStore } from '../stores/configStore.ts'
 import VocationFilter from './VocationFilter.vue'
 import { Vocation, VocationIdentifier } from '../types/vocation.types.ts'
 import { VOCATIONS } from '../constants/vocations.ts'
+import { Supply } from '../utils/supplies/supplies.types.ts'
 
 const suppliesStore = useSuppliesStore()
 const configStore = useConfigStore()
+
+const supplyToEdit = ref<Supply | null>(null)
 
 const totalSuppliesUsedFormatted = computed(() =>
   formatNumber(suppliesStore.totalSuppliesUsed),
@@ -61,7 +65,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
 </script>
 
 <template>
-  <v-dialog max-width="700">
+  <v-dialog max-width="900">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
@@ -114,12 +118,29 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
                   />
                 </td>
                 <td>
-                  <v-chip color="warning">
-                    <span class="mr-1">
-                      {{ supply.value }}
-                    </span>
-                    <v-icon icon="mdi-gold" />
-                  </v-chip>
+                  <v-text-field
+                    v-if="supplyToEdit?.name === supply.name"
+                    v-model="suppliesStore.supplies[supply.name].cost"
+                    type="number"
+                    variant="solo"
+                    :width="80"
+                    @keydown.enter="supplyToEdit = null"
+                  />
+                  <v-badge
+                    v-else
+                    location="top left"
+                    icon="mdi-pencil"
+                    color="warning"
+                    class="cursor-pointer"
+                    @click="supplyToEdit = supply"
+                  >
+                    <v-chip class="cursor-auto" color="warning">
+                      <span class="mr-1">
+                        {{ suppliesStore.supplies[supply.name].cost }}
+                      </span>
+                      <v-icon icon="mdi-gold" />
+                    </v-chip>
+                  </v-badge>
                 </td>
               </tr>
             </tbody>
