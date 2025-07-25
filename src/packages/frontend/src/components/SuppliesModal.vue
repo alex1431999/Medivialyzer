@@ -126,7 +126,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
                     class="cursor-pointer"
                   >
                     <v-text-field
-                      :v-model="suppliesStore.supplies[supply.name].cost"
+                      v-model="suppliesStore.supplies[supply.name].cost"
                       type="number"
                       variant="solo"
                       :width="80"
@@ -142,7 +142,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
                   >
                     <v-chip class="cursor-auto" color="warning">
                       <span class="mr-1">
-                        {{ supply.cost }}
+                        {{ suppliesStore.supplies[supply.name].cost }}
                       </span>
                       <v-icon icon="mdi-gold" />
                     </v-chip>
