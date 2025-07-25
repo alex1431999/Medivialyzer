@@ -61,7 +61,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
 </script>
 
 <template>
-  <v-dialog max-width="700">
+  <v-dialog max-width="900">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
