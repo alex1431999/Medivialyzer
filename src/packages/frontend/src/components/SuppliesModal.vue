@@ -120,7 +120,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
                 <td>
                   <div v-if="supplyToEdit?.name === supply.name">
                     <v-text-field
-                      :value="suppliesStore.supplies[supply.name].cost"
+                      :v-model="suppliesStore.supplies[supply.name].cost"
                       type="number"
                       variant="solo"
                       :width="80"
