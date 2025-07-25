@@ -41,7 +41,9 @@ export const useSuppliesStore = defineStore('supplies', {
 
     const suppliesEffectiveWithCost = Object.keys(suppliesEffective).reduce(
       (result, supplyName) => {
-        const cost = getSupplyByNameSafe(supplyName).cost
+        const cost =
+          suppliesEffective[supplyName].cost ||
+          getSupplyByNameSafe(supplyName).cost
         result[supplyName] = { ...suppliesEffective[supplyName], cost }
         return result
       },
