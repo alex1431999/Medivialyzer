@@ -118,14 +118,20 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
                   />
                 </td>
                 <td>
-                  <div v-if="supplyToEdit?.name === supply.name">
+                  <v-badge
+                    v-if="supplyToEdit?.name === supply.name"
+                    location="top left"
+                    icon="mdi-check"
+                    color="success"
+                    class="cursor-pointer"
+                  >
                     <v-text-field
                       :v-model="suppliesStore.supplies[supply.name].cost"
                       type="number"
                       variant="solo"
                       :width="80"
                     />
-                  </div>
+                  </v-badge>
                   <v-badge
                     v-else
                     location="top left"
