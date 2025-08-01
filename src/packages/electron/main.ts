@@ -19,7 +19,7 @@ async function createWindow() {
         show: false,
         alwaysOnTop: true,
         frame: true,
-        icon: './assets/logo.png'
+        icon: './assets/logo.ico'
     };
 
     if (appBounds !== undefined && appBounds !== null) Object.assign(BrowserWindowOptions, appBounds);
