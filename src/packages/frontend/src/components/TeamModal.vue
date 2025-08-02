@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { VBtn, VCard, VCardText, VCardTitle, VDialog } from 'vuetify/components'
+import {
+  VBtn,
+  VCard,
+  VCardText,
+  VCardTitle,
+  VDialog,
+  VTextField,
+} from 'vuetify/components'
 </script>
 
 <template>
@@ -18,7 +25,9 @@ import { VBtn, VCard, VCardText, VCardTitle, VDialog } from 'vuetify/components'
         <v-card-title class="supplies-modal__header">
           <div>Team</div>
         </v-card-title>
-        <v-card-text> TODO </v-card-text>
+        <v-card-text>
+          <v-text-field label="Display name" placeholder="Anonymous" />
+        </v-card-text>
       </v-card>
     </template>
   </v-dialog>
