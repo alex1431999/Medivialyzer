@@ -7,6 +7,7 @@ import {
   VDialog,
   VTextField,
 } from 'vuetify/components'
+import Members from './Members.vue'
 </script>
 
 <template>
@@ -26,7 +27,8 @@ import {
           <div>Team</div>
         </v-card-title>
         <v-card-text>
-          <v-text-field label="Display name" placeholder="Anonymous" />
+          <v-text-field label="Your display name" placeholder="Anonymous" />
+          <Members />
         </v-card-text>
       </v-card>
     </template>
