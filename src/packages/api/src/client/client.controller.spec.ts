@@ -3,7 +3,7 @@ import { ClientController } from './client.controller';
 import { ClientService } from './client.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Client } from './entities/client.entity';
-import { mockRepository } from '../../test/test-utils';
+import { mockRepository, TEST_DB_IMPORTS } from '../../test/test-utils';
 
 describe('ClientController', () => {
   let controller: ClientController;
@@ -11,10 +11,8 @@ describe('ClientController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ClientController],
-      providers: [
-        ClientService,
-        { provide: getRepositoryToken(Client), useFactory: mockRepository },
-      ],
+      providers: [ClientService],
+      imports: TEST_DB_IMPORTS,
     }).compile();
 
     controller = module.get<ClientController>(ClientController);
