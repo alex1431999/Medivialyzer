@@ -1,9 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ClientController } from './client.controller';
 import { ClientService } from './client.service';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { Client } from './entities/client.entity';
-import { mockRepository, TEST_DB_IMPORTS } from '../../test/test-utils';
+import { TEST_DB_IMPORTS } from '../../test/test-utils';
 
 describe('ClientController', () => {
   let controller: ClientController;

@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TeamService } from './team.service';
 import { TEST_DB_IMPORTS } from '../../test/test-utils';
 import { ClientService } from '../client/client.service';
-import { Client } from 'src/client/entities/client.entity';
 
 describe('TeamService', () => {
   let teamService: TeamService;
