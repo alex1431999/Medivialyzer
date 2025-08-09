@@ -21,7 +21,7 @@ export class TeamService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} team`;
+    return this.teamRepository.findOne({ where: { id } });
   }
 
   update(id: number, updateTeamDto: UpdateTeamDto) {
