@@ -1,12 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Client } from '../../client/entities/client.entity';
 
 @Entity()
 export class Team {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  ownerClientId: string;
+  @ManyToOne(() => Client, (client) => client.ownedTeams)
+  owner: Client;
 
   @Column()
   name: string;
