@@ -12,7 +12,7 @@ export class ClientService {
   ) {}
 
   create(createClientDto: CreateClientDto) {
-    return this.clientRepository.create(createClientDto);
+    return this.clientRepository.insert(createClientDto);
   }
 
   findOne(id: number) {
