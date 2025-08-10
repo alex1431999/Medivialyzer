@@ -208,11 +208,29 @@
     "schemas": {
       "CreateTeamDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "owner": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "owner",
+          "name"
+        ]
       },
       "UpdateTeamDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
       },
       "CreateClientDto": {
         "type": "object",

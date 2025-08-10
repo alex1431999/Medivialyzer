@@ -11,7 +11,7 @@ All URIs are relative to *http://localhost*
 |[**teamControllerUpdate**](#teamcontrollerupdate) | **PATCH** /team/{id} | |
 
 # **teamControllerCreate**
-> teamControllerCreate(body)
+> teamControllerCreate(createTeamDto)
 
 
 ### Example
@@ -19,16 +19,17 @@ All URIs are relative to *http://localhost*
 ```typescript
 import {
     TeamApi,
-    Configuration
+    Configuration,
+    CreateTeamDto
 } from './api';
 
 const configuration = new Configuration();
 const apiInstance = new TeamApi(configuration);
 
-let body: object; //
+let createTeamDto: CreateTeamDto; //
 
 const { status, data } = await apiInstance.teamControllerCreate(
-    body
+    createTeamDto
 );
 ```
 
@@ -36,7 +37,7 @@ const { status, data } = await apiInstance.teamControllerCreate(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **object**|  | |
+| **createTeamDto** | **CreateTeamDto**|  | |
 
 
 ### Return type
@@ -211,7 +212,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **teamControllerUpdate**
-> teamControllerUpdate(body)
+> teamControllerUpdate(updateTeamDto)
 
 
 ### Example
@@ -219,18 +220,19 @@ No authorization required
 ```typescript
 import {
     TeamApi,
-    Configuration
+    Configuration,
+    UpdateTeamDto
 } from './api';
 
 const configuration = new Configuration();
 const apiInstance = new TeamApi(configuration);
 
 let id: string; // (default to undefined)
-let body: object; //
+let updateTeamDto: UpdateTeamDto; //
 
 const { status, data } = await apiInstance.teamControllerUpdate(
     id,
-    body
+    updateTeamDto
 );
 ```
 
@@ -238,7 +240,7 @@ const { status, data } = await apiInstance.teamControllerUpdate(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **object**|  | |
+| **updateTeamDto** | **UpdateTeamDto**|  | |
 | **id** | [**string**] |  | defaults to undefined|
 
 
