@@ -1,3 +1,3 @@
 export class CreateClientDto {
-  id: number;
+  id: string;
 }

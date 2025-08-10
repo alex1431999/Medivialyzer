@@ -1,4 +1,4 @@
 export class CreateTeamDto {
-  owner: number;
+  owner: string;
   name: string;
 }
