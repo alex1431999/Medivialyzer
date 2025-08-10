@@ -204,7 +204,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clientControllerExists(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async clientControllerExists(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerExists(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ClientApi.clientControllerExists']?.[localVarOperationServerIndex]?.url;
@@ -216,7 +216,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clientControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async clientControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerFindOne(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ClientApi.clientControllerFindOne']?.[localVarOperationServerIndex]?.url;
@@ -247,7 +247,7 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientControllerExists(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        clientControllerExists(id: string, options?: RawAxiosRequestConfig): AxiosPromise<boolean> {
             return localVarFp.clientControllerExists(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -256,7 +256,7 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        clientControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.clientControllerFindOne(id, options).then((request) => request(axios, basePath));
         },
     };
@@ -618,7 +618,7 @@ export const TeamApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async teamControllerFindAllByOwner(ownerClientId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async teamControllerFindAllByOwner(ownerClientId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.teamControllerFindAllByOwner(ownerClientId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TeamApi.teamControllerFindAllByOwner']?.[localVarOperationServerIndex]?.url;
@@ -630,7 +630,7 @@ export const TeamApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async teamControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async teamControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.teamControllerFindOne(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TeamApi.teamControllerFindOne']?.[localVarOperationServerIndex]?.url;
@@ -686,7 +686,7 @@ export const TeamApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        teamControllerFindAllByOwner(ownerClientId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        teamControllerFindAllByOwner(ownerClientId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<object>> {
             return localVarFp.teamControllerFindAllByOwner(ownerClientId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -695,7 +695,7 @@ export const TeamApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        teamControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        teamControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.teamControllerFindOne(id, options).then((request) => request(axios, basePath));
         },
         /**

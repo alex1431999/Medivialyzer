@@ -60,7 +60,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **clientControllerExists**
-> clientControllerExists()
+> boolean clientControllerExists()
 
 
 ### Example
@@ -90,7 +90,7 @@ const { status, data } = await apiInstance.clientControllerExists(
 
 ### Return type
 
-void (empty response body)
+**boolean**
 
 ### Authorization
 
@@ -99,7 +99,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -110,7 +110,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **clientControllerFindOne**
-> clientControllerFindOne()
+> object clientControllerFindOne()
 
 
 ### Example
@@ -140,7 +140,7 @@ const { status, data } = await apiInstance.clientControllerFindOne(
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -149,7 +149,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details

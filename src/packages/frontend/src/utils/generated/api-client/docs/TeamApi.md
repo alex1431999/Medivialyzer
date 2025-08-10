@@ -62,7 +62,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **teamControllerFindAllByOwner**
-> teamControllerFindAllByOwner()
+> Array<object> teamControllerFindAllByOwner()
 
 
 ### Example
@@ -92,7 +92,7 @@ const { status, data } = await apiInstance.teamControllerFindAllByOwner(
 
 ### Return type
 
-void (empty response body)
+**Array<object>**
 
 ### Authorization
 
@@ -101,7 +101,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -112,7 +112,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **teamControllerFindOne**
-> teamControllerFindOne()
+> object teamControllerFindOne()
 
 
 ### Example
@@ -142,7 +142,7 @@ const { status, data } = await apiInstance.teamControllerFindOne(
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -151,7 +151,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
