@@ -26,7 +26,7 @@ export class TeamService {
     return this.teamRepository.save({ ...createTeamDto, owner: client });
   }
 
-  async findAllByOwner(owner: number) {
+  async findAllByOwner(owner: string) {
     const client = await this.clientRepository.findOne({
       where: { id: owner },
     });

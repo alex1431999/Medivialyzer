@@ -21,7 +21,7 @@ export class TeamController {
   }
 
   @Get()
-  findAllByOwner(@Param('ownerClientId') ownerClientId: number) {
+  findAllByOwner(@Param('ownerClientId') ownerClientId: string) {
     return this.teamService.findAllByOwner(ownerClientId);
   }
 
