@@ -1,6 +1,15 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
 import { ClientService } from './client.service';
 import { CreateClientDto } from './dto/create-client.dto';
+import { ApiOkResponse } from '@nestjs/swagger';
+import { ClientDto } from './dto/client.dto';
 
 @Controller('client')
 export class ClientController {
@@ -11,8 +20,22 @@ export class ClientController {
     return this.clientService.create(createClientDto);
   }
 
+  @ApiOkResponse({ type: ClientDto })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.clientService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    const client = await this.clientService.findOne(id);
+
+    if (!client) {
+      throw new NotFoundException(`Client with id ${id} not found`);
+    }
+
+    return client;
+  }
+
+  @ApiOkResponse({ type: Boolean })
+  @Get(':id/exists')
+  async exists(@Param('id') id: string) {
+    const client = await this.clientService.findOne(id);
+    return Boolean(client);
   }
 }

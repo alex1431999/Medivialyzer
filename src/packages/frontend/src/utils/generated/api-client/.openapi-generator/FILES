@@ -1,0 +1,15 @@
+.gitignore
+.npmignore
+api.ts
+base.ts
+common.ts
+configuration.ts
+docs/ClientApi.md
+docs/ClientDto.md
+docs/CreateClientDto.md
+docs/CreateTeamDto.md
+docs/LootApi.md
+docs/TeamApi.md
+docs/UpdateTeamDto.md
+git_push.sh
+index.ts
