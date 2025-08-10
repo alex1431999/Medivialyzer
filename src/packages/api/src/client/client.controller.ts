@@ -9,7 +9,7 @@ import {
 import { ClientService } from './client.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
-import { Client } from './entities/client.entity';
+import { ClientDto } from './dto/client.dto';
 
 @Controller('client')
 export class ClientController {
@@ -20,7 +20,7 @@ export class ClientController {
     return this.clientService.create(createClientDto);
   }
 
-  @ApiOkResponse({ type: Client })
+  @ApiOkResponse({ type: ClientDto })
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const client = await this.clientService.findOne(id);
