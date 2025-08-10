@@ -11,7 +11,7 @@ import { TeamService } from './team.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
-import { Team } from './entities/team.entity';
+import { TeamDto } from './dto/team.dto';
 
 @Controller('team')
 export class TeamController {
@@ -23,13 +23,13 @@ export class TeamController {
   }
 
   @Get()
-  @ApiOkResponse({ type: Team, isArray: true })
+  @ApiOkResponse({ type: TeamDto, isArray: true })
   findAllByOwner(@Param('ownerClientId') ownerClientId: string) {
     return this.teamService.findAllByOwner(ownerClientId);
   }
 
   @Get(':id')
-  @ApiOkResponse({ type: Team })
+  @ApiOkResponse({ type: TeamDto })
   findOne(@Param('id') id: string) {
     return this.teamService.findOne(+id);
   }

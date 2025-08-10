@@ -1,9 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateTeamDto {
-  @ApiProperty()
-  id: string;
-
+export class TeamDto {
   @ApiProperty()
   owner: string;
 
