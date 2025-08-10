@@ -28,4 +28,10 @@ export class ClientController {
 
     return client;
   }
+
+  @Get(':id/exists')
+  async exists(@Param('id') id: string) {
+    const client = await this.clientService.findOne(id);
+    return Boolean(client);
+  }
 }
