@@ -6,6 +6,7 @@ base.ts
 common.ts
 configuration.ts
 docs/ClientApi.md
+docs/CreateClientDto.md
 docs/LootApi.md
 docs/TeamApi.md
 git_push.sh

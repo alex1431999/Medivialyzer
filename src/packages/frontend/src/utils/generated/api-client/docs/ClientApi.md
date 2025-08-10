@@ -8,7 +8,7 @@ All URIs are relative to *http://localhost*
 |[**clientControllerFindOne**](#clientcontrollerfindone) | **GET** /client/{id} | |
 
 # **clientControllerCreate**
-> clientControllerCreate(body)
+> clientControllerCreate(createClientDto)
 
 
 ### Example
@@ -16,16 +16,17 @@ All URIs are relative to *http://localhost*
 ```typescript
 import {
     ClientApi,
-    Configuration
+    Configuration,
+    CreateClientDto
 } from './api';
 
 const configuration = new Configuration();
 const apiInstance = new ClientApi(configuration);
 
-let body: object; //
+let createClientDto: CreateClientDto; //
 
 const { status, data } = await apiInstance.clientControllerCreate(
-    body
+    createClientDto
 );
 ```
 
@@ -33,7 +34,7 @@ const { status, data } = await apiInstance.clientControllerCreate(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **object**|  | |
+| **createClientDto** | **CreateClientDto**|  | |
 
 
 ### Return type

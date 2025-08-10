@@ -23,6 +23,19 @@ import type { RequestArgs } from './base';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
+/**
+ * 
+ * @export
+ * @interface CreateClientDto
+ */
+export interface CreateClientDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateClientDto
+     */
+    'id': string;
+}
 
 /**
  * ClientApi - axios parameter creator
@@ -32,13 +45,13 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
     return {
         /**
          * 
-         * @param {object} body 
+         * @param {CreateClientDto} createClientDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientControllerCreate: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('clientControllerCreate', 'body', body)
+        clientControllerCreate: async (createClientDto: CreateClientDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createClientDto' is not null or undefined
+            assertParamExists('clientControllerCreate', 'createClientDto', createClientDto)
             const localVarPath = `/client`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -58,7 +71,7 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createClientDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -110,12 +123,12 @@ export const ClientApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {object} body 
+         * @param {CreateClientDto} createClientDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clientControllerCreate(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerCreate(body, options);
+        async clientControllerCreate(createClientDto: CreateClientDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerCreate(createClientDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ClientApi.clientControllerCreate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -144,12 +157,12 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
     return {
         /**
          * 
-         * @param {object} body 
+         * @param {CreateClientDto} createClientDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientControllerCreate(body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.clientControllerCreate(body, options).then((request) => request(axios, basePath));
+        clientControllerCreate(createClientDto: CreateClientDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.clientControllerCreate(createClientDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -172,13 +185,13 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
 export class ClientApi extends BaseAPI {
     /**
      * 
-     * @param {object} body 
+     * @param {CreateClientDto} createClientDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClientApi
      */
-    public clientControllerCreate(body: object, options?: RawAxiosRequestConfig) {
-        return ClientApiFp(this.configuration).clientControllerCreate(body, options).then((request) => request(this.axios, this.basePath));
+    public clientControllerCreate(createClientDto: CreateClientDto, options?: RawAxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerCreate(createClientDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
