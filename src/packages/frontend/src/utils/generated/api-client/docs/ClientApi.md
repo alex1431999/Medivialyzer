@@ -110,7 +110,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **clientControllerFindOne**
-> object clientControllerFindOne()
+> ClientDto clientControllerFindOne()
 
 
 ### Example
@@ -140,7 +140,7 @@ const { status, data } = await apiInstance.clientControllerFindOne(
 
 ### Return type
 
-**object**
+**ClientDto**
 
 ### Authorization
 

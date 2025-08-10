@@ -26,6 +26,19 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 /**
  * 
  * @export
+ * @interface ClientDto
+ */
+export interface ClientDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientDto
+     */
+    'id': string;
+}
+/**
+ * 
+ * @export
  * @interface CreateClientDto
  */
 export interface CreateClientDto {
@@ -216,7 +229,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clientControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async clientControllerFindOne(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerFindOne(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ClientApi.clientControllerFindOne']?.[localVarOperationServerIndex]?.url;
@@ -256,7 +269,7 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+        clientControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<ClientDto> {
             return localVarFp.clientControllerFindOne(id, options).then((request) => request(axios, basePath));
         },
     };
