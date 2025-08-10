@@ -23,16 +23,16 @@ export const useClientStore = defineStore('client', {
       const configStore = useConfigStore()
       const clientId = configStore.config.clientId
 
-      // TODO I think the return types aren't correct yet
-      let client = await clientApi.clientControllerFindOne(clientId)
+      const doesClientExist = (await clientApi.clientControllerExists(clientId))
+        .data
 
-      if (!client) {
-        client = await clientApi.clientControllerCreate({
+      if (!doesClientExist) {
+        await clientApi.clientControllerCreate({
           id: clientId,
         })
       }
 
-      // TODO set this.client to the client response
+      this.client = (await clientApi.clientControllerFindOne(clientId)).data
     },
   },
 })
