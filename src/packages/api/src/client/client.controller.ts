@@ -8,6 +8,8 @@ import {
 } from '@nestjs/common';
 import { ClientService } from './client.service';
 import { CreateClientDto } from './dto/create-client.dto';
+import { ApiOkResponse } from '@nestjs/swagger';
+import { Client } from './entities/client.entity';
 
 @Controller('client')
 export class ClientController {
@@ -18,6 +20,7 @@ export class ClientController {
     return this.clientService.create(createClientDto);
   }
 
+  @ApiOkResponse({ type: Client })
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const client = await this.clientService.findOne(id);
@@ -29,6 +32,7 @@ export class ClientController {
     return client;
   }
 
+  @ApiOkResponse({ type: Boolean })
   @Get(':id/exists')
   async exists(@Param('id') id: string) {
     const client = await this.clientService.findOne(id);
