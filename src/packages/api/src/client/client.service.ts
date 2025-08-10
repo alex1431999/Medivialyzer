@@ -15,7 +15,7 @@ export class ClientService {
     return this.clientRepository.insert(createClientDto);
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.clientRepository.findOne({ where: { id } });
   }
 }

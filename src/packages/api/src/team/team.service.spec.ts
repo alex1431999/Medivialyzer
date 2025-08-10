@@ -18,10 +18,10 @@ describe('TeamService', () => {
   });
 
   it('can create team', async () => {
-    await clientService.create({ id: 123 });
+    await clientService.create({ id: 'abc' });
     await teamService.create({
       name: 'test',
-      owner: 123,
+      owner: 'abc',
     });
   });
 });
