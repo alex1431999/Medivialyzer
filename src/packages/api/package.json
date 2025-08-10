@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "build:client": "openapi-generator-cli generate -i ./openapi.json -g typescript-axios -o ./api-client",
+    "build:client": "openapi-generator-cli generate -i ./openapi.json -g typescript-axios -o ../frontend/src/utils/generated/api-client",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
