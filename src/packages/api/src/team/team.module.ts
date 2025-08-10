@@ -3,9 +3,10 @@ import { TeamService } from './team.service';
 import { TeamController } from './team.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Team } from './entities/team.entity';
+import { Client } from '../client/entities/client.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Team])],
+  imports: [TypeOrmModule.forFeature([Team, Client])],
   controllers: [TeamController],
   providers: [TeamService],
 })
