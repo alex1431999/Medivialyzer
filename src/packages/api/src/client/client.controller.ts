@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
 import { ClientService } from './client.service';
 import { CreateClientDto } from './dto/create-client.dto';
 
@@ -12,7 +19,13 @@ export class ClientController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.clientService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    const client = await this.clientService.findOne(id);
+
+    if (!client) {
+      throw new NotFoundException(`Client with id ${id} not found`);
+    }
+
+    return client;
   }
 }
