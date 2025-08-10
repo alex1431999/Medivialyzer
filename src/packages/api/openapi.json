@@ -71,7 +71,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Team"
+                    "$ref": "#/components/schemas/TeamDto"
                   }
                 }
               }
@@ -102,7 +102,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Team"
+                  "$ref": "#/components/schemas/TeamDto"
                 }
               }
             }
@@ -275,9 +275,20 @@
           "name"
         ]
       },
-      "Team": {
+      "TeamDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "owner": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "owner",
+          "name"
+        ]
       },
       "UpdateTeamDto": {
         "type": "object",
