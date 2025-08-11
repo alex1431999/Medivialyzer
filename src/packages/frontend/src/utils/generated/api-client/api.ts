@@ -79,6 +79,12 @@ export interface TeamDto {
      * @type {string}
      * @memberof TeamDto
      */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TeamDto
+     */
     'owner': string;
     /**
      * 

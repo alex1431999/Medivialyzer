@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **string** |  | [default to undefined]
 **owner** | **string** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **members** | **Array&lt;string&gt;** |  | [default to undefined]
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
 import { TeamDto } from './api';
 
 const instance: TeamDto = {
+    id,
     owner,
     name,
     members,
