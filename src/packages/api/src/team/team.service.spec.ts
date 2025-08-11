@@ -24,4 +24,20 @@ describe('TeamService', () => {
       owner: 'abc',
     });
   });
+
+  it('can find all by member', async () => {
+    await clientService.create({ id: 'owner' });
+    await clientService.create({ id: 'member' });
+
+    const { id: teamId } = await teamService.create({
+      name: 'test',
+      owner: 'owner',
+    });
+
+    await teamService.addMember(teamId, 'member');
+
+    const teams = await teamService.findAllByMember('member');
+
+    expect(teams.length).toBe(1);
+  });
 });

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -34,6 +34,33 @@ export class TeamService {
     if (!client) throw new Error('Owner doesnt exist');
 
     return this.teamRepository.findBy({ owner: client });
+  }
+
+  async findAllByMember(memberId: string) {
+    const client = await this.clientRepository.findOne({
+      where: { id: memberId },
+    });
+
+    if (!client) throw new Error('Owner doesnt exist');
+
+    return this.teamRepository.findBy({ members: client });
+  }
+
+  async addMember(teamId: number, memberId: string) {
+    const team = await this.teamRepository.findOne({
+      where: { id: teamId },
+      relations: ['members'],
+    });
+
+    const client = await this.clientRepository.findOneBy({ id: memberId });
+
+    if (!team || !client)
+      throw new NotFoundException('Team or Client not found');
+
+    team.members.push(client);
+    await this.teamRepository.save(team);
+
+    return team;
   }
 
   findOne(id: number) {

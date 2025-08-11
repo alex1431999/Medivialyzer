@@ -1,4 +1,10 @@
-import { Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
 import { Team } from '../../team/entities/team.entity';
 
 @Entity()
@@ -10,5 +16,6 @@ export class Client {
   ownedTeams: Team[];
 
   @ManyToMany(() => Team, (team) => team.members)
+  @JoinTable()
   joinedTeams: Team[];
 }

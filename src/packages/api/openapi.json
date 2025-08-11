@@ -52,10 +52,10 @@
         ]
       },
       "get": {
-        "operationId": "TeamController_findAllByOwner",
+        "operationId": "TeamController_findAll",
         "parameters": [
           {
-            "name": "ownerClientId",
+            "name": "clientId",
             "required": true,
             "in": "path",
             "schema": {
@@ -283,11 +283,18 @@
           },
           "name": {
             "type": "string"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
           "owner",
-          "name"
+          "name",
+          "members"
         ]
       },
       "UpdateTeamDto": {
