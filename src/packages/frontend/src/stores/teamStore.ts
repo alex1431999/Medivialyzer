@@ -1,9 +1,14 @@
 import { defineStore } from 'pinia'
 
+export type Member = {
+  id: string
+}
+
 export type Team = {
   id: string
   owner: string // Client ID of the owner
   name: string
+  members: Member[]
 }
 
 export type TeamStoreData = {
