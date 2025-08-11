@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import { useConfigStore } from './configStore.ts'
+import { teamApi } from '../utils/api/api.team.ts'
 
 export type Member = {
   id: string
@@ -25,7 +27,10 @@ export const useTeamStore = defineStore('team', {
   },
   actions: {
     async onBoot() {
-      // TODO load teams
+      const configStore = useConfigStore()
+      const clientId = configStore.config.clientId
+
+      this.teams = (await teamApi.teamControllerFindAll(clientId)).data
     },
   },
 })
