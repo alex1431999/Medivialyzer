@@ -2,15 +2,11 @@ import { defineStore } from 'pinia'
 import { useConfigStore } from './configStore.ts'
 import { teamApi } from '../utils/api/api.team.ts'
 
-export type Member = {
-  id: string
-}
-
 export type Team = {
   id: string
   owner: string // Client ID of the owner
   name: string
-  members: Member[]
+  members: string[]
 }
 
 export type TeamStoreData = {
