@@ -11,8 +11,14 @@ import { useTeamStore } from '../stores/teamStore.ts'
 import NoTeamsPlaceholder from './NoTeamsPlaceholder.vue'
 import Team from './Team.vue'
 import TeamNavigation from './TeamNavigation.vue'
+import { computed } from 'vue'
 
 const teamStore = useTeamStore()
+
+const hasTeams = computed(() => teamStore.teams.length > 0)
+const actionButtonColor = computed(() =>
+  hasTeams.value ? undefined : 'secondary',
+)
 </script>
 
 <template>
@@ -32,13 +38,17 @@ const teamStore = useTeamStore()
           <div>Team</div>
         </v-card-title>
         <v-card-text class="d-flex">
-          <TeamNavigation v-if="teamStore.teams.length > 0" />
-          <NoTeamsPlaceholder v-if="teamStore.teams.length === 0" />
+          <TeamNavigation v-if="hasTeams" />
+          <NoTeamsPlaceholder v-if="!hasTeams" />
           <Team v-else />
         </v-card-text>
         <v-card-actions>
-          <v-btn>Create Team</v-btn>
-          <v-btn>Join Team</v-btn>
+          <v-btn :active-color="actionButtonColor" :active="!hasTeams"
+            >Create Team</v-btn
+          >
+          <v-btn :active-color="actionButtonColor" :active="!hasTeams"
+            >Join Team</v-btn
+          >
           <v-btn>Close</v-btn>
         </v-card-actions>
       </v-card>
