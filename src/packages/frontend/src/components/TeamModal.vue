@@ -8,6 +8,11 @@ import {
   VTextField,
 } from 'vuetify/components'
 import Members from './Members.vue'
+import { useTeamStore } from '../stores/teamStore.ts'
+import NoTeamsPlaceholder from './NoTeamsPlaceholder.vue'
+import Team from './Team.vue'
+
+const teamStore = useTeamStore()
 </script>
 
 <template>
@@ -27,8 +32,8 @@ import Members from './Members.vue'
           <div>Team</div>
         </v-card-title>
         <v-card-text>
-          <v-text-field label="Team name" />
-          <Members />
+          <NoTeamsPlaceholder v-if="teamStore.teams.length === 0" />
+          <Team v-else />
         </v-card-text>
       </v-card>
     </template>
