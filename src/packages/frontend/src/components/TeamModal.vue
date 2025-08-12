@@ -27,7 +27,7 @@ import Members from './Members.vue'
           <div>Team</div>
         </v-card-title>
         <v-card-text>
-          <v-text-field label="Your display name" placeholder="Anonymous" />
+          <v-text-field label="Team name" />
           <Members />
         </v-card-text>
       </v-card>
