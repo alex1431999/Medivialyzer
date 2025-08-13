@@ -5,13 +5,13 @@ All URIs are relative to *http://localhost*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**teamControllerCreate**](#teamcontrollercreate) | **POST** /team | |
-|[**teamControllerFindAllByOwner**](#teamcontrollerfindallbyowner) | **GET** /team | |
+|[**teamControllerFindAll**](#teamcontrollerfindall) | **GET** /team | |
 |[**teamControllerFindOne**](#teamcontrollerfindone) | **GET** /team/{id} | |
 |[**teamControllerRemove**](#teamcontrollerremove) | **DELETE** /team/{id} | |
 |[**teamControllerUpdate**](#teamcontrollerupdate) | **PATCH** /team/{id} | |
 
 # **teamControllerCreate**
-> teamControllerCreate(createTeamDto)
+> TeamDto teamControllerCreate(createTeamDto)
 
 
 ### Example
@@ -42,7 +42,7 @@ const { status, data } = await apiInstance.teamControllerCreate(
 
 ### Return type
 
-void (empty response body)
+**TeamDto**
 
 ### Authorization
 
@@ -51,18 +51,18 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**201** |  |  -  |
+|**200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **teamControllerFindAllByOwner**
-> Array<object> teamControllerFindAllByOwner()
+# **teamControllerFindAll**
+> Array<TeamDto> teamControllerFindAll()
 
 
 ### Example
@@ -76,10 +76,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new TeamApi(configuration);
 
-let ownerClientId: string; // (default to undefined)
+let clientId: string; // (default to undefined)
 
-const { status, data } = await apiInstance.teamControllerFindAllByOwner(
-    ownerClientId
+const { status, data } = await apiInstance.teamControllerFindAll(
+    clientId
 );
 ```
 
@@ -87,12 +87,12 @@ const { status, data } = await apiInstance.teamControllerFindAllByOwner(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **ownerClientId** | [**string**] |  | defaults to undefined|
+| **clientId** | [**string**] |  | defaults to undefined|
 
 
 ### Return type
 
-**Array<object>**
+**Array<TeamDto>**
 
 ### Authorization
 
@@ -112,7 +112,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **teamControllerFindOne**
-> object teamControllerFindOne()
+> TeamDto teamControllerFindOne()
 
 
 ### Example
@@ -142,7 +142,7 @@ const { status, data } = await apiInstance.teamControllerFindOne(
 
 ### Return type
 
-**object**
+**TeamDto**
 
 ### Authorization
 

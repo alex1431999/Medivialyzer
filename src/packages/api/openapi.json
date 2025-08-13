@@ -43,8 +43,15 @@
           }
         },
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -52,10 +59,10 @@
         ]
       },
       "get": {
-        "operationId": "TeamController_findAllByOwner",
+        "operationId": "TeamController_findAll",
         "parameters": [
           {
-            "name": "ownerClientId",
+            "name": "clientId",
             "required": true,
             "in": "path",
             "schema": {
@@ -278,16 +285,27 @@
       "TeamDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "owner": {
             "type": "string"
           },
           "name": {
             "type": "string"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
+          "id",
           "owner",
-          "name"
+          "name",
+          "members"
         ]
       },
       "UpdateTeamDto": {

@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Client } from '../../client/entities/client.entity';
 
 @Entity()
@@ -11,4 +18,8 @@ export class Team {
 
   @Column()
   name: string;
+
+  @ManyToMany(() => Client, (client) => client.joinedTeams)
+  @JoinTable()
+  members: Client[];
 }

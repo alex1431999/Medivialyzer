@@ -18,6 +18,7 @@ export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
   @Post()
+  @ApiOkResponse({ type: TeamDto })
   create(@Body() createTeamDto: CreateTeamDto) {
     return this.teamService.create(createTeamDto);
   }
@@ -26,6 +27,15 @@ export class TeamController {
   @ApiOkResponse({ type: TeamDto, isArray: true })
   findAllByOwner(@Param('ownerClientId') ownerClientId: string) {
     return this.teamService.findAllByOwner(ownerClientId);
+  }
+
+  @Get()
+  @ApiOkResponse({ type: TeamDto, isArray: true })
+  async findAll(@Param('clientId') clientId: string) {
+    const allOwned = await this.teamService.findAllByOwner(clientId);
+    const allJoined = await this.teamService.findAllByMember(clientId);
+
+    return [...allOwned, ...allJoined];
   }
 
   @Get(':id')

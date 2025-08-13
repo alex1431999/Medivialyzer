@@ -9,16 +9,19 @@ import { useConfigStore } from './stores/configStore.ts'
 import { getAllItems } from './utils/item/item.helpers.ts'
 import { baserowPing } from './utils/baserow/baserow.requests.ts'
 import { useClientStore } from './stores/clientStore.ts'
+import { useTeamStore } from './stores/teamStore.ts'
 
 const lootDataStore = useLootDataStore()
 const configStore = useConfigStore()
 const clientStore = useClientStore()
+const teamStore = useTeamStore()
 
 // When the client boots up we want to send a ping
 baserowPing(configStore.config.clientId)
 
 configStore.onBoot()
 clientStore.onBoot()
+teamStore.onBoot()
 
 lootDataStore.update({ since: configStore.config.since, items: getAllItems() })
 
