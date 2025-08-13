@@ -31,8 +31,16 @@ export const useTeamStore = defineStore('team', {
       this.teams = (await teamApi.teamControllerFindAll(clientId)).data
     },
 
-    async create(team: TeamCreateData) {
-      console.log(team)
+    async create(createData: TeamCreateData) {
+      const configStore = useConfigStore()
+      const clientId = configStore.config.clientId
+
+      const response = await teamApi.teamControllerCreate({
+        ...createData,
+        owner: clientId,
+      })
+
+      this.teams.push(response.data)
     },
   },
 })
