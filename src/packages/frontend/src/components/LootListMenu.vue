@@ -4,6 +4,7 @@ import LootListTimeControl from './LootListTimeControl.vue'
 import SuppliesModal from './SuppliesModal.vue'
 import TotalLootValueDisplay from './TotalLootValueDisplay.vue'
 import CreaturesKilledModal from './CreaturesKilledModal.vue'
+import TeamModal from './TeamModal.vue'
 
 const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 </script>
@@ -14,6 +15,7 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
       <div class="d-flex ga-3">
         <SuppliesModal />
         <CreaturesKilledModal />
+        <TeamModal />
       </div>
       <LootListTimeControl
         @reset="$emit('reset')"
