@@ -13,6 +13,7 @@ import Team from './Team.vue'
 import TeamNavigation from './TeamNavigation.vue'
 import { computed, ref } from 'vue'
 import CreateTeamModal from './CreateTeamModal.vue'
+import RequestLoader from './RequestLoader.vue'
 
 const teamStore = useTeamStore()
 
@@ -45,9 +46,15 @@ const actionButtonColor = computed(() =>
           <div>Team</div>
         </v-card-title>
         <v-card-text class="d-flex">
-          <TeamNavigation v-if="hasTeams" />
-          <NoTeamsPlaceholder v-if="!hasTeams" />
-          <Team v-else />
+          <RequestLoader
+            class="ml-auto mr-auto"
+            v-if="teamStore.isLoading"
+          ></RequestLoader>
+          <template v-else>
+            <TeamNavigation v-if="hasTeams" />
+            <NoTeamsPlaceholder v-if="!hasTeams" />
+            <Team v-else />
+          </template>
         </v-card-text>
         <v-card-actions>
           <v-btn

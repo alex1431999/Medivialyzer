@@ -13,10 +13,12 @@ export type TeamCreateData = Pick<Team, 'name'>
 
 export type TeamStoreData = {
   teams: Team[]
+  isLoading: boolean
 }
 
 const DEFAULT_TEAM_STORE_DATA: TeamStoreData = {
   teams: [],
+  isLoading: false,
 }
 
 export const useTeamStore = defineStore('team', {
@@ -35,12 +37,21 @@ export const useTeamStore = defineStore('team', {
       const configStore = useConfigStore()
       const clientId = configStore.config.clientId
 
-      const response = await teamApi.teamControllerCreate({
-        ...createData,
-        owner: clientId,
-      })
+      try {
+        this.isLoading = true
 
-      this.teams.push(response.data)
+        const response = await teamApi.teamControllerCreate({
+          ...createData,
+          owner: clientId,
+        })
+
+        this.teams.push(response.data)
+
+        this.isLoading = false
+      } catch (error) {
+        this.isLoading = false
+        throw error
+      }
     },
   },
 })
