@@ -18,6 +18,7 @@ export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
   @Post()
+  @ApiOkResponse({ type: TeamDto })
   create(@Body() createTeamDto: CreateTeamDto) {
     return this.teamService.create(createTeamDto);
   }
