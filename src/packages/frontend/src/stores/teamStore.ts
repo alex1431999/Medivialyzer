@@ -9,6 +9,8 @@ export type Team = {
   members: string[]
 }
 
+export type TeamCreateData = Pick<Team, 'name'>
+
 export type TeamStoreData = {
   teams: Team[]
 }
@@ -27,6 +29,10 @@ export const useTeamStore = defineStore('team', {
       const clientId = configStore.config.clientId
 
       this.teams = (await teamApi.teamControllerFindAll(clientId)).data
+    },
+
+    async create(team: TeamCreateData) {
+      console.log(team)
     },
   },
 })

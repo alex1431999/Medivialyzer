@@ -11,9 +11,12 @@ import { useTeamStore } from '../stores/teamStore.ts'
 import NoTeamsPlaceholder from './NoTeamsPlaceholder.vue'
 import Team from './Team.vue'
 import TeamNavigation from './TeamNavigation.vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import CreateTeamModal from './CreateTeamModal.vue'
 
 const teamStore = useTeamStore()
+
+const isCreateTeamModalOpen = ref<boolean>(false)
 
 const hasTeams = computed(() => teamStore.teams.length > 0)
 const actionButtonColor = computed(() =>
@@ -33,6 +36,10 @@ const actionButtonColor = computed(() =>
     </template>
 
     <template v-slot:default>
+      <CreateTeamModal
+        v-model:show="isCreateTeamModalOpen"
+        @create="(data) => teamStore.create(data)"
+      />
       <v-card>
         <v-card-title class="supplies-modal__header">
           <div>Team</div>
@@ -43,7 +50,10 @@ const actionButtonColor = computed(() =>
           <Team v-else />
         </v-card-text>
         <v-card-actions>
-          <v-btn :active-color="actionButtonColor" :active="!hasTeams"
+          <v-btn
+            :active-color="actionButtonColor"
+            :active="!hasTeams"
+            @click="isCreateTeamModalOpen = true"
             >Create Team</v-btn
           >
           <v-btn :active-color="actionButtonColor" :active="!hasTeams"
