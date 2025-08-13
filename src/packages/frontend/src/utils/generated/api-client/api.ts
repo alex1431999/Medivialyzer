@@ -650,7 +650,7 @@ export const TeamApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async teamControllerCreate(createTeamDto: CreateTeamDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async teamControllerCreate(createTeamDto: CreateTeamDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TeamDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.teamControllerCreate(createTeamDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TeamApi.teamControllerCreate']?.[localVarOperationServerIndex]?.url;
@@ -721,7 +721,7 @@ export const TeamApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        teamControllerCreate(createTeamDto: CreateTeamDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        teamControllerCreate(createTeamDto: CreateTeamDto, options?: RawAxiosRequestConfig): AxiosPromise<TeamDto> {
             return localVarFp.teamControllerCreate(createTeamDto, options).then((request) => request(axios, basePath));
         },
         /**
