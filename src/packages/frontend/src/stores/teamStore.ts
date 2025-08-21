@@ -50,9 +50,12 @@ export const useTeamStore = defineStore('team', {
           owner: clientId,
         })
 
-        this.teams.push(response.data)
+        const teamCreated = response.data
 
+        this.teams.push(teamCreated)
         this.isLoading = false
+
+        return teamCreated
       } catch (error) {
         this.isLoading = false
         throw error

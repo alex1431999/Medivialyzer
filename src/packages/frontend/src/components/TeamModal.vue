@@ -7,7 +7,11 @@ import {
   VDialog,
   VCardActions,
 } from 'vuetify/components'
-import { useTeamStore, Team as TeamType } from '../stores/teamStore.ts'
+import {
+  useTeamStore,
+  Team as TeamType,
+  TeamCreateData,
+} from '../stores/teamStore.ts'
 import NoTeamsPlaceholder from './NoTeamsPlaceholder.vue'
 import Team from './Team.vue'
 import TeamNavigation from './TeamNavigation.vue'
@@ -36,6 +40,10 @@ watch(
   },
   { immediate: true },
 )
+
+async function onCreateTeam(createData: TeamCreateData) {
+  teamSeleceted.value = await teamStore.create(createData)
+}
 </script>
 
 <template>
@@ -52,7 +60,7 @@ watch(
     <template v-slot:default>
       <CreateTeamModal
         v-model:show="isCreateTeamModalOpen"
-        @create="(data) => teamStore.create(data)"
+        @create="onCreateTeam"
       />
       <v-card>
         <v-card-title class="supplies-modal__header">
