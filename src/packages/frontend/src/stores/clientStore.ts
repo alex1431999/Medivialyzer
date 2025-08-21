@@ -4,6 +4,7 @@ import { useConfigStore } from './configStore.ts'
 
 export type Client = {
   id: string
+  name: string
 }
 
 export type ClientStoreData = {
