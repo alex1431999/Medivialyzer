@@ -7,7 +7,7 @@ import {
   VDialog,
   VCardActions,
 } from 'vuetify/components'
-import { useTeamStore } from '../stores/teamStore.ts'
+import { useTeamStore, Team as TeamType } from '../stores/teamStore.ts'
 import NoTeamsPlaceholder from './NoTeamsPlaceholder.vue'
 import Team from './Team.vue'
 import TeamNavigation from './TeamNavigation.vue'
@@ -23,6 +23,8 @@ const hasTeams = computed(() => teamStore.teams.length > 0)
 const actionButtonColor = computed(() =>
   hasTeams.value ? undefined : 'secondary',
 )
+
+const teamSeleceted = ref<TeamType | null>(null)
 </script>
 
 <template>
@@ -51,9 +53,12 @@ const actionButtonColor = computed(() =>
             v-if="teamStore.isLoading"
           ></RequestLoader>
           <template v-else>
-            <TeamNavigation v-if="hasTeams" />
+            <TeamNavigation
+              v-if="hasTeams"
+              @selectTeam="(team) => (teamSeleceted = team)"
+            />
             <NoTeamsPlaceholder v-if="!hasTeams" />
-            <Team v-else />
+            <Team v-if="teamSeleceted" :team="teamSeleceted" />
           </template>
         </v-card-text>
         <v-card-actions>
