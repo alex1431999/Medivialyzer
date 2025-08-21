@@ -6,6 +6,6 @@ const { team } = defineProps<{ team: Team }>()
 </script>
 
 <template>
-  {{ team.name }}
-  <Members />
+  <h2>{{ team.name }}</h2>
+  <Members :members="team.members" />
 </template>
