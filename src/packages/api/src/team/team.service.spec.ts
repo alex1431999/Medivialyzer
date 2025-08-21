@@ -18,7 +18,7 @@ describe('TeamService', () => {
   });
 
   it('can create team', async () => {
-    await clientService.create({ id: 'abc' });
+    await clientService.create({ id: 'abc', name: 'test' });
     await teamService.create({
       name: 'test',
       owner: 'abc',
@@ -26,8 +26,8 @@ describe('TeamService', () => {
   });
 
   it('can find all by member', async () => {
-    await clientService.create({ id: 'owner' });
-    await clientService.create({ id: 'member' });
+    await clientService.create({ id: 'owner', name: 'test' });
+    await clientService.create({ id: 'member', name: 'test' });
 
     const { id: teamId } = await teamService.create({
       name: 'test',

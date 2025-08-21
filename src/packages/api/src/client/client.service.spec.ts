@@ -15,7 +15,9 @@ describe('ClientService', () => {
   });
 
   it('ids should be unique', async () => {
-    await expect(service.create({ id: 'abc' })).resolves.not.toThrow();
-    await expect(service.create({ id: 'abc' })).rejects.toThrow();
+    await expect(
+      service.create({ id: 'abc', name: 'test' }),
+    ).resolves.not.toThrow();
+    await expect(service.create({ id: 'abc', name: 'test' })).rejects.toThrow();
   });
 });
