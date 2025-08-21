@@ -11,6 +11,6 @@ export class TeamDto {
   @ApiProperty()
   name: string;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => [ClientDto] })
   members: ClientDto[];
 }

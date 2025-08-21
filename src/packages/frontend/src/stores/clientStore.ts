@@ -27,8 +27,10 @@ export const useClientStore = defineStore('client', {
         .data
 
       if (!doesClientExist) {
+        // TODO we still need to set a name when the user opens the client for the first time
         await clientApi.clientControllerCreate({
           id: clientId,
+          name: 'TODO',
         })
       }
 

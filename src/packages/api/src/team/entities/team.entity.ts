@@ -19,7 +19,7 @@ export class Team {
   @Column()
   name: string;
 
-  @ManyToMany(() => Client, (client) => client.joinedTeams)
+  @ManyToMany(() => Client, (client) => client.joinedTeams, { eager: true })
   @JoinTable()
   members: Client[];
 }

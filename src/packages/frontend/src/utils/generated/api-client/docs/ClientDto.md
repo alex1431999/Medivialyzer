@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [default to undefined]
+**name** | **string** |  | [default to undefined]
 
 ## Example
 
@@ -14,6 +15,7 @@ import { ClientDto } from './api';
 
 const instance: ClientDto = {
     id,
+    name,
 };
 ```
 

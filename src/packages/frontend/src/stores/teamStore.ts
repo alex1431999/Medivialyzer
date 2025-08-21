@@ -35,15 +35,7 @@ export const useTeamStore = defineStore('team', {
       const configStore = useConfigStore()
       const clientId = configStore.config.clientId
 
-      const teams = (await teamApi.teamControllerFindAll(clientId)).data
-
-      // TODO we need to change the endpoint to actually return proper member entities here
-      const teamsWithMembers = teams.map((team) => ({
-        ...team,
-        members: team.members.map((id) => ({ id, name: 'TODO' })),
-      }))
-
-      this.teams = teamsWithMembers
+      this.teams = (await teamApi.teamControllerFindAll(clientId)).data
     },
 
     async create(createData: TeamCreateData) {
