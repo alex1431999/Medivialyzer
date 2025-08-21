@@ -11,7 +11,7 @@ import { useTeamStore, Team as TeamType } from '../stores/teamStore.ts'
 import NoTeamsPlaceholder from './NoTeamsPlaceholder.vue'
 import Team from './Team.vue'
 import TeamNavigation from './TeamNavigation.vue'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import CreateTeamModal from './CreateTeamModal.vue'
 import RequestLoader from './RequestLoader.vue'
 
@@ -25,6 +25,17 @@ const actionButtonColor = computed(() =>
 )
 
 const teamSeleceted = ref<TeamType | null>(null)
+
+// Auto select the first team when no selection was made yet
+watch(
+  teamStore.teams,
+  (teams) => {
+    if (teamSeleceted.value === null && teams.length > 0) {
+      teamSeleceted.value = teams[0]
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
