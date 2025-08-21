@@ -7,11 +7,15 @@ import {
   VDialog,
   VCardActions,
 } from 'vuetify/components'
-import { useTeamStore } from '../stores/teamStore.ts'
+import {
+  useTeamStore,
+  Team as TeamType,
+  TeamCreateData,
+} from '../stores/teamStore.ts'
 import NoTeamsPlaceholder from './NoTeamsPlaceholder.vue'
 import Team from './Team.vue'
 import TeamNavigation from './TeamNavigation.vue'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import CreateTeamModal from './CreateTeamModal.vue'
 import RequestLoader from './RequestLoader.vue'
 
@@ -23,6 +27,23 @@ const hasTeams = computed(() => teamStore.teams.length > 0)
 const actionButtonColor = computed(() =>
   hasTeams.value ? undefined : 'secondary',
 )
+
+const teamSeleceted = ref<TeamType | null>(null)
+
+// Auto select the first team when no selection was made yet
+watch(
+  teamStore.teams,
+  (teams) => {
+    if (teamSeleceted.value === null && teams.length > 0) {
+      teamSeleceted.value = teams[0]
+    }
+  },
+  { immediate: true },
+)
+
+async function onCreateTeam(createData: TeamCreateData) {
+  teamSeleceted.value = await teamStore.create(createData)
+}
 </script>
 
 <template>
@@ -39,7 +60,7 @@ const actionButtonColor = computed(() =>
     <template v-slot:default>
       <CreateTeamModal
         v-model:show="isCreateTeamModalOpen"
-        @create="(data) => teamStore.create(data)"
+        @create="onCreateTeam"
       />
       <v-card>
         <v-card-title class="supplies-modal__header">
@@ -51,9 +72,12 @@ const actionButtonColor = computed(() =>
             v-if="teamStore.isLoading"
           ></RequestLoader>
           <template v-else>
-            <TeamNavigation v-if="hasTeams" />
+            <TeamNavigation
+              v-if="hasTeams"
+              @selectTeam="(team) => (teamSeleceted = team)"
+            />
             <NoTeamsPlaceholder v-if="!hasTeams" />
-            <Team v-else />
+            <Team v-if="teamSeleceted" :team="teamSeleceted" />
           </template>
         </v-card-text>
         <v-card-actions>

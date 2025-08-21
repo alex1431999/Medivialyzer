@@ -6,7 +6,12 @@ export type Team = {
   id: string
   owner: string // Client ID of the owner
   name: string
-  members: string[]
+  members: Member[]
+}
+
+export type Member = {
+  id: string
+  name: string
 }
 
 export type TeamCreateData = Pick<Team, 'name'>
@@ -45,9 +50,12 @@ export const useTeamStore = defineStore('team', {
           owner: clientId,
         })
 
-        this.teams.push(response.data)
+        const teamCreated = response.data
 
+        this.teams.push(teamCreated)
         this.isLoading = false
+
+        return teamCreated
       } catch (error) {
         this.isLoading = false
         throw error

@@ -35,6 +35,12 @@ export interface ClientDto {
      * @memberof ClientDto
      */
     'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientDto
+     */
+    'name': string;
 }
 /**
  * 
@@ -48,6 +54,12 @@ export interface CreateClientDto {
      * @memberof CreateClientDto
      */
     'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateClientDto
+     */
+    'name': string;
 }
 /**
  * 
@@ -94,10 +106,10 @@ export interface TeamDto {
     'name': string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<ClientDto>}
      * @memberof TeamDto
      */
-    'members': Array<string>;
+    'members': Array<ClientDto>;
 }
 /**
  * 

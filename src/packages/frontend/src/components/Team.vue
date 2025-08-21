@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { VTextField } from 'vuetify/components'
 import Members from './Members.vue'
+import { Team } from '../stores/teamStore.ts'
+
+const { team } = defineProps<{ team: Team }>()
 </script>
 
 <template>
-  <v-text-field label="Team name" />
-  <Members />
+  <div class="d-flex flex-column">
+    <h2>{{ team.name }}</h2>
+    <Members :members="team.members" />
+  </div>
 </template>

@@ -1,4 +1,5 @@
 import {
+  Column,
   Entity,
   JoinTable,
   ManyToMany,
@@ -11,6 +12,9 @@ import { Team } from '../../team/entities/team.entity';
 export class Client {
   @PrimaryColumn({ unique: true })
   id: string;
+
+  @Column()
+  name: string;
 
   @ManyToOne(() => Team, (team) => team.owner, { cascade: true })
   ownedTeams: Team[];

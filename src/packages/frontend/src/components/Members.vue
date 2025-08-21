@@ -1,31 +1,21 @@
 <script setup lang="ts">
+import { VList, VListItem } from 'vuetify/components'
 import Member from './Member.vue'
-import { VCard, VCardText, VCardTitle, VChip, VIcon } from 'vuetify/components'
+import { Member as MemberType } from '../stores/teamStore.ts'
+import { useClientStore } from '../stores/clientStore.ts'
 
-function onInvitationIdCopy() {
-  console.log('TODO')
-}
+const clientStore = useClientStore()
+
+const { members } = defineProps<{ members: MemberType[] }>()
 </script>
 
 <template>
-  <VCard>
-    <v-card-title>
-      <div class="d-flex justify-space-between">
-        <span>Members</span>
-        <v-chip color="secondary">
-          TODO
-          <v-icon
-            icon="mdi-clipboard"
-            class="ml-2"
-            @click="onInvitationIdCopy"
-          ></v-icon>
-        </v-chip>
-      </div>
-    </v-card-title>
-    <v-card-text>
-      <Member class="mb-3" />
-      <Member class="mb-3" />
-      <Member class="mb-3" />
-    </v-card-text>
-  </VCard>
+  <v-list>
+    <v-list-item>
+      <Member v-if="clientStore.client" :member="clientStore.client" />
+    </v-list-item>
+    <v-list-item v-for="member in members" :key="member.id">
+      <Member :member="member" />
+    </v-list-item>
+  </v-list>
 </template>

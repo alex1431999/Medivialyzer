@@ -282,6 +282,21 @@
           "name"
         ]
       },
+      "ClientDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
       "TeamDto": {
         "type": "object",
         "properties": {
@@ -297,7 +312,7 @@
           "members": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/ClientDto"
             }
           }
         },
@@ -324,21 +339,14 @@
         "properties": {
           "id": {
             "type": "string"
-          }
-        },
-        "required": [
-          "id"
-        ]
-      },
-      "ClientDto": {
-        "type": "object",
-        "properties": {
-          "id": {
+          },
+          "name": {
             "type": "string"
           }
         },
         "required": [
-          "id"
+          "id",
+          "name"
         ]
       }
     }
