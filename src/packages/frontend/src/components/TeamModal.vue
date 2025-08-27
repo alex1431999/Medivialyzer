@@ -6,6 +6,7 @@ import {
   VCardTitle,
   VDialog,
   VCardActions,
+  VDivider,
 } from 'vuetify/components'
 import {
   useTeamStore,
@@ -76,6 +77,7 @@ async function onCreateTeam(createData: TeamCreateData) {
               v-if="hasTeams"
               @selectTeam="(team) => (teamSeleceted = team)"
             />
+            <v-divider vertical class="mr-5 ml-5"></v-divider>
             <NoTeamsPlaceholder v-if="!hasTeams" />
             <Team v-if="teamSeleceted" :team="teamSeleceted" />
           </template>

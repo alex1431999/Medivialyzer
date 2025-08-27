@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VList, VListItem } from 'vuetify/components'
+import { VList, VListItem, VDivider } from 'vuetify/components'
 import { useTeamStore } from '../stores/teamStore.ts'
 
 const teamStore = useTeamStore()
@@ -8,12 +8,14 @@ const emit = defineEmits(['selectTeam'])
 
 <template>
   <v-list style="min-width: 150px">
-    <VListItem
-      v-for="team in teamStore.teams"
-      :key="team.id"
-      @click="emit('selectTeam', team)"
-    >
-      {{ team.name }}
-    </VListItem>
+    <template v-for="(team, i) in teamStore.teams" :key="team.id">
+      <VListItem @click="emit('selectTeam', team)">
+        {{ team.name }}
+      </VListItem>
+      <v-divider
+        v-if="i !== teamStore.teams.length - 1"
+        class="mt-2 mb-2"
+      ></v-divider>
+    </template>
   </v-list>
 </template>
