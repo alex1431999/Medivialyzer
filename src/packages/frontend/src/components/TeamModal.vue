@@ -85,8 +85,12 @@ async function onUpdateTeamName(name: string) {
               :team-selected="teamSeleceted"
               @selectTeam="(team) => (teamSeleceted = team)"
             />
-            <v-divider vertical class="mr-5 ml-5"></v-divider>
             <NoTeamsPlaceholder v-if="!hasTeams" />
+            <v-divider
+              v-if="teamSeleceted"
+              vertical
+              class="mr-5 ml-5"
+            ></v-divider>
             <Team
               v-if="teamSeleceted"
               :team="teamSeleceted"
