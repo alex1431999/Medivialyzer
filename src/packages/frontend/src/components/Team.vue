@@ -8,6 +8,6 @@ const { team } = defineProps<{ team: Team }>()
 <template>
   <div class="d-flex flex-column">
     <h2>{{ team.name }}</h2>
-    <Members :members="team.members" />
+    <Members :members="team.members || []" />
   </div>
 </template>
