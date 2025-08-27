@@ -75,6 +75,7 @@ async function onCreateTeam(createData: TeamCreateData) {
           <template v-else>
             <TeamNavigation
               v-if="hasTeams"
+              :team-selected="teamSeleceted"
               @selectTeam="(team) => (teamSeleceted = team)"
             />
             <v-divider vertical class="mr-5 ml-5"></v-divider>
