@@ -45,6 +45,13 @@ watch(
 async function onCreateTeam(createData: TeamCreateData) {
   teamSeleceted.value = await teamStore.create(createData)
 }
+
+async function onUpdateTeamName(name: string) {
+  if (!teamSeleceted.value) throw new Error('No team selected')
+
+  const id = teamSeleceted.value.id
+  await teamStore.update(id, { name })
+}
 </script>
 
 <template>
@@ -80,7 +87,11 @@ async function onCreateTeam(createData: TeamCreateData) {
             />
             <v-divider vertical class="mr-5 ml-5"></v-divider>
             <NoTeamsPlaceholder v-if="!hasTeams" />
-            <Team v-if="teamSeleceted" :team="teamSeleceted" />
+            <Team
+              v-if="teamSeleceted"
+              :team="teamSeleceted"
+              @update-name="(name) => onUpdateTeamName(name)"
+            />
           </template>
         </v-card-text>
         <v-card-actions>

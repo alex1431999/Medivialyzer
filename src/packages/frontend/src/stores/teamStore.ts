@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { useConfigStore } from './configStore.ts'
 import { teamApi } from '../utils/api/api.team.ts'
+import { UpdateTeamDto } from '../utils/generated/api-client'
+import _ from 'lodash'
 
 export type Team = {
   id: string
@@ -32,10 +34,16 @@ export const useTeamStore = defineStore('team', {
   },
   actions: {
     async onBoot() {
+      await this.refresh()
+    },
+
+    async refresh() {
       const configStore = useConfigStore()
       const clientId = configStore.config.clientId
 
-      this.teams = (await teamApi.teamControllerFindAll(clientId)).data
+      const response = await teamApi.teamControllerFindAll(clientId)
+
+      this.teams = _.sortBy(response.data, 'name')
     },
 
     async create(createData: TeamCreateData) {
@@ -60,6 +68,11 @@ export const useTeamStore = defineStore('team', {
         this.isLoading = false
         throw error
       }
+    },
+
+    async update(id: string, updateData: UpdateTeamDto) {
+      await teamApi.teamControllerUpdate(id, updateData)
+      await this.refresh()
     },
   },
 })
