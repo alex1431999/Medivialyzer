@@ -3,13 +3,14 @@ import LootList from './components/LootList.vue'
 import Header from './components/Header.vue'
 import UpgradeNotification from './components/UpgradeNotification.vue'
 import { FIVE_SECONDS } from './constants/time.ts'
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useLootDataStore } from './stores/lootDataStore.ts'
 import { useConfigStore } from './stores/configStore.ts'
 import { getAllItems } from './utils/item/item.helpers.ts'
 import { baserowPing } from './utils/baserow/baserow.requests.ts'
 import { useClientStore } from './stores/clientStore.ts'
 import { useTeamStore } from './stores/teamStore.ts'
+import ClientModal from './components/ClientModal.vue'
 
 const lootDataStore = useLootDataStore()
 const configStore = useConfigStore()
@@ -24,6 +25,10 @@ clientStore.onBoot()
 teamStore.onBoot()
 
 lootDataStore.update({ since: configStore.config.since, items: getAllItems() })
+
+const showClientModal = computed(
+  () => clientStore.initialized && clientStore.client === null,
+)
 
 setInterval(() => {
   lootDataStore.update({
@@ -65,12 +70,19 @@ watch(
   },
   { deep: true },
 )
+
+async function onCreateClient(name: string) {
+  await clientStore.create(name)
+}
 </script>
 
 <template>
-  <Header class="app__header" />
-  <LootList />
-  <UpgradeNotification />
+  <ClientModal @submit="onCreateClient" v-if="showClientModal" />
+  <template v-else>
+    <Header class="app__header" />
+    <LootList />
+    <UpgradeNotification />
+  </template>
 </template>
 
 <style scoped>

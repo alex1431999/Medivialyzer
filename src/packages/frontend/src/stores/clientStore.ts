@@ -9,10 +9,12 @@ export type Client = {
 
 export type ClientStoreData = {
   client: Client | null
+  initialized: boolean
 }
 
 const DEFAULT_CLIENT_STORE_DATA: ClientStoreData = {
   client: null,
+  initialized: false,
 }
 
 export const useClientStore = defineStore('client', {
@@ -27,13 +29,21 @@ export const useClientStore = defineStore('client', {
       const doesClientExist = (await clientApi.clientControllerExists(clientId))
         .data
 
-      if (!doesClientExist) {
-        // TODO we still need to set a name when the user opens the client for the first time
-        await clientApi.clientControllerCreate({
-          id: clientId,
-          name: 'TODO',
-        })
+      if (doesClientExist) {
+        this.client = (await clientApi.clientControllerFindOne(clientId)).data
       }
+
+      this.initialized = true
+    },
+
+    async create(name: string) {
+      const configStore = useConfigStore()
+      const clientId = configStore.config.clientId
+
+      await clientApi.clientControllerCreate({
+        id: clientId,
+        name,
+      })
 
       this.client = (await clientApi.clientControllerFindOne(clientId)).data
     },
