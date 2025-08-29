@@ -18,7 +18,7 @@ const disableSubmit = computed(() => name.value === '')
 </script>
 
 <template>
-  <v-dialog :model-value="true">
+  <v-dialog :model-value="true" max-width="500">
     <v-card>
       <v-card-title>Select a username</v-card-title>
       <v-card-text>
