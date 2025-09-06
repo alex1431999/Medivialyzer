@@ -5,6 +5,7 @@ import { useConfigStore } from './stores/configStore.ts'
 import { useClientStore } from './stores/clientStore.ts'
 import ClientModal from './components/ClientModal.vue'
 import Main from './components/Main.vue'
+import NotificationProvider from './components/NotificationProvider.vue'
 
 const configStore = useConfigStore()
 const clientStore = useClientStore()
@@ -25,4 +26,5 @@ async function onCreateClient(name: string) {
   <ClientModal @submit="onCreateClient" v-if="showClientModal" />
   <Main v-else />
   <UpgradeNotification />
+  <NotificationProvider />
 </template>
