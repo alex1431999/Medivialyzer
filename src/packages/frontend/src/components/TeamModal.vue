@@ -19,6 +19,9 @@ import TeamNavigation from './TeamNavigation.vue'
 import { computed, ref, watch } from 'vue'
 import CreateTeamModal from './CreateTeamModal.vue'
 import RequestLoader from './RequestLoader.vue'
+import { useNotifications } from '../composables/useNotifications.ts'
+
+const { notify } = useNotifications()
 
 const teamStore = useTeamStore()
 
@@ -44,6 +47,7 @@ watch(
 
 async function onCreateTeam(createData: TeamCreateData) {
   teamSeleceted.value = await teamStore.create(createData)
+  notify('Team successfully created', 'success')
 }
 
 async function onUpdateTeamName(name: string) {
@@ -51,6 +55,8 @@ async function onUpdateTeamName(name: string) {
 
   const id = teamSeleceted.value.id
   await teamStore.update(id, { name })
+
+  notify('Name updated successfully', 'success')
 }
 </script>
 

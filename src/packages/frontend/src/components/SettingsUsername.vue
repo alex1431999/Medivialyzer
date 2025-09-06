@@ -2,6 +2,9 @@
 import { VTextField, VBtn } from 'vuetify/components'
 import { ref } from 'vue'
 import { useClientStore } from '../stores/clientStore.ts'
+import { useNotifications } from '../composables/useNotifications.ts'
+
+const { notify } = useNotifications()
 
 const clientStore = useClientStore()
 
@@ -11,6 +14,8 @@ const userName = ref<string>(clientStore.client?.name || '')
 async function onChangeName() {
   await clientStore.update({ name: userName.value })
   isEditMode.value = false
+
+  notify('Name successfully changed', 'success')
 }
 </script>
 
