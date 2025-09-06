@@ -61,7 +61,7 @@ async function onUpdateTeamName(name: string) {
 </script>
 
 <template>
-  <v-dialog max-width="900" min-height="400">
+  <v-dialog max-width="900" min-height="500">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
