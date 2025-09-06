@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VBtn, VTextField } from 'vuetify/components'
+import { VBtn, VTextField, VIcon } from 'vuetify/components'
 import { Team } from '../stores/teamStore.ts'
 import { ref, watch } from 'vue'
 
@@ -29,18 +29,12 @@ function onEditNameSave() {
       hide-details
       :readonly="!editNameMode"
       :disabled="!editNameMode"
-    ></v-text-field>
-    <v-btn
-      v-if="editNameMode"
-      icon="mdi-check"
-      size="small"
-      @click="onEditNameSave"
-    ></v-btn>
-    <v-btn
-      v-else
-      icon="mdi-pencil"
-      size="small"
-      @click="editNameMode = true"
-    ></v-btn>
+    />
+    <v-btn v-if="editNameMode" icon size="small" @click="onEditNameSave">
+      <v-icon color="secondary">mdi-check</v-icon>
+    </v-btn>
+    <v-btn v-else icon variant="text" size="small" @click="editNameMode = true">
+      <v-icon color="secondary">mdi-pencil</v-icon>
+    </v-btn>
   </div>
 </template>
