@@ -12,7 +12,7 @@ const handleCopy = async () => {
 </script>
 
 <template>
-  <div class="d-flex ga-2">
+  <div class="d-flex ga-2 align-center">
     <v-text-field
       disabled
       hide-details
@@ -20,7 +20,7 @@ const handleCopy = async () => {
       :model-value="props.id"
     />
 
-    <v-btn icon variant="text" color="primary" @click="handleCopy">
+    <v-btn icon variant="text" color="primary" @click="handleCopy" size="small">
       <v-icon color="secondary"> mdi-content-copy </v-icon>
     </v-btn>
   </div>

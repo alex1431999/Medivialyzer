@@ -21,7 +21,7 @@ function onEditNameSave() {
 </script>
 
 <template>
-  <div class="d-flex ga-2">
+  <div class="d-flex ga-2 align-center">
     <v-text-field
       v-model="nameLocal"
       variant="solo-filled"
@@ -30,7 +30,17 @@ function onEditNameSave() {
       :readonly="!editNameMode"
       :disabled="!editNameMode"
     ></v-text-field>
-    <v-btn v-if="editNameMode" icon="mdi-check" @click="onEditNameSave"></v-btn>
-    <v-btn v-else icon="mdi-pencil" @click="editNameMode = true"></v-btn>
+    <v-btn
+      v-if="editNameMode"
+      icon="mdi-check"
+      size="small"
+      @click="onEditNameSave"
+    ></v-btn>
+    <v-btn
+      v-else
+      icon="mdi-pencil"
+      size="small"
+      @click="editNameMode = true"
+    ></v-btn>
   </div>
 </template>
