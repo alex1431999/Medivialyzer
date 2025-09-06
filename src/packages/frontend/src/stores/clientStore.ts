@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { clientApi } from '../utils/api/api.client.ts'
 import { useConfigStore } from './configStore.ts'
+import { UpdateClientDto } from '../utils/generated/api-client'
 
 export type Client = {
   id: string
@@ -46,6 +47,15 @@ export const useClientStore = defineStore('client', {
       })
 
       this.client = (await clientApi.clientControllerFindOne(clientId)).data
+    },
+
+    async update(updateData: UpdateClientDto) {
+      const configStore = useConfigStore()
+      const clientId = configStore.config.clientId
+
+      this.client = (
+        await clientApi.clientControllerUpdate(clientId, updateData)
+      ).data
     },
   },
 })

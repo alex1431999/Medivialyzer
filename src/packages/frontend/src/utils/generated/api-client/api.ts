@@ -114,6 +114,19 @@ export interface TeamDto {
 /**
  * 
  * @export
+ * @interface UpdateClientDto
+ */
+export interface UpdateClientDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateClientDto
+     */
+    'name': string;
+}
+/**
+ * 
+ * @export
  * @interface UpdateTeamDto
  */
 export interface UpdateTeamDto {
@@ -232,6 +245,45 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateClientDto} updateClientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerUpdate: async (id: string, updateClientDto: UpdateClientDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('clientControllerUpdate', 'id', id)
+            // verify required parameter 'updateClientDto' is not null or undefined
+            assertParamExists('clientControllerUpdate', 'updateClientDto', updateClientDto)
+            const localVarPath = `/client/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateClientDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -278,6 +330,19 @@ export const ClientApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['ClientApi.clientControllerFindOne']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateClientDto} updateClientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clientControllerUpdate(id: string, updateClientDto: UpdateClientDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerUpdate(id, updateClientDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ClientApi.clientControllerUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -314,6 +379,16 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
          */
         clientControllerFindOne(id: string, options?: RawAxiosRequestConfig): AxiosPromise<ClientDto> {
             return localVarFp.clientControllerFindOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateClientDto} updateClientDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clientControllerUpdate(id: string, updateClientDto: UpdateClientDto, options?: RawAxiosRequestConfig): AxiosPromise<ClientDto> {
+            return localVarFp.clientControllerUpdate(id, updateClientDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -356,6 +431,18 @@ export class ClientApi extends BaseAPI {
      */
     public clientControllerFindOne(id: string, options?: RawAxiosRequestConfig) {
         return ClientApiFp(this.configuration).clientControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateClientDto} updateClientDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClientApi
+     */
+    public clientControllerUpdate(id: string, updateClientDto: UpdateClientDto, options?: RawAxiosRequestConfig) {
+        return ClientApiFp(this.configuration).clientControllerUpdate(id, updateClientDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

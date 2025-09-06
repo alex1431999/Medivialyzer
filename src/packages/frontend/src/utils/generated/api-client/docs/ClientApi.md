@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 |[**clientControllerCreate**](#clientcontrollercreate) | **POST** /client | |
 |[**clientControllerExists**](#clientcontrollerexists) | **GET** /client/{id}/exists | |
 |[**clientControllerFindOne**](#clientcontrollerfindone) | **GET** /client/{id} | |
+|[**clientControllerUpdate**](#clientcontrollerupdate) | **PATCH** /client/{id} | |
 
 # **clientControllerCreate**
 > clientControllerCreate(createClientDto)
@@ -149,6 +150,60 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **clientControllerUpdate**
+> ClientDto clientControllerUpdate(updateClientDto)
+
+
+### Example
+
+```typescript
+import {
+    ClientApi,
+    Configuration,
+    UpdateClientDto
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new ClientApi(configuration);
+
+let id: string; // (default to undefined)
+let updateClientDto: UpdateClientDto; //
+
+const { status, data } = await apiInstance.clientControllerUpdate(
+    id,
+    updateClientDto
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **updateClientDto** | **UpdateClientDto**|  | |
+| **id** | [**string**] |  | defaults to undefined|
+
+
+### Return type
+
+**ClientDto**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 
