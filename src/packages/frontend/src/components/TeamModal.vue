@@ -36,7 +36,7 @@ const teamSeleceted = ref<TeamType | null>(null)
 
 // Auto select the first team when no selection was made yet
 watch(
-  teamStore.teams,
+  () => teamStore.teams,
   (teams) => {
     if (teamSeleceted.value === null && teams.length > 0) {
       teamSeleceted.value = teams[0]
