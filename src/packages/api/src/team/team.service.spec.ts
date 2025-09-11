@@ -34,7 +34,7 @@ describe('TeamService', () => {
       owner: 'owner',
     });
 
-    await teamService.addMember(teamId, 'member');
+    await teamService.createMember(teamId, { id: 'member' });
 
     const teams = await teamService.findAllByMember('member');
 

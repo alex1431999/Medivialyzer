@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Team } from './entities/team.entity';
 import { Repository } from 'typeorm';
 import { Client } from '../client/entities/client.entity';
+import { CreateMemberDto } from '../client/dto/create-member.dto';
 
 @Injectable()
 export class TeamService {
@@ -46,13 +47,15 @@ export class TeamService {
     return this.teamRepository.findBy({ members: client });
   }
 
-  async addMember(teamId: number, memberId: string) {
+  async createMember(teamId: number, createMemberDto: CreateMemberDto) {
     const team = await this.teamRepository.findOne({
       where: { id: teamId },
       relations: ['members'],
     });
 
-    const client = await this.clientRepository.findOneBy({ id: memberId });
+    const client = await this.clientRepository.findOneBy({
+      id: createMemberDto.id,
+    });
 
     if (!team || !client)
       throw new NotFoundException('Team or Client not found');

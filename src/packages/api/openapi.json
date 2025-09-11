@@ -143,7 +143,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -165,6 +172,46 @@
         "responses": {
           "200": {
             "description": ""
+          }
+        },
+        "tags": [
+          "Team"
+        ]
+      }
+    },
+    "/team/{id}/members": {
+      "post": {
+        "operationId": "TeamController_createMember",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMemberDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -370,6 +417,17 @@
         },
         "required": [
           "name"
+        ]
+      },
+      "CreateMemberDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
         ]
       },
       "CreateClientDto": {
