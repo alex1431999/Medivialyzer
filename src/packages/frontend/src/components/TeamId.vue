@@ -2,7 +2,7 @@
 import { VBtn, VIcon, VTextField } from 'vuetify/components'
 import { useNotifications } from '../composables/useNotifications.ts'
 
-const props = defineProps<{ id: string }>()
+const props = defineProps<{ id: number }>()
 const { notify } = useNotifications()
 
 const handleCopy = async () => {
