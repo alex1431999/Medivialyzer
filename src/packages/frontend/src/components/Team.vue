@@ -10,7 +10,7 @@ const emit = defineEmits(['updateName'])
 
 <template>
   <div class="d-flex flex-column w-100">
-    <TeamId id="test12" class="mb-3" />
+    <TeamId :id="team.id" class="mb-3" />
     <TeamName
       class="mb-3"
       :team="team"
