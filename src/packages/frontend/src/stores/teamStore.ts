@@ -74,5 +74,18 @@ export const useTeamStore = defineStore('team', {
       await teamApi.teamControllerUpdate(id, updateData)
       await this.refresh()
     },
+
+    async join(id: string) {
+      const configStore = useConfigStore()
+      const clientId = configStore.config.clientId
+
+      const response = await teamApi.teamControllerCreateMember(id, {
+        id: clientId,
+      })
+      const teamUpdated = response.data
+
+      const teamIndex = this.teams.findIndex((team) => team.id === id)
+      if (teamIndex >= 0) this.teams[teamIndex] = teamUpdated
+    },
   },
 })
