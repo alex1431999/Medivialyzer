@@ -47,7 +47,7 @@ export class TeamService {
     return this.teamRepository.findBy({ members: client });
   }
 
-  async createMember(teamId: number, createMemberDto: CreateMemberDto) {
+  async createMember(teamId: string, createMemberDto: CreateMemberDto) {
     // TODO verify the user is not part of the team yet, either as member or owner
     const team = await this.teamRepository.findOne({
       where: { id: teamId },
@@ -67,15 +67,15 @@ export class TeamService {
     return team;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.teamRepository.findOne({ where: { id } });
   }
 
-  async update(id: number, updateTeamDto: UpdateTeamDto) {
+  async update(id: string, updateTeamDto: UpdateTeamDto) {
     return this.teamRepository.update(id, updateTeamDto);
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.teamRepository.delete(id);
   }
 }

@@ -10,8 +10,8 @@ import { Client } from '../../client/entities/client.entity';
 
 @Entity()
 export class Team {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @ManyToOne(() => Client, (client) => client.ownedTeams)
   owner: Client;

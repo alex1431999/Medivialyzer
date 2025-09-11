@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Put,
 } from '@nestjs/common';
 import { TeamService } from './team.service';
 import { CreateTeamDto } from './dto/create-team.dto';
@@ -43,20 +42,20 @@ export class TeamController {
   @Get(':id')
   @ApiOkResponse({ type: TeamDto })
   findOne(@Param('id') id: string) {
-    return this.teamService.findOne(+id);
+    return this.teamService.findOne(id);
   }
 
   @Patch(':id')
   @ApiOkResponse({ type: TeamDto })
   async update(@Param('id') id: string, @Body() updateTeamDto: UpdateTeamDto) {
-    await this.teamService.update(+id, updateTeamDto);
-    return this.teamService.findOne(+id);
+    await this.teamService.update(id, updateTeamDto);
+    return this.teamService.findOne(id);
   }
 
   @Delete(':id')
   @ApiOkResponse()
   async remove(@Param('id') id: string) {
-    await this.teamService.remove(+id);
+    await this.teamService.remove(id);
   }
 
   @Post(':id/members')
@@ -65,6 +64,6 @@ export class TeamController {
     @Param('id') id: string,
     @Body() createMemberDto: CreateMemberDto,
   ) {
-    return this.teamService.createMember(+id, createMemberDto);
+    return this.teamService.createMember(id, createMemberDto);
   }
 }
