@@ -48,6 +48,7 @@ export class TeamService {
   }
 
   async createMember(teamId: number, createMemberDto: CreateMemberDto) {
+    // TODO verify the user is not part of the team yet, either as member or owner
     const team = await this.teamRepository.findOne({
       where: { id: teamId },
       relations: ['members'],
