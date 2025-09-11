@@ -34,7 +34,10 @@ export class TeamService {
 
     if (!client) throw new Error('Owner doesnt exist');
 
-    return this.teamRepository.findBy({ owner: client });
+    return this.teamRepository.find({
+      where: { owner: client },
+      relations: ['owner', 'members'],
+    });
   }
 
   async findAllByMember(memberId: string) {
@@ -44,7 +47,10 @@ export class TeamService {
 
     if (!client) throw new Error('Owner doesnt exist');
 
-    return this.teamRepository.findBy({ members: client });
+    return this.teamRepository.find({
+      where: { members: client },
+      relations: ['owner', 'members'],
+    });
   }
 
   async createMember(teamId: string, createMemberDto: CreateMemberDto) {
