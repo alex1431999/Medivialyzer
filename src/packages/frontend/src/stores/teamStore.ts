@@ -86,6 +86,8 @@ export const useTeamStore = defineStore('team', {
 
       const teamIndex = this.teams.findIndex((team) => team.id === id)
       if (teamIndex >= 0) this.teams[teamIndex] = teamUpdated
+
+      return teamUpdated
     },
   },
 })

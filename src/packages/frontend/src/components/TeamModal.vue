@@ -20,12 +20,14 @@ import { computed, ref, watch } from 'vue'
 import CreateTeamModal from './CreateTeamModal.vue'
 import RequestLoader from './RequestLoader.vue'
 import { useNotifications } from '../composables/useNotifications.ts'
+import JoinTeamModal from './JoinTeamModal.vue'
 
 const { notify } = useNotifications()
 
 const teamStore = useTeamStore()
 
 const isCreateTeamModalOpen = ref<boolean>(false)
+const isJoinTeamModalOpen = ref<boolean>(false)
 
 const hasTeams = computed(() => teamStore.teams.length > 0)
 const actionButtonColor = computed(() =>
@@ -48,6 +50,11 @@ watch(
 async function onCreateTeam(createData: TeamCreateData) {
   teamSeleceted.value = await teamStore.create(createData)
   notify('Team successfully created', 'success')
+}
+
+async function onJoinTeam(id: string) {
+  teamSeleceted.value = await teamStore.join(id)
+  notify('Team successfully joined', 'success')
 }
 
 async function onUpdateTeamName(name: string) {
@@ -76,6 +83,7 @@ async function onUpdateTeamName(name: string) {
         v-model:show="isCreateTeamModalOpen"
         @create="onCreateTeam"
       />
+      <JoinTeamModal v-model:show="isJoinTeamModalOpen" @join="onJoinTeam" />
       <v-card>
         <v-card-title class="supplies-modal__header">
           <div>Team</div>
@@ -111,7 +119,10 @@ async function onUpdateTeamName(name: string) {
             @click="isCreateTeamModalOpen = true"
             >Create Team</v-btn
           >
-          <v-btn :active-color="actionButtonColor" :active="!hasTeams"
+          <v-btn
+            :active-color="actionButtonColor"
+            :active="!hasTeams"
+            @click="isJoinTeamModalOpen = true"
             >Join Team</v-btn
           >
           <v-btn>Close</v-btn>
