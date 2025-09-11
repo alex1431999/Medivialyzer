@@ -64,6 +64,19 @@ export interface CreateClientDto {
 /**
  * 
  * @export
+ * @interface CreateMemberDto
+ */
+export interface CreateMemberDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateMemberDto
+     */
+    'id': string;
+}
+/**
+ * 
+ * @export
  * @interface CreateTeamDto
  */
 export interface CreateTeamDto {
@@ -597,6 +610,45 @@ export const TeamApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {string} id 
+         * @param {CreateMemberDto} createMemberDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        teamControllerCreateMember: async (id: string, createMemberDto: CreateMemberDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('teamControllerCreateMember', 'id', id)
+            // verify required parameter 'createMemberDto' is not null or undefined
+            assertParamExists('teamControllerCreateMember', 'createMemberDto', createMemberDto)
+            const localVarPath = `/team/{id}/members`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createMemberDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} clientId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -757,6 +809,19 @@ export const TeamApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} id 
+         * @param {CreateMemberDto} createMemberDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async teamControllerCreateMember(id: string, createMemberDto: CreateMemberDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TeamDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.teamControllerCreateMember(id, createMemberDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TeamApi.teamControllerCreateMember']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {string} clientId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -798,7 +863,7 @@ export const TeamApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async teamControllerUpdate(id: string, updateTeamDto: UpdateTeamDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async teamControllerUpdate(id: string, updateTeamDto: UpdateTeamDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TeamDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.teamControllerUpdate(id, updateTeamDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TeamApi.teamControllerUpdate']?.[localVarOperationServerIndex]?.url;
@@ -822,6 +887,16 @@ export const TeamApiFactory = function (configuration?: Configuration, basePath?
          */
         teamControllerCreate(createTeamDto: CreateTeamDto, options?: RawAxiosRequestConfig): AxiosPromise<TeamDto> {
             return localVarFp.teamControllerCreate(createTeamDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {CreateMemberDto} createMemberDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        teamControllerCreateMember(id: string, createMemberDto: CreateMemberDto, options?: RawAxiosRequestConfig): AxiosPromise<TeamDto> {
+            return localVarFp.teamControllerCreateMember(id, createMemberDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -857,7 +932,7 @@ export const TeamApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        teamControllerUpdate(id: string, updateTeamDto: UpdateTeamDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        teamControllerUpdate(id: string, updateTeamDto: UpdateTeamDto, options?: RawAxiosRequestConfig): AxiosPromise<TeamDto> {
             return localVarFp.teamControllerUpdate(id, updateTeamDto, options).then((request) => request(axios, basePath));
         },
     };
@@ -879,6 +954,18 @@ export class TeamApi extends BaseAPI {
      */
     public teamControllerCreate(createTeamDto: CreateTeamDto, options?: RawAxiosRequestConfig) {
         return TeamApiFp(this.configuration).teamControllerCreate(createTeamDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {CreateMemberDto} createMemberDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TeamApi
+     */
+    public teamControllerCreateMember(id: string, createMemberDto: CreateMemberDto, options?: RawAxiosRequestConfig) {
+        return TeamApiFp(this.configuration).teamControllerCreateMember(id, createMemberDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
