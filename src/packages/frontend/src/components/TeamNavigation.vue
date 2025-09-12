@@ -31,6 +31,7 @@ function canDeleteTeam(team: Team) {
           <TeamMenu
             :can-leave="canLeaveTeam(team)"
             :can-delete="canDeleteTeam(team)"
+            @delete="teamStore.remove(team.id)"
           />
         </div>
       </VListItem>

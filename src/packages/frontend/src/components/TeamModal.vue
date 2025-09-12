@@ -21,6 +21,7 @@ import CreateTeamModal from './CreateTeamModal.vue'
 import RequestLoader from './RequestLoader.vue'
 import { useNotifications } from '../composables/useNotifications.ts'
 import JoinTeamModal from './JoinTeamModal.vue'
+import _ from 'lodash'
 
 const { notify } = useNotifications()
 
@@ -34,33 +35,39 @@ const actionButtonColor = computed(() =>
   hasTeams.value ? undefined : 'secondary',
 )
 
-const teamSeleceted = ref<TeamType | null>(null)
+const teamSelected = ref<TeamType | null>(null)
 
 // Auto select the first team when no selection was made yet
 watch(
   () => teamStore.teams,
   (teams) => {
-    if (teamSeleceted.value === null && teams.length > 0) {
-      teamSeleceted.value = teams[0]
+    const teamIds = _.map(teams, 'id')
+
+    if (teamSelected.value === null && teams.length > 0) {
+      teamSelected.value = teams[0]
+    }
+
+    if (teamSelected.value && !teamIds.includes(teamSelected.value.id)) {
+      teamSelected.value = teams.length > 0 ? teams[0] : null
     }
   },
-  { immediate: true },
+  { immediate: true, deep: true },
 )
 
 async function onCreateTeam(createData: TeamCreateData) {
-  teamSeleceted.value = await teamStore.create(createData)
+  teamSelected.value = await teamStore.create(createData)
   notify('Team successfully created', 'success')
 }
 
 async function onJoinTeam(id: string) {
-  teamSeleceted.value = await teamStore.join(id)
+  teamSelected.value = await teamStore.join(id)
   notify('Team successfully joined', 'success')
 }
 
 async function onUpdateTeamName(name: string) {
-  if (!teamSeleceted.value) throw new Error('No team selected')
+  if (!teamSelected.value) throw new Error('No team selected')
 
-  const id = teamSeleceted.value.id
+  const id = teamSelected.value.id
   await teamStore.update(id, { name })
 
   notify('Name updated successfully', 'success')
@@ -96,18 +103,18 @@ async function onUpdateTeamName(name: string) {
           <template v-else>
             <TeamNavigation
               v-if="hasTeams"
-              :team-selected="teamSeleceted"
-              @selectTeam="(team) => (teamSeleceted = team)"
+              :team-selected="teamSelected"
+              @selectTeam="(team) => (teamSelected = team)"
             />
             <NoTeamsPlaceholder v-if="!hasTeams" />
             <v-divider
-              v-if="teamSeleceted"
+              v-if="teamSelected"
               vertical
               class="mr-5 ml-5"
             ></v-divider>
             <Team
-              v-if="teamSeleceted"
-              :team="teamSeleceted"
+              v-if="teamSelected"
+              :team="teamSelected"
               @update-name="(name) => onUpdateTeamName(name)"
             />
           </template>
