@@ -84,7 +84,10 @@ export class TeamService {
   }
 
   findOne(id: string) {
-    return this.teamRepository.findOne({ where: { id } });
+    return this.teamRepository.findOne({
+      where: { id },
+      relations: ['members', 'owner'],
+    });
   }
 
   async update(id: string, updateTeamDto: UpdateTeamDto) {
