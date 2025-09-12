@@ -1,10 +1,23 @@
 <script setup lang="ts">
 import { VList, VListItem, VDivider } from 'vuetify/components'
 import { Team, useTeamStore } from '../stores/teamStore.ts'
+import TeamMenu from './TeamMenu.vue'
+import { computed } from 'vue'
+import { useClientStore } from '../stores/clientStore.ts'
 
 const teamStore = useTeamStore()
+const clientStore = useClientStore()
+
 const { teamSelected } = defineProps<{ teamSelected: Team | null }>()
 const emit = defineEmits(['selectTeam'])
+
+function canLeaveTeam(team: Team) {
+  return team.owner.id !== clientStore.client?.id
+}
+
+function canDeleteTeam(team: Team) {
+  return team.owner.id === clientStore.client?.id
+}
 </script>
 
 <template>
@@ -14,7 +27,13 @@ const emit = defineEmits(['selectTeam'])
         :active="team.id === teamSelected?.id"
         @click="emit('selectTeam', team)"
       >
-        {{ team.name }}
+        <div class="d-flex justify-space-between">
+          {{ team.name }}
+          <TeamMenu
+            :can-leave="canLeaveTeam(team)"
+            :can-delete="canDeleteTeam(team)"
+          />
+        </div>
       </VListItem>
       <v-divider
         v-if="i !== teamStore.teams.length - 1"
