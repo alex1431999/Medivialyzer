@@ -3,6 +3,7 @@ import { VList, VListItem, VDivider } from 'vuetify/components'
 import { Team, useTeamStore } from '../stores/teamStore.ts'
 import TeamMenu from './TeamMenu.vue'
 import { useClientStore } from '../stores/clientStore.ts'
+import { getClient } from '../utils/client.ts'
 
 const teamStore = useTeamStore()
 const clientStore = useClientStore()
@@ -31,6 +32,7 @@ function canDeleteTeam(team: Team) {
           <TeamMenu
             :can-leave="canLeaveTeam(team)"
             :can-delete="canDeleteTeam(team)"
+            @leave="teamStore.removeMember(team.id, getClient().id)"
             @delete="teamStore.remove(team.id)"
           />
         </div>

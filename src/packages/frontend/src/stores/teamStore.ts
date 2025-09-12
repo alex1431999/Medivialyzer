@@ -80,6 +80,11 @@ export const useTeamStore = defineStore('team', {
       _.remove(this.teams, (team) => team.id === id)
     },
 
+    async removeMember(id: string, memberId: string) {
+      await teamApi.teamControllerRemoveMember(id, memberId)
+      await this.refresh()
+    },
+
     async join(id: string) {
       const configStore = useConfigStore()
       const clientId = configStore.config.clientId
