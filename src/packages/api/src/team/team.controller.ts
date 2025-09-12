@@ -27,8 +27,6 @@ export class TeamController {
   @Get()
   @ApiOkResponse({ type: TeamDto, isArray: true })
   async findAllByOwner(@Param('ownerClientId') ownerClientId: string) {
-    const t = await this.teamService.findAllByOwner(ownerClientId);
-    console.log(t);
     return this.teamService.findAllByOwner(ownerClientId);
   }
 
@@ -67,5 +65,11 @@ export class TeamController {
     @Body() createMemberDto: CreateMemberDto,
   ) {
     return this.teamService.createMember(id, createMemberDto);
+  }
+
+  @Delete(':id/members/:memberId')
+  @ApiOkResponse()
+  removeMember(@Param('id') id: string, @Param('memberId') memberId: string) {
+    return this.teamService.removeMember(id, memberId);
   }
 }

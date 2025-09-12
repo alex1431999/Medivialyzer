@@ -73,6 +73,16 @@ export class TeamService {
     return team;
   }
 
+  async removeMember(teamId: string, memberId: string) {
+    const team = await this.findOne(teamId);
+
+    if (!team) throw new NotFoundException('Team not found');
+
+    team.members = team.members.filter((member) => member.id !== memberId);
+
+    await this.teamRepository.save(team);
+  }
+
   findOne(id: string) {
     return this.teamRepository.findOne({ where: { id } });
   }

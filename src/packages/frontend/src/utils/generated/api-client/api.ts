@@ -749,6 +749,43 @@ export const TeamApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @param {string} id 
+         * @param {string} memberId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        teamControllerRemoveMember: async (id: string, memberId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('teamControllerRemoveMember', 'id', id)
+            // verify required parameter 'memberId' is not null or undefined
+            assertParamExists('teamControllerRemoveMember', 'memberId', memberId)
+            const localVarPath = `/team/{id}/members/{memberId}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"memberId"}}`, encodeURIComponent(String(memberId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {UpdateTeamDto} updateTeamDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -859,6 +896,19 @@ export const TeamApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
+         * @param {string} memberId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async teamControllerRemoveMember(id: string, memberId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.teamControllerRemoveMember(id, memberId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TeamApi.teamControllerRemoveMember']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {UpdateTeamDto} updateTeamDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -924,6 +974,16 @@ export const TeamApiFactory = function (configuration?: Configuration, basePath?
          */
         teamControllerRemove(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.teamControllerRemove(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} memberId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        teamControllerRemoveMember(id: string, memberId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.teamControllerRemoveMember(id, memberId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -999,6 +1059,18 @@ export class TeamApi extends BaseAPI {
      */
     public teamControllerRemove(id: string, options?: RawAxiosRequestConfig) {
         return TeamApiFp(this.configuration).teamControllerRemove(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} memberId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TeamApi
+     */
+    public teamControllerRemoveMember(id: string, memberId: string, options?: RawAxiosRequestConfig) {
+        return TeamApiFp(this.configuration).teamControllerRemoveMember(id, memberId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
