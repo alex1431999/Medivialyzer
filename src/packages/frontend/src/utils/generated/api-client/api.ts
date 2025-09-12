@@ -107,10 +107,10 @@ export interface TeamDto {
     'id': string;
     /**
      * 
-     * @type {string}
+     * @type {ClientDto}
      * @memberof TeamDto
      */
-    'owner': string;
+    'owner': ClientDto;
     /**
      * 
      * @type {string}

@@ -5,8 +5,8 @@ export class TeamDto {
   @ApiProperty()
   id: string;
 
-  @ApiProperty()
-  owner: string;
+  @ApiProperty({ type: () => ClientDto })
+  owner: ClientDto;
 
   @ApiProperty()
   name: string;

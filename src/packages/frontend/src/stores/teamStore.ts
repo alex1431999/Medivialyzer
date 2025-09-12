@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 export type Team = {
   id: string
-  owner: string // Client ID of the owner
+  owner: Member
   name: string
   members: Member[]
 }

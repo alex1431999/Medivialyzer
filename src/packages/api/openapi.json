@@ -389,7 +389,7 @@
             "type": "string"
           },
           "owner": {
-            "type": "string"
+            "$ref": "#/components/schemas/ClientDto"
           },
           "name": {
             "type": "string"

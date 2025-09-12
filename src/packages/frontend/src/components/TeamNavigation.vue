@@ -2,7 +2,6 @@
 import { VList, VListItem, VDivider } from 'vuetify/components'
 import { Team, useTeamStore } from '../stores/teamStore.ts'
 import TeamMenu from './TeamMenu.vue'
-import { computed } from 'vue'
 import { useClientStore } from '../stores/clientStore.ts'
 
 const teamStore = useTeamStore()

@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | [default to undefined]
-**owner** | **string** |  | [default to undefined]
+**owner** | [**ClientDto**](ClientDto.md) |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **members** | [**Array&lt;ClientDto&gt;**](ClientDto.md) |  | [default to undefined]
 
