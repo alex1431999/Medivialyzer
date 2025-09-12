@@ -47,25 +47,27 @@ async function onSubmitWaste() {
       <v-btn v-bind="activatorProps" text="Submit" />
     </template>
 
-    <v-card>
-      <v-card-title>Submit waste</v-card-title>
-      <v-card-text>
-        <v-select
-          label="Team"
-          required
-          :items="teamOptions"
-          v-model="teamSelected"
-        ></v-select>
-        <v-text-field v-model="wasteAmount" label="Waste" type="number" />
-      </v-card-text>
-      <v-card-actions>
-        <v-btn
-          text="Submit"
-          :disabled="teamSelected === null"
-          @click="onSubmitWaste"
-        ></v-btn>
-        <v-btn text="Cancel" @click="isOpen = false"></v-btn>
-      </v-card-actions>
-    </v-card>
+    <template v-slot:default>
+      <v-card>
+        <v-card-title>Submit waste</v-card-title>
+        <v-card-text>
+          <v-select
+            label="Team"
+            required
+            :items="teamOptions"
+            v-model="teamSelected"
+          ></v-select>
+          <v-text-field v-model="wasteAmount" label="Waste" type="number" />
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            text="Submit"
+            :disabled="teamSelected === null"
+            @click="onSubmitWaste"
+          ></v-btn>
+          <v-btn text="Cancel" @click="isOpen = false"></v-btn>
+        </v-card-actions>
+      </v-card>
+    </template>
   </v-dialog>
 </template>
