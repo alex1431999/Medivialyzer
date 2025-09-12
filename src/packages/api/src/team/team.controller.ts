@@ -13,6 +13,7 @@ import { UpdateTeamDto } from './dto/update-team.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { TeamDto } from './dto/team.dto';
 import { CreateMemberDto } from '../client/dto/create-member.dto';
+import { CreateWasteDto } from './dto/create-waste.dto';
 
 @Controller('team')
 export class TeamController {
@@ -71,5 +72,15 @@ export class TeamController {
   @ApiOkResponse()
   removeMember(@Param('id') id: string, @Param('memberId') memberId: string) {
     return this.teamService.removeMember(id, memberId);
+  }
+
+  @Post(':id/waste/:memberId')
+  @ApiOkResponse()
+  async createWaste(
+    @Param('id') id: string,
+    @Param('memberId') memberId: string,
+    @Body() createWasteDto: CreateWasteDto,
+  ) {
+    await this.teamService.createWaste(id, memberId, createWasteDto);
   }
 }

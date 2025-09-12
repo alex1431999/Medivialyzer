@@ -6,6 +6,8 @@ import { Team } from './entities/team.entity';
 import { Repository } from 'typeorm';
 import { Client } from '../client/entities/client.entity';
 import { CreateMemberDto } from '../client/dto/create-member.dto';
+import { CreateWasteDto } from './dto/create-waste.dto';
+import { Waste } from './entities/waste.entity';
 
 @Injectable()
 export class TeamService {
@@ -15,6 +17,9 @@ export class TeamService {
 
     @InjectRepository(Client)
     private clientRepository: Repository<Client>,
+
+    @InjectRepository(Waste)
+    private wasteRepository: Repository<Waste>,
   ) {}
 
   async create(createTeamDto: CreateTeamDto) {
@@ -93,5 +98,27 @@ export class TeamService {
 
   remove(id: string) {
     return this.teamRepository.delete(id);
+  }
+
+  async createWaste(
+    teamId: string,
+    memberId: string,
+    createWasteDto: CreateWasteDto,
+  ) {
+    const team = await this.findOne(teamId);
+    const client = await this.clientRepository.findOne({
+      where: { id: memberId },
+    });
+
+    if (!team || !client)
+      throw new NotFoundException('Team or client not found');
+
+    const waste = this.wasteRepository.create({
+      team,
+      client,
+      wasteAmount: createWasteDto.wasteAmount,
+    });
+
+    return this.wasteRepository.save(waste);
   }
 }

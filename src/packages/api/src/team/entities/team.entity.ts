@@ -4,9 +4,11 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Client } from '../../client/entities/client.entity';
+import { Waste } from './waste.entity';
 
 @Entity()
 export class Team {
@@ -22,4 +24,7 @@ export class Team {
   @ManyToMany(() => Client, (client) => client.joinedTeams)
   @JoinTable()
   members: Client[];
+
+  @OneToMany(() => Waste, (waste) => waste.team)
+  wastes: Waste[];
 }
