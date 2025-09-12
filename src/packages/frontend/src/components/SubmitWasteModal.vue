@@ -7,23 +7,35 @@ import {
   VCardText,
   VSelect,
   VCardActions,
+  VTextField,
 } from 'vuetify/components'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { Team, useTeamStore } from '../stores/teamStore.ts'
 import { useNotifications } from '../composables/useNotifications.ts'
 
 const teamStore = useTeamStore()
 const { notify } = useNotifications()
 
+const { calculatedWaste } = defineProps<{ calculatedWaste: number }>()
+
 const isOpen = ref<boolean>(false)
 const teamSelected = ref<Team | null>(teamStore.teams[0] || null)
+const wasteAmount = ref<number>(calculatedWaste)
 
 const teamOptions = computed(() =>
   teamStore.teams.map((team) => ({ title: team.name, value: team })),
 )
 
+// Reset the value when the modal opens/closes
+watch(
+  () => isOpen.value,
+  () => {
+    wasteAmount.value = calculatedWaste
+  },
+)
+
 async function onSubmitWaste() {
-  console.log('TODO')
+  console.log('TODO', wasteAmount.value)
   notify('Waste submitted', 'success')
   isOpen.value = false
 }
@@ -44,6 +56,7 @@ async function onSubmitWaste() {
           :items="teamOptions"
           v-model="teamSelected"
         ></v-select>
+        <v-text-field v-model="wasteAmount" label="Waste" type="number" />
       </v-card-text>
       <v-card-actions>
         <v-btn

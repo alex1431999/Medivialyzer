@@ -149,7 +149,9 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
         </v-card-text>
 
         <v-card-actions>
-          <SubmitWasteModal />
+          <SubmitWasteModal
+            :calculated-waste="suppliesStore.totalSuppliesUsed"
+          />
           <v-btn text="Reset" @click="onReset"></v-btn>
           <v-btn text="Close" @click="isActive.value = false"></v-btn>
         </v-card-actions>
