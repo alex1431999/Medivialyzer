@@ -250,6 +250,47 @@
         ]
       }
     },
+    "/team/{id}/waste/{memberId}": {
+      "post": {
+        "operationId": "TeamController_createWaste",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWasteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Team"
+        ]
+      }
+    },
     "/client": {
       "post": {
         "operationId": "ClientController_create",
@@ -459,6 +500,17 @@
         },
         "required": [
           "id"
+        ]
+      },
+      "CreateWasteDto": {
+        "type": "object",
+        "properties": {
+          "wasteAmount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "wasteAmount"
         ]
       },
       "CreateClientDto": {

@@ -7,7 +7,7 @@ export class Waste {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('number')
+  @Column('int')
   wasteAmount: number;
 
   @ManyToOne(() => Team, (team) => team.wastes, { onDelete: 'CASCADE' })

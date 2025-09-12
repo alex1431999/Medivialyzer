@@ -96,6 +96,19 @@ export interface CreateTeamDto {
 /**
  * 
  * @export
+ * @interface CreateWasteDto
+ */
+export interface CreateWasteDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateWasteDto
+     */
+    'wasteAmount': number;
+}
+/**
+ * 
+ * @export
  * @interface TeamDto
  */
 export interface TeamDto {
@@ -649,6 +662,49 @@ export const TeamApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {string} id 
+         * @param {string} memberId 
+         * @param {CreateWasteDto} createWasteDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        teamControllerCreateWaste: async (id: string, memberId: string, createWasteDto: CreateWasteDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('teamControllerCreateWaste', 'id', id)
+            // verify required parameter 'memberId' is not null or undefined
+            assertParamExists('teamControllerCreateWaste', 'memberId', memberId)
+            // verify required parameter 'createWasteDto' is not null or undefined
+            assertParamExists('teamControllerCreateWaste', 'createWasteDto', createWasteDto)
+            const localVarPath = `/team/{id}/waste/{memberId}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"memberId"}}`, encodeURIComponent(String(memberId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createWasteDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} clientId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -859,6 +915,20 @@ export const TeamApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} id 
+         * @param {string} memberId 
+         * @param {CreateWasteDto} createWasteDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async teamControllerCreateWaste(id: string, memberId: string, createWasteDto: CreateWasteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.teamControllerCreateWaste(id, memberId, createWasteDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TeamApi.teamControllerCreateWaste']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {string} clientId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -950,6 +1020,17 @@ export const TeamApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {string} id 
+         * @param {string} memberId 
+         * @param {CreateWasteDto} createWasteDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        teamControllerCreateWaste(id: string, memberId: string, createWasteDto: CreateWasteDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.teamControllerCreateWaste(id, memberId, createWasteDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {string} clientId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1026,6 +1107,19 @@ export class TeamApi extends BaseAPI {
      */
     public teamControllerCreateMember(id: string, createMemberDto: CreateMemberDto, options?: RawAxiosRequestConfig) {
         return TeamApiFp(this.configuration).teamControllerCreateMember(id, createMemberDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {string} memberId 
+     * @param {CreateWasteDto} createWasteDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TeamApi
+     */
+    public teamControllerCreateWaste(id: string, memberId: string, createWasteDto: CreateWasteDto, options?: RawAxiosRequestConfig) {
+        return TeamApiFp(this.configuration).teamControllerCreateWaste(id, memberId, createWasteDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
