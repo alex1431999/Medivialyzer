@@ -99,5 +99,16 @@ export const useTeamStore = defineStore('team', {
 
       return teamUpdated
     },
+
+    async submitWaste(id: string, wasteAmount: number) {
+      const configStore = useConfigStore()
+      const clientId = configStore.config.clientId
+
+      await teamApi.teamControllerCreateWaste(id, clientId, {
+        wasteAmount: wasteAmount,
+      })
+
+      await this.refresh()
+    },
   },
 })

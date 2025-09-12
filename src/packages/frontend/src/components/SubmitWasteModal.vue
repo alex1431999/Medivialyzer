@@ -35,7 +35,10 @@ watch(
 )
 
 async function onSubmitWaste() {
-  console.log('TODO', wasteAmount.value)
+  if (!teamSelected.value) throw new Error('No team selected')
+
+  await teamStore.submitWaste(teamSelected.value.id, wasteAmount.value)
+
   notify('Waste submitted', 'success')
   isOpen.value = false
 }
