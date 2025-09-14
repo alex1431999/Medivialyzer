@@ -26,7 +26,7 @@ const waste = computed(() =>
         <v-chip>
           {{ member.name }}
 
-          <!-- TODO add some styling -->
+          <!-- TODO add a dedicated component -->
           {{ waste?.wasteAmount }}
         </v-chip>
       </v-badge>
