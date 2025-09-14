@@ -183,6 +183,12 @@ export interface WasteDto {
     'wasteAmount': number;
     /**
      * 
+     * @type {string}
+     * @memberof WasteDto
+     */
+    'createdAt': string;
+    /**
+     * 
      * @type {ClientDto}
      * @memberof WasteDto
      */

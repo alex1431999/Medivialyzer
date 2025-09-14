@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Team } from './team.entity';
 import { Client } from '../../client/entities/client.entity';
 
@@ -9,6 +15,9 @@ export class Waste {
 
   @Column('int')
   wasteAmount: number;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   @ManyToOne(() => Team, (team) => team.wastes, { onDelete: 'CASCADE' })
   team: Team;

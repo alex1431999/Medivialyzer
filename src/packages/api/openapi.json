@@ -460,12 +460,17 @@
           "wasteAmount": {
             "type": "number"
           },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
           "client": {
             "$ref": "#/components/schemas/ClientDto"
           }
         },
         "required": [
           "wasteAmount",
+          "createdAt",
           "client"
         ]
       },

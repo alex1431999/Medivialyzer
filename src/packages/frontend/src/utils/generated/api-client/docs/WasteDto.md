@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **wasteAmount** | **number** |  | [default to undefined]
+**createdAt** | **string** |  | [default to undefined]
 **client** | [**ClientDto**](ClientDto.md) |  | [default to undefined]
 
 ## Example
@@ -15,6 +16,7 @@ import { WasteDto } from './api';
 
 const instance: WasteDto = {
     wasteAmount,
+    createdAt,
     client,
 };
 ```

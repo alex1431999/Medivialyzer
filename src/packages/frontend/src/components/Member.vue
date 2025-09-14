@@ -11,7 +11,6 @@ const { member, team } = defineProps<{ member: Member | Client; team: Team }>()
 
 const isYou = computed(() => clientStore.client?.id === member.id)
 
-// TODO add createdAt field to data on API level
 const waste = computed(() =>
   _.sortBy(team.wastes, 'createdAt').find(
     (wasteCurrent) => wasteCurrent.client.id === member.id,

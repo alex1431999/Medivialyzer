@@ -5,6 +5,9 @@ export class WasteDto {
   @ApiProperty()
   wasteAmount: number;
 
+  @ApiProperty()
+  createdAt: Date;
+
   @ApiProperty({ type: () => ClientDto })
   client: ClientDto;
 }
