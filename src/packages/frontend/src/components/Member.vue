@@ -11,11 +11,10 @@ const { member, team } = defineProps<{ member: Member | Client; team: Team }>()
 
 const isYou = computed(() => clientStore.client?.id === member.id)
 
-// TODO check if we need to cast createdAt to a number
 const waste = computed(() =>
-  _.sortBy(team.wastes, 'createdAt').find(
-    (wasteCurrent) => wasteCurrent.client.id === member.id,
-  ),
+  _.sortBy(team.wastes, 'createdAt')
+    .reverse()
+    .find((wasteCurrent) => wasteCurrent.client.id === member.id),
 )
 </script>
 
