@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { useConfigStore } from './configStore.ts'
 import { teamApi } from '../utils/api/api.team.ts'
-import { UpdateTeamDto } from '../utils/generated/api-client'
+import { TeamDto, UpdateTeamDto } from '../utils/generated/api-client'
 import _ from 'lodash'
 
 export type Team = {
@@ -19,7 +19,7 @@ export type Member = {
 export type TeamCreateData = Pick<Team, 'name'>
 
 export type TeamStoreData = {
-  teams: Team[]
+  teams: TeamDto[]
   isLoading: boolean
 }
 

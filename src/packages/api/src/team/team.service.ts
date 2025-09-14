@@ -41,7 +41,7 @@ export class TeamService {
 
     return this.teamRepository.find({
       where: { owner: client },
-      relations: ['owner', 'members'],
+      relations: ['owner', 'members', 'wastes', 'wastes.client'],
     });
   }
 
@@ -54,7 +54,7 @@ export class TeamService {
 
     return this.teamRepository.find({
       where: { members: client },
-      relations: ['owner', 'members'],
+      relations: ['owner', 'members', 'wastes', 'wastes.client'],
     });
   }
 
@@ -88,7 +88,7 @@ export class TeamService {
   findOne(id: string) {
     return this.teamRepository.findOne({
       where: { id },
-      relations: ['members', 'owner'],
+      relations: ['owner', 'members', 'wastes', 'wastes.client'],
     });
   }
 

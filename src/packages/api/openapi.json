@@ -454,6 +454,24 @@
           "name"
         ]
       },
+      "WasteDto": {
+        "type": "object",
+        "properties": {
+          "wasteAmount": {
+            "type": "number"
+          },
+          "client": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClientDto"
+            }
+          }
+        },
+        "required": [
+          "wasteAmount",
+          "client"
+        ]
+      },
       "TeamDto": {
         "type": "object",
         "properties": {
@@ -471,13 +489,20 @@
             "items": {
               "$ref": "#/components/schemas/ClientDto"
             }
+          },
+          "wastes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WasteDto"
+            }
           }
         },
         "required": [
           "id",
           "owner",
           "name",
-          "members"
+          "members",
+          "wastes"
         ]
       },
       "UpdateTeamDto": {

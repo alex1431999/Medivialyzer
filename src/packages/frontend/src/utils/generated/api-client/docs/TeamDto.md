@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **owner** | [**ClientDto**](ClientDto.md) |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **members** | [**Array&lt;ClientDto&gt;**](ClientDto.md) |  | [default to undefined]
+**wastes** | [**Array&lt;WasteDto&gt;**](WasteDto.md) |  | [default to undefined]
 
 ## Example
 
@@ -20,6 +21,7 @@ const instance: TeamDto = {
     owner,
     name,
     members,
+    wastes,
 };
 ```
 

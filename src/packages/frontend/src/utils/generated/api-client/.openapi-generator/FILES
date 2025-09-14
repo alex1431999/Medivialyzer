@@ -15,5 +15,6 @@ docs/TeamApi.md
 docs/TeamDto.md
 docs/UpdateClientDto.md
 docs/UpdateTeamDto.md
+docs/WasteDto.md
 git_push.sh
 index.ts

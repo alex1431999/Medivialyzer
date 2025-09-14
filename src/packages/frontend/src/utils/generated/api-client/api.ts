@@ -136,6 +136,12 @@ export interface TeamDto {
      * @memberof TeamDto
      */
     'members': Array<ClientDto>;
+    /**
+     * 
+     * @type {Array<WasteDto>}
+     * @memberof TeamDto
+     */
+    'wastes': Array<WasteDto>;
 }
 /**
  * 
@@ -162,6 +168,25 @@ export interface UpdateTeamDto {
      * @memberof UpdateTeamDto
      */
     'name': string;
+}
+/**
+ * 
+ * @export
+ * @interface WasteDto
+ */
+export interface WasteDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof WasteDto
+     */
+    'wasteAmount': number;
+    /**
+     * 
+     * @type {Array<ClientDto>}
+     * @memberof WasteDto
+     */
+    'client': Array<ClientDto>;
 }
 
 /**

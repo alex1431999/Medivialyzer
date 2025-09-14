@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ClientDto } from '../../client/dto/client.dto';
+import { WasteDto } from './waste.dto';
 
 export class TeamDto {
   @ApiProperty()
@@ -13,4 +14,7 @@ export class TeamDto {
 
   @ApiProperty({ type: () => [ClientDto] })
   members: ClientDto[];
+
+  @ApiProperty({ type: () => [WasteDto] })
+  wastes: WasteDto[];
 }
