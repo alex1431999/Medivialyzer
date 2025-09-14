@@ -461,10 +461,7 @@
             "type": "number"
           },
           "client": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ClientDto"
-            }
+            "$ref": "#/components/schemas/ClientDto"
           }
         },
         "required": [

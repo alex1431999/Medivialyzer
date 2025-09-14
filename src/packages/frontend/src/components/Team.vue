@@ -16,6 +16,6 @@ const emit = defineEmits(['updateName'])
       :team="team"
       @update-name="(value) => emit('updateName', value)"
     ></TeamName>
-    <Members :members="team.members || []" />
+    <Members :team="team" :members="team.members || []" />
   </div>
 </template>

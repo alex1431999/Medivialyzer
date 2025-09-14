@@ -4,17 +4,9 @@ import { teamApi } from '../utils/api/api.team.ts'
 import { TeamDto, UpdateTeamDto } from '../utils/generated/api-client'
 import _ from 'lodash'
 
-export type Team = {
-  id: string
-  owner: Member
-  name: string
-  members: Member[]
-}
+export type Team = TeamDto
 
-export type Member = {
-  id: string
-  name: string
-}
+export type Member = Team['members'][number]
 
 export type TeamCreateData = Pick<Team, 'name'>
 

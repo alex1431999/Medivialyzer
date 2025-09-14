@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { VCard, VCardText, VBadge, VChip } from 'vuetify/components'
-import { Member } from '../stores/teamStore.ts'
+import { Member, Team } from '../stores/teamStore.ts'
 import { Client, useClientStore } from '../stores/clientStore.ts'
 import { computed } from 'vue'
+import _ from 'lodash'
 
 const clientStore = useClientStore()
 
-const { member } = defineProps<{ member: Member | Client }>()
+const { member, team } = defineProps<{ member: Member | Client; team: Team }>()
 
 const isYou = computed(() => clientStore.client?.id === member.id)
+
+// TODO add createdAt field to data on API level
+const waste = computed(() =>
+  _.sortBy(team.wastes, 'createdAt').find(
+    (wasteCurrent) => wasteCurrent.client.id === member.id,
+  ),
+)
 </script>
 
 <template>
@@ -18,6 +26,9 @@ const isYou = computed(() => clientStore.client?.id === member.id)
       <v-badge v-else color="secondary" content="You">
         <v-chip>
           {{ member.name }}
+
+          <!-- TODO add some styling -->
+          {{ waste?.wasteAmount }}
         </v-chip>
       </v-badge>
     </v-card-text>

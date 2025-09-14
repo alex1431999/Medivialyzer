@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **wasteAmount** | **number** |  | [default to undefined]
-**client** | [**Array&lt;ClientDto&gt;**](ClientDto.md) |  | [default to undefined]
+**client** | [**ClientDto**](ClientDto.md) |  | [default to undefined]
 
 ## Example
 

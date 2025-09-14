@@ -183,10 +183,10 @@ export interface WasteDto {
     'wasteAmount': number;
     /**
      * 
-     * @type {Array<ClientDto>}
+     * @type {ClientDto}
      * @memberof WasteDto
      */
-    'client': Array<ClientDto>;
+    'client': ClientDto;
 }
 
 /**
