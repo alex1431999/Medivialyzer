@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia'
 import { useConfigStore } from './configStore.ts'
 import { teamApi } from '../utils/api/api.team.ts'
-import { TeamDto, UpdateTeamDto } from '../utils/generated/api-client'
+import { TeamDto, UpdateTeamDto, WasteDto } from '../utils/generated/api-client'
 import _ from 'lodash'
+
+export type Waste = WasteDto
 
 export type Team = TeamDto
 
