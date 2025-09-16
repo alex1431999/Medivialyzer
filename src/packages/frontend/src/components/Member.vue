@@ -2,6 +2,7 @@
 import { VCard, VCardText, VBadge, VChip } from 'vuetify/components'
 import { Member, Team } from '../stores/teamStore.ts'
 import { Client, useClientStore } from '../stores/clientStore.ts'
+import Waste from './Waste.vue'
 import { computed } from 'vue'
 import _ from 'lodash'
 
@@ -25,11 +26,10 @@ const waste = computed(() =>
       <v-badge v-else color="secondary" content="You">
         <v-chip>
           {{ member.name }}
-
-          <!-- TODO add a dedicated component -->
-          {{ waste?.wasteAmount }}
         </v-chip>
       </v-badge>
+
+      <Waste :waste-amount="waste?.wasteAmount" />
     </v-card-text>
   </v-card>
 </template>
