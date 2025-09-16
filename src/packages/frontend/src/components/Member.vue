@@ -6,6 +6,7 @@ import Waste from './Waste.vue'
 import { computed } from 'vue'
 import _ from 'lodash'
 import Profit from './Profit.vue'
+import { WasteDto } from '../utils/generated/api-client'
 
 const clientStore = useClientStore()
 
@@ -13,9 +14,20 @@ const { member, team } = defineProps<{ member: Member | Client; team: Team }>()
 
 const isYou = computed(() => clientStore.client?.id === member.id)
 
+/**
+ * If waste is older than 30 minutes we don't consider it valid anymore
+ */
+function filterOutdatedWaste(waste: WasteDto) {
+  const wasteSubmittedAt = new Date(waste.createdAt).getTime()
+  const THIRTY_MINUTES = 1000 * 60 * 30
+
+  return wasteSubmittedAt > Date.now() - THIRTY_MINUTES
+}
+
 const waste = computed(() =>
   _.sortBy(team.wastes, 'createdAt')
     .reverse()
+    .filter(filterOutdatedWaste)
     .find((wasteCurrent) => wasteCurrent.client.id === member.id),
 )
 </script>
