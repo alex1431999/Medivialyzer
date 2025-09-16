@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VChip } from 'vuetify/components'
+import { VChip, VIcon } from 'vuetify/components'
 
 const { profitAmount } = defineProps<{ profitAmount?: number }>()
 </script>
@@ -11,5 +11,8 @@ const { profitAmount } = defineProps<{ profitAmount?: number }>()
     append-icon="mdi-gold"
   >
     {{ profitAmount }}
+  </v-chip>
+  <v-chip v-else class="opacity-20" color="success">
+    <v-icon>mdi-gold</v-icon>
   </v-chip>
 </template>
