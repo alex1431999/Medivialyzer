@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { VChip, VIcon } from 'vuetify/components'
-import { Waste } from '../stores/teamStore.ts'
+import { WasteDto } from '../utils/generated/api-client'
 
-const { waste } = defineProps<{ waste?: Waste }>()
+const { waste } = defineProps<{ waste?: WasteDto }>()
 </script>
 
 <template>
