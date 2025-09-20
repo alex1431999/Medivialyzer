@@ -1,35 +1,21 @@
 <script setup lang="ts">
 import { VCard, VCardText, VBadge, VChip } from 'vuetify/components'
-import { Member, Team } from '../stores/teamStore.ts'
+import { Member } from '../stores/teamStore.ts'
 import { Client, useClientStore } from '../stores/clientStore.ts'
 import Waste from './Waste.vue'
 import { computed } from 'vue'
-import _ from 'lodash'
 import Profit from './Profit.vue'
 import { WasteDto } from '../utils/generated/api-client'
 
 const clientStore = useClientStore()
 
-const { member, team } = defineProps<{ member: Member | Client; team: Team }>()
+const { member, waste, profitAmount } = defineProps<{
+  member: Member | Client
+  waste?: WasteDto
+  profitAmount?: number
+}>()
 
 const isYou = computed(() => clientStore.client?.id === member.id)
-
-/**
- * If waste is older than 30 minutes we don't consider it valid anymore
- */
-function filterOutdatedWaste(waste: WasteDto) {
-  const wasteSubmittedAt = new Date(waste.createdAt).getTime()
-  const THIRTY_MINUTES = 1000 * 60 * 30
-
-  return wasteSubmittedAt > Date.now() - THIRTY_MINUTES
-}
-
-const waste = computed(() =>
-  _.sortBy(team.wastes, 'createdAt')
-    .reverse()
-    .filter(filterOutdatedWaste)
-    .find((wasteCurrent) => wasteCurrent.client.id === member.id),
-)
 </script>
 
 <template>
@@ -47,7 +33,7 @@ const waste = computed(() =>
           <Waste :waste="waste" />
 
           <!-- TODO: we still need to calcualte the profit -->
-          <Profit :profit-amount="100"></Profit>
+          <Profit :profit-amount="profitAmount"></Profit>
         </div>
       </div>
     </v-card-text>

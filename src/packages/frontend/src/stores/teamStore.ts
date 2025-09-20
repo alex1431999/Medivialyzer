@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import { useConfigStore } from './configStore.ts'
 import { teamApi } from '../utils/api/api.team.ts'
-import { TeamDto, UpdateTeamDto } from '../utils/generated/api-client'
+import { TeamDto, UpdateTeamDto, WasteDto } from '../utils/generated/api-client'
 import _ from 'lodash'
+import { filterOutdatedWaste } from '../utils/waste/waste.utils.ts'
 
 export type Team = TeamDto
 
@@ -36,6 +37,18 @@ export const useTeamStore = defineStore('team', {
       const response = await teamApi.teamControllerFindAll(clientId)
 
       this.teams = _.sortBy(response.data, 'name')
+    },
+
+    getWaste(teamId: string, userId: string): WasteDto | undefined {
+      const team = this.teams.find((teamCurrent) => teamId === teamCurrent.id)
+      if (!team) return undefined
+
+      const relevantWastes = team.wastes.filter(filterOutdatedWaste)
+      const mostRecentWaste = _.sortBy(relevantWastes, 'createdAt')
+        .reverse()
+        .find((wasteCurrnet) => wasteCurrnet.client.id === userId)
+
+      return mostRecentWaste || undefined
     },
 
     async create(createData: TeamCreateData) {
