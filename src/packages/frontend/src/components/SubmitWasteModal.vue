@@ -19,11 +19,11 @@ const { notify } = useNotifications()
 const { calculatedWaste } = defineProps<{ calculatedWaste: number }>()
 
 const isOpen = ref<boolean>(false)
-const teamSelected = ref<Team | null>(teamStore.teams[0] || null)
+const teamSelected = ref<string | null>(teamStore.teams[0]?.id || null)
 const wasteAmount = ref<number>(calculatedWaste)
 
 const teamOptions = computed(() =>
-  teamStore.teams.map((team) => ({ title: team.name, value: team })),
+  teamStore.teams.map((team) => ({ title: team.name, value: team.id })),
 )
 
 // Reset the value when the modal opens/closes
@@ -39,7 +39,7 @@ watch(
 async function onSubmitWaste() {
   if (!teamSelected.value) throw new Error('No team selected')
 
-  await teamStore.submitWaste(teamSelected.value.id, wasteAmount.value)
+  await teamStore.submitWaste(teamSelected.value, wasteAmount.value)
 
   notify('Waste submitted', 'success')
   isOpen.value = false
