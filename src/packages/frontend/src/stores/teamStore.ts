@@ -51,6 +51,11 @@ export const useTeamStore = defineStore('team', {
       return mostRecentWaste || undefined
     },
 
+    getProfit(teamId: string, userId: string): number | undefined {
+      // TODO implement
+      return 15
+    },
+
     async create(createData: TeamCreateData) {
       const configStore = useConfigStore()
       const clientId = configStore.config.clientId

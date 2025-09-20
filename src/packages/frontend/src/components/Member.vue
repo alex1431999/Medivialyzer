@@ -32,7 +32,6 @@ const isYou = computed(() => clientStore.client?.id === member.id)
         <div class="d-flex ga-2">
           <Waste :waste="waste" />
 
-          <!-- TODO: we still need to calcualte the profit -->
           <Profit :profit-amount="profitAmount"></Profit>
         </div>
       </div>

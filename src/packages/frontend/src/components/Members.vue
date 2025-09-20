@@ -21,12 +21,14 @@ const { members, team } = defineProps<{ members: MemberType[]; team: Team }>()
         v-if="clientStore.client"
         :member="clientStore.client"
         :waste="teamStore.getWaste(team.id, clientStore.client.id)"
+        :profit-amount="teamStore.getProfit(team.id, clientStore.client.id)"
       />
     </v-list-item>
     <v-list-item v-for="member in members" :key="member.id">
       <Member
         :member="member"
         :waste="teamStore.getWaste(team.id, member.id)"
+        :profit-amount="teamStore.getProfit(team.id, member.id)"
       />
     </v-list-item>
   </v-list>
