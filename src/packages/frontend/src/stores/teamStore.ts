@@ -53,6 +53,7 @@ export const useTeamStore = defineStore('team', {
 
     getProfit(teamId: string, userId: string): number | undefined {
       // TODO implement
+      // TODO we need to move the total loot calculation to the lood data store to be able to access that here
       return 15
     },
 
