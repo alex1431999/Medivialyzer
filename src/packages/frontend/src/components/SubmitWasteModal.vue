@@ -30,7 +30,9 @@ const teamOptions = computed(() =>
 watch(
   () => isOpen.value,
   () => {
-    wasteAmount.value = calculatedWaste
+    setTimeout(() => {
+      wasteAmount.value = calculatedWaste
+    }, 500)
   },
 )
 
