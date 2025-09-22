@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VCard, VCardText, VBadge, VChip } from 'vuetify/components'
-import { Member, Team, useTeamStore } from '../stores/teamStore.ts'
+import { Member, Team } from '../stores/teamStore.ts'
 import { Client, useClientStore } from '../stores/clientStore.ts'
 import Waste from './Waste.vue'
 import { computed } from 'vue'
@@ -21,7 +21,6 @@ import {
 const clientStore = useClientStore()
 const configStore = useConfigStore()
 const lootDataStore = useLootDataStore()
-const teamstore = useTeamStore()
 
 const { member, team } = defineProps<{
   member: Member | Client
