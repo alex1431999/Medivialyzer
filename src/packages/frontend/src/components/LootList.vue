@@ -2,7 +2,6 @@
 import { computed, ref } from 'vue'
 import LootListItem from './LootListItem.vue'
 import LootListMenu from './LootListMenu.vue'
-import * as _ from 'lodash'
 import { useConfigStore } from '../stores/configStore.ts'
 import { THIRTY_MINUTES } from '../constants/time.ts'
 import LootTimeDisplay from './LootTimeDisplay.vue'
