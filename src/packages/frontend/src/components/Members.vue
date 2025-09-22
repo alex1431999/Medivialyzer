@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { VList, VListItem } from 'vuetify/components'
 import Member from './Member.vue'
-import {
-  Member as MemberType,
-  Team,
-  useTeamStore,
-} from '../stores/teamStore.ts'
+import { Member as MemberType, Team } from '../stores/teamStore.ts'
 import { useClientStore } from '../stores/clientStore.ts'
 
 const clientStore = useClientStore()
-const teamStore = useTeamStore()
 
 const { members, team } = defineProps<{ members: MemberType[]; team: Team }>()
 </script>
@@ -20,16 +15,11 @@ const { members, team } = defineProps<{ members: MemberType[]; team: Team }>()
       <Member
         v-if="clientStore.client"
         :member="clientStore.client"
-        :waste="teamStore.getWaste(team.id, clientStore.client.id)"
-        :profit-amount="teamStore.getProfit(team.id, clientStore.client.id)"
+        :team="team"
       />
     </v-list-item>
     <v-list-item v-for="member in members" :key="member.id">
-      <Member
-        :member="member"
-        :waste="teamStore.getWaste(team.id, member.id)"
-        :profit-amount="teamStore.getProfit(team.id, member.id)"
-      />
+      <Member :member="member" :team="team" />
     </v-list-item>
   </v-list>
 </template>

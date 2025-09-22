@@ -1,21 +1,49 @@
 <script setup lang="ts">
 import { VCard, VCardText, VBadge, VChip } from 'vuetify/components'
-import { Member } from '../stores/teamStore.ts'
+import { Member, Team, useTeamStore } from '../stores/teamStore.ts'
 import { Client, useClientStore } from '../stores/clientStore.ts'
 import Waste from './Waste.vue'
 import { computed } from 'vue'
 import Profit from './Profit.vue'
 import { WasteDto } from '../utils/generated/api-client'
+import {
+  calcualteTotalLootValue,
+  filterLoot,
+  groupLoot,
+} from '../utils/loot/loot.helpers.ts'
+import { useLootDataStore } from '../stores/lootDataStore.ts'
+import { useConfigStore } from '../stores/configStore.ts'
+import {
+  calculateMemberProfit,
+  getMemberWaste,
+} from '../utils/waste/waste.utils.ts'
 
 const clientStore = useClientStore()
+const configStore = useConfigStore()
+const lootDataStore = useLootDataStore()
+const teamstore = useTeamStore()
 
-const { member, waste, profitAmount } = defineProps<{
+const { member, team } = defineProps<{
   member: Member | Client
+  team: Team
   waste?: WasteDto
-  profitAmount?: number
 }>()
 
+const loot = computed(() => {
+  const lootFiltered = filterLoot(
+    lootDataStore.lootDataParsed.loot,
+    configStore.config,
+  )
+  return groupLoot(lootFiltered)
+})
+
+const totalLootValue = computed(() => calcualteTotalLootValue(loot.value))
+
 const isYou = computed(() => clientStore.client?.id === member.id)
+const waste = computed(() => getMemberWaste(member.id, team.wastes))
+const profit = computed(() =>
+  calculateMemberProfit(member.id, team.wastes, totalLootValue.value),
+)
 </script>
 
 <template>
@@ -32,7 +60,7 @@ const isYou = computed(() => clientStore.client?.id === member.id)
         <div class="d-flex ga-2">
           <Waste :waste="waste" />
 
-          <Profit :profit-amount="profitAmount"></Profit>
+          <Profit :profit-amount="profit"></Profit>
         </div>
       </div>
     </v-card-text>
