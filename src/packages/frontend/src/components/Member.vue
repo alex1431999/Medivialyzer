@@ -14,7 +14,7 @@ import {
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import { useConfigStore } from '../stores/configStore.ts'
 import {
-  calculateMemberProfit,
+  calculateMemberShare,
   getMemberWaste,
 } from '../utils/waste/waste.utils.ts'
 
@@ -41,7 +41,7 @@ const totalLootValue = computed(() => calcualteTotalLootValue(loot.value))
 const isYou = computed(() => clientStore.client?.id === member.id)
 const waste = computed(() => getMemberWaste(member.id, team.wastes))
 const profit = computed(() =>
-  calculateMemberProfit(member.id, team.wastes, totalLootValue.value),
+  calculateMemberShare(member.id, team.wastes, totalLootValue.value),
 )
 </script>
 

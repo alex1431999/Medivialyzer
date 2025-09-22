@@ -17,13 +17,13 @@ export function getMemberWaste(memberId: string, wastes: WasteDto[]) {
   return mostRecentWaste || undefined
 }
 
-export function calculateMemberProfit(
+export function calculateMemberShare(
   memberId: string,
   wastes: WasteDto[],
   totalLootValue: number,
 ): number | undefined {
-  const hasSubmittedWaste = !!getMemberWaste(memberId, wastes)
-  if (!hasSubmittedWaste) return undefined
+  const memberWaste = getMemberWaste(memberId, wastes)
+  if (!memberWaste) return undefined
 
   const memberIds = _.uniq(_.map(wastes, 'client.id'))
   const wastesOfMembers = memberIds
@@ -36,5 +36,5 @@ export function calculateMemberProfit(
   const totalProfit = totalLootValue - totalWaste
   const profitEach = totalProfit / wastesOfMembers.length
 
-  return profitEach
+  return profitEach + memberWaste.wasteAmount
 }
