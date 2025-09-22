@@ -14,7 +14,11 @@ import EditItemModal from './EditItemModal.vue'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import LootLuckDisplay from './LootLuckDisplay.vue'
 import Loader from './Loader.vue'
-import { filterLoot, groupLoot } from '../utils/loot/loot.helpers.ts'
+import {
+  calcualteTotalLootValue,
+  filterLoot,
+  groupLoot,
+} from '../utils/loot/loot.helpers.ts'
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
@@ -48,12 +52,7 @@ const lootSorted = computed(() =>
   }),
 )
 
-const totalLootValue = computed(() => {
-  const values = loot.value.map(
-    (lootEntry) => (lootEntry.item.value || 0) * lootEntry.amount,
-  )
-  return _.sum(values)
-})
+const totalLootValue = computed(() => calcualteTotalLootValue(loot.value))
 
 const profit = computed(() => {
   return totalLootValue.value - suppliesStore.totalSuppliesUsed
