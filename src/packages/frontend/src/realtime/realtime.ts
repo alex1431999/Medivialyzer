@@ -1,8 +1,10 @@
 import { io } from 'socket.io-client'
+import { useTeamStore } from '../stores/teamStore.ts'
 
-const socket = io('http://localhost:3001')
+export const socket = io('http://localhost:3001')
 
 // Receive
-socket.on('messageReceived', (data) => {
-  console.log(data)
+socket.on('teamUpdated', async () => {
+  const teamStore = useTeamStore()
+  await teamStore.refresh()
 })

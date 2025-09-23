@@ -3,6 +3,7 @@ import { useConfigStore } from './configStore.ts'
 import { teamApi } from '../utils/api/api.team.ts'
 import { TeamDto, UpdateTeamDto } from '../utils/generated/api-client'
 import _ from 'lodash'
+import { joinTeamChannels } from '../realtime/realtime.utils.ts'
 
 export type Team = TeamDto
 
@@ -36,6 +37,9 @@ export const useTeamStore = defineStore('team', {
       const response = await teamApi.teamControllerFindAll(clientId)
 
       this.teams = _.sortBy(response.data, 'name')
+
+      const teamIds = _.map(this.teams, 'id')
+      joinTeamChannels(teamIds)
     },
 
     async create(createData: TeamCreateData) {
@@ -54,6 +58,8 @@ export const useTeamStore = defineStore('team', {
 
         this.teams.push(teamCreated)
         this.isLoading = false
+
+        joinTeamChannels([teamCreated.id])
 
         return teamCreated
       } catch (error) {
