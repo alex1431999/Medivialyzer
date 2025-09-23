@@ -12,3 +12,11 @@ socket.on('wasteAdded', async (memberName) => {
 
   notify(`Member ${memberName} submitted their waste`, 'info')
 })
+
+socket.on('memberCreated', async (memberName) => {
+  const { notify } = useNotifications()
+  const teamStore = useTeamStore()
+  await teamStore.refresh()
+
+  notify(`Member ${memberName} has joined one of your teams`, 'info')
+})

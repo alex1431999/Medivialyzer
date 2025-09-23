@@ -72,8 +72,12 @@ export class TeamController {
     @Param('id') id: string,
     @Body() createMemberDto: CreateMemberDto,
   ) {
+    const member = await this.clientService.findOne(id);
+    if (!member)
+      throw new NotFoundException(`Could not find member with id ${id}`);
+
     const team = await this.teamService.createMember(id, createMemberDto);
-    this.teamGateway.notifyTeamUpdated(id);
+    this.teamGateway.notifyMemberCreated(id, member.name);
 
     return team;
   }
