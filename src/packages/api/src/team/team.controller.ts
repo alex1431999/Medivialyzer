@@ -14,10 +14,14 @@ import { ApiOkResponse } from '@nestjs/swagger';
 import { TeamDto } from './dto/team.dto';
 import { CreateMemberDto } from '../client/dto/create-member.dto';
 import { CreateWasteDto } from './dto/create-waste.dto';
+import { TeamGateway } from './team.gateway';
 
 @Controller('team')
 export class TeamController {
-  constructor(private readonly teamService: TeamService) {}
+  constructor(
+    private readonly teamService: TeamService,
+    private readonly teamGateway: TeamGateway,
+  ) {}
 
   @Post()
   @ApiOkResponse({ type: TeamDto })
@@ -61,11 +65,14 @@ export class TeamController {
 
   @Post(':id/members')
   @ApiOkResponse({ type: TeamDto })
-  createMember(
+  async createMember(
     @Param('id') id: string,
     @Body() createMemberDto: CreateMemberDto,
   ) {
-    return this.teamService.createMember(id, createMemberDto);
+    const team = await this.teamService.createMember(id, createMemberDto);
+    this.teamGateway.notifyTeamUpdated(id);
+
+    return team;
   }
 
   @Delete(':id/members/:memberId')
@@ -82,5 +89,6 @@ export class TeamController {
     @Body() createWasteDto: CreateWasteDto,
   ) {
     await this.teamService.createWaste(id, memberId, createWasteDto);
+    this.teamGateway.notifyTeamUpdated(id);
   }
 }
