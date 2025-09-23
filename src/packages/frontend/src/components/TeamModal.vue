@@ -43,12 +43,18 @@ watch(
   (teams) => {
     const teamIds = _.map(teams, 'id')
 
+    // Auto select first team if no team has been selected yet
     if (teamSelected.value === null && teams.length > 0) {
       teamSelected.value = teams[0]
     }
 
+    // Remove selected team if the selected team got deleted
     if (teamSelected.value && !teamIds.includes(teamSelected.value.id)) {
       teamSelected.value = teams.length > 0 ? teams[0] : null
+    } else if (teamSelected.value) {
+      // Update selected team in case the values have changed
+      teamSelected.value =
+        teams.find((team) => team.id === teamSelected.value?.id) || null
     }
   },
   { immediate: true, deep: true },
