@@ -1,10 +1,14 @@
 import { io } from 'socket.io-client'
 import { useTeamStore } from '../stores/teamStore.ts'
+import { useNotifications } from '../composables/useNotifications.ts'
 
 export const socket = io('http://localhost:3001')
 
 // Receive
-socket.on('teamUpdated', async () => {
+socket.on('wasteAdded', async (memberName) => {
+  const { notify } = useNotifications()
   const teamStore = useTeamStore()
   await teamStore.refresh()
+
+  notify(`Member ${memberName} submitted their waste`, 'info')
 })

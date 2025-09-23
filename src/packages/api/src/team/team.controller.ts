@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  NotFoundException,
 } from '@nestjs/common';
 import { TeamService } from './team.service';
 import { CreateTeamDto } from './dto/create-team.dto';
@@ -15,11 +16,13 @@ import { TeamDto } from './dto/team.dto';
 import { CreateMemberDto } from '../client/dto/create-member.dto';
 import { CreateWasteDto } from './dto/create-waste.dto';
 import { TeamGateway } from './team.gateway';
+import { ClientService } from '../client/client.service';
 
 @Controller('team')
 export class TeamController {
   constructor(
     private readonly teamService: TeamService,
+    private readonly clientService: ClientService,
     private readonly teamGateway: TeamGateway,
   ) {}
 
@@ -88,7 +91,11 @@ export class TeamController {
     @Param('memberId') memberId: string,
     @Body() createWasteDto: CreateWasteDto,
   ) {
+    const member = await this.clientService.findOne(memberId);
+    if (!member)
+      throw new NotFoundException(`Could not find member with id ${id}`);
+
     await this.teamService.createWaste(id, memberId, createWasteDto);
-    this.teamGateway.notifyTeamUpdated(id);
+    this.teamGateway.notifyWasteAdded(id, member.name);
   }
 }
