@@ -5,7 +5,9 @@ import { formatNumber } from 'medivialyzer-frontend/src/utils/number.ts'
 
 const { profitEach } = defineProps<{ profitEach: number | null }>()
 
-const color = computed(() => (profitEach > 0 ? 'success' : 'error'))
+const color = computed(() =>
+  profitEach !== null && profitEach > 0 ? 'success' : 'error',
+)
 </script>
 
 <template>
