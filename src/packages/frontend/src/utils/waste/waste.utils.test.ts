@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import { WasteDto } from '../generated/api-client'
-import { calculateMemberShare, getMemberWaste } from './waste.utils.ts'
+import { calculateMemberPayout, getMemberWaste } from './waste.utils.ts'
 
 describe('waste utils', () => {
   describe('getMemberWaste', () => {
@@ -55,7 +55,7 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(calculateMemberShare(memberId, wastes, 100)).toEqual(undefined)
+      expect(calculateMemberPayout(memberId, wastes, 100)).toEqual(undefined)
     })
 
     test('member has made profit', () => {
@@ -73,7 +73,7 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(calculateMemberShare(memberId, wastes, 400)).toEqual(200)
+      expect(calculateMemberPayout(memberId, wastes, 400)).toEqual(200)
     })
 
     test('member has wasted', () => {
@@ -91,7 +91,7 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(calculateMemberShare(memberId, wastes, 50)).toEqual(25)
+      expect(calculateMemberPayout(memberId, wastes, 50)).toEqual(25)
     })
 
     test('individual waste is not even', () => {
@@ -109,7 +109,7 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(calculateMemberShare(memberId, wastes, 1500)).toEqual(500)
+      expect(calculateMemberPayout(memberId, wastes, 1500)).toEqual(500)
     })
   })
 })

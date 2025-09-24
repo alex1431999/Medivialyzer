@@ -4,7 +4,7 @@ import { Member, Team } from '../stores/teamStore.ts'
 import { Client, useClientStore } from '../stores/clientStore.ts'
 import Waste from './Waste.vue'
 import { computed } from 'vue'
-import Profit from './Profit.vue'
+import Payout from './Payout.vue'
 import { WasteDto } from '../utils/generated/api-client'
 import {
   calcualteTotalLootValue,
@@ -14,7 +14,7 @@ import {
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import { useConfigStore } from '../stores/configStore.ts'
 import {
-  calculateMemberShare,
+  calculateMemberPayout,
   getMemberWaste,
 } from '../utils/waste/waste.utils.ts'
 
@@ -40,8 +40,8 @@ const totalLootValue = computed(() => calcualteTotalLootValue(loot.value))
 
 const isYou = computed(() => clientStore.client?.id === member.id)
 const waste = computed(() => getMemberWaste(member.id, team.wastes))
-const profit = computed(() =>
-  calculateMemberShare(member.id, team.wastes, totalLootValue.value),
+const payout = computed(() =>
+  calculateMemberPayout(member.id, team.wastes, totalLootValue.value),
 )
 </script>
 
@@ -58,7 +58,7 @@ const profit = computed(() =>
 
         <div class="d-flex ga-2">
           <Waste :waste="waste" />
-          <Profit :profit-amount="profit"></Profit>
+          <Payout :payout="payout"></Payout>
         </div>
       </div>
     </v-card-text>

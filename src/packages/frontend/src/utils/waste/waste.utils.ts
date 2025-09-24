@@ -17,7 +17,7 @@ export function getMemberWaste(memberId: string, wastes: WasteDto[]) {
   return mostRecentWaste || undefined
 }
 
-export function calculateMemberShare(
+export function calculateMemberPayout(
   memberId: string,
   wastes: WasteDto[],
   totalLootValue: number,
