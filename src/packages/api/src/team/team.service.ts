@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -59,7 +63,6 @@ export class TeamService {
   }
 
   async createMember(teamId: string, createMemberDto: CreateMemberDto) {
-    // TODO verify the user is not part of the team yet, either as member or owner
     const team = await this.findOne(teamId);
 
     const client = await this.clientRepository.findOneBy({
@@ -68,6 +71,12 @@ export class TeamService {
 
     if (!team || !client)
       throw new NotFoundException('Team or Client not found');
+
+    const allMembers = [team.owner, ...team.members];
+    const allMembersIds = allMembers.map((member) => member.id);
+
+    if (allMembersIds.includes(createMemberDto.id))
+      throw new BadRequestException('User is already part of this team');
 
     team.members.push(client);
     await this.teamRepository.save(team);
