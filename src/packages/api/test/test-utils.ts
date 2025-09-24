@@ -1,6 +1,4 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Loot } from '../src/loot/entities/loot.entity';
-import { Item } from '../src/loot/entities/item.entity';
 import { Team } from '../src/team/entities/team.entity';
 import { Client } from '../src/client/entities/client.entity';
 import { Waste } from '../src/team/entities/waste.entity';
@@ -17,8 +15,8 @@ export const TEST_DB_IMPORTS = [
     type: 'sqlite',
     database: ':memory:',
     dropSchema: true,
-    entities: [Loot, Item, Team, Client, Waste],
+    entities: [Team, Client, Waste],
     synchronize: true,
   }),
-  TypeOrmModule.forFeature([Loot, Item, Team, Client, Waste]),
+  TypeOrmModule.forFeature([Team, Client, Waste]),
 ];

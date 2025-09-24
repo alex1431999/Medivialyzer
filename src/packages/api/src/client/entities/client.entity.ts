@@ -1,5 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
-import { Team } from '../../team/entities/team.entity';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { Waste } from '../../team/entities/waste.entity';
 
 @Entity()
