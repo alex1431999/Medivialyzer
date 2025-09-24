@@ -8,6 +8,21 @@ export function filterOutdatedWaste(waste: WasteDto) {
   return wasteSubmittedAt > Date.now() - THIRTY_MINUTES
 }
 
+export function getTotalWaste(wastes: WasteDto[]) {
+  const memberIds = _.uniq(_.map(wastes, 'client.id'))
+  const wastesOfMembers = memberIds
+    .map((memberId) => getMemberWaste(memberId, wastes))
+    .filter((waste) => waste !== undefined)
+  const wasteAmounts = _.map(wastesOfMembers, 'wasteAmount')
+
+  return _.sum(wasteAmounts)
+}
+
+export function getMembersWithWaste(wastes: WasteDto[]) {
+  const memberIds = _.uniq(_.map(wastes, 'client.id'))
+  return memberIds.filter((memberId) => !!getMemberWaste(memberId, wastes))
+}
+
 export function getMemberWaste(memberId: string, wastes: WasteDto[]) {
   const relevantWastes = wastes.filter(filterOutdatedWaste)
   const mostRecentWaste = _.sortBy(relevantWastes, 'createdAt')
