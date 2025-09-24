@@ -49,7 +49,7 @@ const profit = computed(() =>
   <v-card elevation="2" variant="outlined" rounded>
     <v-card-text>
       <div class="d-flex justify-space-between align-center">
-        <v-badge v-if="!isYou"> {{ member.name }}</v-badge>
+        <v-chip v-if="!isYou"> {{ member.name }}</v-chip>
         <v-badge v-else color="secondary" content="You">
           <v-chip>
             {{ member.name }}
@@ -58,7 +58,6 @@ const profit = computed(() =>
 
         <div class="d-flex ga-2">
           <Waste :waste="waste" />
-
           <Profit :profit-amount="profit"></Profit>
         </div>
       </div>
