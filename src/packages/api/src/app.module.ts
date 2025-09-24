@@ -1,6 +1,5 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
-import { LootModule } from './loot/loot.module';
 import { TeamModule } from './team/team.module';
 import { ClientModule } from './client/client.module';
 
@@ -16,7 +15,6 @@ import { ClientModule } from './client/client.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, // turn off in production
     }),
-    LootModule,
     TeamModule,
     ClientModule,
   ],
