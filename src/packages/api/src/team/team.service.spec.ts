@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TeamService } from './team.service';
 import { TEST_DB_IMPORTS } from '../../test/test-utils';
 import { ClientService } from '../client/client.service';
+import { BadRequestException } from '@nestjs/common';
 
 describe('TeamService', () => {
   let teamService: TeamService;
@@ -39,5 +40,18 @@ describe('TeamService', () => {
     const teams = await teamService.findAllByMember('member');
 
     expect(teams.length).toBe(1);
+  });
+
+  it('cant join a team you are already part of', async () => {
+    await clientService.create({ id: 'owner', name: 'test' });
+
+    const { id: teamId } = await teamService.create({
+      name: 'test',
+      owner: 'owner',
+    });
+
+    await expect(
+      teamService.createMember(teamId, { id: 'owner' }),
+    ).rejects.toThrow(BadRequestException);
   });
 });
