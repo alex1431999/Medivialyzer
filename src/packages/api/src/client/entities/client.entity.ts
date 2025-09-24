@@ -1,12 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
-  OneToMany,
-  PrimaryColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 import { Team } from '../../team/entities/team.entity';
 import { Waste } from '../../team/entities/waste.entity';
 
@@ -20,10 +12,6 @@ export class Client {
 
   @ManyToOne(() => Team, (team) => team.owner, { cascade: true })
   ownedTeams: Team[];
-
-  @ManyToMany(() => Team, (team) => team.members)
-  @JoinTable()
-  joinedTeams: Team[];
 
   @OneToMany(() => Waste, (waste) => waste.client)
   wastes: Waste[];
