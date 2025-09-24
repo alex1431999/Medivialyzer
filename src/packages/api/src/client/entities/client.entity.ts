@@ -10,9 +10,6 @@ export class Client {
   @Column()
   name: string;
 
-  @ManyToOne(() => Team, (team) => team.owner, { cascade: true })
-  ownedTeams: Team[];
-
   @OneToMany(() => Waste, (waste) => waste.client)
   wastes: Waste[];
 }

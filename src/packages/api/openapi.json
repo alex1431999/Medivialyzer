@@ -1,33 +1,6 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/loot/createMany": {
-      "post": {
-        "operationId": "LootController_createMany",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Loot"
-        ]
-      }
-    },
     "/team": {
       "post": {
         "operationId": "TeamController_create",

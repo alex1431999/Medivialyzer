@@ -15,7 +15,7 @@ export class Team {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Client, (client) => client.ownedTeams)
+  @ManyToOne(() => Client)
   owner: Client;
 
   @Column()
