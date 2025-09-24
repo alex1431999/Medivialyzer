@@ -34,12 +34,6 @@ export class TeamController {
 
   @Get()
   @ApiOkResponse({ type: TeamDto, isArray: true })
-  async findAllByOwner(@Param('ownerClientId') ownerClientId: string) {
-    return this.teamService.findAllByOwner(ownerClientId);
-  }
-
-  @Get()
-  @ApiOkResponse({ type: TeamDto, isArray: true })
   async findAll(@Param('clientId') clientId: string) {
     const allOwned = await this.teamService.findAllByOwner(clientId);
     const allJoined = await this.teamService.findAllByMember(clientId);
