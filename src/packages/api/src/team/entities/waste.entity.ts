@@ -22,6 +22,6 @@ export class Waste {
   @ManyToOne(() => Team, (team) => team.wastes, { onDelete: 'CASCADE' })
   team: Team;
 
-  @ManyToOne(() => Client, (client) => client.wastes)
+  @ManyToOne(() => Client, (client) => client.wastes, { onDelete: 'CASCADE' })
   client: Client;
 }

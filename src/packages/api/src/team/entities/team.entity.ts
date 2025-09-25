@@ -15,7 +15,7 @@ export class Team {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Client)
+  @ManyToOne(() => Client, { onDelete: 'CASCADE' })
   owner: Client;
 
   @Column()
