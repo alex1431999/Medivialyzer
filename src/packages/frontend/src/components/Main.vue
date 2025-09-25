@@ -19,7 +19,6 @@ baserowPing(configStore.config.clientId)
 
 configStore.onBoot()
 clientStore.onBoot()
-teamStore.onBoot()
 
 lootDataStore.update({ since: configStore.config.since, items: getAllItems() })
 
@@ -29,6 +28,14 @@ setInterval(() => {
     items: getAllItems(),
   })
 }, FIVE_SECONDS)
+
+// Only try to load the teamStore once client has been initialised
+watch(
+  () => clientStore.initialized,
+  () => {
+    teamStore.onBoot()
+  },
+)
 
 // Update when the loot path changes
 watch(
