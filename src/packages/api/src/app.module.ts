@@ -9,8 +9,6 @@ const database = process.env.PGDATABASE || 'medivialyzer';
 const host = process.env.PGHOST || 'database';
 const port = parseInt(process.env.PGPORT || '5432', 10);
 
-const synchronize = process.env.NODE_ENV === 'development';
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -20,7 +18,7 @@ const synchronize = process.env.NODE_ENV === 'development';
       database,
       host,
       port,
-      synchronize,
+      synchronize: true, // We shouldn't use this in prod but I use if for convenience
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     TeamModule,
