@@ -13,15 +13,13 @@ import EditItemModal from './EditItemModal.vue'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import LootLuckDisplay from './LootLuckDisplay.vue'
 import Loader from './Loader.vue'
-import {
-  calcualteTotalLootValue,
-  filterLoot,
-  groupLoot,
-} from '../utils/loot/loot.helpers.ts'
+import { useLoot } from '../composables/useLoot.ts'
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
 const lootDataStore = useLootDataStore()
+
+const { loot, totalLootValue } = useLoot()
 
 const itemToAddName = ref<string | null>(null)
 const itemToEdit = ref<LootEntry | null>(null)
@@ -34,13 +32,6 @@ const creatures = computed(
 const creaturesAverageLoot = computed(
   () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
 )
-const loot = computed(() => {
-  const lootFiltered = filterLoot(
-    lootDataStore.lootDataParsed.loot,
-    configStore.config,
-  )
-  return groupLoot(lootFiltered)
-})
 
 const lootSorted = computed(() =>
   loot.value.sort((a, b) => {
@@ -50,8 +41,6 @@ const lootSorted = computed(() =>
     return a.amount * aValue > b.amount * bValue ? -1 : 1
   }),
 )
-
-const totalLootValue = computed(() => calcualteTotalLootValue(loot.value))
 
 const profit = computed(() => {
   return totalLootValue.value - suppliesStore.totalSuppliesUsed

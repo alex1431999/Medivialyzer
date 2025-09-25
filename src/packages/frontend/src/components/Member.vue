@@ -7,40 +7,24 @@ import { computed } from 'vue'
 import Payout from './Payout.vue'
 import { WasteDto } from '../utils/generated/api-client'
 import {
-  calcualteTotalLootValue,
-  filterLoot,
-  groupLoot,
-} from '../utils/loot/loot.helpers.ts'
-import { useLootDataStore } from '../stores/lootDataStore.ts'
-import { useConfigStore } from '../stores/configStore.ts'
-import {
   calculateMemberPayout,
   getMemberWaste,
 } from '../utils/waste/waste.utils.ts'
 import MemberMenu from './MemberMenu.vue'
 import { useNotifications } from '../composables/useNotifications.ts'
+import { useLoot } from '../composables/useLoot.ts'
 
 const clientStore = useClientStore()
-const configStore = useConfigStore()
-const lootDataStore = useLootDataStore()
 const teamStore = useTeamStore()
+
 const { notify } = useNotifications()
+const { totalLootValue } = useLoot()
 
 const { member, team } = defineProps<{
   member: Member | Client
   team: Team
   waste?: WasteDto
 }>()
-
-const loot = computed(() => {
-  const lootFiltered = filterLoot(
-    lootDataStore.lootDataParsed.loot,
-    configStore.config,
-  )
-  return groupLoot(lootFiltered)
-})
-
-const totalLootValue = computed(() => calcualteTotalLootValue(loot.value))
 
 const isYou = computed(() => clientStore.client?.id === member.id)
 const isClientOwner = computed(() => clientStore.client?.id === team.owner.id)
