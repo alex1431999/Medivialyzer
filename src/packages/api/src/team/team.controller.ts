@@ -28,8 +28,9 @@ export class TeamController {
 
   @Post()
   @ApiOkResponse({ type: TeamDto })
-  create(@Body() createTeamDto: CreateTeamDto) {
-    return this.teamService.create(createTeamDto);
+  async create(@Body() createTeamDto: CreateTeamDto) {
+    const team = await this.teamService.create(createTeamDto);
+    return this.teamService.findOne(team.id);
   }
 
   @Get()
