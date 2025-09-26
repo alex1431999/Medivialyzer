@@ -87,19 +87,28 @@ export const useTeamStore = defineStore('team', {
       const configStore = useConfigStore()
       const clientId = configStore.config.clientId
 
-      const response = await teamApi.teamControllerCreateMember(id, {
-        id: clientId,
-      })
-      const teamUpdated = response.data
+      this.isLoading = true
 
-      const teamIndex = this.teams.findIndex((team) => team.id === id)
-      if (teamIndex >= 0) this.teams[teamIndex] = teamUpdated
+      try {
+        const response = await teamApi.teamControllerCreateMember(id, {
+          id: clientId,
+        })
+        const teamUpdated = response.data
 
-      joinTeamChannels([teamUpdated.id])
+        const teamIndex = this.teams.findIndex((team) => team.id === id)
+        if (teamIndex >= 0) this.teams[teamIndex] = teamUpdated
 
-      this.teams.push(teamUpdated)
+        joinTeamChannels([teamUpdated.id])
 
-      return teamUpdated
+        this.teams.push(teamUpdated)
+
+        this.isLoading = false
+
+        return teamUpdated
+      } catch (error) {
+        this.isLoading = false
+        throw error
+      }
     },
 
     async submitWaste(id: string, wasteAmount: number) {
