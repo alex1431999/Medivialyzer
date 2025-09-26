@@ -22,6 +22,7 @@ import RequestLoader from './RequestLoader.vue'
 import { useNotifications } from '../composables/useNotifications.ts'
 import JoinTeamModal from './JoinTeamModal.vue'
 import _ from 'lodash'
+import { AxiosError } from 'axios'
 
 const { notify } = useNotifications()
 
@@ -66,8 +67,19 @@ async function onCreateTeam(createData: TeamCreateData) {
 }
 
 async function onJoinTeam(id: string) {
-  teamSelected.value = await teamStore.join(id)
-  notify('Team successfully joined', 'success')
+  try {
+    teamSelected.value = await teamStore.join(id)
+    notify('Team successfully joined', 'success')
+  } catch (error) {
+    if (
+      error instanceof AxiosError &&
+      (error.status === 404 || error.status === 500)
+    ) {
+      notify(`A team with id ${id} does not exist`, 'error')
+    } else {
+      throw error
+    }
+  }
 }
 
 async function onUpdateTeamName(name: string) {
