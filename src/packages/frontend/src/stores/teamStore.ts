@@ -95,6 +95,8 @@ export const useTeamStore = defineStore('team', {
       const teamIndex = this.teams.findIndex((team) => team.id === id)
       if (teamIndex >= 0) this.teams[teamIndex] = teamUpdated
 
+      joinTeamChannels([teamUpdated.id])
+
       this.teams.push(teamUpdated)
 
       return teamUpdated
