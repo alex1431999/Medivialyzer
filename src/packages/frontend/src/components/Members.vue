@@ -7,7 +7,7 @@ const { members, team } = defineProps<{ members: MemberType[]; team: Team }>()
 </script>
 
 <template>
-  <v-list>
+  <v-list style="max-height: 300px">
     <v-list-item>
       <Member :member="team.owner" :team="team" />
     </v-list-item>
