@@ -1,20 +1,28 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
-import { LootModule } from './loot/loot.module';
+import { TeamModule } from './team/team.module';
+import { ClientModule } from './client/client.module';
+
+const username = process.env.PGUSER || 'postgres';
+const password = process.env.PGPASSWORD || 'postgres';
+const database = process.env.PGDATABASE || 'medivialyzer';
+const host = process.env.PGHOST || 'database';
+const port = parseInt(process.env.PGPORT || '5432', 10);
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'database',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'medivialyzer',
+      username,
+      password,
+      database,
+      host,
+      port,
+      synchronize: true, // We shouldn't use this in prod but I use if for convenience
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // turn off in production
     }),
-    LootModule,
+    TeamModule,
+    ClientModule,
   ],
 })
 export class AppModule {}

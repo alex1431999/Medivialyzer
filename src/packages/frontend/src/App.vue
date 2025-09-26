@@ -1,74 +1,30 @@
 <script setup lang="ts">
-import LootList from './components/LootList.vue'
-import Header from './components/Header.vue'
 import UpgradeNotification from './components/UpgradeNotification.vue'
-import { FIVE_SECONDS } from './constants/time.ts'
-import { watch } from 'vue'
-import { useLootDataStore } from './stores/lootDataStore.ts'
+import { computed } from 'vue'
 import { useConfigStore } from './stores/configStore.ts'
-import { getAllItems } from './utils/item/item.helpers.ts'
-import { baserowPing } from './utils/baserow/baserow.requests.ts'
+import { useClientStore } from './stores/clientStore.ts'
+import ClientModal from './components/ClientModal.vue'
+import Main from './components/Main.vue'
+import NotificationProvider from './components/NotificationProvider.vue'
 
-const lootDataStore = useLootDataStore()
 const configStore = useConfigStore()
-
-// When the client boots up we want to send a ping
-baserowPing(configStore.config.clientId)
+const clientStore = useClientStore()
 
 configStore.onBoot()
+clientStore.onBoot()
 
-lootDataStore.update({ since: configStore.config.since, items: getAllItems() })
-
-setInterval(() => {
-  lootDataStore.update({
-    since: configStore.config.since,
-    items: getAllItems(),
-  })
-}, FIVE_SECONDS)
-
-// Update when the loot path changes
-watch(
-  () => configStore.config.lootFilePath,
-  () => {
-    lootDataStore.update({
-      since: configStore.config.since,
-      items: getAllItems(),
-    })
-  },
+const showClientModal = computed(
+  () => clientStore.initialized && clientStore.client === null,
 )
 
-// Update when since changes
-watch(
-  () => configStore.config.since,
-  () => {
-    lootDataStore.update({
-      since: configStore.config.since,
-      items: getAllItems(),
-    })
-  },
-)
-
-// Update when custom items change
-watch(
-  () => configStore.config.customItems,
-  () => {
-    lootDataStore.update({
-      since: configStore.config.since,
-      items: getAllItems(),
-    })
-  },
-  { deep: true },
-)
+async function onCreateClient(name: string) {
+  await clientStore.create(name)
+}
 </script>
 
 <template>
-  <Header class="app__header" />
-  <LootList />
+  <ClientModal @submit="onCreateClient" v-if="showClientModal" />
+  <Main v-else />
   <UpgradeNotification />
+  <NotificationProvider />
 </template>
-
-<style scoped>
-.app__header {
-  margin-bottom: 16px;
-}
-</style>

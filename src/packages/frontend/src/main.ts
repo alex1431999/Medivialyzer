@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import './style.css'
+import './realtime'
 import App from './App.vue'
 import { vuetify } from './plugins/vuetify.ts'
 import { pinia } from './plugins/pinia.ts'

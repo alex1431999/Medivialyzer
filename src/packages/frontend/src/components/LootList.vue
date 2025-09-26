@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import LootListItem from './LootListItem.vue'
-import { groupLoot } from '../utils/loot/loot.helpers.ts'
 import LootListMenu from './LootListMenu.vue'
-import * as _ from 'lodash'
 import { useConfigStore } from '../stores/configStore.ts'
 import { THIRTY_MINUTES } from '../constants/time.ts'
 import LootTimeDisplay from './LootTimeDisplay.vue'
@@ -15,10 +13,13 @@ import EditItemModal from './EditItemModal.vue'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import LootLuckDisplay from './LootLuckDisplay.vue'
 import Loader from './Loader.vue'
+import { useLoot } from '../composables/useLoot.ts'
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
 const lootDataStore = useLootDataStore()
+
+const { loot, totalLootValue } = useLoot()
 
 const itemToAddName = ref<string | null>(null)
 const itemToEdit = ref<LootEntry | null>(null)
@@ -31,39 +32,15 @@ const creatures = computed(
 const creaturesAverageLoot = computed(
   () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
 )
-const loot = computed(() => lootDataStore.lootDataParsed.loot)
 
-const lootFiltered = computed(() => {
-  const lootWithoutIgnoredItems = loot.value.filter(
-    (lootCurrent) =>
-      !configStore.config.ignoredItems.includes(lootCurrent.item.name),
-  )
-
-  if (configStore.config.ignoreItemsWithNoValue) {
-    return lootWithoutIgnoredItems.filter(
-      (lootCurrent) =>
-        lootCurrent.item.value === undefined || lootCurrent.item.value > 0,
-    )
-  }
-
-  return lootWithoutIgnoredItems
-})
-const lootGrouped = computed(() => groupLoot(lootFiltered.value))
 const lootSorted = computed(() =>
-  lootGrouped.value.sort((a, b) => {
+  loot.value.sort((a, b) => {
     const aValue = a.item.value !== undefined ? a.item.value : -1 // -1 make sure that unknown items are at the bototm of the list
     const bValue = b.item.value !== undefined ? b.item.value : -1
 
     return a.amount * aValue > b.amount * bValue ? -1 : 1
   }),
 )
-
-const totalLootValue = computed(() => {
-  const values = lootGrouped.value.map(
-    (lootEntry) => (lootEntry.item.value || 0) * lootEntry.amount,
-  )
-  return _.sum(values)
-})
 
 const profit = computed(() => {
   return totalLootValue.value - suppliesStore.totalSuppliesUsed
