@@ -96,6 +96,31 @@ describe('lootParser', () => {
         },
       ])
     })
+
+    /**
+     * Sometimes medivia writes the loot as multiple lines in to the loot.txt.
+     * We deal with that bug by trying to piece together the line
+     */
+    test('multiline bug', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        19:14 Loot of 
+        giant 
+        cobra: a gold 
+        coin.
+        `
+      const lootParser = new LootParser(lootData)
+      expect(lootParser.parse({ since: 0 }).loot).toEqual([
+        {
+          item: {
+            name: 'Gold Coin',
+            value: 1,
+          },
+          amount: 1,
+          timestamp: new Date('Wed Dec 04 19:29:20 2024').getTime(),
+        },
+      ])
+    })
   })
 
   describe('creatures', () => {

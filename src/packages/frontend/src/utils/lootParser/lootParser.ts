@@ -181,6 +181,38 @@ export class LootParser {
   }
 
   private forEachLine(callback: (line: string) => void) {
-    this.lootData.split('\n').forEach(callback)
+    const lines = this.lootData
+      .split('\n') // Split by break lines
+      .map((line) => line.trim()) // Remove any extra white space
+      .filter((line) => !!line) // Get rid of all the empty lines
+
+    let linesPiecedTogehter = []
+    let fullLine = ''
+
+    for (let i = 0; i < lines.length; ++i) {
+      const currentLine = lines[i]
+      const nextLine = lines[i + 1]
+
+      // We add a space here because when lines go over multiple liens the space gets lost
+      fullLine += `${currentLine} `
+
+      // If there is no next line or the next line starts a new line we completed the current line
+      if (nextLine === undefined || this.isValidStartOfLine(nextLine)) {
+        linesPiecedTogehter.push(fullLine.trim())
+        fullLine = ''
+      }
+    }
+
+    linesPiecedTogehter.forEach(callback)
+  }
+
+  private isValidStartOfLine(line: string) {
+    const VALID_OPTIONS = [
+      /^channel saved at/, // String starts with "channel saved at"
+      /^\d{2}:\d{2}/, // String starts with HH:MM
+      /^$/, // Empty string
+    ]
+
+    return VALID_OPTIONS.some((pattern) => pattern.test(line.toLowerCase()))
   }
 }
