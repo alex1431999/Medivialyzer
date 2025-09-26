@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { clientApi } from '../utils/api/api.client.ts'
 import { useConfigStore } from './configStore.ts'
 import { UpdateClientDto } from '../utils/generated/api-client'
+import { useTeamStore } from './teamStore.ts'
 
 export type Client = {
   id: string
@@ -51,11 +52,15 @@ export const useClientStore = defineStore('client', {
 
     async update(updateData: UpdateClientDto) {
       const configStore = useConfigStore()
+      const teamStore = useTeamStore()
       const clientId = configStore.config.clientId
 
       this.client = (
         await clientApi.clientControllerUpdate(clientId, updateData)
       ).data
+
+      // We need to refresh teams data in case a name change was done
+      await teamStore.refresh()
     },
   },
 })
