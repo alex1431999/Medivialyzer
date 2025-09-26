@@ -28,6 +28,7 @@ const { notify } = useNotifications()
 
 const teamStore = useTeamStore()
 
+const isTeamModalOpen = ref<boolean>(false)
 const isCreateTeamModalOpen = ref<boolean>(false)
 const isJoinTeamModalOpen = ref<boolean>(false)
 
@@ -59,6 +60,17 @@ watch(
     }
   },
   { immediate: true, deep: true },
+)
+
+// We refresh the team store data when the modal opens so a user can force
+// a refresh by just reopening the modal
+watch(
+  () => isTeamModalOpen.value,
+  async () => {
+    if (isTeamModalOpen.value) {
+      await teamStore.refresh()
+    }
+  },
 )
 
 async function onCreateTeam(createData: TeamCreateData) {
@@ -93,7 +105,7 @@ async function onUpdateTeamName(name: string) {
 </script>
 
 <template>
-  <v-dialog max-width="900" min-height="500">
+  <v-dialog max-width="900" min-height="500" v-model="isTeamModalOpen">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
