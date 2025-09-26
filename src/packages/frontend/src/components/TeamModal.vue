@@ -83,11 +83,14 @@ async function onJoinTeam(id: string) {
     teamSelected.value = await teamStore.join(id)
     notify('Team successfully joined', 'success')
   } catch (error) {
-    if (
-      error instanceof AxiosError &&
-      (error.status === 404 || error.status === 500)
-    ) {
-      notify(`A team with id ${id} does not exist`, 'error')
+    if (error instanceof AxiosError) {
+      if (error.status === 404 || error.status === 500) {
+        notify(`A team with id ${id} does not exist`, 'error')
+      } else if (error.status === 400) {
+        notify('You are already part of this team', 'error')
+      } else {
+        throw error
+      }
     } else {
       throw error
     }
