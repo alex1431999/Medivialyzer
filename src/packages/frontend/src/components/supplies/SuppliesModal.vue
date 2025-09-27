@@ -18,7 +18,7 @@ import { useSuppliesStore } from '../stores/suppliesStore.ts'
 import { computed, ref, watch } from 'vue'
 import { formatNumber } from '../utils/number.ts'
 import { useConfigStore } from '../stores/configStore.ts'
-import VocationFilter from './VocationFilter.vue'
+import SuppliesVocationFilter from './SuppliesVocationFilter.vue'
 import { Vocation, VocationIdentifier } from '../types/vocation.types.ts'
 import { VOCATIONS } from '../constants/vocations.ts'
 import { Supply } from '../utils/supplies/supplies.types.ts'
@@ -86,7 +86,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
           </v-chip>
         </v-card-title>
         <v-card-text>
-          <VocationFilter
+          <SuppliesVocationFilter
             class="mb-3 mt-3"
             :active-vocation-id="vocationSelected.id"
             @update="onVocationFilterUpdate"
