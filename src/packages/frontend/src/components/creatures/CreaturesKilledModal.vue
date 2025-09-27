@@ -14,7 +14,7 @@ import {
 } from 'vuetify/components'
 import { useLootDataStore } from '../../stores/lootDataStore.ts'
 import { computed, ref } from 'vue'
-import CreatureKilled from './CreatureKilled.vue'
+import CreaturesKilled from './CreaturesKilled.vue'
 import {
   getCreatureKillsPerHour,
   getCreatureWithAverageLoot,
@@ -94,7 +94,7 @@ function filterCreatures(creatures: CreatureGrouped[]) {
 
             <v-tabs-window-item value="current">
               <div v-if="creaturesCurrentHunt.length" class="creatures-list">
-                <CreatureKilled
+                <CreaturesKilled
                   class="mb-2"
                   v-for="creature in creaturesCurrentHunt"
                   :key="creature.name"
@@ -111,14 +111,14 @@ function filterCreatures(creatures: CreatureGrouped[]) {
                       creature,
                     )
                   "
-                ></CreatureKilled>
+                ></CreaturesKilled>
               </div>
               <CreaturesKilledEmptyPlaceholder v-else />
             </v-tabs-window-item>
 
             <v-tabs-window-item value="general">
               <div v-if="creaturesGeneral.length" class="creatures-list">
-                <CreatureKilled
+                <CreaturesKilled
                   class="mb-2"
                   v-for="creature in creaturesGeneral"
                   :key="creature.name"
@@ -129,7 +129,7 @@ function filterCreatures(creatures: CreatureGrouped[]) {
                       creature,
                     )
                   "
-                ></CreatureKilled>
+                ></CreaturesKilled>
               </div>
               <CreaturesKilledEmptyPlaceholder v-else />
             </v-tabs-window-item>
