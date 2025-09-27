@@ -2,9 +2,9 @@
 import { VCard, VCardText, VBadge, VChip } from 'vuetify/components'
 import { Member, Team, useTeamStore } from '../../stores/teamStore.ts'
 import { Client, useClientStore } from '../../stores/clientStore.ts'
-import Waste from './Waste.vue'
+import MemberWaste from './MemberWaste.vue'
 import { computed } from 'vue'
-import Payout from './Payout.vue'
+import MemberPayout from './MemberPayout.vue'
 import { WasteDto } from '../../utils/generated/api-client'
 import {
   calculateMemberPayout,
@@ -54,8 +54,8 @@ async function removeMember() {
         </v-badge>
 
         <div class="d-flex ga-2 align-center">
-          <Waste :waste="waste" />
-          <Payout :payout="payout"></Payout>
+          <MemberWaste :waste="waste" />
+          <MemberPayout :payout="payout"></MemberPayout>
           <MemberMenu :can-remove="canRemoveMember" @remove="removeMember" />
         </div>
       </div>

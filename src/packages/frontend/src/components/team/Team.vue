@@ -4,7 +4,7 @@ import Members from './Members.vue'
 import { Team } from '../../stores/teamStore.ts'
 import TeamId from './TeamId.vue'
 import TeamName from './TeamName.vue'
-import ProfitEach from './ProfitEach.vue'
+import TeamProfitEach from './TeamProfitEach.vue'
 import { computed } from 'vue'
 import {
   getMembersWithWaste,
@@ -37,10 +37,10 @@ const profitEach = computed(() => {
       @update-name="(value) => emit('updateName', value)"
     ></TeamName>
     <v-divider class="mt-2 mb-2" />
-    <ProfitEach
+    <TeamProfitEach
       class="ma-2 d-flex justify-center"
       :profit-each="profitEach"
-    ></ProfitEach>
+    ></TeamProfitEach>
     <Members :team="team" :members="team.members || []" />
   </div>
 </template>

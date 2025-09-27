@@ -22,7 +22,7 @@ import SuppliesVocationFilter from './SuppliesVocationFilter.vue'
 import { Vocation, VocationIdentifier } from '../../types/vocation.types.ts'
 import { VOCATIONS } from '../../constants/vocations.ts'
 import { Supply } from '../../utils/supplies/supplies.types.ts'
-import SubmitWasteModal from './SubmitWasteModal.vue'
+import SuppliesSubmitWasteModal from './SuppliesSubmitWasteModal.vue'
 
 const suppliesStore = useSuppliesStore()
 const configStore = useConfigStore()
@@ -149,7 +149,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
         </v-card-text>
 
         <v-card-actions>
-          <SubmitWasteModal
+          <SuppliesSubmitWasteModal
             :calculated-waste="suppliesStore.totalSuppliesUsed"
           />
           <v-btn text="Reset" @click="onReset"></v-btn>

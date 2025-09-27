@@ -13,14 +13,14 @@ import {
   Team as TeamType,
   TeamCreateData,
 } from '../../stores/teamStore.ts'
-import NoTeamsPlaceholder from './NoTeamsPlaceholder.vue'
+import TeamEmptyPlaceholder from './TeamEmptyPlaceholder.vue'
 import Team from './Team.vue'
 import TeamNavigation from './TeamNavigation.vue'
 import { computed, ref, watch } from 'vue'
-import CreateTeamModal from './CreateTeamModal.vue'
+import TeamCreateModal from './TeamCreateModal.vue'
 import RequestLoader from '../RequestLoader.vue'
 import { useNotifications } from '../../composables/useNotifications.ts'
-import JoinTeamModal from './JoinTeamModal.vue'
+import TeamJoinModal from './TeamJoinModal.vue'
 import _ from 'lodash'
 import { AxiosError } from 'axios'
 
@@ -119,11 +119,11 @@ async function onUpdateTeamName(name: string) {
     </template>
 
     <template v-slot:default>
-      <CreateTeamModal
+      <TeamCreateModal
         v-model:show="isCreateTeamModalOpen"
         @create="onCreateTeam"
       />
-      <JoinTeamModal v-model:show="isJoinTeamModalOpen" @join="onJoinTeam" />
+      <TeamJoinModal v-model:show="isJoinTeamModalOpen" @join="onJoinTeam" />
       <v-card>
         <v-card-title class="supplies-modal__header">
           <div>Team</div>
@@ -139,7 +139,7 @@ async function onUpdateTeamName(name: string) {
               :team-selected="teamSelected"
               @selectTeam="(team) => (teamSelected = team)"
             />
-            <NoTeamsPlaceholder v-if="!hasTeams" />
+            <TeamEmptyPlaceholder v-if="!hasTeams" />
             <v-divider
               v-if="teamSelected"
               vertical
