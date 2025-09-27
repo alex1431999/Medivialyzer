@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VDivider } from 'vuetify/components'
-import Members from './Members.vue'
+import Members from './member/Members.vue'
 import { Team } from '../../stores/teamStore.ts'
 import TeamId from './TeamId.vue'
 import TeamName from './TeamName.vue'

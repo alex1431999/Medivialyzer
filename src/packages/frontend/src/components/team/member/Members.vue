@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { VList, VListItem } from 'vuetify/components'
 import Member from './Member.vue'
-import { Member as MemberType, Team } from '../../stores/teamStore.ts'
+import { Member as MemberType, Team } from '../../../stores/teamStore.ts'
 
 const { members, team } = defineProps<{ members: MemberType[]; team: Team }>()
 </script>
