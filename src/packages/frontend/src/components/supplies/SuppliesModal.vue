@@ -23,6 +23,7 @@ import { Vocation, VocationIdentifier } from '../../types/vocation.types.ts'
 import { VOCATIONS } from '../../constants/vocations.ts'
 import { Supply } from '../../utils/supplies/supplies.types.ts'
 import SuppliesSubmitWasteModal from './SuppliesSubmitWasteModal.vue'
+import _ from 'lodash'
 
 const suppliesStore = useSuppliesStore()
 const configStore = useConfigStore()
@@ -43,8 +44,10 @@ const vocationSelected = computed(
 const suppliesFiltered = computed(() =>
   SUPPLIES.filter((supply) =>
     vocationSelected.value.supplies.includes(supply.name),
-  ),
+  ).sort((supply) => (getIsFavorite(supply) ? -1 : 1)),
 )
+
+const suppliesFavorites = computed(() => configStore.config.suppliesFavorites)
 
 watch(
   () => suppliesStore.supplies,
@@ -62,6 +65,24 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
   configStore.setConfig({
     supplyFilter: { vocationSelected: vocationIdentifier },
   })
+}
+
+function getIsFavorite(supply: Supply): boolean {
+  return !!_.get(
+    suppliesFavorites.value,
+    `${vocationSelected.value.id}.${supply.name}`,
+  )
+}
+
+function setIsFavorite(supply: Supply, value: boolean) {
+  const suppliesFavoritesClone = _.cloneDeep(suppliesFavorites.value)
+  _.set(
+    suppliesFavoritesClone,
+    `${vocationSelected.value.id}.${supply.name}`,
+    value,
+  )
+
+  configStore.setConfig({ suppliesFavorites: suppliesFavoritesClone })
 }
 </script>
 
@@ -95,14 +116,27 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
           <v-table class="supplies-modal__table">
             <thead>
               <tr>
+                <th>Favorite</th>
                 <th>Item</th>
                 <th>Before</th>
                 <th>After</th>
                 <th>Cost</th>
               </tr>
             </thead>
-            <tbody>
-              <tr v-for="supply in suppliesFiltered">
+
+            <transition-group name="table" tag="tbody">
+              <tr v-for="supply in suppliesFiltered" :key="supply.name">
+                <td>
+                  <v-icon
+                    v-if="getIsFavorite(supply)"
+                    @click="setIsFavorite(supply, false)"
+                  >
+                    mdi-star
+                  </v-icon>
+                  <v-icon v-else @click="setIsFavorite(supply, true)">
+                    mdi-star-outline
+                  </v-icon>
+                </td>
                 <td>{{ supply.name }}</td>
                 <td>
                   <v-text-field
@@ -144,7 +178,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
                   </v-badge>
                 </td>
               </tr>
-            </tbody>
+            </transition-group>
           </v-table>
         </v-card-text>
 
@@ -169,5 +203,9 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
 
 .supplies-modal__table {
   max-height: 300px;
+}
+
+.table-move {
+  transition: transform 0.3s ease;
 }
 </style>

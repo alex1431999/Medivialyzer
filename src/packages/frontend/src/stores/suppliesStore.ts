@@ -3,10 +3,15 @@ import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
 import _ from 'lodash'
 import { useConfigStore } from './configStore.ts'
 import { getSupplyByNameSafe } from '../utils/supplies/supplies.utils.ts'
+import { VocationIdentifier } from '../types/vocation.types.ts'
 
 export type SuppliesData = Record<
   string,
   { before: number | ''; after: number | ''; cost: number }
+>
+
+export type SuppliesFavorites = Partial<
+  Record<VocationIdentifier, Record<string, boolean>>
 >
 
 export type SuppliesStoreData = {
@@ -26,7 +31,7 @@ const DEFAULT_SUPPLIES_DATA: SuppliesData = SUPPLIES.reduce(
 )
 
 export const useSuppliesStore = defineStore('supplies', {
-  state: () => {
+  state: (): SuppliesStoreData => {
     const configStore = useConfigStore()
 
     const storedSupplies: SuppliesData = _.cloneDeep(
