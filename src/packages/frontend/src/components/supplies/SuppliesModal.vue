@@ -123,8 +123,9 @@ function setIsFavorite(supply: Supply, value: boolean) {
                 <th>Cost</th>
               </tr>
             </thead>
-            <tbody>
-              <tr v-for="supply in suppliesFiltered">
+
+            <transition-group name="table" tag="tbody">
+              <tr v-for="supply in suppliesFiltered" :key="supply.name">
                 <td>
                   <v-icon
                     v-if="getIsFavorite(supply)"
@@ -177,7 +178,7 @@ function setIsFavorite(supply: Supply, value: boolean) {
                   </v-badge>
                 </td>
               </tr>
-            </tbody>
+            </transition-group>
           </v-table>
         </v-card-text>
 
@@ -202,5 +203,9 @@ function setIsFavorite(supply: Supply, value: boolean) {
 
 .supplies-modal__table {
   max-height: 300px;
+}
+
+.table-move {
+  transition: transform 0.3s ease;
 }
 </style>
