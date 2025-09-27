@@ -44,7 +44,7 @@ const vocationSelected = computed(
 const suppliesFiltered = computed(() =>
   SUPPLIES.filter((supply) =>
     vocationSelected.value.supplies.includes(supply.name),
-  ),
+  ).sort((supply) => (getIsFavorite(supply) ? -1 : 1)),
 )
 
 const suppliesFavorites = computed(() => configStore.config.suppliesFavorites)
