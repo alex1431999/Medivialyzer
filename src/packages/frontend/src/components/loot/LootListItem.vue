@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
 
-import { LootEntry } from '../utils/loot/loot.types.ts'
+import { LootEntry } from '../../utils/loot/loot.types.ts'
 import { VCard, VCardText, VTooltip } from 'vuetify/components'
 import { VChip } from 'vuetify/components/VChip'
 import { VBadge } from 'vuetify/components/VBadge'
 import { VIcon } from 'vuetify/components/VIcon'
-import { getNPC } from '../utils/npc/npc.helpers.ts'
+import { getNPC } from '../../utils/npc/npc.helpers.ts'
 import LootListItemMenu from './LootListItemMenu.vue'
-import { formatNumber } from '../utils/number.ts'
+import { formatNumber } from '../../utils/number.ts'
 
 const emit = defineEmits(['click', 'ignore', 'edit'])
 

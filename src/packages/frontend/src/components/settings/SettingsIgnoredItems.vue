@@ -1,43 +1,39 @@
 <script setup lang="ts">
 import { VBtn, VList, VListItem, VAlert } from 'vuetify/components'
 import { computed } from 'vue'
-import { useConfigStore } from '../stores/configStore.ts'
-import { Item } from '../utils/item/item.types.ts'
-import _ from 'lodash'
+import { useConfigStore } from '../../stores/configStore.ts'
 
 const configStore = useConfigStore()
 
-const customItems = computed(() =>
-  _.sortBy(configStore.config.customItems, 'name'),
-)
+const ignoredItems = computed(() => configStore.config.ignoredItems.sort())
 
-function onRemoveCustomItem(item: Item) {
-  configStore.removeCustomItem(item)
+function onRemoveIgnoredItem(itemName: string) {
+  configStore.removeIgnoredItems(itemName)
 }
 </script>
 
 <template>
-  <v-list class="settings-custom-items__list" v-if="customItems.length > 0">
+  <v-list class="settings-ignored-items__list" v-if="ignoredItems.length > 0">
     <v-list-item
       class="overflow-hidden mb-2 pa-2"
+      v-for="itemName in ignoredItems"
+      :key="itemName"
       variant="elevated"
-      v-for="item in customItems"
-      :key="item.name"
     >
       <div class="d-flex justify-space-between">
-        <div>{{ item.name }}</div>
+        <div>{{ itemName }}</div>
         <v-btn
           icon="mdi-trash-can"
           size="x-small"
           color="error"
-          @click="onRemoveCustomItem(item)"
+          @click="onRemoveIgnoredItem(itemName)"
         />
       </div>
     </v-list-item>
   </v-list>
   <div class="d-flex justify-center" v-else>
     <v-alert
-      text="You have added any custom an items yet"
+      text="You have not ignored an item yet"
       type="info"
       color="secondary"
     />
@@ -45,7 +41,7 @@ function onRemoveCustomItem(item: Item) {
 </template>
 
 <style scoped>
-.settings-custom-items__list {
+.settings-ignored-items__list {
   max-height: 300px;
 }
 </style>

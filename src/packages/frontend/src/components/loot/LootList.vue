@@ -2,18 +2,18 @@
 import { computed, ref } from 'vue'
 import LootListItem from './LootListItem.vue'
 import LootListMenu from './LootListMenu.vue'
-import { useConfigStore } from '../stores/configStore.ts'
-import { THIRTY_MINUTES } from '../constants/time.ts'
+import { useConfigStore } from '../../stores/configStore.ts'
+import { THIRTY_MINUTES } from '../../constants/time.ts'
 import LootTimeDisplay from './LootTimeDisplay.vue'
 import LootProfitDisplay from './LootProfitDisplay.vue'
-import { useSuppliesStore } from '../stores/suppliesStore.ts'
-import { LootEntry } from '../utils/loot/loot.types.ts'
-import AddItemModal from './AddItemModal.vue'
-import EditItemModal from './EditItemModal.vue'
-import { useLootDataStore } from '../stores/lootDataStore.ts'
+import { useSuppliesStore } from '../../stores/suppliesStore.ts'
+import { LootEntry } from '../../utils/loot/loot.types.ts'
+import ItemAddModal from './item/ItemAddModal.vue'
+import ItemEditModal from './item/ItemEditModal.vue'
+import { useLootDataStore } from '../../stores/lootDataStore.ts'
 import LootLuckDisplay from './LootLuckDisplay.vue'
-import Loader from './Loader.vue'
-import { useLoot } from '../composables/useLoot.ts'
+import Loader from '../Loader.vue'
+import { useLoot } from '../../composables/useLoot.ts'
 
 const configStore = useConfigStore()
 const suppliesStore = useSuppliesStore()
@@ -89,11 +89,11 @@ function onLootItemEdit(entry: LootEntry) {
 </script>
 
 <template>
-  <AddItemModal
+  <ItemAddModal
     :item-to-add-name="itemToAddName"
     @on-close="itemToAddName = null"
   />
-  <EditItemModal :item-to-edit="itemToEdit" @on-close="itemToEdit = null" />
+  <ItemEditModal :item-to-edit="itemToEdit" @on-close="itemToEdit = null" />
 
   <div class="loot-list__header">
     <LootTimeDisplay

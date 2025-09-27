@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Header from './Header.vue'
-import LootList from './LootList.vue'
+import LootList from './loot/LootList.vue'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import { useConfigStore } from '../stores/configStore.ts'
 import { useClientStore } from '../stores/clientStore.ts'

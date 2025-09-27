@@ -13,16 +13,16 @@ import {
   VDivider,
   VBadge,
 } from 'vuetify/components'
-import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
-import { useSuppliesStore } from '../stores/suppliesStore.ts'
+import { SUPPLIES } from '../../utils/supplies/supplies.constants.ts'
+import { useSuppliesStore } from '../../stores/suppliesStore.ts'
 import { computed, ref, watch } from 'vue'
-import { formatNumber } from '../utils/number.ts'
-import { useConfigStore } from '../stores/configStore.ts'
-import VocationFilter from './VocationFilter.vue'
-import { Vocation, VocationIdentifier } from '../types/vocation.types.ts'
-import { VOCATIONS } from '../constants/vocations.ts'
-import { Supply } from '../utils/supplies/supplies.types.ts'
-import SubmitWasteModal from './SubmitWasteModal.vue'
+import { formatNumber } from '../../utils/number.ts'
+import { useConfigStore } from '../../stores/configStore.ts'
+import SuppliesVocationFilter from './SuppliesVocationFilter.vue'
+import { Vocation, VocationIdentifier } from '../../types/vocation.types.ts'
+import { VOCATIONS } from '../../constants/vocations.ts'
+import { Supply } from '../../utils/supplies/supplies.types.ts'
+import SuppliesSubmitWasteModal from './SuppliesSubmitWasteModal.vue'
 
 const suppliesStore = useSuppliesStore()
 const configStore = useConfigStore()
@@ -86,7 +86,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
           </v-chip>
         </v-card-title>
         <v-card-text>
-          <VocationFilter
+          <SuppliesVocationFilter
             class="mb-3 mt-3"
             :active-vocation-id="vocationSelected.id"
             @update="onVocationFilterUpdate"
@@ -149,7 +149,7 @@ function onVocationFilterUpdate(vocationIdentifier: VocationIdentifier) {
         </v-card-text>
 
         <v-card-actions>
-          <SubmitWasteModal
+          <SuppliesSubmitWasteModal
             :calculated-waste="suppliesStore.totalSuppliesUsed"
           />
           <v-btn text="Reset" @click="onReset"></v-btn>

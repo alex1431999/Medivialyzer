@@ -1,22 +1,21 @@
 <script setup lang="ts">
 import {
-  VBtn,
-  VCard,
-  VCardActions,
-  VCardText,
-  VCardTitle,
   VDialog,
+  VCard,
+  VCardTitle,
+  VCardText,
+  VCardActions,
+  VBtn,
 } from 'vuetify/components'
-import ItemForm, { ItemFormData } from './ItemForm.vue'
-import { useConfigStore } from '../stores/configStore.ts'
 import { ref, watch } from 'vue'
-import { Item } from '../utils/item/item.types.ts'
-import { LootEntry } from '../utils/loot/loot.types.ts'
-import { baserowSubmitItem } from '../utils/baserow/baserow.requests.ts'
+import { Item } from '../../..//utils/item/item.types.ts'
+import { useConfigStore } from '../../../stores/configStore.ts'
+import { baserowSubmitItem } from '../../../utils/baserow/baserow.requests.ts'
+import ItemForm, { ItemFormData } from './ItemForm.vue'
 
 const configStore = useConfigStore()
 
-const { itemToEdit } = defineProps<{ itemToEdit: LootEntry | null }>()
+const { itemToAddName } = defineProps<{ itemToAddName: string | null }>()
 const emit = defineEmits(['onClose'])
 
 const formData = ref<ItemFormData>(initialiseFormData())
@@ -24,9 +23,9 @@ const formData = ref<ItemFormData>(initialiseFormData())
 const isOpen = ref<boolean>(false)
 
 watch(
-  () => itemToEdit,
+  () => itemToAddName,
   () => {
-    isOpen.value = itemToEdit !== null
+    isOpen.value = itemToAddName !== null
     formData.value = initialiseFormData()
   },
 )
@@ -45,16 +44,11 @@ watch(
 )
 
 function initialiseFormData(): ItemFormData {
-  const name = itemToEdit?.item.name || ''
-  const value = itemToEdit?.item.value || undefined
-  const NPC =
-    itemToEdit?.item.NPCs?.length && itemToEdit?.item.NPCs[0] !== 'Players'
-      ? itemToEdit?.item.NPCs[0]
-      : undefined
-
   return {
     value: {
-      item: { name, value, NPC },
+      item: {
+        name: itemToAddName || '',
+      },
       consent: configStore.config.consentToSubmitItem,
       isValid: true,
     },
@@ -62,6 +56,7 @@ function initialiseFormData(): ItemFormData {
 }
 
 async function submit() {
+  if (!itemToAddName) throw new Error('Name is required')
   if (formData.value.value.item.value === null)
     throw new Error('Value is required')
   if (formData.value.value.item.value === undefined)
@@ -77,7 +72,7 @@ async function submit() {
   configStore.setConsentToSubmitItem(formData.value.value.consent)
 
   if (formData.value.value.consent) {
-    await baserowSubmitItem(item, true)
+    await baserowSubmitItem(item, false)
   }
 
   isOpen.value = false
@@ -101,5 +96,3 @@ async function submit() {
     </template>
   </v-dialog>
 </template>
-
-<style scoped></style>

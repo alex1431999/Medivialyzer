@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { VChip, VIcon, VTooltip } from 'vuetify/components'
 import { computed } from 'vue'
-import { formatNumber } from '../utils/number.ts'
+import { formatNumber } from '../../utils/number.ts'
 
 const { profit } = defineProps<{ profit: number }>()
 

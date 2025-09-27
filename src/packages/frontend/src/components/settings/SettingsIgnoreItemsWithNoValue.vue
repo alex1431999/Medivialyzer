@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VCheckbox } from 'vuetify/components'
-import { useConfigStore } from '../stores/configStore.ts'
+import { useConfigStore } from '../../stores/configStore.ts'
 import { ref, watch } from 'vue'
 
 const configStore = useConfigStore()
