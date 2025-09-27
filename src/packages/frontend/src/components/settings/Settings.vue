@@ -20,7 +20,7 @@ const tab = ref<string>('general')
 </script>
 
 <template>
-  <v-dialog max-width="800">
+  <v-dialog max-width="900">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn icon="mdi-cog" v-bind="activatorProps" />
     </template>

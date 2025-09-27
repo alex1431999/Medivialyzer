@@ -65,7 +65,7 @@ function filterCreatures(creatures: CreatureGrouped[]) {
 </script>
 
 <template>
-  <v-dialog width="700">
+  <v-dialog max-width="900">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
