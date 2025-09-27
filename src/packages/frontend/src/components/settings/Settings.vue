@@ -22,7 +22,12 @@ const tab = ref<string>('general')
 <template>
   <v-dialog max-width="900">
     <template v-slot:activator="{ props: activatorProps }">
-      <v-btn icon="mdi-cog" v-bind="activatorProps" />
+      <v-btn
+        size="small"
+        icon="mdi-cog"
+        color="secondary"
+        v-bind="activatorProps"
+      />
     </template>
 
     <template v-slot:default="{ isActive }">

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Header from './Header.vue'
 import LootList from './loot/LootList.vue'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import { useConfigStore } from '../stores/configStore.ts'
@@ -73,12 +72,5 @@ watch(
 </script>
 
 <template>
-  <Header class="app__header" />
   <LootList />
 </template>
-
-<style scoped>
-.app__header {
-  margin-bottom: 16px;
-}
-</style>
