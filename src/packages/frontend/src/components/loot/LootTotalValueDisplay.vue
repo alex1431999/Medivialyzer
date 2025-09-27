@@ -9,7 +9,7 @@ const totalLootValueFormatted = computed(() => formatNumber(totalLootValue))
 </script>
 
 <template>
-  <div style="width: 80px">
+  <div style="width: 150px" class="d-flex justify-end">
     <v-tooltip text="Total loot">
       <template v-slot:activator="{ props }">
         <v-chip v-bind="props" color="secondary">
