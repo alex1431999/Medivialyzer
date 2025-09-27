@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { VList, VListItem, VDivider } from 'vuetify/components'
-import { Team, useTeamStore } from '../stores/teamStore.ts'
+import { Team, useTeamStore } from '../../stores/teamStore.ts'
 import TeamMenu from './TeamMenu.vue'
-import { useClientStore } from '../stores/clientStore.ts'
-import { getClient } from '../utils/client.ts'
+import { useClientStore } from '../../stores/clientStore.ts'
+import { getClient } from '../../utils/client.ts'
 
 const teamStore = useTeamStore()
 const clientStore = useClientStore()

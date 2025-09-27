@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { VCard, VCardText } from 'vuetify/components/VCard'
 import LootListTimeControl from './LootListTimeControl.vue'
-import SuppliesModal from './SuppliesModal.vue'
+import SuppliesModal from '../supplies/SuppliesModal.vue'
 import LootTotalValueDisplay from './LootTotalValueDisplay.vue'
-import CreaturesKilledModal from './CreaturesKilledModal.vue'
-import TeamModal from './TeamModal.vue'
+import CreaturesKilledModal from '../creatures/CreaturesKilledModal.vue'
+import TeamModal from '../team/TeamModal.vue'
 
 const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 </script>

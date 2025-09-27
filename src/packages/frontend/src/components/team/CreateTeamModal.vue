@@ -10,7 +10,7 @@ import {
   VCardActions,
 } from 'vuetify/components'
 import { ref } from 'vue'
-import { TeamCreateData } from '../stores/teamStore.ts'
+import { TeamCreateData } from '../../stores/teamStore.ts'
 
 const show = defineModel<boolean>('show')
 const createTeamData = ref<TeamCreateData>({ name: '' })

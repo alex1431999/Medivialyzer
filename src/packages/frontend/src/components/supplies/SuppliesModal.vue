@@ -13,15 +13,15 @@ import {
   VDivider,
   VBadge,
 } from 'vuetify/components'
-import { SUPPLIES } from '../utils/supplies/supplies.constants.ts'
-import { useSuppliesStore } from '../stores/suppliesStore.ts'
+import { SUPPLIES } from '../../utils/supplies/supplies.constants.ts'
+import { useSuppliesStore } from '../../stores/suppliesStore.ts'
 import { computed, ref, watch } from 'vue'
-import { formatNumber } from '../utils/number.ts'
-import { useConfigStore } from '../stores/configStore.ts'
+import { formatNumber } from '../../utils/number.ts'
+import { useConfigStore } from '../../stores/configStore.ts'
 import SuppliesVocationFilter from './SuppliesVocationFilter.vue'
-import { Vocation, VocationIdentifier } from '../types/vocation.types.ts'
-import { VOCATIONS } from '../constants/vocations.ts'
-import { Supply } from '../utils/supplies/supplies.types.ts'
+import { Vocation, VocationIdentifier } from '../../types/vocation.types.ts'
+import { VOCATIONS } from '../../constants/vocations.ts'
+import { Supply } from '../../utils/supplies/supplies.types.ts'
 import SubmitWasteModal from './SubmitWasteModal.vue'
 
 const suppliesStore = useSuppliesStore()

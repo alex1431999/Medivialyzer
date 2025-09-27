@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VChip, VIcon, VTooltip } from 'vuetify/components'
-import { WasteDto } from '../utils/generated/api-client'
+import { WasteDto } from '../../utils/generated/api-client'
 import { formatNumber } from 'medivialyzer-frontend/src/utils/number.ts'
 
 const { waste } = defineProps<{ waste?: WasteDto }>()

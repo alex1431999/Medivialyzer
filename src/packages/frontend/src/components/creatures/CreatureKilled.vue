@@ -2,7 +2,7 @@
 import {
   CreatureGrouped,
   CreatureWithAverageLoot,
-} from '../utils/creature/creature.types.ts'
+} from '../../utils/creature/creature.types.ts'
 import {
   VChip,
   VBadge,

@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { VCard, VCardText, VBadge, VChip } from 'vuetify/components'
-import { Member, Team, useTeamStore } from '../stores/teamStore.ts'
-import { Client, useClientStore } from '../stores/clientStore.ts'
+import { Member, Team, useTeamStore } from '../../stores/teamStore.ts'
+import { Client, useClientStore } from '../../stores/clientStore.ts'
 import Waste from './Waste.vue'
 import { computed } from 'vue'
 import Payout from './Payout.vue'
-import { WasteDto } from '../utils/generated/api-client'
+import { WasteDto } from '../../utils/generated/api-client'
 import {
   calculateMemberPayout,
   getMemberWaste,
-} from '../utils/waste/waste.utils.ts'
+} from '../../utils/waste/waste.utils.ts'
 import MemberMenu from './MemberMenu.vue'
-import { useNotifications } from '../composables/useNotifications.ts'
-import { useLoot } from '../composables/useLoot.ts'
+import { useNotifications } from '../../composables/useNotifications.ts'
+import { useLoot } from '../../composables/useLoot.ts'
 
 const clientStore = useClientStore()
 const teamStore = useTeamStore()

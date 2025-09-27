@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { VBtn, VList, VListItem, VAlert } from 'vuetify/components'
 import { computed } from 'vue'
-import { useConfigStore } from '../stores/configStore.ts'
-import { Item } from '../utils/item/item.types.ts'
+import { useConfigStore } from '../../stores/configStore.ts'
+import { Item } from '../../utils/item/item.types.ts'
 import _ from 'lodash'
 
 const configStore = useConfigStore()

@@ -10,8 +10,8 @@ import {
   VTextField,
 } from 'vuetify/components'
 import { computed, ref, watch } from 'vue'
-import { useTeamStore } from '../stores/teamStore.ts'
-import { useNotifications } from '../composables/useNotifications.ts'
+import { useTeamStore } from '../../stores/teamStore.ts'
+import { useNotifications } from '../../composables/useNotifications.ts'
 
 const teamStore = useTeamStore()
 const { notify } = useNotifications()

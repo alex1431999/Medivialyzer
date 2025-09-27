@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VBtn, VIcon, VTextField } from 'vuetify/components'
-import { useNotifications } from '../composables/useNotifications.ts'
+import { useNotifications } from '../../composables/useNotifications.ts'
 
 const props = defineProps<{ id: string }>()
 const { notify } = useNotifications()

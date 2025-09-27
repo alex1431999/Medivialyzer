@@ -12,16 +12,16 @@ import {
   VTabsWindowItem,
   VAutocomplete,
 } from 'vuetify/components'
-import { useLootDataStore } from '../stores/lootDataStore.ts'
+import { useLootDataStore } from '../../stores/lootDataStore.ts'
 import { computed, ref } from 'vue'
 import CreatureKilled from './CreatureKilled.vue'
 import {
   getCreatureKillsPerHour,
   getCreatureWithAverageLoot,
   groupCreatures,
-} from '../utils/creature/creature.helpers.ts'
+} from '../../utils/creature/creature.helpers.ts'
 import _ from 'lodash'
-import { CreatureGrouped } from '../utils/creature/creature.types.ts'
+import { CreatureGrouped } from '../../utils/creature/creature.types.ts'
 import CreaturesKilledEmptyPlaceholder from './CreaturesKilledEmptyPlaceholder.vue'
 
 const lootDataStore = useLootDataStore()

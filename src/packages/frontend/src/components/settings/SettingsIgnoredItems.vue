@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { VBtn, VList, VListItem, VAlert } from 'vuetify/components'
 import { computed } from 'vue'
-import { useConfigStore } from '../stores/configStore.ts'
+import { useConfigStore } from '../../stores/configStore.ts'
 
 const configStore = useConfigStore()
 

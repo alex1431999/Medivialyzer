@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { VDivider } from 'vuetify/components'
 import Members from './Members.vue'
-import { Team } from '../stores/teamStore.ts'
+import { Team } from '../../stores/teamStore.ts'
 import TeamId from './TeamId.vue'
 import TeamName from './TeamName.vue'
 import ProfitEach from './ProfitEach.vue'
@@ -9,8 +9,8 @@ import { computed } from 'vue'
 import {
   getMembersWithWaste,
   getTotalWaste,
-} from '../utils/waste/waste.utils.ts'
-import { useLoot } from '../composables/useLoot.ts'
+} from '../../utils/waste/waste.utils.ts'
+import { useLoot } from '../../composables/useLoot.ts'
 
 const { totalLootValue } = useLoot()
 

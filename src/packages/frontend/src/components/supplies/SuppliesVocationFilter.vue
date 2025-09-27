@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { VBtn } from 'vuetify/components'
-import { VOCATIONS } from '../constants/vocations.ts'
-import { VocationIdentifier } from '../types/vocation.types.ts'
+import { VOCATIONS } from '../../constants/vocations.ts'
+import { VocationIdentifier } from '../../types/vocation.types.ts'
 
 const vocations = Object.values(VOCATIONS)
 

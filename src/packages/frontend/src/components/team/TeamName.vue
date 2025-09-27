@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VBtn, VTextField, VIcon } from 'vuetify/components'
-import { Team } from '../stores/teamStore.ts'
+import { Team } from '../../stores/teamStore.ts'
 import { ref, watch } from 'vue'
 
 const { team } = defineProps<{ team: Team }>()

@@ -8,11 +8,11 @@ import {
   VDialog,
 } from 'vuetify/components'
 import ItemForm, { ItemFormData } from './ItemForm.vue'
-import { useConfigStore } from '../stores/configStore.ts'
+import { useConfigStore } from '../../../stores/configStore.ts'
 import { ref, watch } from 'vue'
-import { Item } from '../utils/item/item.types.ts'
-import { LootEntry } from '../utils/loot/loot.types.ts'
-import { baserowSubmitItem } from '../utils/baserow/baserow.requests.ts'
+import { Item } from '../../../utils/item/item.types.ts'
+import { LootEntry } from '../../../utils/loot/loot.types.ts'
+import { baserowSubmitItem } from '../../../utils/baserow/baserow.requests.ts'
 
 const configStore = useConfigStore()
 

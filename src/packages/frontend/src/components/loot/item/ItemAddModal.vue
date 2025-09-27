@@ -8,9 +8,9 @@ import {
   VBtn,
 } from 'vuetify/components'
 import { ref, watch } from 'vue'
-import { Item } from '../utils/item/item.types.ts'
-import { useConfigStore } from '../stores/configStore.ts'
-import { baserowSubmitItem } from '../utils/baserow/baserow.requests.ts'
+import { Item } from '../../..//utils/item/item.types.ts'
+import { useConfigStore } from '../../../stores/configStore.ts'
+import { baserowSubmitItem } from '../../../utils/baserow/baserow.requests.ts'
 import ItemForm, { ItemFormData } from './ItemForm.vue'
 
 const configStore = useConfigStore()

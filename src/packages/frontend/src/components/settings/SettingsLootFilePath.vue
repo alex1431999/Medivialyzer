@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { VBtn, VTextField } from 'vuetify/components'
-import { useConfigStore } from '../stores/configStore.ts'
-import { electron } from '../utils/electron/electron.constants.ts'
+import { useConfigStore } from '../../stores/configStore.ts'
+import { electron } from '../../utils/electron/electron.constants.ts'
 import { ref, watch } from 'vue'
 
 const configStore = useConfigStore()

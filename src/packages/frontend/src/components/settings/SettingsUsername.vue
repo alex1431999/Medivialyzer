@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { VTextField, VBtn } from 'vuetify/components'
 import { ref } from 'vue'
-import { useClientStore } from '../stores/clientStore.ts'
-import { useNotifications } from '../composables/useNotifications.ts'
+import { useClientStore } from '../../stores/clientStore.ts'
+import { useNotifications } from '../../composables/useNotifications.ts'
 
 const { notify } = useNotifications()
 

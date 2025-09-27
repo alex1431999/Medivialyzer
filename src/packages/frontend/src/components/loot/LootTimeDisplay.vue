@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import { defineProps } from 'vue'
 import moment from 'moment'
-import { useConfigStore } from '../stores/configStore.ts'
+import { useConfigStore } from '../../stores/configStore.ts'
 import { VTextField } from 'vuetify/components'
 
 const props = defineProps<{ since: number }>()
