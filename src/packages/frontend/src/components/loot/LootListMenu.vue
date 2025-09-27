@@ -2,7 +2,7 @@
 import { VCard, VCardText } from 'vuetify/components/VCard'
 import LootListTimeControl from './LootListTimeControl.vue'
 import SuppliesModal from './SuppliesModal.vue'
-import TotalLootValueDisplay from './TotalLootValueDisplay.vue'
+import LootTotalValueDisplay from './LootTotalValueDisplay.vue'
 import CreaturesKilledModal from './CreaturesKilledModal.vue'
 import TeamModal from './TeamModal.vue'
 
@@ -22,7 +22,7 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
         @back="$emit('back')"
         @forward="$emit('forward')"
       ></LootListTimeControl>
-      <TotalLootValueDisplay :total-loot-value="totalLootValue" />
+      <LootTotalValueDisplay :total-loot-value="totalLootValue" />
     </v-card-text>
   </v-card>
 </template>

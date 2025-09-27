@@ -8,8 +8,8 @@ import LootTimeDisplay from './LootTimeDisplay.vue'
 import LootProfitDisplay from './LootProfitDisplay.vue'
 import { useSuppliesStore } from '../stores/suppliesStore.ts'
 import { LootEntry } from '../utils/loot/loot.types.ts'
-import AddItemModal from './AddItemModal.vue'
-import EditItemModal from './EditItemModal.vue'
+import ItemAddModal from './ItemAddModal.vue'
+import ItemEditModal from './ItemEditModal.vue'
 import { useLootDataStore } from '../stores/lootDataStore.ts'
 import LootLuckDisplay from './LootLuckDisplay.vue'
 import Loader from './Loader.vue'
@@ -89,11 +89,11 @@ function onLootItemEdit(entry: LootEntry) {
 </script>
 
 <template>
-  <AddItemModal
+  <ItemAddModal
     :item-to-add-name="itemToAddName"
     @on-close="itemToAddName = null"
   />
-  <EditItemModal :item-to-edit="itemToEdit" @on-close="itemToEdit = null" />
+  <ItemEditModal :item-to-edit="itemToEdit" @on-close="itemToEdit = null" />
 
   <div class="loot-list__header">
     <LootTimeDisplay
