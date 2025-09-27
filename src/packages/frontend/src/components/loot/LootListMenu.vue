@@ -5,6 +5,7 @@ import SuppliesModal from '../supplies/SuppliesModal.vue'
 import LootTotalValueDisplay from './LootTotalValueDisplay.vue'
 import CreaturesKilledModal from '../creatures/CreaturesKilledModal.vue'
 import TeamModal from '../team/TeamModal.vue'
+import Settings from '../settings/Settings.vue'
 
 const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 </script>
@@ -13,6 +14,7 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
   <v-card class="loot-list-menu__card">
     <v-card-text class="loot-list-menu__card-text">
       <div class="d-flex ga-3">
+        <Settings />
         <SuppliesModal />
         <CreaturesKilledModal />
         <TeamModal />
