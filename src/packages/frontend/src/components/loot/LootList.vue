@@ -139,7 +139,7 @@ function onLootItemEdit(entry: LootEntry) {
 
 .loot-list__items {
   height: 70vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .loot-list__list-item {
