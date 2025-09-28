@@ -65,7 +65,7 @@ function filterCreatures(creatures: CreatureGrouped[]) {
 </script>
 
 <template>
-  <v-dialog max-width="900">
+  <v-dialog max-width="900" height="570">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
@@ -146,7 +146,7 @@ function filterCreatures(creatures: CreatureGrouped[]) {
 
 <style scoped>
 .creatures-list {
-  max-height: 400px;
+  max-height: 280px;
   overflow-y: auto;
 }
 </style>
