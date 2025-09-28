@@ -13,7 +13,7 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 <template>
   <v-card class="loot-list-menu__card">
     <v-card-text class="loot-list-menu__card-text">
-      <div class="d-flex ga-3">
+      <div class="d-flex ga-3" style="width: 150px">
         <Settings />
         <SuppliesModal />
         <CreaturesKilledModal />
