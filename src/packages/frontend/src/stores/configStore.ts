@@ -13,6 +13,7 @@ export type Config = {
   customItems: Item[]
   ignoreItemsWithNoValue: boolean
   consentToSubmitItem: boolean
+  restartHintAcknowledged: boolean
   lootFilePath?: string
   skipVersionUpgrade?: string
   supplies?: SuppliesData
@@ -29,6 +30,7 @@ const DEFAULT_CONFIG: Config = {
   customItems: [],
   ignoreItemsWithNoValue: false,
   consentToSubmitItem: false,
+  restartHintAcknowledged: false,
   supplies: {},
   suppliesFavorites: {},
   supplyFilter: {
