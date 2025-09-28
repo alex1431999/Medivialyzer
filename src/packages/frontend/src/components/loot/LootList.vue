@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { VAlert } from 'vuetify/components'
 import LootListItem from './LootListItem.vue'
 import LootListMenu from './LootListMenu.vue'
 import { useConfigStore } from '../../stores/configStore.ts'
@@ -119,6 +120,16 @@ function onLootItemEdit(entry: LootEntry) {
     >
     </LootListItem>
     <Loader class="d-flex justify-center align-center h-100" v-else />
+    <div
+      v-if="!isLootLoading && lootSorted.length === 0"
+      class="d-flex justify-center w-100"
+    >
+      <div class="w-3ß">
+        <v-alert color="secondary" type="info">
+          No loot found in the timeframe selected
+        </v-alert>
+      </div>
+    </div>
   </div>
 
   <LootListMenu
