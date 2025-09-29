@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VDataTable } from 'vuetify/components'
+import { VDataTable, VIcon } from 'vuetify/components'
 
 export type CreaturesKilledTableItem = {
   name: string
@@ -29,9 +29,44 @@ const headers = [
     fixed-header
     height="280px"
     hide-default-footer
+    class="data-table"
   >
+    <template v-slot:header.name="{ column }">
+      <span class="d-inline-flex align-center text-secondary">
+        <v-icon icon="mdi-paw" class="mr-1" color="secondary" />
+        {{ column.title }}
+      </span>
+    </template>
+
+    <template v-slot:header.amount="{ column }">
+      <span class="d-inline-flex align-center text-secondary">
+        <v-icon icon="mdi-counter" class="mr-1" color="secondary" />
+        {{ column.title }}
+      </span>
+    </template>
+
+    <template v-slot:header.killsPerHour="{ column }">
+      <span class="d-inline-flex align-center text-secondary">
+        <v-icon icon="mdi-sword-cross" class="mr-1" color="secondary" />
+        {{ column.title }}
+      </span>
+    </template>
+
+    <template v-slot:header.avgLoot="{ column }">
+      <span class="d-inline-flex align-center text-secondary">
+        <v-icon icon="mdi-gold" class="mr-1" color="secondary" />
+        {{ column.title }}
+      </span>
+    </template>
+
     <template v-slot:item.avgLoot="{ item }">
       {{ item.avgLoot.toFixed(2) }}
     </template>
   </v-data-table>
 </template>
+
+<style scoped>
+:deep(.data-table .v-table__wrapper > table > tbody > tr:nth-of-type(odd)) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+</style>

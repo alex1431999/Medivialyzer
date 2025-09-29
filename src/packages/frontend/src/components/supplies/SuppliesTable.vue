@@ -51,38 +51,39 @@ function onFavoriteClick(item: SuppliesTableItem, value: boolean) {
     fixed-header
     height="300px"
     hide-default-footer
+    class="data-table"
   >
     <template v-slot:header.favorite="{ column }">
-      <span class="d-inline-flex align-center">
-        <v-icon icon="mdi-star" class="mr-1" />
+      <span class="d-inline-flex align-center text-secondary">
+        <v-icon icon="mdi-star" class="mr-1" color="secondary" />
         {{ column.title }}
       </span>
     </template>
 
     <template v-slot:header.name="{ column }">
-      <span class="d-inline-flex align-center">
-        <v-icon icon="mdi-package-variant" class="mr-1" />
+      <span class="d-inline-flex align-center text-secondary">
+        <v-icon icon="mdi-package-variant" class="mr-1" color="secondary" />
         {{ column.title }}
       </span>
     </template>
 
     <template v-slot:header.before="{ column }">
-      <span class="d-inline-flex align-center">
-        <v-icon icon="mdi-arrow-up-bold-box-outline" class="mr-1" />
+      <span class="d-inline-flex align-center text-secondary">
+        <v-icon icon="mdi-arrow-up-bold-box-outline" class="mr-1" color="secondary" />
         {{ column.title }}
       </span>
     </template>
 
     <template v-slot:header.after="{ column }">
-      <span class="d-inline-flex align-center">
-        <v-icon icon="mdi-arrow-down-bold-box-outline" class="mr-1" />
+      <span class="d-inline-flex align-center text-secondary">
+        <v-icon icon="mdi-arrow-down-bold-box-outline" class="mr-1" color="secondary" />
         {{ column.title }}
       </span>
     </template>
 
     <template v-slot:header.cost="{ column }">
-      <span class="d-inline-flex align-center">
-        <v-icon icon="mdi-gold" class="mr-1" />
+      <span class="d-inline-flex align-center text-secondary">
+        <v-icon icon="mdi-gold" class="mr-1" color="secondary" />
         {{ column.title }}
       </span>
     </template>
@@ -127,3 +128,9 @@ function onFavoriteClick(item: SuppliesTableItem, value: boolean) {
     </template>
   </v-data-table>
 </template>
+
+<style scoped>
+:deep(.data-table .v-table__wrapper > table > tbody > tr:nth-of-type(odd)) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+</style>
