@@ -14,7 +14,6 @@ import {
 } from 'vuetify/components'
 import { useLootDataStore } from '../../stores/lootDataStore.ts'
 import { computed, ref } from 'vue'
-import CreaturesKilled from './CreaturesKilled.vue'
 import {
   getCreatureKillsPerHour,
   getCreatureWithAverageLoot,
@@ -23,6 +22,9 @@ import {
 import _ from 'lodash'
 import { CreatureGrouped } from '../../utils/creature/creature.types.ts'
 import CreaturesKilledEmptyPlaceholder from './CreaturesKilledEmptyPlaceholder.vue'
+import CreaturesKilledTable, {
+  CreaturesKilledTableItem,
+} from './CreaturesKilledTable.vue'
 
 const lootDataStore = useLootDataStore()
 
@@ -43,13 +45,31 @@ const creaturesGeneral = computed(() => {
   return _.sortBy(creaturesFiltered, ['amount']).reverse()
 })
 
-const creaturesWithAverageLootCurrentHunt = computed(
-  () => lootDataStore.lootDataParsed.creaturesWithAverageLootCurrentHunt,
-)
+const tableItemsCurrent = computed<CreaturesKilledTableItem[]>(() => {
+  return creaturesCurrentHunt.value.map((creature) => ({
+    name: creature.name,
+    amount: creature.amount,
+    killsPerHour: getCreatureKillsPerHour(
+      creature,
+      lootDataStore.lootDataParsed.creaturesCurrentHunt,
+    ),
+    avgLoot: getCreatureWithAverageLoot(
+      lootDataStore.lootDataParsed.creaturesWithAverageLootCurrentHunt,
+      creature,
+    ).averageLootValue,
+  }))
+})
 
-const creaturesWithAverageLootGeneral = computed(
-  () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
-)
+const tableItemsGeneral = computed<CreaturesKilledTableItem[]>(() => {
+  return creaturesGeneral.value.map((creature) => ({
+    name: creature.name,
+    amount: creature.amount,
+    avgLoot: getCreatureWithAverageLoot(
+      lootDataStore.lootDataParsed.creaturesWithAverageLoot,
+      creature,
+    ).averageLootValue,
+  }))
+})
 
 const creatureNames = computed(() =>
   creaturesGeneral.value.map((creature) => creature.name),
@@ -93,45 +113,17 @@ function filterCreatures(creatures: CreatureGrouped[]) {
             />
 
             <v-tabs-window-item value="current">
-              <div v-if="creaturesCurrentHunt.length" class="creatures-list">
-                <CreaturesKilled
-                  class="mb-2"
-                  v-for="creature in creaturesCurrentHunt"
-                  :key="creature.name"
-                  :creature="creature"
-                  :creature-kills-per-hour="
-                    getCreatureKillsPerHour(
-                      creature,
-                      lootDataStore.lootDataParsed.creaturesCurrentHunt,
-                    )
-                  "
-                  :creature-with-average-loot="
-                    getCreatureWithAverageLoot(
-                      creaturesWithAverageLootCurrentHunt,
-                      creature,
-                    )
-                  "
-                ></CreaturesKilled>
-              </div>
-              <CreaturesKilledEmptyPlaceholder v-else />
+              <CreaturesKilledTable :items="tableItemsCurrent" />
+              <CreaturesKilledEmptyPlaceholder
+                v-if="!tableItemsCurrent.length"
+              />
             </v-tabs-window-item>
 
             <v-tabs-window-item value="general">
-              <div v-if="creaturesGeneral.length" class="creatures-list">
-                <CreaturesKilled
-                  class="mb-2"
-                  v-for="creature in creaturesGeneral"
-                  :key="creature.name"
-                  :creature="creature"
-                  :creature-with-average-loot="
-                    getCreatureWithAverageLoot(
-                      creaturesWithAverageLootGeneral,
-                      creature,
-                    )
-                  "
-                ></CreaturesKilled>
-              </div>
-              <CreaturesKilledEmptyPlaceholder v-else />
+              <CreaturesKilledTable :items="tableItemsGeneral" />
+              <CreaturesKilledEmptyPlaceholder
+                v-if="!tableItemsGeneral.length"
+              />
             </v-tabs-window-item>
           </v-tabs-window>
         </v-card-text>
@@ -143,10 +135,3 @@ function filterCreatures(creatures: CreatureGrouped[]) {
     </template>
   </v-dialog>
 </template>
-
-<style scoped>
-.creatures-list {
-  max-height: 280px;
-  overflow-y: auto;
-}
-</style>
