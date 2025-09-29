@@ -27,7 +27,8 @@ const headers = [
     :items="items"
     density="compact"
     fixed-header
-    height="220px"
+    height="280px"
+    hide-default-footer
   >
     <template v-slot:item.avgLoot="{ item }">
       {{ item.avgLoot.toFixed(2) }}
