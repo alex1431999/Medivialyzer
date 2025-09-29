@@ -104,12 +104,13 @@ function filterCreatures(creatures: CreatureGrouped[]) {
             <v-tab value="general">General</v-tab>
           </v-tabs>
 
-          <v-tabs-window v-model="tab" class="mt-2">
+          <v-tabs-window v-model="tab" class="mt-3">
             <v-autocomplete
-              class="mb-2"
               label="Search creature"
               :items="creatureNames"
               v-model="creaturesSearchValue"
+              density="compact"
+              clearable
             />
 
             <v-tabs-window-item value="current">
