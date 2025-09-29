@@ -64,9 +64,3 @@ const headers = [
     </template>
   </v-data-table>
 </template>
-
-<style scoped>
-:deep(.data-table .v-table__wrapper > table > tbody > tr:nth-of-type(odd)) {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-</style>
