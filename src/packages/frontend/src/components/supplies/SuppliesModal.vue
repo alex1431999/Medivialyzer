@@ -2,20 +2,19 @@
 import {
   VBtn,
   VDialog,
-  VTable,
   VCard,
   VCardText,
-  VChip,
   VIcon,
   VCardTitle,
   VCardActions,
   VTextField,
   VDivider,
-  VBadge,
+  VDataTable,
+  VChip,
 } from 'vuetify/components'
 import { SUPPLIES } from '../../utils/supplies/supplies.constants.ts'
 import { useSuppliesStore } from '../../stores/suppliesStore.ts'
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { formatNumber } from '../../utils/number.ts'
 import { useConfigStore } from '../../stores/configStore.ts'
 import SuppliesVocationFilter from './SuppliesVocationFilter.vue'
@@ -28,7 +27,13 @@ import _ from 'lodash'
 const suppliesStore = useSuppliesStore()
 const configStore = useConfigStore()
 
-const supplyToEdit = ref<Supply | null>(null)
+const headers = [
+  { title: 'Favorite', key: 'favorite', sortable: false, width: '1%', align: 'start' },
+  { title: 'Item', key: 'name', align: 'start', sortable: false },
+  { title: 'Before', key: 'before', sortable: false, align: 'start' },
+  { title: 'After', key: 'after', sortable: false, align: 'start' },
+  { title: 'Cost', key: 'cost', align: 'start', sortable: false },
+] as const
 
 const totalSuppliesUsedFormatted = computed(() =>
   formatNumber(suppliesStore.totalSuppliesUsed),
@@ -46,6 +51,21 @@ const suppliesFiltered = computed(() =>
     vocationSelected.value.supplies.includes(supply.name),
   ).sort((supply) => (getIsFavorite(supply) ? -1 : 1)),
 )
+
+const tableItems = computed(() => {
+  return suppliesFiltered.value.map((supply) => {
+    const before = suppliesStore.supplies[supply.name]?.before || 0
+    const after = suppliesStore.supplies[supply.name]?.after || 0
+    const cost = suppliesStore.supplies[supply.name]?.cost || supply.value
+    return {
+      ...supply,
+      isFavorite: getIsFavorite(supply),
+      before,
+      after,
+      cost,
+    }
+  })
+})
 
 const suppliesFavorites = computed(() => configStore.config.suppliesFavorites)
 
@@ -113,73 +133,92 @@ function setIsFavorite(supply: Supply, value: boolean) {
             @update="onVocationFilterUpdate"
           />
           <v-divider />
-          <v-table class="supplies-modal__table">
-            <thead>
-              <tr>
-                <th>Favorite</th>
-                <th>Item</th>
-                <th>Before</th>
-                <th>After</th>
-                <th>Cost</th>
-              </tr>
-            </thead>
+          <v-data-table
+            :headers="headers"
+            :items="tableItems"
+            :sort-by="[]"
+            density="compact"
+            fixed-header
+            height="300px"
+            hide-default-footer
+          >
+            <template v-slot:header.favorite="{ column }">
+              <span class="d-inline-flex align-center">
+                <v-icon icon="mdi-star" class="mr-1" />
+                {{ column.title }}
+              </span>
+            </template>
 
-            <transition-group name="table" tag="tbody">
-              <tr v-for="supply in suppliesFiltered" :key="supply.name">
-                <td>
-                  <v-icon
-                    v-if="getIsFavorite(supply)"
-                    @click="setIsFavorite(supply, false)"
-                  >
-                    mdi-star
-                  </v-icon>
-                  <v-icon v-else @click="setIsFavorite(supply, true)">
-                    mdi-star-outline
-                  </v-icon>
-                </td>
-                <td>{{ supply.name }}</td>
-                <td>
-                  <v-text-field
-                    v-model="suppliesStore.supplies[supply.name].before"
-                    type="number"
-                    variant="solo"
-                  />
-                </td>
-                <td>
-                  <v-text-field
-                    v-model="suppliesStore.supplies[supply.name].after"
-                    type="number"
-                    variant="solo"
-                  />
-                </td>
-                <td>
-                  <v-text-field
-                    v-if="supplyToEdit?.name === supply.name"
-                    v-model="suppliesStore.supplies[supply.name].cost"
-                    type="number"
-                    variant="solo"
-                    :width="80"
-                    @keydown.enter="supplyToEdit = null"
-                  />
-                  <v-badge
-                    v-else
-                    location="top left"
-                    icon="mdi-pencil"
-                    color="warning"
-                    class="cursor-pointer"
-                    @click="supplyToEdit = supply"
-                  >
-                    <v-chip class="cursor-auto" color="warning">
-                      <span class="mr-1">
-                        {{ suppliesStore.supplies[supply.name].cost }}
-                      </span>
-                      <v-icon icon="mdi-gold" />
-                    </v-chip>
-                  </v-badge>
-                </td>
-              </tr>
-            </transition-group>
-          </v-table>
+            <template v-slot:header.name="{ column }">
+              <span class="d-inline-flex align-center">
+                <v-icon icon="mdi-package-variant" class="mr-1" />
+                {{ column.title }}
+              </span>
+            </template>
+
+            <template v-slot:header.before="{ column }">
+              <span class="d-inline-flex align-center">
+                <v-icon icon="mdi-arrow-up-bold-box-outline" class="mr-1" />
+                {{ column.title }}
+              </span>
+            </template>
+
+            <template v-slot:header.after="{ column }">
+              <span class="d-inline-flex align-center">
+                <v-icon icon="mdi-arrow-down-bold-box-outline" class="mr-1" />
+                {{ column.title }}
+              </span>
+            </template>
+
+            <template v-slot:header.cost="{ column }">
+              <span class="d-inline-flex align-center">
+                <v-icon icon="mdi-gold" class="mr-1" />
+                {{ column.title }}
+              </span>
+            </template>
+
+            <template v-slot:item.favorite="{ item }">
+              <v-icon
+                v-if="item.isFavorite"
+                @click="setIsFavorite(item, false)"
+              >
+                mdi-star
+              </v-icon>
+              <v-icon v-else @click="setIsFavorite(item, true)">
+                mdi-star-outline
+              </v-icon>
+            </template>
+
+            <template v-slot:item.before="{ item }">
+              <v-text-field
+                v-model="suppliesStore.supplies[item.name].before"
+                type="number"
+                variant="plain"
+                density="compact"
+                hide-details
+              />
+            </template>
+
+            <template v-slot:item.after="{ item }">
+              <v-text-field
+                v-model="suppliesStore.supplies[item.name].after"
+                type="number"
+                variant="plain"
+                density="compact"
+                hide-details
+              />
+            </template>
+
+            <template v-slot:item.cost="{ item }">
+              <v-text-field
+                v-model="suppliesStore.supplies[item.name].cost"
+                type="number"
+                variant="plain"
+                density="compact"
+                hide-details
+              />
+            </template>
+          </v-data-table>
         </v-card-text>
 
         <v-card-actions>
@@ -199,13 +238,5 @@ function setIsFavorite(supply: Supply, value: boolean) {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-}
-
-.supplies-modal__table {
-  max-height: 300px;
-}
-
-.table-move {
-  transition: transform 0.3s ease;
 }
 </style>
