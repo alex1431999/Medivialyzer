@@ -2,20 +2,17 @@
 import {
   VBtn,
   VDialog,
-  VTable,
   VCard,
   VCardText,
-  VChip,
   VIcon,
   VCardTitle,
   VCardActions,
-  VTextField,
   VDivider,
-  VBadge,
+  VChip,
 } from 'vuetify/components'
 import { SUPPLIES } from '../../utils/supplies/supplies.constants.ts'
 import { useSuppliesStore } from '../../stores/suppliesStore.ts'
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { formatNumber } from '../../utils/number.ts'
 import { useConfigStore } from '../../stores/configStore.ts'
 import SuppliesVocationFilter from './SuppliesVocationFilter.vue'
@@ -24,11 +21,10 @@ import { VOCATIONS } from '../../constants/vocations.ts'
 import { Supply } from '../../utils/supplies/supplies.types.ts'
 import SuppliesSubmitWasteModal from './SuppliesSubmitWasteModal.vue'
 import _ from 'lodash'
+import SuppliesTable, { SuppliesTableItem } from './SuppliesTable.vue'
 
 const suppliesStore = useSuppliesStore()
 const configStore = useConfigStore()
-
-const supplyToEdit = ref<Supply | null>(null)
 
 const totalSuppliesUsedFormatted = computed(() =>
   formatNumber(suppliesStore.totalSuppliesUsed),
@@ -46,6 +42,21 @@ const suppliesFiltered = computed(() =>
     vocationSelected.value.supplies.includes(supply.name),
   ).sort((supply) => (getIsFavorite(supply) ? -1 : 1)),
 )
+
+const tableItems = computed<SuppliesTableItem[]>(() => {
+  return suppliesFiltered.value.map((supply) => {
+    const before = suppliesStore.supplies[supply.name]?.before || 0
+    const after = suppliesStore.supplies[supply.name]?.after || 0
+    const cost = suppliesStore.supplies[supply.name]?.cost || 0
+    return {
+      ...supply,
+      isFavorite: getIsFavorite(supply),
+      before,
+      after,
+      cost,
+    }
+  })
+})
 
 const suppliesFavorites = computed(() => configStore.config.suppliesFavorites)
 
@@ -84,6 +95,13 @@ function setIsFavorite(supply: Supply, value: boolean) {
 
   configStore.setConfig({ suppliesFavorites: suppliesFavoritesClone })
 }
+
+function onUpdateFavorite(payload: {
+  item: SuppliesTableItem
+  value: boolean
+}) {
+  setIsFavorite(payload.item, payload.value)
+}
 </script>
 
 <template>
@@ -113,73 +131,10 @@ function setIsFavorite(supply: Supply, value: boolean) {
             @update="onVocationFilterUpdate"
           />
           <v-divider />
-          <v-table class="supplies-modal__table">
-            <thead>
-              <tr>
-                <th>Favorite</th>
-                <th>Item</th>
-                <th>Before</th>
-                <th>After</th>
-                <th>Cost</th>
-              </tr>
-            </thead>
-
-            <transition-group name="table" tag="tbody">
-              <tr v-for="supply in suppliesFiltered" :key="supply.name">
-                <td>
-                  <v-icon
-                    v-if="getIsFavorite(supply)"
-                    @click="setIsFavorite(supply, false)"
-                  >
-                    mdi-star
-                  </v-icon>
-                  <v-icon v-else @click="setIsFavorite(supply, true)">
-                    mdi-star-outline
-                  </v-icon>
-                </td>
-                <td>{{ supply.name }}</td>
-                <td>
-                  <v-text-field
-                    v-model="suppliesStore.supplies[supply.name].before"
-                    type="number"
-                    variant="solo"
-                  />
-                </td>
-                <td>
-                  <v-text-field
-                    v-model="suppliesStore.supplies[supply.name].after"
-                    type="number"
-                    variant="solo"
-                  />
-                </td>
-                <td>
-                  <v-text-field
-                    v-if="supplyToEdit?.name === supply.name"
-                    v-model="suppliesStore.supplies[supply.name].cost"
-                    type="number"
-                    variant="solo"
-                    :width="80"
-                    @keydown.enter="supplyToEdit = null"
-                  />
-                  <v-badge
-                    v-else
-                    location="top left"
-                    icon="mdi-pencil"
-                    color="warning"
-                    class="cursor-pointer"
-                    @click="supplyToEdit = supply"
-                  >
-                    <v-chip class="cursor-auto" color="warning">
-                      <span class="mr-1">
-                        {{ suppliesStore.supplies[supply.name].cost }}
-                      </span>
-                      <v-icon icon="mdi-gold" />
-                    </v-chip>
-                  </v-badge>
-                </td>
-              </tr>
-            </transition-group>
-          </v-table>
+          <SuppliesTable
+            :items="tableItems"
+            @update:favorite="onUpdateFavorite"
+          />
         </v-card-text>
 
         <v-card-actions>
@@ -199,13 +154,5 @@ function setIsFavorite(supply: Supply, value: boolean) {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-}
-
-.supplies-modal__table {
-  max-height: 300px;
-}
-
-.table-move {
-  transition: transform 0.3s ease;
 }
 </style>
