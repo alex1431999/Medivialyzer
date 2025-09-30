@@ -96,15 +96,6 @@ async function onJoinTeam(id: string) {
     }
   }
 }
-
-async function onUpdateTeamName(name: string) {
-  if (!teamSelected.value) throw new Error('No team selected')
-
-  const id = teamSelected.value.id
-  await teamStore.update(id, { name })
-
-  notify('Name updated successfully', 'success')
-}
 </script>
 
 <template>
@@ -145,11 +136,7 @@ async function onUpdateTeamName(name: string) {
               vertical
               class="mr-5 ml-5"
             ></v-divider>
-            <Team
-              v-if="teamSelected"
-              :team="teamSelected"
-              @update-name="(name) => onUpdateTeamName(name)"
-            />
+            <Team v-if="teamSelected" :team="teamSelected" />
           </template>
         </v-card-text>
         <v-card-actions>

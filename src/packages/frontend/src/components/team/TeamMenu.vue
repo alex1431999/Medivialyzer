@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { VList, VListItem, VMenu, VIcon } from 'vuetify/components'
 
-const emit = defineEmits(['leave', 'delete'])
+const emit = defineEmits(['leave', 'delete', 'rename'])
 
 const { canLeave, canDelete } = defineProps<{
   canLeave: boolean
+  canRename: boolean
   canDelete: boolean
 }>()
 </script>
@@ -17,6 +18,9 @@ const { canLeave, canDelete } = defineProps<{
     <v-list>
       <v-list-item :disabled="!canLeave" @click="emit('leave')">
         Leave
+      </v-list-item>
+      <v-list-item :disabled="!canRename" @click="emit('rename')">
+        Rename
       </v-list-item>
       <v-list-item :disabled="!canDelete" @click="emit('delete')">
         Delete
