@@ -36,32 +36,6 @@ export class TeamService {
     return this.teamRepository.save({ ...createTeamDto, owner: client });
   }
 
-  async findAllByOwner(ownerId: string) {
-    const client = await this.clientRepository.findOne({
-      where: { id: ownerId },
-    });
-
-    if (!client) throw new Error('Owner client doesnt exist');
-
-    return this.teamRepository.find({
-      where: { owner: client },
-      relations: ['owner', 'members', 'wastes', 'wastes.client'],
-    });
-  }
-
-  async findAllByMember(memberId: string) {
-    const client = await this.clientRepository.findOne({
-      where: { id: memberId },
-    });
-
-    if (!client) throw new Error('Member client doesnt exist');
-
-    return this.teamRepository.find({
-      where: { members: client },
-      relations: ['owner', 'members', 'wastes', 'wastes.client'],
-    });
-  }
-
   async findAllByClient(clientId: string) {
     const client = await this.clientRepository.findOne({
       where: { id: clientId },

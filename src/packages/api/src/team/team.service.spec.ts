@@ -26,7 +26,7 @@ describe('TeamService', () => {
     });
   });
 
-  it('can find all by member', async () => {
+  it('can find all by client', async () => {
     await clientService.create({ id: 'owner', name: 'test' });
     await clientService.create({ id: 'member', name: 'test' });
 
@@ -37,7 +37,7 @@ describe('TeamService', () => {
 
     await teamService.createMember(teamId, { id: 'member' });
 
-    const teams = await teamService.findAllByMember('member');
+    const teams = await teamService.findAllByClient('member');
 
     expect(teams.length).toBe(1);
   });
