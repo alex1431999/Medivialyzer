@@ -43,7 +43,7 @@ async function onChangeName(name: string) {
   <div>
     <TeamRenameModal
       v-model:show="isRenameModalOpen"
-      :name="teamToRenameSelected?.name || ''"
+      :name="teamToRenameSelected?.name"
       @submit="onChangeName($event)"
     />
     <v-list style="min-width: 150px">

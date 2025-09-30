@@ -8,23 +8,14 @@ import {
   VCardActions,
   VTextField,
 } from 'vuetify/components'
-import { ref, watch } from 'vue'
 
 const show = defineModel<boolean>('show')
-
-const { name } = defineProps<{ name: string }>()
+const name = defineModel<string>('name')
 
 const emit = defineEmits(['submit', 'close'])
 
-const nameUpdated = ref<string>(name)
-
-watch(
-  () => name,
-  () => (nameUpdated.value = name),
-)
-
 async function onSubmit() {
-  emit('submit', nameUpdated.value)
+  emit('submit', name.value)
   show.value = false
 }
 </script>
@@ -35,12 +26,12 @@ async function onSubmit() {
       <v-card>
         <v-card-title>Update team name</v-card-title>
         <v-card-text>
-          <v-text-field v-model="nameUpdated" label="Name" />
+          <v-text-field v-model="name" label="Name" />
         </v-card-text>
         <v-card-actions>
           <v-btn
             text="Submit"
-            :disabled="nameUpdated === ''"
+            :disabled="name === ''"
             @click="onSubmit"
           ></v-btn>
           <v-btn text="Cancel" @click="show = false"></v-btn>
