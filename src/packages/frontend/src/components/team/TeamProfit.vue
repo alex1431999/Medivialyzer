@@ -3,15 +3,22 @@ import { VChip } from 'vuetify/components'
 import { computed } from 'vue'
 import { formatNumber } from 'medivialyzer-frontend/src/utils/number.ts'
 
-const { profitEach } = defineProps<{ profitEach: number | null }>()
+const { profit, profitEach } = defineProps<{
+  profit: number | null
+  profitEach: number | null
+}>()
 
 const color = computed(() =>
-  profitEach !== null && profitEach > 0 ? 'success' : 'error',
+  profit !== null && profit > 0 ? 'success' : 'error',
 )
 </script>
 
 <template>
-  <div>
+  <div class="d-flex ga-2">
+    <v-chip v-if="profit !== null" append-icon="mdi-gold" :color="color">
+      Profit: {{ formatNumber(profit) }}
+    </v-chip>
+    <v-chip v-else class="opacity-20" append-icon="mdi-gold"> Profit </v-chip>
     <v-chip v-if="profitEach !== null" append-icon="mdi-gold" :color="color">
       Profit each: {{ formatNumber(profitEach) }}
     </v-chip>

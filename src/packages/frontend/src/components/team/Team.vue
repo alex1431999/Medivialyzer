@@ -3,7 +3,7 @@ import { VDivider } from 'vuetify/components'
 import Members from './member/Members.vue'
 import { Team } from '../../stores/teamStore.ts'
 import TeamId from './TeamId.vue'
-import TeamProfitEach from './TeamProfitEach.vue'
+import TeamProfit from './TeamProfit.vue'
 import { computed } from 'vue'
 import {
   getMembersWithWaste,
@@ -15,14 +15,20 @@ const { totalLootValue } = useLoot()
 
 const { team } = defineProps<{ team: Team }>()
 
-const profitEach = computed(() => {
+const membersWithWaste = computed(() => getMembersWithWaste(team.wastes))
+
+const profit = computed(() => {
+  if (!membersWithWaste.value.length) return null
+
   const totalWasteAmount = getTotalWaste(team.wastes)
-  const totalProfit = totalLootValue.value - totalWasteAmount
-  const membersWithWasteAmount = getMembersWithWaste(team.wastes).length
+  return totalLootValue.value - totalWasteAmount
+})
 
-  if (membersWithWasteAmount === 0) return null
+const profitEach = computed(() => {
+  const membersWithWasteAmount = membersWithWaste.value.length
+  if (membersWithWasteAmount === 0 || profit.value === null) return null
 
-  return totalProfit / membersWithWasteAmount
+  return profit.value / membersWithWasteAmount
 })
 </script>
 
@@ -30,10 +36,11 @@ const profitEach = computed(() => {
   <div class="d-flex flex-column w-100">
     <TeamId :id="team.id" class="mb-3" />
     <v-divider class="mt-2 mb-2" />
-    <TeamProfitEach
-      class="ma-2 d-flex justify-center"
+    <TeamProfit
+      class="ma-2"
+      :profit="profit"
       :profit-each="profitEach"
-    ></TeamProfitEach>
+    ></TeamProfit>
     <Members :team="team" :members="team.members || []" />
   </div>
 </template>
