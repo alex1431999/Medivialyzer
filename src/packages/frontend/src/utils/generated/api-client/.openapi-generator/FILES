@@ -10,7 +10,6 @@ docs/CreateClientDto.md
 docs/CreateMemberDto.md
 docs/CreateTeamDto.md
 docs/CreateWasteDto.md
-docs/LootApi.md
 docs/TeamApi.md
 docs/TeamDto.md
 docs/UpdateClientDto.md

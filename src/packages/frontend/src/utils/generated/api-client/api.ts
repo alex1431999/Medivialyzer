@@ -506,112 +506,6 @@ export class ClientApi extends BaseAPI {
 
 
 /**
- * LootApi - axios parameter creator
- * @export
- */
-export const LootApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @param {Array<string>} requestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        lootControllerCreateMany: async (requestBody: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('lootControllerCreateMany', 'requestBody', requestBody)
-            const localVarPath = `/loot/createMany`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * LootApi - functional programming interface
- * @export
- */
-export const LootApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = LootApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @param {Array<string>} requestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async lootControllerCreateMany(requestBody: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.lootControllerCreateMany(requestBody, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['LootApi.lootControllerCreateMany']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * LootApi - factory interface
- * @export
- */
-export const LootApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = LootApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {Array<string>} requestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        lootControllerCreateMany(requestBody: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.lootControllerCreateMany(requestBody, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * LootApi - object-oriented interface
- * @export
- * @class LootApi
- * @extends {BaseAPI}
- */
-export class LootApi extends BaseAPI {
-    /**
-     * 
-     * @param {Array<string>} requestBody 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof LootApi
-     */
-    public lootControllerCreateMany(requestBody: Array<string>, options?: RawAxiosRequestConfig) {
-        return LootApiFp(this.configuration).lootControllerCreateMany(requestBody, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
  * TeamApi - axios parameter creator
  * @export
  */
@@ -743,7 +637,7 @@ export const TeamApiAxiosParamCreator = function (configuration?: Configuration)
         teamControllerFindAll: async (clientId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'clientId' is not null or undefined
             assertParamExists('teamControllerFindAll', 'clientId', clientId)
-            const localVarPath = `/team`
+            const localVarPath = `/team/client/{clientId}`
                 .replace(`{${"clientId"}}`, encodeURIComponent(String(clientId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
