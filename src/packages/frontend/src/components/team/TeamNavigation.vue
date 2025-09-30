@@ -41,7 +41,6 @@ async function onChangeName(name: string) {
 
 <template>
   <div>
-    <!-- TODO name doesnt work yet and we aren't handling submit yet -->
     <TeamRenameModal
       v-model:show="isRenameModalOpen"
       :name="teamToRenameSelected?.name || ''"

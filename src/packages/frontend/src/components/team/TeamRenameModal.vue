@@ -8,7 +8,7 @@ import {
   VCardActions,
   VTextField,
 } from 'vuetify/components'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const show = defineModel<boolean>('show')
 
@@ -17,6 +17,11 @@ const { name } = defineProps<{ name: string }>()
 const emit = defineEmits(['submit', 'close'])
 
 const nameUpdated = ref<string>(name)
+
+watch(
+  () => name,
+  () => (nameUpdated.value = name),
+)
 
 async function onSubmit() {
   emit('submit', nameUpdated.value)

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { VList, VListItem, VMenu, VIcon } from 'vuetify/components'
 
-const emit = defineEmits(['leave', 'delete'])
+const emit = defineEmits(['leave', 'delete', 'rename'])
 
 const { canLeave, canDelete } = defineProps<{
   canLeave: boolean
