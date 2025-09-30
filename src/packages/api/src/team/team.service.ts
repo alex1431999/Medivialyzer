@@ -36,12 +36,12 @@ export class TeamService {
     return this.teamRepository.save({ ...createTeamDto, owner: client });
   }
 
-  async findAllByOwner(owner: string) {
+  async findAllByOwner(ownerId: string) {
     const client = await this.clientRepository.findOne({
-      where: { id: owner },
+      where: { id: ownerId },
     });
 
-    if (!client) throw new Error('Owner doesnt exist');
+    if (!client) throw new Error('Owner client doesnt exist');
 
     return this.teamRepository.find({
       where: { owner: client },
@@ -54,12 +54,30 @@ export class TeamService {
       where: { id: memberId },
     });
 
-    if (!client) throw new Error('Owner doesnt exist');
+    if (!client) throw new Error('Member client doesnt exist');
 
     return this.teamRepository.find({
       where: { members: client },
       relations: ['owner', 'members', 'wastes', 'wastes.client'],
     });
+  }
+
+  async findAllByClient(clientId: string) {
+    const client = await this.clientRepository.findOne({
+      where: { id: clientId },
+    });
+
+    if (!client) throw new Error('Client doesnt exist');
+
+    return this.teamRepository
+      .createQueryBuilder('team')
+      .leftJoinAndSelect('team.owner', 'owner')
+      .leftJoinAndSelect('team.members', 'members')
+      .leftJoinAndSelect('team.wastes', 'wastes')
+      .leftJoinAndSelect('wastes.client', 'wasteClient')
+      .where('owner.id = :clientId', { clientId })
+      .orWhere('members.id = :clientId', { clientId })
+      .getMany();
   }
 
   async createMember(teamId: string, createMemberDto: CreateMemberDto) {

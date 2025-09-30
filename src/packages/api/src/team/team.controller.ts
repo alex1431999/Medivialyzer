@@ -33,13 +33,10 @@ export class TeamController {
     return this.teamService.findOne(team.id);
   }
 
-  @Get()
+  @Get('/client/:clientId')
   @ApiOkResponse({ type: TeamDto, isArray: true })
   async findAll(@Param('clientId') clientId: string) {
-    const allOwned = await this.teamService.findAllByOwner(clientId);
-    const allJoined = await this.teamService.findAllByMember(clientId);
-
-    return [...allOwned, ...allJoined];
+    return this.teamService.findAllByClient(clientId);
   }
 
   @Get(':id')

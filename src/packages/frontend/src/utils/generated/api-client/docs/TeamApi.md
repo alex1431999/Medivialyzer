@@ -7,7 +7,7 @@ All URIs are relative to *http://localhost*
 |[**teamControllerCreate**](#teamcontrollercreate) | **POST** /team | |
 |[**teamControllerCreateMember**](#teamcontrollercreatemember) | **POST** /team/{id}/members | |
 |[**teamControllerCreateWaste**](#teamcontrollercreatewaste) | **POST** /team/{id}/waste/{memberId} | |
-|[**teamControllerFindAll**](#teamcontrollerfindall) | **GET** /team | |
+|[**teamControllerFindAll**](#teamcontrollerfindall) | **GET** /team/client/{clientId} | |
 |[**teamControllerFindOne**](#teamcontrollerfindone) | **GET** /team/{id} | |
 |[**teamControllerRemove**](#teamcontrollerremove) | **DELETE** /team/{id} | |
 |[**teamControllerRemoveMember**](#teamcontrollerremovemember) | **DELETE** /team/{id}/members/{memberId} | |

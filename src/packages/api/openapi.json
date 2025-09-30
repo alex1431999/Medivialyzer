@@ -30,7 +30,9 @@
         "tags": [
           "Team"
         ]
-      },
+      }
+    },
+    "/team/client/{clientId}": {
       "get": {
         "operationId": "TeamController_findAll",
         "parameters": [
