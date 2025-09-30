@@ -6,7 +6,6 @@ import { useClientStore } from '../../stores/clientStore.ts'
 import { getClient } from '../../utils/client.ts'
 import { ref } from 'vue'
 import TeamRenameModal from './TeamRenameModal.vue'
-import TeamCreateModal from './TeamCreateModal.vue'
 
 const teamStore = useTeamStore()
 const clientStore = useClientStore()
@@ -33,14 +32,20 @@ function onRequestRename(team: Team) {
   teamToRenameSelected.value = team
   isRenameModalOpen.value = true
 }
+
+async function onChangeName(name: string) {
+  if (!teamToRenameSelected.value) throw new Error('No team selected')
+  await teamStore.update(teamToRenameSelected.value.id, { name })
+}
 </script>
 
 <template>
   <div>
     <!-- TODO name doesnt work yet and we aren't handling submit yet -->
     <TeamRenameModal
-      :name="teamToRenameSelected?.name || ''"
       v-model:show="isRenameModalOpen"
+      :name="teamToRenameSelected?.name || ''"
+      @submit="onChangeName($event)"
     />
     <v-list style="min-width: 150px">
       <template v-for="(team, i) in teamStore.teams" :key="team.id">
