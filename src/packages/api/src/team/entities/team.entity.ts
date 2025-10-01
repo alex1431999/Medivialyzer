@@ -18,7 +18,7 @@ export class Team {
   @ManyToOne(() => Client, { onDelete: 'CASCADE' })
   owner: Client;
 
-  @Column()
+  @Column({ nullable: false })
   name: string;
 
   @ManyToMany(() => Client)

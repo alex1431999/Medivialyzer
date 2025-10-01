@@ -6,7 +6,7 @@ export class Client {
   @PrimaryColumn({ unique: true })
   id: string;
 
-  @Column()
+  @Column({ nullable: false })
   name: string;
 
   @OneToMany(() => Waste, (waste) => waste.client)
