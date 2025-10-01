@@ -53,7 +53,9 @@ async function onChangeName(name: string) {
           @click="emit('selectTeam', team)"
         >
           <div class="d-flex justify-space-between">
-            {{ team.name }}
+            <span style="overflow: auto">
+              {{ team.name }}
+            </span>
             <TeamMenu
               :can-leave="canLeaveTeam(team)"
               :can-rename="canRenameTeam(team)"
