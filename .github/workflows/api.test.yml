@@ -15,3 +15,6 @@ jobs:
 
       - name: Test the project
         run: docker run medivialyzer sh -c "yarn workspace medivialyzer-api test"
+
+      - name: Test the project (e2e)
+        run: docker run medivialyzer sh -c "yarn workspace medivialyzer-api test:e2e"
