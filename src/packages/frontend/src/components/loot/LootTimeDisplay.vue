@@ -39,6 +39,7 @@ watch(
       density="compact"
       variant="outlined"
       hide-details
+      rounded
       class="flex-grow-1"
     />
     <v-text-field
@@ -49,6 +50,7 @@ watch(
       density="compact"
       variant="outlined"
       hide-details
+      rounded
       class="flex-grow-1 ml-2"
     />
   </div>
