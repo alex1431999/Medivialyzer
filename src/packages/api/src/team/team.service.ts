@@ -31,7 +31,7 @@ export class TeamService {
       where: { id: createTeamDto.owner },
     });
 
-    if (!client) throw new Error('Owner doesnt exist');
+    if (!client) throw new NotFoundException('Owner does not exist');
 
     return this.teamRepository.save({ ...createTeamDto, owner: client });
   }
@@ -41,7 +41,7 @@ export class TeamService {
       where: { id: clientId },
     });
 
-    if (!client) throw new Error('Client doesnt exist');
+    if (!client) throw new NotFoundException('Client does not exist');
 
     return this.teamRepository
       .createQueryBuilder('team')
@@ -81,7 +81,12 @@ export class TeamService {
 
     if (!team) throw new NotFoundException('Team not found');
 
+    const initialMemberCount = team.members.length;
     team.members = team.members.filter((member) => member.id !== memberId);
+
+    if (team.members.length === initialMemberCount) {
+      throw new NotFoundException(`Member with ID ${memberId} not found in team`);
+    }
 
     await this.teamRepository.save(team);
   }
@@ -94,11 +99,19 @@ export class TeamService {
   }
 
   async update(id: string, updateTeamDto: UpdateTeamDto) {
-    return this.teamRepository.update(id, updateTeamDto);
+    const result = await this.teamRepository.update(id, updateTeamDto);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Team with ID ${id} not found`);
+    }
+    return result;
   }
 
-  remove(id: string) {
-    return this.teamRepository.delete(id);
+  async remove(id: string) {
+    const result = await this.teamRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Team with ID ${id} not found`);
+    }
+    return result;
   }
 
   async createWaste(

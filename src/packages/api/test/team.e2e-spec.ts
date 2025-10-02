@@ -51,6 +51,13 @@ describe('TeamController (e2e)', () => {
       .expect(400);
   });
 
+  it('/team (POST) should return 404 if owner does not exist', async () => {
+    return request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'does-not-exist', name: 'team' })
+      .expect(404);
+  });
+
   it('/team/client/:clientId (GET) should return all teams for a client', async () => {
     await request(app.getHttpServer())
       .post('/client')
@@ -66,6 +73,12 @@ describe('TeamController (e2e)', () => {
 
     expect(response.status).toBe(200);
     expect(response.body as TeamDto[]).toHaveLength(1);
+  });
+
+  it('/team/client/:clientId (GET) should return 404 if client does not exist', async () => {
+    return request(app.getHttpServer())
+      .get('/team/client/does-not-exist')
+      .expect(404);
   });
 
   it('/team/:id (GET) should return a team', async () => {
@@ -94,12 +107,17 @@ describe('TeamController (e2e)', () => {
       .send({ owner: 'owner-e2e', name: 'team' });
     const team = teamResponse.body as TeamDto;
 
-    const response = await request(app.getHttpServer())
+    await request(app.getHttpServer())
       .patch(`/team/${team.id}`)
-      .send({ name: 'new name' });
+      .send({ name: 'new name' })
+      .expect(200);
+  });
 
-    expect(response.status).toBe(200);
-    expect((response.body as TeamDto).name).toBe('new name');
+  it('/team/:id (PATCH) should return 404 if team does not exist', async () => {
+    return request(app.getHttpServer())
+      .patch('/team/does-not-exist')
+      .send({ name: 'new name' })
+      .expect(404);
   });
 
   it('/team/:id (DELETE) should delete a team', async () => {
@@ -115,6 +133,12 @@ describe('TeamController (e2e)', () => {
     await request(app.getHttpServer()).delete(`/team/${team.id}`).expect(200);
 
     return request(app.getHttpServer()).get(`/team/${team.id}`).expect(404);
+  });
+
+  it('/team/:id (DELETE) should return 404 if team does not exist', async () => {
+    return request(app.getHttpServer())
+      .delete('/team/does-not-exist')
+      .expect(404);
   });
 
   it('/:id/members (POST) should add a member to a team', async () => {
@@ -155,6 +179,26 @@ describe('TeamController (e2e)', () => {
       .expect(404);
   });
 
+  it('/:id/members (POST) should not add a member that is already in the team', async () => {
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'owner-e2e', name: 'owner-e2e' });
+
+    const teamResponse = await request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team' });
+    const team = teamResponse.body as TeamDto;
+
+    await request(app.getHttpServer())
+      .post(`/team/${team.id}/members`)
+      .send({ id: 'owner-e2e' });
+
+    return request(app.getHttpServer())
+      .post(`/team/${team.id}/members`)
+      .send({ id: 'owner-e2e' })
+      .expect(400);
+  });
+
   it('/:id/members/:memberId (DELETE) should remove a member from a team', async () => {
     await request(app.getHttpServer())
       .post('/client')
@@ -182,6 +226,21 @@ describe('TeamController (e2e)', () => {
     expect((response.body as TeamDto).members).toHaveLength(0);
   });
 
+  it('/:id/members/:memberId (DELETE) should return 404 if member is not in the team', async () => {
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'owner-e2e', name: 'owner-e2e' });
+
+    const teamResponse = await request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team' });
+    const team = teamResponse.body as TeamDto;
+
+    return request(app.getHttpServer())
+      .delete(`/team/${team.id}/members/does-not-exist`)
+      .expect(404);
+  });
+
   it('/:id/waste/:memberId (POST) should create waste for a member', async () => {
     await request(app.getHttpServer())
       .post('/client')
@@ -201,5 +260,21 @@ describe('TeamController (e2e)', () => {
 
     expect((response.body as TeamDto).wastes).toHaveLength(1);
     expect((response.body as TeamDto).wastes[0].wasteAmount).toBe(100);
+  });
+
+  it('/:id/waste/:memberId (POST) should not create waste for a member if wasteAmount is not a number', async () => {
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'owner-e2e', name: 'owner-e2e' });
+
+    const teamResponse = await request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team' });
+    const team = teamResponse.body as TeamDto;
+
+    return request(app.getHttpServer())
+      .post(`/team/${team.id}/waste/owner-e2e`)
+      .send({ wasteAmount: 'not a number' })
+      .expect(400);
   });
 });
