@@ -20,7 +20,7 @@ const { calculatedWaste } = defineProps<{ calculatedWaste: number }>()
 
 const isOpen = ref<boolean>(false)
 const teamSelected = ref<string | null>(teamStore.teams[0]?.id || null)
-const wasteAmount = ref<number>(calculatedWaste)
+const wasteAmount = ref<string>(calculatedWaste.toString())
 
 const teamOptions = computed(() =>
   teamStore.teams.map((team) => ({ title: team.name, value: team.id })),
@@ -31,7 +31,7 @@ watch(
   () => isOpen.value,
   () => {
     setTimeout(() => {
-      wasteAmount.value = calculatedWaste
+      wasteAmount.value = calculatedWaste.toString()
     }, 500)
   },
 )
@@ -39,7 +39,10 @@ watch(
 async function onSubmitWaste() {
   if (!teamSelected.value) throw new Error('No team selected')
 
-  await teamStore.submitWaste(teamSelected.value, wasteAmount.value)
+  await teamStore.submitWaste(
+    teamSelected.value,
+    parseInt(wasteAmount.value, 10),
+  )
 
   notify('Waste submitted', 'success')
   isOpen.value = false

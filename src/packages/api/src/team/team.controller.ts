@@ -41,8 +41,10 @@ export class TeamController {
 
   @Get(':id')
   @ApiOkResponse({ type: TeamDto })
-  findOne(@Param('id') id: string) {
-    return this.teamService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    const team = await this.teamService.findOne(id);
+    if (!team) throw new NotFoundException(`Team with ID ${id} not found`);
+    return team;
   }
 
   @Patch(':id')
