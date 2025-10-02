@@ -6,6 +6,7 @@ common.ts
 configuration.ts
 docs/ClientApi.md
 docs/ClientDto.md
+docs/ClientExistsDto.md
 docs/CreateClientDto.md
 docs/CreateMemberDto.md
 docs/CreateTeamDto.md

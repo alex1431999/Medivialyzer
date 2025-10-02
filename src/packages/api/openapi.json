@@ -377,7 +377,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/ClientExistsDto"
                 }
               }
             }
@@ -528,6 +528,17 @@
         "required": [
           "id",
           "name"
+        ]
+      },
+      "ClientExistsDto": {
+        "type": "object",
+        "properties": {
+          "exists": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "exists"
         ]
       },
       "UpdateClientDto": {

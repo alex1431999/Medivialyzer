@@ -85,7 +85,9 @@ export class TeamService {
     team.members = team.members.filter((member) => member.id !== memberId);
 
     if (team.members.length === initialMemberCount) {
-      throw new NotFoundException(`Member with ID ${memberId} not found in team`);
+      throw new NotFoundException(
+        `Member with ID ${memberId} not found in team`,
+      );
     }
 
     await this.teamRepository.save(team);

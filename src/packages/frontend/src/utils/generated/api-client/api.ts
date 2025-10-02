@@ -45,6 +45,19 @@ export interface ClientDto {
 /**
  * 
  * @export
+ * @interface ClientExistsDto
+ */
+export interface ClientExistsDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ClientExistsDto
+     */
+    'exists': boolean;
+}
+/**
+ * 
+ * @export
  * @interface CreateClientDto
  */
 export interface CreateClientDto {
@@ -369,7 +382,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clientControllerExists(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
+        async clientControllerExists(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientExistsDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientControllerExists(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ClientApi.clientControllerExists']?.[localVarOperationServerIndex]?.url;
@@ -425,7 +438,7 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientControllerExists(id: string, options?: RawAxiosRequestConfig): AxiosPromise<boolean> {
+        clientControllerExists(id: string, options?: RawAxiosRequestConfig): AxiosPromise<ClientExistsDto> {
             return localVarFp.clientControllerExists(id, options).then((request) => request(axios, basePath));
         },
         /**

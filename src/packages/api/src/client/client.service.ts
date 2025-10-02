@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateClientDto } from './dto/create-client.dto';
 import { Repository } from 'typeorm';
 import { Client } from './entities/client.entity';
@@ -16,8 +16,12 @@ export class ClientService {
     return this.clientRepository.insert(createClientDto);
   }
 
-  update(id: string, updateClientDto: UpdateClientDto) {
-    return this.clientRepository.update(id, updateClientDto);
+  async update(id: string, updateClientDto: UpdateClientDto) {
+    const result = await this.clientRepository.update(id, updateClientDto);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Client with ID ${id} not found`);
+    }
+    return result;
   }
 
   findOne(id: string) {

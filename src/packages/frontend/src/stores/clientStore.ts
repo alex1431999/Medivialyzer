@@ -29,7 +29,7 @@ export const useClientStore = defineStore('client', {
       const clientId = configStore.config.clientId
 
       const doesClientExist = (await clientApi.clientControllerExists(clientId))
-        .data
+        .data.exists
 
       if (doesClientExist) {
         this.client = (await clientApi.clientControllerFindOne(clientId)).data

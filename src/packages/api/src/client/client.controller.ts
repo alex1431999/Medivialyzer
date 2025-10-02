@@ -12,6 +12,7 @@ import { CreateClientDto } from './dto/create-client.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { ClientDto } from './dto/client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
+import { ClientExistsDto } from './dto/client-exists.dto';
 
 @Controller('client')
 export class ClientController {
@@ -34,11 +35,11 @@ export class ClientController {
     return client;
   }
 
-  @ApiOkResponse({ type: Boolean })
+  @ApiOkResponse({ type: ClientExistsDto })
   @Get(':id/exists')
   async exists(@Param('id') id: string) {
     const client = await this.clientService.findOne(id);
-    return Boolean(client);
+    return { exists: Boolean(client) };
   }
 
   @ApiOkResponse({ type: ClientDto })
