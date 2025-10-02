@@ -122,10 +122,10 @@ function onLootItemEdit(entry: LootEntry) {
     <Loader class="d-flex justify-center align-center h-100" v-else />
     <div
       v-if="!isLootLoading && lootSorted.length === 0"
-      class="d-flex justify-center w-100"
+      class="d-flex justify-center align-center h-100 w-100"
     >
-      <div class="w-3ß">
-        <v-alert color="secondary" type="info">
+      <div>
+        <v-alert color="secondary" type="info" variant="text">
           No loot found in the timeframe selected
         </v-alert>
       </div>
