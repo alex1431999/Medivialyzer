@@ -31,14 +31,13 @@ watch(
 </script>
 
 <template>
-  <div class="d-flex gap-4 align-center" style="max-width: 300px">
+  <div class="date-time-container">
     <v-text-field
       v-model="dateString"
       label="Date"
       type="date"
       density="compact"
-      variant="solo"
-      rounded
+      variant="outlined"
       hide-details
       class="flex-grow-1"
     />
@@ -48,10 +47,19 @@ watch(
       type="time"
       step="60"
       density="compact"
-      variant="solo"
-      rounded
+      variant="outlined"
       hide-details
       class="flex-grow-1 ml-2"
     />
   </div>
 </template>
+
+<style scoped>
+.date-time-container {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  max-width: 300px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+</style>
