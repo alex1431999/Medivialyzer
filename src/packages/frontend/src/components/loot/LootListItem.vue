@@ -46,6 +46,7 @@ function onClick() {
   <VCard
     class="loot-list-item__card"
     v-on="isUnknownItem ? { click: onClick } : {}"
+    variant="plain"
   >
     <VCardText class="loot-list-item__text">
       <div class="loot-list-item__name">

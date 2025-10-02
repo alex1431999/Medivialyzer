@@ -11,7 +11,7 @@ const { totalLootValue } = defineProps<{ totalLootValue: number }>()
 </script>
 
 <template>
-  <v-card class="loot-list-menu__card">
+  <v-card class="loot-list-menu__card" variant="text">
     <v-card-text class="loot-list-menu__card-text">
       <div class="d-flex ga-3" style="width: 150px">
         <Settings />
