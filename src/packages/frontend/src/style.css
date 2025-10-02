@@ -16,7 +16,21 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url('assets/background.png');
+  background-color: #121212; /* A dark grey, almost black */
+  background-image:
+    radial-gradient(circle at top right, rgba(128, 203, 196, 0.3), transparent 30%),
+    radial-gradient(circle at bottom left, rgba(128, 203, 196, 0.3), transparent 30%),
+    linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
 }
 
 #app {
