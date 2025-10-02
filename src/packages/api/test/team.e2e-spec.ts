@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
@@ -9,9 +8,10 @@ import { TeamService } from '../src/team/team.service';
 import { TeamGateway } from '../src/team/team.gateway';
 import { ClientService } from '../src/client/client.service';
 import { TeamDto } from '../src/team/dto/team.dto';
+import { App } from 'supertest/types';
 
 describe('TeamController (e2e)', () => {
-  let app: INestApplication;
+  let app: INestApplication<App>;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
