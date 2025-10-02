@@ -29,7 +29,6 @@ describe('TeamController (e2e)', () => {
   });
 
   it('/team (POST) is able to create a team', async () => {
-    // First create an owner client
     await request(app.getHttpServer())
       .post('/client')
       .send({ id: 'owner-e2e', name: 'owner-e2e' });
@@ -41,7 +40,6 @@ describe('TeamController (e2e)', () => {
   });
 
   it('/team (POST) should not accept empty value for name', async () => {
-    // First create an owner client
     await request(app.getHttpServer())
       .post('/client')
       .send({ id: 'owner-e2e', name: 'owner-e2e' });
@@ -50,5 +48,20 @@ describe('TeamController (e2e)', () => {
       .post('/team')
       .send({ owner: 'owner-e2e', name: '' })
       .expect(400);
+  });
+
+  it('/:id/members (POST) cant add a member that doesnt exust', async () => {
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'owner-e2e', name: 'owner-e2e' });
+
+    const teamResponse = await request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team' });
+
+    return request(app.getHttpServer())
+      .post(`/${teamResponse.body.id}`)
+      .send({ id: 'does not exist' })
+      .expect(404);
   });
 });
