@@ -47,6 +47,9 @@
       "target": "nsis",
       "icon": "assets/logo.ico"
     },
+    "mac": {
+      "icon": "assets/logo.icns"
+    },
     "nsis": {
       "oneClick": false,
       "perMachine": true,
