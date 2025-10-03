@@ -48,7 +48,7 @@ function onClick() {
     v-on="isUnknownItem ? { click: onClick } : {}"
     variant="text"
   >
-    <VCardText class="loot-list-item__text">
+    <VCardText class="loot-list-item__text py-2">
       <div class="loot-list-item__name">
         <LootListItemMenu
           @ignore="emit('ignore', lootEntry.item.name)"
@@ -57,7 +57,7 @@ function onClick() {
 
         <!-- Item name -->
         <v-badge color="secondary" :content="`${lootEntry.amount}x`">
-          <v-chip>
+          <v-chip text-class="font-weight-bold">
             {{ lootEntry.item.name }}
           </v-chip>
         </v-badge>

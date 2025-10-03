@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { VAlert } from 'vuetify/components'
+import { VAlert, VDivider } from 'vuetify/components'
 import LootListItem from './LootListItem.vue'
 import LootListMenu from './LootListMenu.vue'
 import { useConfigStore } from '../../stores/configStore.ts'
@@ -108,17 +108,22 @@ function onLootItemEdit(entry: LootEntry) {
   </div>
 
   <div class="loot-list__items">
-    <LootListItem
-      v-if="!isLootLoading"
-      v-for="lootEntry in lootSorted"
-      class="loot-list__list-item"
-      :key="lootEntry.item.name"
-      :loot-entry="lootEntry"
-      @ignore="onIgnore"
-      @click="onLootItemClicked(lootEntry)"
-      @edit="onLootItemEdit(lootEntry)"
-    >
-    </LootListItem>
+    <template v-if="!isLootLoading">
+      <template
+        v-for="(lootEntry, index) in lootSorted"
+        :key="lootEntry.item.name"
+      >
+        <LootListItem
+          class="loot-list__list-item"
+          :loot-entry="lootEntry"
+          @ignore="onIgnore"
+          @click="onLootItemClicked(lootEntry)"
+          @edit="onLootItemEdit(lootEntry)"
+        >
+        </LootListItem>
+        <v-divider v-if="index < lootSorted.length - 1" class="my-2" />
+      </template>
+    </template>
     <Loader class="d-flex justify-center align-center h-100" v-else />
     <div
       v-if="!isLootLoading && lootSorted.length === 0"
