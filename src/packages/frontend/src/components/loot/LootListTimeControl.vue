@@ -16,7 +16,7 @@ import { VBtn, VTooltip } from 'vuetify/components'
       </template>
     </v-tooltip>
 
-    <v-tooltip location="top" text="Reset hunt">
+    <v-tooltip location="top" text="Reset timer">
       <template v-slot:activator="{ props }">
         <v-btn
           v-bind="props"
