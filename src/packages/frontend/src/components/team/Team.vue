@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VDivider, VBtn } from 'vuetify/components'
+import { VDivider } from 'vuetify/components'
 import Members from './member/Members.vue'
 import { Team } from '../../stores/teamStore.ts'
 import TeamId from './TeamId.vue'
@@ -10,6 +10,8 @@ import {
   getTotalWaste,
 } from '../../utils/waste/waste.utils.ts'
 import { useLoot } from '../../composables/useLoot.ts'
+import TeamSplitLootModal from './TeamSplitLootModal.vue'
+import TeamDoneButton from './TeamDoneButton.vue'
 
 const { totalLootValue } = useLoot()
 
@@ -39,15 +41,9 @@ const profitEach = computed(() => {
     <TeamId :id="team.id" class="mb-3" />
     <v-divider class="mt-2 mb-2" />
     <div class="d-flex justify-space-between ma-4">
-      <v-btn
-        v-if="!hasSplitLoot"
-        variant="outlined"
-        class="w-25"
-        color="secondary"
-      >
-        Split Loot
-      </v-btn>
+      <TeamSplitLootModal v-if="!hasSplitLoot" :team="team" />
       <template v-else>
+        <TeamDoneButton :team="team" />
         <TeamProfit :profit="profit" :profit-each="profitEach"></TeamProfit>
       </template>
     </div>
