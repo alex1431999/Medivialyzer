@@ -25,6 +25,7 @@ const headers = [
     v-if="items.length"
     :headers="headers"
     :items="items"
+    :items-per-page="-1"
     density="compact"
     fixed-header
     height="280px"
