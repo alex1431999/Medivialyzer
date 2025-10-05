@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 export function filterOutdatedWaste(
   waste: WasteDto,
-  resetTimestamp: Date | null,
+  resetTimestamp: string | null,
 ) {
   const wasteSubmittedAt = new Date(waste.createdAt).getTime()
   if (resetTimestamp) {
@@ -13,7 +13,10 @@ export function filterOutdatedWaste(
   return true
 }
 
-export function getTotalWaste(wastes: WasteDto[], resetTimestamp: Date | null) {
+export function getTotalWaste(
+  wastes: WasteDto[],
+  resetTimestamp: string | null,
+) {
   const memberIds = _.uniq(_.map(wastes, 'client.id'))
   const wastesOfMembers = memberIds
     .map((memberId) => getMemberWaste(memberId, wastes, resetTimestamp))
@@ -25,7 +28,7 @@ export function getTotalWaste(wastes: WasteDto[], resetTimestamp: Date | null) {
 
 export function getMembersWithWaste(
   wastes: WasteDto[],
-  resetTimestamp: Date | null,
+  resetTimestamp: string | null,
 ) {
   const memberIds = _.uniq(_.map(wastes, 'client.id'))
   return memberIds.filter(
@@ -36,7 +39,7 @@ export function getMembersWithWaste(
 export function getMemberWaste(
   memberId: string,
   wastes: WasteDto[],
-  resetTimestamp: Date | null,
+  resetTimestamp: string | null,
 ) {
   const relevantWastes = wastes.filter((waste) =>
     filterOutdatedWaste(waste, resetTimestamp),
@@ -52,7 +55,7 @@ export function calculateMemberPayout(
   memberId: string,
   wastes: WasteDto[],
   totalLootValue: number,
-  resetTimestamp: Date | null,
+  resetTimestamp: string | null,
 ): number | undefined {
   const memberWaste = getMemberWaste(memberId, wastes, resetTimestamp)
   if (!memberWaste) return undefined
