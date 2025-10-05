@@ -105,6 +105,12 @@ export interface CreateTeamDto {
      * @memberof CreateTeamDto
      */
     'name': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof CreateTeamDto
+     */
+    'lootAmount'?: object | null;
 }
 /**
  * 
@@ -149,6 +155,12 @@ export interface TeamDto {
      * @memberof TeamDto
      */
     'lootAmount': number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TeamDto
+     */
+    'resetTimestamp': string | null;
     /**
      * 
      * @type {Array<ClientDto>}
