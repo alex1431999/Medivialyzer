@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateTeamDto } from './create-team.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateTeamDto extends PartialType(CreateTeamDto) {
   @ApiProperty()
@@ -9,6 +9,11 @@ export class UpdateTeamDto extends PartialType(CreateTeamDto) {
   @IsString()
   @IsNotEmpty()
   name?: string;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsOptional()
+  lootAmount?: number | null;
 
   owner?: never;
 }

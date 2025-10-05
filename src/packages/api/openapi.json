@@ -461,6 +461,9 @@
           "name": {
             "type": "string"
           },
+          "lootAmount": {
+            "type": "object"
+          },
           "members": {
             "type": "array",
             "items": {
@@ -478,6 +481,7 @@
           "id",
           "owner",
           "name",
+          "lootAmount",
           "members",
           "wastes"
         ]
@@ -487,10 +491,14 @@
         "properties": {
           "name": {
             "type": "string"
+          },
+          "lootAmount": {
+            "type": "object"
           }
         },
         "required": [
-          "name"
+          "name",
+          "lootAmount"
         ]
       },
       "CreateMemberDto": {

@@ -21,6 +21,9 @@ export class Team {
   @Column({ nullable: false })
   name: string;
 
+  @Column('int', { nullable: true })
+  lootAmount: number | null;
+
   @ManyToMany(() => Client)
   @JoinTable()
   members: Client[];

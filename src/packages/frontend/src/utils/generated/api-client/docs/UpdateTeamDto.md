@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **string** |  | [default to undefined]
+**lootAmount** | **object** |  | [default to undefined]
 
 ## Example
 
@@ -14,6 +15,7 @@ import { UpdateTeamDto } from './api';
 
 const instance: UpdateTeamDto = {
     name,
+    lootAmount,
 };
 ```
 

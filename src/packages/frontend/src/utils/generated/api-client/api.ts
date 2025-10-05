@@ -145,6 +145,12 @@ export interface TeamDto {
     'name': string;
     /**
      * 
+     * @type {object}
+     * @memberof TeamDto
+     */
+    'lootAmount': object;
+    /**
+     * 
      * @type {Array<ClientDto>}
      * @memberof TeamDto
      */
@@ -181,6 +187,12 @@ export interface UpdateTeamDto {
      * @memberof UpdateTeamDto
      */
     'name': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof UpdateTeamDto
+     */
+    'lootAmount': object;
 }
 /**
  * 

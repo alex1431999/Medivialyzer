@@ -236,6 +236,22 @@ describe('TeamController (e2e)', () => {
       .expect(200);
   });
 
+  it('/team/:id (PATCH) should update be able to update lootAmount', async () => {
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'owner-e2e', name: 'owner-e2e' });
+
+    const teamResponse = await request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team' });
+    const team = teamResponse.body as TeamDto;
+
+    await request(app.getHttpServer())
+      .patch(`/team/${team.id}`)
+      .send({ lootAmount: 500 })
+      .expect(200);
+  });
+
   it('/team/:id (PATCH) should return 404 if team does not exist', async () => {
     return request(app.getHttpServer())
       .patch('/team/does-not-exist')
