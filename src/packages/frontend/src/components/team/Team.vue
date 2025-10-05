@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VDivider } from 'vuetify/components'
+import { VDivider, VBtn } from 'vuetify/components'
 import Members from './member/Members.vue'
 import { Team } from '../../stores/teamStore.ts'
 import TeamId from './TeamId.vue'
@@ -36,11 +36,10 @@ const profitEach = computed(() => {
   <div class="d-flex flex-column w-100">
     <TeamId :id="team.id" class="mb-3" />
     <v-divider class="mt-2 mb-2" />
-    <TeamProfit
-      class="ma-2"
-      :profit="profit"
-      :profit-each="profitEach"
-    ></TeamProfit>
+    <div class="d-flex justify-space-between ma-2">
+      <v-btn class="w-25" color="secondary">Split Loot</v-btn>
+      <TeamProfit :profit="profit" :profit-each="profitEach"></TeamProfit>
+    </div>
     <Members :team="team" :members="team.members || []" />
   </div>
 </template>
