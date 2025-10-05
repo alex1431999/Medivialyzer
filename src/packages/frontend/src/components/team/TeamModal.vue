@@ -152,7 +152,7 @@ async function onJoinTeam(id: string) {
             @click="isJoinTeamModalOpen = true"
             >Join Team</v-btn
           >
-          <v-btn>Close</v-btn>
+          <v-btn @click="isTeamModalOpen = false">Close</v-btn>
         </v-card-actions>
       </v-card>
     </template>
