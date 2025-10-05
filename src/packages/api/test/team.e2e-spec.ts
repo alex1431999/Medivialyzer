@@ -97,6 +97,38 @@ describe('TeamController (e2e)', () => {
     expect((response.body as TeamDto).name).toBe('team');
   });
 
+  it('/team/:id (GET) should return all members of a team', async () => {
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'owner-e2e', name: 'owner-e2e' });
+
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'member-1', name: 'member-1' });
+
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'member-2', name: 'member-2' });
+
+    const teamResponse = await request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team' });
+    const team = teamResponse.body as TeamDto;
+
+    await request(app.getHttpServer())
+      .post(`/team/${team.id}/members`)
+      .send({ id: 'member-1' });
+
+    await request(app.getHttpServer())
+      .post(`/team/${team.id}/members`)
+      .send({ id: 'member-2' });
+
+    const response = await request(app.getHttpServer()).get(`/team/${team.id}`);
+
+    expect(response.status).toBe(200);
+    expect((response.body as TeamDto).members).toHaveLength(2);
+  });
+
   it('/team/:id (PATCH) should update a team', async () => {
     await request(app.getHttpServer())
       .post('/client')
