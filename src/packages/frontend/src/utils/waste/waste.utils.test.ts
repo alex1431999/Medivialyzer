@@ -14,7 +14,9 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(getMemberWaste(memberId, wastes)).toEqual(undefined)
+      expect(getMemberWaste(memberId, wastes, Date.now().toString())).toEqual(
+        undefined,
+      )
     })
 
     test('waste is outdated', () => {
@@ -27,7 +29,9 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(getMemberWaste(memberId, wastes)).toEqual(undefined)
+      expect(getMemberWaste(memberId, wastes, Date.now().toString())).toEqual(
+        undefined,
+      )
     })
 
     test('gets correct waste', () => {
@@ -40,7 +44,9 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(getMemberWaste(memberId, wastes)).toEqual(wastes[0])
+      expect(getMemberWaste(memberId, wastes, new Date().toString())).toEqual(
+        wastes[0],
+      )
     })
   })
 
@@ -55,7 +61,9 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(calculateMemberPayout(memberId, wastes, 100)).toEqual(undefined)
+      expect(
+        calculateMemberPayout(memberId, wastes, 100, new Date().toString()),
+      ).toEqual(undefined)
     })
 
     test('member has made profit', () => {
@@ -73,7 +81,9 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(calculateMemberPayout(memberId, wastes, 400)).toEqual(200)
+      expect(
+        calculateMemberPayout(memberId, wastes, 400, new Date().toString()),
+      ).toEqual(200)
     })
 
     test('member has wasted', () => {
@@ -91,7 +101,9 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(calculateMemberPayout(memberId, wastes, 50)).toEqual(25)
+      expect(
+        calculateMemberPayout(memberId, wastes, 50, new Date().toString()),
+      ).toEqual(25)
     })
 
     test('individual waste is not even', () => {
@@ -109,7 +121,9 @@ describe('waste utils', () => {
         },
       ]
 
-      expect(calculateMemberPayout(memberId, wastes, 1500)).toEqual(500)
+      expect(
+        calculateMemberPayout(memberId, wastes, 1500, new Date().toString()),
+      ).toEqual(500)
     })
   })
 })
