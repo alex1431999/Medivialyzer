@@ -8,10 +8,11 @@ import {
   VCardActions,
   VTextField,
 } from 'vuetify/components'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { Team, useTeamStore } from '../../stores/teamStore.ts'
 import { useNotifications } from '../../composables/useNotifications.ts'
 import { useLoot } from '../../composables/useLoot.ts'
+import { getMembersWithWaste } from '../../utils/waste/waste.utils.ts'
 
 const teamStore = useTeamStore()
 const { totalLootValue } = useLoot()
@@ -22,6 +23,10 @@ const { team } = defineProps<{ team: Team }>()
 const isOpen = ref<boolean>(false)
 const lootAmount = ref<string>(totalLootValue.value.toString())
 const isLoading = ref<boolean>(false)
+
+const isDisabled = computed(
+  () => getMembersWithWaste(team.wastes, team.resetTimestamp).length === 0,
+)
 
 // Reset the value when the modal opens/closes
 watch(
@@ -60,6 +65,7 @@ async function onSplit() {
         class="w-25"
         color="secondary"
         v-bind="activatorProps"
+        :disabled="isDisabled"
       >
         Split Loot
       </v-btn>
