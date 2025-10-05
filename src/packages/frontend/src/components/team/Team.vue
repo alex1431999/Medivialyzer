@@ -65,7 +65,11 @@ function onLootAmountChange(value: string) {
         <TeamProfit :profit="profit" :profit-each="profitEach"></TeamProfit>
       </template>
     </div>
-    <Members :team="team" :members="team.members || []" />
+    <Members
+      :team="team"
+      :members="team.members"
+      :is-split-mode="hasSplitLoot"
+    />
   </div>
 </template>
 
