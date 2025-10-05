@@ -131,6 +131,41 @@ describe('TeamController (e2e)', () => {
     expect((response.body as TeamDto[])[0].members).toHaveLength(2);
   });
 
+  it('/team/client/:clientId (GET) should return all members of a team when called by a member', async () => {
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'owner-e2e', name: 'owner-e2e' });
+
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'member-1', name: 'member-1' });
+
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'member-2', name: 'member-2' });
+
+    const teamResponse = await request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team' });
+    const team = teamResponse.body as TeamDto;
+
+    await request(app.getHttpServer())
+      .post(`/team/${team.id}/members`)
+      .send({ id: 'member-1' });
+
+    await request(app.getHttpServer())
+      .post(`/team/${team.id}/members`)
+      .send({ id: 'member-2' });
+
+    const response = await request(app.getHttpServer()).get(
+      '/team/client/member-1',
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.body as TeamDto[]).toHaveLength(1);
+    expect((response.body as TeamDto[])[0].members).toHaveLength(2);
+  });
+
   it('/team/client/:clientId (GET) should return 404 if client does not exist', async () => {
     return request(app.getHttpServer())
       .get('/team/client/does-not-exist')

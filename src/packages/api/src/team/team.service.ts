@@ -49,8 +49,18 @@ export class TeamService {
       .leftJoinAndSelect('team.members', 'members')
       .leftJoinAndSelect('team.wastes', 'wastes')
       .leftJoinAndSelect('wastes.client', 'wasteClient')
-      .where('owner.id = :clientId', { clientId })
-      .orWhere('members.id = :clientId', { clientId })
+      .where((qb) => {
+        const subQuery = qb
+          .subQuery()
+          .select('team.id')
+          .from(Team, 'team')
+          .leftJoin('team.owner', 'owner')
+          .leftJoin('team.members', 'members')
+          .where('owner.id = :clientId', { clientId })
+          .orWhere('members.id = :clientId', { clientId })
+          .getQuery();
+        return 'team.id IN ' + subQuery;
+      })
       .getMany();
   }
 
