@@ -61,7 +61,7 @@ const headers = [
     </template>
 
     <template v-slot:item.avgLoot="{ item }">
-      {{ item.avgLoot.toFixed(2) }}
+      {{ item.avgLoot.toFixed() }}
     </template>
   </v-data-table>
 </template>
