@@ -118,6 +118,19 @@ export class TeamService {
     return result;
   }
 
+  async reset(id: string) {
+    const result = await this.teamRepository.update(id, {
+      resetTimestamp: new Date(),
+      lootAmount: null,
+    });
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`Team with ID ${id} not found`);
+    }
+
+    return result;
+  }
+
   async remove(id: string) {
     const result = await this.teamRepository.delete(id);
     if (result.affected === 0) {

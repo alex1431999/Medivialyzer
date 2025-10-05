@@ -54,6 +54,13 @@ export class TeamController {
     return this.teamService.findOne(id);
   }
 
+  @Patch(':id/reset')
+  @ApiOkResponse({ type: TeamDto })
+  async reset(@Param('id') id: string) {
+    await this.teamService.reset(id);
+    return this.teamService.findOne(id);
+  }
+
   @Delete(':id')
   @ApiOkResponse()
   async remove(@Param('id') id: string) {

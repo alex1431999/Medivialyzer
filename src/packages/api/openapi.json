@@ -154,6 +154,36 @@
         ]
       }
     },
+    "/team/{id}/reset": {
+      "patch": {
+        "operationId": "TeamController_reset",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Team"
+        ]
+      }
+    },
     "/team/{id}/members": {
       "post": {
         "operationId": "TeamController_createMember",

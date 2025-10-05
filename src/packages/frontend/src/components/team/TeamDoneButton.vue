@@ -9,13 +9,12 @@ const { team } = defineProps<{ team: Team }>()
 
 const isLoading = ref(false)
 
-// TODO reset waste
 async function onDone() {
   isLoading.value = true
 
-  await teamStore.update(team.id, { lootAmount: null })
+  await teamStore.reset(team.id)
 
-  isLoading.value = true
+  isLoading.value = false
 }
 </script>
 
