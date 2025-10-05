@@ -26,6 +26,8 @@ const teamOptions = computed(() =>
   teamStore.teams.map((team) => ({ title: team.name, value: team.id })),
 )
 
+const isDisabled = computed(() => teamStore.teams.length === 0)
+
 // Reset the value when the modal opens/closes
 watch(
   () => isOpen.value,
@@ -52,7 +54,7 @@ async function onSubmitWaste() {
 <template>
   <v-dialog max-width="400" v-model="isOpen">
     <template v-slot:activator="{ props: activatorProps }">
-      <v-btn v-bind="activatorProps" text="Submit" />
+      <v-btn :disabled="isDisabled" v-bind="activatorProps" text="Submit" />
     </template>
 
     <template v-slot:default>
