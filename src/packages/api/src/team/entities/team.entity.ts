@@ -24,7 +24,7 @@ export class Team {
   @Column('int', { nullable: true })
   lootAmount: number | null;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'text', nullable: true })
   resetTimestamp: Date | null;
 
   @ManyToMany(() => Client)
