@@ -75,6 +75,27 @@ describe('TeamController (e2e)', () => {
     expect(response.body as TeamDto[]).toHaveLength(1);
   });
 
+  it('/team/client/:clientId (GET) should return all teams when a client has more than 1 team', async () => {
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'owner-e2e', name: 'owner-e2e' });
+
+    await request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team-1' });
+
+    await request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team-2' });
+
+    const response = await request(app.getHttpServer()).get(
+      '/team/client/owner-e2e',
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.body as TeamDto[]).toHaveLength(2);
+  });
+
   it('/team/client/:clientId (GET) should return 404 if client does not exist', async () => {
     return request(app.getHttpServer())
       .get('/team/client/does-not-exist')
