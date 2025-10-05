@@ -17,6 +17,8 @@ const { team } = defineProps<{ team: Team }>()
 
 const membersWithWaste = computed(() => getMembersWithWaste(team.wastes))
 
+const hasSplitLoot = computed(() => team.lootAmount !== null)
+
 const profit = computed(() => {
   if (!membersWithWaste.value.length) return null
 
@@ -36,9 +38,18 @@ const profitEach = computed(() => {
   <div class="d-flex flex-column w-100">
     <TeamId :id="team.id" class="mb-3" />
     <v-divider class="mt-2 mb-2" />
-    <div class="d-flex justify-space-between ma-2">
-      <v-btn class="w-25" color="secondary">Split Loot</v-btn>
-      <TeamProfit :profit="profit" :profit-each="profitEach"></TeamProfit>
+    <div class="d-flex justify-space-between ma-4">
+      <v-btn
+        v-if="!hasSplitLoot"
+        variant="outlined"
+        class="w-25"
+        color="secondary"
+      >
+        Split Loot
+      </v-btn>
+      <template v-else>
+        <TeamProfit :profit="profit" :profit-each="profitEach"></TeamProfit>
+      </template>
     </div>
     <Members :team="team" :members="team.members || []" />
   </div>
