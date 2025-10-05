@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { VDataTable, VIcon } from 'vuetify/components'
+import { formatNumber } from 'medivialyzer-frontend/src/utils/number.ts'
 
 export type CreaturesKilledTableItem = {
   name: string
@@ -61,7 +62,7 @@ const headers = [
     </template>
 
     <template v-slot:item.avgLoot="{ item }">
-      {{ item.avgLoot.toFixed() }}
+      {{ formatNumber(Number(item.avgLoot.toFixed())) }}
     </template>
   </v-data-table>
 </template>
