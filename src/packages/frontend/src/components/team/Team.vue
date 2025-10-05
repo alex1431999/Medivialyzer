@@ -47,7 +47,7 @@ function onLootAmountChange(value: string) {
   <div class="d-flex flex-column w-100">
     <TeamId :id="team.id" class="mb-3" />
     <v-divider class="mt-2 mb-2" />
-    <div class="d-flex justify-space-between ma-4">
+    <div class="d-flex justify-space-between ma-4 align-center">
       <TeamSplitLootModal v-if="!hasSplitLoot" :team="team" />
       <template v-else>
         <TeamDoneButton :team="team" />
