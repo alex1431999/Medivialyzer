@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { VDivider } from 'vuetify/components'
+import { VDivider, VTextField } from 'vuetify/components'
 import Members from './member/Members.vue'
-import { Team } from '../../stores/teamStore.ts'
+import { Team, useTeamStore } from '../../stores/teamStore.ts'
 import TeamId from './TeamId.vue'
 import TeamProfit from './TeamProfit.vue'
 import { computed } from 'vue'
@@ -14,10 +14,13 @@ import TeamSplitLootModal from './TeamSplitLootModal.vue'
 import TeamDoneButton from './TeamDoneButton.vue'
 
 const { totalLootValue } = useLoot()
+const teamStore = useTeamStore()
 
 const { team } = defineProps<{ team: Team }>()
 
-const membersWithWaste = computed(() => getMembersWithWaste(team.wastes, team.resetTimestamp))
+const membersWithWaste = computed(() =>
+  getMembersWithWaste(team.wastes, team.resetTimestamp),
+)
 
 const hasSplitLoot = computed(() => team.lootAmount !== null)
 
@@ -34,6 +37,10 @@ const profitEach = computed(() => {
 
   return profit.value / membersWithWasteAmount
 })
+
+function onLootAmountChange(value: string) {
+  teamStore.update(team.id, { lootAmount: Number(value) })
+}
 </script>
 
 <template>
@@ -44,9 +51,26 @@ const profitEach = computed(() => {
       <TeamSplitLootModal v-if="!hasSplitLoot" :team="team" />
       <template v-else>
         <TeamDoneButton :team="team" />
+        <v-text-field
+          v-model="team.lootAmount"
+          label="Total Loot"
+          type="number"
+          density="compact"
+          variant="outlined"
+          hide-details
+          class="total-loot-input"
+          color="secondary"
+          @update:model-value="onLootAmountChange"
+        />
         <TeamProfit :profit="profit" :profit-each="profitEach"></TeamProfit>
       </template>
     </div>
     <Members :team="team" :members="team.members || []" />
   </div>
 </template>
+
+<style scoped>
+.total-loot-input {
+  max-width: 150px;
+}
+</style>
