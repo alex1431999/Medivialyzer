@@ -28,9 +28,9 @@ const { member, team } = defineProps<{
 
 const isYou = computed(() => clientStore.client?.id === member.id)
 const isClientOwner = computed(() => clientStore.client?.id === team.owner.id)
-const waste = computed(() => getMemberWaste(member.id, team.wastes))
+const waste = computed(() => getMemberWaste(member.id, team.wastes, team.resetTimestamp))
 const payout = computed(() =>
-  calculateMemberPayout(member.id, team.wastes, totalLootValue.value),
+  calculateMemberPayout(member.id, team.wastes, totalLootValue.value, team.resetTimestamp),
 )
 const canRemoveMember = computed(() => isClientOwner.value && !isYou.value)
 

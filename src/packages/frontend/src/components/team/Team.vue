@@ -17,14 +17,14 @@ const { totalLootValue } = useLoot()
 
 const { team } = defineProps<{ team: Team }>()
 
-const membersWithWaste = computed(() => getMembersWithWaste(team.wastes))
+const membersWithWaste = computed(() => getMembersWithWaste(team.wastes, team.resetTimestamp))
 
 const hasSplitLoot = computed(() => team.lootAmount !== null)
 
 const profit = computed(() => {
   if (!membersWithWaste.value.length) return null
 
-  const totalWasteAmount = getTotalWaste(team.wastes)
+  const totalWasteAmount = getTotalWaste(team.wastes, team.resetTimestamp)
   return totalLootValue.value - totalWasteAmount
 })
 

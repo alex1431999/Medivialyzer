@@ -1,29 +1,46 @@
 import { WasteDto } from '../generated/api-client'
 import _ from 'lodash'
-import { ONE_HOUR } from '../../constants/time.ts'
 
-export function filterOutdatedWaste(waste: WasteDto) {
+export function filterOutdatedWaste(
+  waste: WasteDto,
+  resetTimestamp: Date | null,
+) {
   const wasteSubmittedAt = new Date(waste.createdAt).getTime()
-  return wasteSubmittedAt > Date.now() - ONE_HOUR
+  if (resetTimestamp) {
+    return wasteSubmittedAt > new Date(resetTimestamp).getTime()
+  }
+
+  return true
 }
 
-export function getTotalWaste(wastes: WasteDto[]) {
+export function getTotalWaste(wastes: WasteDto[], resetTimestamp: Date | null) {
   const memberIds = _.uniq(_.map(wastes, 'client.id'))
   const wastesOfMembers = memberIds
-    .map((memberId) => getMemberWaste(memberId, wastes))
+    .map((memberId) => getMemberWaste(memberId, wastes, resetTimestamp))
     .filter((waste) => waste !== undefined)
   const wasteAmounts = _.map(wastesOfMembers, 'wasteAmount')
 
   return _.sum(wasteAmounts)
 }
 
-export function getMembersWithWaste(wastes: WasteDto[]) {
+export function getMembersWithWaste(
+  wastes: WasteDto[],
+  resetTimestamp: Date | null,
+) {
   const memberIds = _.uniq(_.map(wastes, 'client.id'))
-  return memberIds.filter((memberId) => !!getMemberWaste(memberId, wastes))
+  return memberIds.filter(
+    (memberId) => !!getMemberWaste(memberId, wastes, resetTimestamp),
+  )
 }
 
-export function getMemberWaste(memberId: string, wastes: WasteDto[]) {
-  const relevantWastes = wastes.filter(filterOutdatedWaste)
+export function getMemberWaste(
+  memberId: string,
+  wastes: WasteDto[],
+  resetTimestamp: Date | null,
+) {
+  const relevantWastes = wastes.filter((waste) =>
+    filterOutdatedWaste(waste, resetTimestamp),
+  )
   const mostRecentWaste = _.sortBy(relevantWastes, 'createdAt')
     .reverse()
     .find((wasteCurrnet) => wasteCurrnet.client.id === memberId)
@@ -35,13 +52,16 @@ export function calculateMemberPayout(
   memberId: string,
   wastes: WasteDto[],
   totalLootValue: number,
+  resetTimestamp: Date | null,
 ): number | undefined {
-  const memberWaste = getMemberWaste(memberId, wastes)
+  const memberWaste = getMemberWaste(memberId, wastes, resetTimestamp)
   if (!memberWaste) return undefined
 
   const memberIds = _.uniq(_.map(wastes, 'client.id'))
   const wastesOfMembers = memberIds
-    .map((memberIdCurrent) => getMemberWaste(memberIdCurrent, wastes))
+    .map((memberIdCurrent) =>
+      getMemberWaste(memberIdCurrent, wastes, resetTimestamp),
+    )
     .filter((waste) => waste !== undefined)
 
   const wasteSums = _.map(wastesOfMembers, 'wasteAmount')
