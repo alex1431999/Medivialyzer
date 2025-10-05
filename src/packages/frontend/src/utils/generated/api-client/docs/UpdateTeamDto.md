@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** |  | [default to undefined]
-**lootAmount** | **object** |  | [default to undefined]
+**name** | **string** |  | [optional] [default to undefined]
+**lootAmount** | **number** |  | [optional] [default to undefined]
 
 ## Example
 

@@ -462,7 +462,8 @@
             "type": "string"
           },
           "lootAmount": {
-            "type": "object"
+            "type": "number",
+            "nullable": true
           },
           "members": {
             "type": "array",
@@ -493,13 +494,10 @@
             "type": "string"
           },
           "lootAmount": {
-            "type": "object"
+            "type": "number",
+            "nullable": true
           }
-        },
-        "required": [
-          "name",
-          "lootAmount"
-        ]
+        }
       },
       "CreateMemberDto": {
         "type": "object",
