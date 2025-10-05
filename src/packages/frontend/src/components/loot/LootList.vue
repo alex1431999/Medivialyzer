@@ -97,11 +97,14 @@ function onLootItemEdit(entry: LootEntry) {
   <ItemEditModal :item-to-edit="itemToEdit" @on-close="itemToEdit = null" />
 
   <div class="loot-list__header">
-    <LootTimeDisplay
-      class="loot-list__time-display"
-      :since="configStore.config.since"
-    />
-    <div class="d-flex ga-2">
+    <div style="width: 400px">
+      <LootTimeDisplay
+        class="loot-list__time-display"
+        :since="configStore.config.since"
+      />
+    </div>
+    <img src="/logo.ico" class="logo" />
+    <div class="d-flex ga-2 justify-end" style="width: 400px">
       <LootLuckDisplay :lootLuck="lootLuck" />
       <LootProfitDisplay :profit="profit" />
     </div>
@@ -164,5 +167,10 @@ function onLootItemEdit(entry: LootEntry) {
 
 .loot-list__menu {
   margin-top: 16px;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
 }
 </style>
