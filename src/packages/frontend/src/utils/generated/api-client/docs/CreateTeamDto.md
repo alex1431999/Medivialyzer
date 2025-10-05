@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **owner** | **string** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
+**lootAmount** | **object** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -16,6 +17,7 @@ import { CreateTeamDto } from './api';
 const instance: CreateTeamDto = {
     owner,
     name,
+    lootAmount,
 };
 ```
 

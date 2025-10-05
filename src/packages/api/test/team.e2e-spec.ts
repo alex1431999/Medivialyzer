@@ -236,11 +236,48 @@ describe('TeamController (e2e)', () => {
       .expect(200);
   });
 
+  it('/team/:id (PATCH) should update be able to update lootAmount', async () => {
+    await request(app.getHttpServer())
+      .post('/client')
+      .send({ id: 'owner-e2e', name: 'owner-e2e' });
+
+    const teamResponse = await request(app.getHttpServer())
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team' });
+    const team = teamResponse.body as TeamDto;
+
+    await request(app.getHttpServer())
+      .patch(`/team/${team.id}`)
+      .send({ lootAmount: 500 })
+      .expect(200);
+  });
+
   it('/team/:id (PATCH) should return 404 if team does not exist', async () => {
-    return request(app.getHttpServer())
+    return request(app.getHttpServer() as App)
       .patch('/team/does-not-exist')
       .send({ name: 'new name' })
       .expect(404);
+  });
+
+  it('/team/:id/reset (PATCH) should set lootAmount to null and update resetTimestamp', async () => {
+    await request(app.getHttpServer() as App)
+      .post('/client')
+      .send({ id: 'owner-e2e', name: 'owner-e2e' });
+
+    const teamResponse = await request(app.getHttpServer() as App)
+      .post('/team')
+      .send({ owner: 'owner-e2e', name: 'team', lootAmount: 500 });
+    const team = teamResponse.body as TeamDto;
+
+    await request(app.getHttpServer() as App)
+      .patch(`/team/${team.id}/reset`)
+      .expect(200);
+
+    const response = await request(app.getHttpServer() as App).get(`/team/${team.id}`);
+
+    expect(response.status).toBe(200);
+    expect((response.body as TeamDto).lootAmount).toBeNull();
+    expect((response.body as TeamDto).resetTimestamp).not.toBeNull();
   });
 
   it('/team/:id (DELETE) should delete a team', async () => {

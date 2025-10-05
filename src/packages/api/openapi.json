@@ -154,6 +154,36 @@
         ]
       }
     },
+    "/team/{id}/reset": {
+      "patch": {
+        "operationId": "TeamController_reset",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Team"
+        ]
+      }
+    },
     "/team/{id}/members": {
       "post": {
         "operationId": "TeamController_createMember",
@@ -407,6 +437,10 @@
           },
           "name": {
             "type": "string"
+          },
+          "lootAmount": {
+            "type": "object",
+            "nullable": true
           }
         },
         "required": [
@@ -461,6 +495,15 @@
           "name": {
             "type": "string"
           },
+          "lootAmount": {
+            "type": "number",
+            "nullable": true
+          },
+          "resetTimestamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "members": {
             "type": "array",
             "items": {
@@ -478,6 +521,8 @@
           "id",
           "owner",
           "name",
+          "lootAmount",
+          "resetTimestamp",
           "members",
           "wastes"
         ]
@@ -487,11 +532,12 @@
         "properties": {
           "name": {
             "type": "string"
+          },
+          "lootAmount": {
+            "type": "number",
+            "nullable": true
           }
-        },
-        "required": [
-          "name"
-        ]
+        }
       },
       "CreateMemberDto": {
         "type": "object",

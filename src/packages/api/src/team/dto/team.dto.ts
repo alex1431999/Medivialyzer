@@ -12,6 +12,12 @@ export class TeamDto {
   @ApiProperty()
   name: string;
 
+  @ApiProperty({ type: 'number', nullable: true })
+  lootAmount?: number | null;
+
+  @ApiProperty({ type: 'string', format: 'date-time', nullable: true })
+  resetTimestamp?: Date | null;
+
   @ApiProperty({ type: () => [ClientDto] })
   members: ClientDto[];
 

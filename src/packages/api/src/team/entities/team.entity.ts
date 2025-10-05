@@ -21,6 +21,12 @@ export class Team {
   @Column({ nullable: false })
   name: string;
 
+  @Column('int', { nullable: true })
+  lootAmount: number | null;
+
+  @Column({ type: 'text', nullable: true })
+  resetTimestamp: Date | null;
+
   @ManyToMany(() => Client)
   @JoinTable()
   members: Client[];
