@@ -24,6 +24,7 @@ async function createWindow() {
 
     if (appBounds !== undefined && appBounds !== null) Object.assign(BrowserWindowOptions, appBounds);
     const mainWindow = new BrowserWindow(BrowserWindowOptions);
+    mainWindow.setMenu(null);
 
     // and load the index.html of the app.
     // win.loadFile("index.html");
