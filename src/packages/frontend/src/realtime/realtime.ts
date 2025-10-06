@@ -4,7 +4,11 @@ import { useNotifications } from '../composables/useNotifications.ts'
 
 export const socket = io('http://localhost:3001')
 
-// Receive
+socket.on('teamUpdated', async () => {
+  const teamStore = useTeamStore()
+  await teamStore.refresh()
+})
+
 socket.on('wasteAdded', async (memberName) => {
   const { notify } = useNotifications()
   const teamStore = useTeamStore()
