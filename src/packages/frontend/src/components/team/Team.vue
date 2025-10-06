@@ -9,11 +9,9 @@ import {
   getMembersWithWaste,
   getTotalWaste,
 } from '../../utils/waste/waste.utils.ts'
-import { useLoot } from '../../composables/useLoot.ts'
 import TeamSplitLootModal from './TeamSplitLootModal.vue'
 import TeamDoneButton from './TeamDoneButton.vue'
 
-const { totalLootValue } = useLoot()
 const teamStore = useTeamStore()
 
 const { team } = defineProps<{ team: Team }>()
@@ -25,10 +23,10 @@ const membersWithWaste = computed(() =>
 const hasSplitLoot = computed(() => team.lootAmount !== null)
 
 const profit = computed(() => {
-  if (!membersWithWaste.value.length) return null
+  if (!membersWithWaste.value.length || team.lootAmount === null) return null
 
   const totalWasteAmount = getTotalWaste(team.wastes, team.resetTimestamp)
-  return totalLootValue.value - totalWasteAmount
+  return team.lootAmount - totalWasteAmount
 })
 
 const profitEach = computed(() => {
@@ -62,7 +60,11 @@ function onLootAmountChange(value: string) {
           color="secondary"
           @update:model-value="onLootAmountChange"
         />
-        <TeamProfit :profit="profit" :profit-each="profitEach"></TeamProfit>
+        <TeamProfit
+          v-if="profit !== null && profitEach !== null"
+          :profit="profit"
+          :profit-each="profitEach"
+        ></TeamProfit>
       </template>
     </div>
     <Members
