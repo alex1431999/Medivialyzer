@@ -18,7 +18,6 @@ const clientStore = useClientStore()
 const teamStore = useTeamStore()
 
 const { notify } = useNotifications()
-const { totalLootValue } = useLoot()
 
 const { member, team } = defineProps<{
   member: Member | Client
@@ -32,12 +31,14 @@ const waste = computed(() =>
   getMemberWaste(member.id, team.wastes, team.resetTimestamp),
 )
 const payout = computed(() =>
-  calculateMemberPayout(
-    member.id,
-    team.wastes,
-    totalLootValue.value,
-    team.resetTimestamp,
-  ),
+  team.lootAmount === null
+    ? null
+    : calculateMemberPayout(
+        member.id,
+        team.wastes,
+        team.lootAmount,
+        team.resetTimestamp,
+      ),
 )
 const canRemoveMember = computed(() => isClientOwner.value && !isYou.value)
 
@@ -62,7 +63,7 @@ async function removeMember() {
 
         <div class="d-flex ga-2 align-center">
           <MemberWaste :waste="waste" />
-          <MemberPayout :payout="payout"></MemberPayout>
+          <MemberPayout v-if="payout" :payout="payout"></MemberPayout>
           <MemberMenu :can-remove="canRemoveMember" @remove="removeMember" />
         </div>
       </div>
