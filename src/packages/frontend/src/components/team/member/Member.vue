@@ -12,7 +12,6 @@ import {
 } from '../../../utils/waste/waste.utils.ts'
 import MemberMenu from './MemberMenu.vue'
 import { useNotifications } from '../../../composables/useNotifications.ts'
-import { useLoot } from '../../../composables/useLoot.ts'
 
 const clientStore = useClientStore()
 const teamStore = useTeamStore()
