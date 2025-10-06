@@ -1,8 +1,9 @@
 import { io } from 'socket.io-client'
 import { useTeamStore } from '../stores/teamStore.ts'
 import { useNotifications } from '../composables/useNotifications.ts'
+import { API_BASE_PATH } from '../utils/api/api.constants.ts'
 
-export const socket = io('http://localhost:3001')
+export const socket = io(API_BASE_PATH)
 
 socket.on('teamUpdated', async () => {
   const teamStore = useTeamStore()
