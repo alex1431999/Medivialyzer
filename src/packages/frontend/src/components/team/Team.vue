@@ -11,6 +11,7 @@ import {
 } from '../../utils/waste/waste.utils.ts'
 import TeamSplitLootModal from './TeamSplitLootModal.vue'
 import TeamDoneButton from './TeamDoneButton.vue'
+import _ from 'lodash'
 
 const teamStore = useTeamStore()
 
@@ -39,6 +40,8 @@ const profitEach = computed(() => {
 function onLootAmountChange(value: string) {
   teamStore.update(team.id, { lootAmount: Number(value) })
 }
+
+const onLootamountChangeDebounced = _.debounce(onLootAmountChange, 1000)
 </script>
 
 <template>
@@ -58,7 +61,7 @@ function onLootAmountChange(value: string) {
           hide-details
           class="total-loot-input"
           color="secondary"
-          @update:model-value="onLootAmountChange"
+          @update:model-value="onLootamountChangeDebounced"
         />
         <TeamProfit
           v-if="profit !== null && profitEach !== null"
