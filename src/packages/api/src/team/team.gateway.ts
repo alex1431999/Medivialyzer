@@ -27,6 +27,10 @@ export class TeamGateway {
     await client.join(`team-${teamId}`);
   }
 
+  notifyTeamUpdated(teamId: string) {
+    this.server.to(`team-${teamId}`).emit('updated');
+  }
+
   notifyWasteAdded(teamId: string, clientName: string) {
     this.server.to(`team-${teamId}`).emit('wasteAdded', clientName);
   }

@@ -51,6 +51,7 @@ export class TeamController {
   @ApiOkResponse({ type: TeamDto })
   async update(@Param('id') id: string, @Body() updateTeamDto: UpdateTeamDto) {
     await this.teamService.update(id, updateTeamDto);
+    this.teamGateway.notifyTeamUpdated(id);
     return this.teamService.findOne(id);
   }
 
