@@ -25,10 +25,10 @@ const membersWithWaste = computed(() =>
 const hasSplitLoot = computed(() => team.lootAmount !== null)
 
 const profit = computed(() => {
-  if (!membersWithWaste.value.length) return null
+  if (!membersWithWaste.value.length || team.lootAmount === null) return null
 
   const totalWasteAmount = getTotalWaste(team.wastes, team.resetTimestamp)
-  return totalLootValue.value - totalWasteAmount
+  return team.lootAmount - totalWasteAmount
 })
 
 const profitEach = computed(() => {
