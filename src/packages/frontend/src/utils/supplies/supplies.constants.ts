@@ -9,7 +9,7 @@ export const SUPPLIES = [
   },
   {
     name: 'Heavy magic missile rune',
-    cost: 75,
+    cost: 85,
   },
   {
     name: 'Ice Heavy magic missile rune',
@@ -17,7 +17,7 @@ export const SUPPLIES = [
   },
   {
     name: 'Sudden death rune',
-    cost: 300,
+    cost: 330,
   },
   {
     name: 'Great fireball rune',
@@ -61,14 +61,14 @@ export const SUPPLIES = [
   },
   {
     name: 'Small explosive rune',
-    cost: 55,
+    cost: 50,
   },
   {
     name: 'Burst Arrow',
-    cost: 55,
+    cost: 50,
   },
   {
     name: 'Lionfish meal tier 1',
-    cost: 900,
+    cost: 1000,
   },
 ]
