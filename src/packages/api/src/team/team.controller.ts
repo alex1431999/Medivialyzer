@@ -59,6 +59,7 @@ export class TeamController {
   @ApiOkResponse({ type: TeamDto })
   async reset(@Param('id') id: string) {
     await this.teamService.reset(id);
+    this.teamGateway.notifyTeamUpdated(id);
     return this.teamService.findOne(id);
   }
 
