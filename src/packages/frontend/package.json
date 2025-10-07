@@ -1,7 +1,7 @@
 {
   "name": "medivialyzer-frontend",
   "private": true,
-  "version": "1.4.0",
+  "version": "2.0.0",
   "type": "module",
   "packageManager": "yarn@4.8.0",
   "scripts": {

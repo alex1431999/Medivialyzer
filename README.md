@@ -1,9 +1,9 @@
 # Medivialyzer
-![medivialyzer-preview](https://github.com/alex1431999/Medivialyzer/blob/main/docs/assets/medivialyzer-preview.PNG)
+![medivialyzer-preview](https://github.com/alex1431999/Medivialyzer/blob/main/docs/assets/medivialyzer-preview.png)
 
 ## Getting started
 ### Install the client
-- Download the client [here](https://github.com/alex1431999/Medivialyzer/releases/download/1.4.0/medivialyzer-1.4.0.zip).
+- Download the client [here](https://github.com/alex1431999/Medivialyzer/releases/download/2.0.0/medivialyzer-2.0.0-win.zip).
 - Unzip the archive
 - Run `Medivialyzer Setup <version>.exe`
 
