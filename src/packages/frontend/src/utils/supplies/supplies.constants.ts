@@ -37,7 +37,7 @@ export const SUPPLIES = [
   },
   {
     name: 'Ring of purity minutes',
-    cost: 233.33,
+    cost: 233,
   },
   {
     name: 'Arrow',
