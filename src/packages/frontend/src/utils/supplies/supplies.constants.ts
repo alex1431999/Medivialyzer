@@ -28,8 +28,8 @@ export const SUPPLIES = [
     cost: 2000,
   },
   {
-    name: 'Backpacks of Mana fluids',
-    cost: 2000,
+    name: 'Mana fluid',
+    cost: 100,
   },
   {
     name: 'Big mana Potion',
