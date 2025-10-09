@@ -30,6 +30,25 @@ const DEFAULT_SUPPLIES_DATA: SuppliesData = SUPPLIES.reduce(
   {},
 )
 
+/**
+ * This function makes sure you always have all supplies in your supply data list.
+ */
+function fillMissingSupplies(suppliesData: SuppliesData) {
+  const suppliesDataCopy = _.cloneDeep(suppliesData)
+
+  SUPPLIES.forEach((supply) => {
+    if (!Object.keys(suppliesDataCopy).includes(supply.name)) {
+      suppliesDataCopy[supply.name] = {
+        before: '',
+        after: '',
+        cost: supply.cost,
+      }
+    }
+  })
+
+  return suppliesDataCopy
+}
+
 export const useSuppliesStore = defineStore('supplies', {
   state: (): SuppliesStoreData => {
     const configStore = useConfigStore()
@@ -37,12 +56,8 @@ export const useSuppliesStore = defineStore('supplies', {
     const storedSupplies: SuppliesData = _.cloneDeep(
       configStore.$state.config.supplies,
     )
-    const defaultSupplies = _.cloneDeep(DEFAULT_SUPPLIES_DATA)
 
-    const suppliesEffective =
-      Object.keys(storedSupplies).length === Object.keys(defaultSupplies).length
-        ? storedSupplies
-        : defaultSupplies
+    const suppliesEffective = fillMissingSupplies(storedSupplies)
 
     const suppliesEffectiveWithCost = Object.keys(suppliesEffective).reduce(
       (result, supplyName) => {
@@ -60,7 +75,11 @@ export const useSuppliesStore = defineStore('supplies', {
   getters: {
     totalSuppliesUsed: (state) => {
       return SUPPLIES.reduce((total, supply) => {
-        const { before, after, cost } = _.get(state.supplies, `${supply.name}`)
+        const { before, after, cost } = _.get(
+          state.supplies,
+          `${supply.name}`,
+          { before: null, after: null, cost: null },
+        )
 
         // This means the supply either wasn't used or we haven't entered the after value yet
         if (
