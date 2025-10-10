@@ -40,6 +40,10 @@ export const SUPPLIES = [
     cost: 233,
   },
   {
+    name: 'Emberwake ring minutes',
+    cost: 133,
+  },
+  {
     name: 'Arrow',
     cost: 2,
   },
