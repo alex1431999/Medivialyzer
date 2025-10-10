@@ -105,7 +105,7 @@ function onUpdateFavorite(payload: {
 </script>
 
 <template>
-  <v-dialog max-width="900">
+  <v-dialog max-width="1100">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
