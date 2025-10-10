@@ -5,3 +5,4 @@ node_modules
 .idea
 .vite
 .yarn
+/**/.DS_STORE
