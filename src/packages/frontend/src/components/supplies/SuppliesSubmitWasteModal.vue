@@ -8,6 +8,7 @@ import {
   VSelect,
   VCardActions,
   VTextField,
+  VTooltip,
 } from 'vuetify/components'
 import { computed, ref, watch } from 'vue'
 import { useTeamStore } from '../../stores/teamStore.ts'
@@ -54,7 +55,18 @@ async function onSubmitWaste() {
 <template>
   <v-dialog max-width="400" v-model="isOpen">
     <template v-slot:activator="{ props: activatorProps }">
-      <v-btn :disabled="isDisabled" v-bind="activatorProps" text="Submit" />
+      <v-btn v-if="!isDisabled" v-bind="activatorProps" text="Submit" />
+
+      <v-tooltip
+        v-else
+        text="You need to be part of a team to submit your waste"
+      >
+        <template v-slot:activator="{ props }">
+          <span v-bind="props">
+            <v-btn text="Submit" disabled />
+          </span>
+        </template>
+      </v-tooltip>
     </template>
 
     <template v-slot:default>
