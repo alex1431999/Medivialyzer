@@ -7,7 +7,6 @@ import {
   VTextField,
   VCardActions,
   VBtn,
-  VForm,
 } from 'vuetify/components'
 import { computed, ref } from 'vue'
 
@@ -22,9 +21,7 @@ const disableSubmit = computed(() => name.value === '')
     <v-card>
       <v-card-title>Select a username</v-card-title>
       <v-card-text>
-        <v-form>
-          <v-text-field label="Username" required v-model="name"></v-text-field>
-        </v-form>
+        <v-text-field label="Username" required v-model="name"></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-btn :disabled="disableSubmit" @click="emit('submit', name)"
