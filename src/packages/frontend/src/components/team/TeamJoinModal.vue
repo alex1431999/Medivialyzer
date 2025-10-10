@@ -6,15 +6,16 @@ import {
   VCardText,
   VCardTitle,
   VDialog,
-  VForm,
   VTextField,
 } from 'vuetify/components'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const show = defineModel<boolean>('show')
 const teamId = ref<string>('')
 
 const emit = defineEmits(['join'])
+
+const isJoinDisabled = computed(() => teamId.value === '')
 
 function onJoin() {
   emit('join', teamId.value)
@@ -27,17 +28,11 @@ function onJoin() {
     <v-card>
       <v-card-title>Join Team</v-card-title>
       <v-card-text>
-        <v-form>
-          <v-text-field
-            required
-            label="Team ID"
-            v-model="teamId"
-          ></v-text-field>
-        </v-form>
+        <v-text-field required label="Team ID" v-model="teamId"></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-btn @click="show = false">Close</v-btn>
-        <v-btn @click="onJoin">Join</v-btn>
+        <v-btn @click="onJoin" :disabled="isJoinDisabled">Join</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

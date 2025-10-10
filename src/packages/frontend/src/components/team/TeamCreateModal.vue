@@ -4,7 +4,6 @@ import {
   VCard,
   VCardTitle,
   VCardText,
-  VForm,
   VTextField,
   VBtn,
   VCardActions,
@@ -30,13 +29,11 @@ function onCreate() {
     <v-card>
       <v-card-title>Create Team</v-card-title>
       <v-card-text>
-        <v-form>
-          <v-text-field
-            required
-            label="Name"
-            v-model="createTeamData.name"
-          ></v-text-field>
-        </v-form>
+        <v-text-field
+          required
+          label="Name"
+          v-model="createTeamData.name"
+        ></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-btn @click="show = false">Close</v-btn>
