@@ -6,7 +6,6 @@ import {
   VCardText,
   VCardTitle,
   VDialog,
-  VForm,
   VTextField,
 } from 'vuetify/components'
 import { ref } from 'vue'
@@ -27,13 +26,7 @@ function onJoin() {
     <v-card>
       <v-card-title>Join Team</v-card-title>
       <v-card-text>
-        <v-form>
-          <v-text-field
-            required
-            label="Team ID"
-            v-model="teamId"
-          ></v-text-field>
-        </v-form>
+        <v-text-field required label="Team ID" v-model="teamId"></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-btn @click="show = false">Close</v-btn>
