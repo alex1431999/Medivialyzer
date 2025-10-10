@@ -4,7 +4,6 @@ import {
   VCard,
   VCardTitle,
   VCardText,
-  VForm,
   VTextField,
   VBtn,
   VCardActions,
