@@ -11,6 +11,6 @@ contextBridge.exposeInMainWorld('electron', {
     getConfig: () => configStore.get('config'),
     openFileDialog: () => ipcRenderer.invoke('open-file-dialog'),
     onLootDataUpdated: (callback: (event: any, ...args: any[]) => void) => ipcRenderer.on('loot-data-updated', callback),
-    onLootDataInitial: (callback: (event: any, ...args: any[]) => void) => ipcRenderer.on('loot-data-initial', callback),
-    readEntireLootFile: readEntireLootFile,
+    readEntireLootFile: () => ipcRenderer.invoke('read-entire-loot-file'),
+    watchLootFile: () => ipcRenderer.invoke('watch-loot-file'),
 });

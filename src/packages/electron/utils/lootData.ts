@@ -6,18 +6,20 @@ import { BrowserWindow } from 'electron';
 
 export const DEFAULT_LOOT_FILE_PATH = path.join(os.homedir(), 'medivia', 'Loot.txt');
 
+let fileWatcher: fs.FSWatcher | null = null
+let lastReadSize = 0;
+
 export function readEntireLootFile() {
   const filePath = (configStore.get('config') as any).lootFilePath || DEFAULT_LOOT_FILE_PATH;
-  try {
-    const data = fs.readFileSync(filePath).toString();
-    lastReadSize = Buffer.byteLength(data, 'utf8');
-    return data;
-  } catch (error) {
-    return '';
+
+  const data = fs.readFileSync(filePath).toString();
+  lastReadSize = Buffer.byteLength(data, 'utf8');
+
+  const mainWindow = BrowserWindow.getAllWindows()[0];
+  if (mainWindow) {
+    mainWindow.webContents.send('loot-data-updated', data, lastReadSize);
   }
 }
-
-let lastReadSize = 0;
 
 function readNewLines(filePath: string) {
   const stats = fs.statSync(filePath);
@@ -46,21 +48,24 @@ function readNewLines(filePath: string) {
     lastReadSize = newSize;
     const mainWindow = BrowserWindow.getAllWindows()[0];
     if (mainWindow) {
-      mainWindow.webContents.send('loot-data-updated', newData);
+      mainWindow.webContents.send('loot-data-updated', newData, lastReadSize);
     }
   });
 }
 
-export function watchLootFile() {
+export async function watchLootFile() {
   const filePath = (configStore.get('config') as any).lootFilePath || DEFAULT_LOOT_FILE_PATH;
 
   const dir = path.dirname(filePath);
   const base = path.basename(filePath);
 
+  // Close existing file watcher. This makes sure the function can be called n times without dangling watchers
+  if (fileWatcher) fileWatcher.close()
+
   // We have to watch the dir here instead of the file name because on mac
   // for example, the file gets removed and replaced when edited via a file
   // editor for example. The dir remains stable
-  fs.watch(dir, (eventType, filename) => {
+  fileWatcher = fs.watch(dir, (eventType, filename) => {
     if (filename === base) {
       readNewLines(filePath);
     }
