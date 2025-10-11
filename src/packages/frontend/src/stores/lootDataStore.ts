@@ -32,33 +32,45 @@ const DEFAULT_DATA: LootDataStoreData = {
 export const useLootDataStore = defineStore('lootData', {
   state: () => ({ ...DEFAULT_DATA }),
   actions: {
-    update(options?: LootParserOptions) {
-      const lootData = electron.getLootData()
+    init() {
+      electron.onLootDataInitial(async (_: any, initialData: string) => {
+        this.lootData = initialData
+        await this.parse()
+      })
 
-      const hasLootDataChanged = lootData !== this.lootData
+      electron.onLootDataUpdated(async (_: any, newData: string) => {
+        this.lootData += newData
+
+        await this.parse()
+      })
+    },
+    async updateOptions(options: LootParserOptions) {
       const hasOptionsChanged = !_.isEqual(options, this.previousOptions)
 
-      if (hasLootDataChanged || hasOptionsChanged) {
-        this.lootData = lootData
+      if (hasOptionsChanged) {
         this.previousOptions = options || {}
-        this.isParsingLootData = true
-        this.ongoingParsingCalls += 1
 
-        runWorkerLootParser(lootData, options)
-          .then((lootDataParsed) => {
-            this.lootDataParsed = lootDataParsed
-            this.ongoingParsingCalls -= 1
-          })
-          .catch((error) => {
-            this.ongoingParsingCalls -= 1
-            throw error
-          })
-          .finally(() => {
-            if (this.ongoingParsingCalls === 0) {
-              this.isParsingLootData = false
-            }
-          })
+        await this.parse()
       }
+    },
+    async parse() {
+      this.isParsingLootData = true
+      this.ongoingParsingCalls += 1
+
+      return runWorkerLootParser(this.lootData, this.previousOptions)
+        .then((lootDataParsed) => {
+          this.lootDataParsed = lootDataParsed
+          this.ongoingParsingCalls -= 1
+        })
+        .catch((error) => {
+          this.ongoingParsingCalls -= 1
+          throw error
+        })
+        .finally(() => {
+          if (this.ongoingParsingCalls === 0) {
+            this.isParsingLootData = false
+          }
+        })
     },
   },
 })

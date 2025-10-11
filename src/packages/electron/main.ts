@@ -43,7 +43,6 @@ async function createWindow() {
         mainWindow.webContents.openDevTools();
     }
 
-
     ipcMain.handle('versions', () => {
         return {
             node: process.versions.chrome,
@@ -62,11 +61,15 @@ async function createWindow() {
         });
         return result.filePaths[0]; // Return the selected file path
     });
+
+    return mainWindow
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
+import { getInitialLootData, watchLootFile } from "./utils/lootData";
+
 app.whenReady().then(async () => {
     // if dev
     if (isDev) {
@@ -78,7 +81,11 @@ app.whenReady().then(async () => {
         }
     }
 
-    createWindow();
+    const mainWindow = await createWindow();
+    const initialLootData = getInitialLootData();
+    mainWindow.webContents.send('loot-data-initial', initialLootData);
+
+    watchLootFile();
     app.on("activate", function () {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
