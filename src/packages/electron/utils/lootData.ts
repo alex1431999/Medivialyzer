@@ -6,7 +6,7 @@ import { BrowserWindow } from 'electron';
 
 export const DEFAULT_LOOT_FILE_PATH = path.join(os.homedir(), 'medivia', 'Loot.txt');
 
-export function getInitialLootData() {
+export function readEntireLootFile() {
   const filePath = (configStore.get('config') as any).lootFilePath || DEFAULT_LOOT_FILE_PATH;
   try {
     const data = fs.readFileSync(filePath).toString();

@@ -68,7 +68,7 @@ async function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-import { getInitialLootData, watchLootFile } from "./utils/lootData";
+import { watchLootFile } from "./utils/lootData";
 
 app.whenReady().then(async () => {
     // if dev
@@ -81,9 +81,7 @@ app.whenReady().then(async () => {
         }
     }
 
-    const mainWindow = await createWindow();
-    const initialLootData = getInitialLootData();
-    mainWindow.webContents.send('loot-data-initial', initialLootData);
+    await createWindow();
 
     watchLootFile();
     app.on("activate", function () {
