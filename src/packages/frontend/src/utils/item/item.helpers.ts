@@ -2,9 +2,10 @@ import { Item, ItemName } from './item.types.ts'
 import { ITEMS } from './item.constants.ts'
 import { useConfigStore } from '../../stores/configStore.ts'
 import { singularize } from '../string.ts'
+import { pinia } from '../../plugins/pinia.ts'
 
 export function getAllItems() {
-  const configStore = useConfigStore()
+  const configStore = useConfigStore(pinia)
 
   // We insert the custom items first to make sure that custom items always
   // overrule the defined items in case somebody is doing a search over this
