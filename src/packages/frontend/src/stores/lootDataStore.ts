@@ -13,6 +13,8 @@ export type LootDataStoreData = {
   previousOptions: LootParserOptions
   isParsingLootData: boolean
   ongoingParsingCalls: number
+  lastReadSize: number
+  updatePromise: Promise<void>
 }
 
 const DEFAULT_DATA: LootDataStoreData = {
@@ -27,22 +29,34 @@ const DEFAULT_DATA: LootDataStoreData = {
   previousOptions: {},
   isParsingLootData: false,
   ongoingParsingCalls: 0,
+  lastReadSize: 0,
+  updatePromise: Promise.resolve(),
 }
 
 export const useLootDataStore = defineStore('lootData', {
   state: () => ({ ...DEFAULT_DATA }),
   actions: {
-    init() {
-      electron.onLootDataInitial(async (_: any, initialData: string) => {
-        this.lootData = initialData
-        await this.parse()
-      })
+    async init() {
+      this.lootData = ''
+      this.lastReadSize = 0
+      await this.parse()
 
-      electron.onLootDataUpdated(async (_: any, newData: string) => {
-        this.lootData += newData
+      electron.onLootDataUpdated(
+        async (_: any, newData: string, lastReadSize: number) => {
+          this.updatePromise = this.updatePromise.then(async () => {
+            // Only accept new data
+            if (lastReadSize > this.lastReadSize) {
+              this.lastReadSize = lastReadSize
+              this.lootData += newData
 
-        await this.parse()
-      })
+              await this.parse()
+            }
+          })
+        },
+      )
+
+      electron.watchLootFile()
+      electron.readEntireLootFile()
     },
     async updateOptions(options: LootParserOptions) {
       const hasOptionsChanged = !_.isEqual(options, this.previousOptions)

@@ -2,6 +2,7 @@ import { app, BrowserWindow, BrowserWindowConstructorOptions, ipcMain, screen, d
 import path from "path";
 import { isDev } from "./env";
 import { appConfig } from "./electronStore/configuration";
+import { readEntireLootFile, watchLootFile } from './utils/lootData';
 
 async function createWindow() {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -62,14 +63,20 @@ async function createWindow() {
         return result.filePaths[0]; // Return the selected file path
     });
 
+    ipcMain.handle('watch-loot-file', async () => {
+      await watchLootFile()
+    })
+
+    ipcMain.handle('read-entire-loot-file', async () => {
+      readEntireLootFile()
+    })
+
     return mainWindow
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-import { getInitialLootData, watchLootFile } from "./utils/lootData";
-
 app.whenReady().then(async () => {
     // if dev
     if (isDev) {
@@ -81,11 +88,8 @@ app.whenReady().then(async () => {
         }
     }
 
-    const mainWindow = await createWindow();
-    const initialLootData = getInitialLootData();
-    mainWindow.webContents.send('loot-data-initial', initialLootData);
+    await createWindow();
 
-    watchLootFile();
     app.on("activate", function () {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
