@@ -37,6 +37,7 @@ export const useLootDataStore = defineStore('lootData', {
   state: () => ({ ...DEFAULT_DATA }),
   actions: {
     async init() {
+      this.lootData = ''
       this.lastReadSize = 0
       await this.parse()
 
