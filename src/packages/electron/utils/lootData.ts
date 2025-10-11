@@ -6,6 +6,17 @@ import { BrowserWindow } from 'electron';
 
 export const DEFAULT_LOOT_FILE_PATH = path.join(os.homedir(), 'medivia', 'Loot.txt');
 
+export function getInitialLootData() {
+  const filePath = (configStore.get('config') as any).lootFilePath || DEFAULT_LOOT_FILE_PATH;
+  try {
+    const data = fs.readFileSync(filePath).toString();
+    lastReadSize = Buffer.byteLength(data, 'utf8');
+    return data;
+  } catch (error) {
+    return '';
+  }
+}
+
 let lastReadSize = 0;
 
 function readNewLines(filePath: string) {
@@ -45,7 +56,6 @@ export function watchLootFile() {
 
   fs.watch(filePath, (eventType: string) => {
     if (eventType === 'change' || eventType === 'rename') {
-      console.log('doing read new lines');
       readNewLines(filePath);
     }
   });

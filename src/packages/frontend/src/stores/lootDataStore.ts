@@ -33,6 +33,11 @@ export const useLootDataStore = defineStore('lootData', {
   state: () => ({ ...DEFAULT_DATA }),
   actions: {
     init() {
+      electron.onLootDataInitial(async (_: any, initialData: string) => {
+        this.lootData = initialData
+        await this.parse()
+      })
+
       electron.onLootDataUpdated(async (_: any, newData: string) => {
         this.lootData += newData
 
