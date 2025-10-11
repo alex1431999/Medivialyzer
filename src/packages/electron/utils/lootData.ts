@@ -23,6 +23,8 @@ function readNewLines(filePath: string) {
   const stats = fs.statSync(filePath);
   const newSize = stats.size;
 
+  console.log(lastReadSize, newSize);
+
   if (newSize < lastReadSize) {
     lastReadSize = 0;
   }
@@ -54,8 +56,14 @@ function readNewLines(filePath: string) {
 export function watchLootFile() {
   const filePath = (configStore.get('config') as any).lootFilePath || DEFAULT_LOOT_FILE_PATH;
 
-  fs.watch(filePath, (eventType: string) => {
-    if (eventType === 'change' || eventType === 'rename') {
+  const dir = path.dirname(filePath);
+  const base = path.basename(filePath);
+
+  // We have to watch the dir here instead of the file name because on mac
+  // for example, the file gets removed and replaced when edited via a file
+  // editor for example. The dir remains stable
+  fs.watch(dir, (eventType, filename) => {
+    if (filename === base) {
       readNewLines(filePath);
     }
   });
