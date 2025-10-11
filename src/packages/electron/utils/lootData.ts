@@ -1,17 +1,52 @@
-import fs from "node:fs";
-import path from "path";
-import * as os from "node:os";
+import fs from 'node:fs';
+import path from 'path';
+import * as os from 'node:os';
 import { configStore } from '../stores/configStore';
+import { BrowserWindow } from 'electron';
 
 export const DEFAULT_LOOT_FILE_PATH = path.join(os.homedir(), 'medivia', 'Loot.txt');
 
-export function getLootData() {
-    const filePath = (configStore.get('config') as any).lootFilePath || DEFAULT_LOOT_FILE_PATH
+let lastReadSize = 0;
 
-    try {
-        return fs.readFileSync(filePath).toString()
+function readNewLines(filePath: string) {
+  const stats = fs.statSync(filePath);
+  const newSize = stats.size;
+
+  if (newSize < lastReadSize) {
+    lastReadSize = 0;
+  }
+
+  if (newSize === lastReadSize) {
+    return null;
+  }
+
+  const stream = fs.createReadStream(filePath, {
+    start: lastReadSize,
+    end: newSize,
+    encoding: 'utf-8',
+  });
+
+  let newData = '';
+  stream.on('data', (chunk) => {
+    newData += chunk;
+  });
+
+  stream.on('end', () => {
+    lastReadSize = newSize;
+    const mainWindow = BrowserWindow.getAllWindows()[0];
+    if (mainWindow) {
+      mainWindow.webContents.send('loot-data-updated', newData);
     }
-    catch (error) {
-        return ''
+  });
+}
+
+export function watchLootFile() {
+  const filePath = (configStore.get('config') as any).lootFilePath || DEFAULT_LOOT_FILE_PATH;
+
+  fs.watch(filePath, (eventType: string) => {
+    if (eventType === 'change' || eventType === 'rename') {
+      console.log('doing read new lines');
+      readNewLines(filePath);
     }
+  });
 }

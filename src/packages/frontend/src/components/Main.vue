@@ -7,7 +7,6 @@ import { useTeamStore } from '../stores/teamStore.ts'
 import { baserowPing } from '../utils/baserow/baserow.requests.ts'
 import { getAllItems } from '../utils/item/item.helpers.ts'
 import { watch } from 'vue'
-import { FIVE_SECONDS } from '../constants/time.ts'
 const lootDataStore = useLootDataStore()
 const configStore = useConfigStore()
 const clientStore = useClientStore()
@@ -19,14 +18,7 @@ baserowPing(configStore.config.clientId)
 configStore.onBoot()
 clientStore.onBoot()
 
-lootDataStore.update({ since: configStore.config.since, items: getAllItems() })
-
-setInterval(() => {
-  lootDataStore.update({
-    since: configStore.config.since,
-    items: getAllItems(),
-  })
-}, FIVE_SECONDS)
+lootDataStore.init()
 
 // Only try to load the teamStore once client has been initialised
 watch(
@@ -40,7 +32,7 @@ watch(
 watch(
   () => configStore.config.lootFilePath,
   () => {
-    lootDataStore.update({
+    lootDataStore.updateOptions({
       since: configStore.config.since,
       items: getAllItems(),
     })
@@ -51,7 +43,7 @@ watch(
 watch(
   () => configStore.config.since,
   () => {
-    lootDataStore.update({
+    lootDataStore.updateOptions({
       since: configStore.config.since,
       items: getAllItems(),
     })
@@ -62,7 +54,7 @@ watch(
 watch(
   () => configStore.config.customItems,
   () => {
-    lootDataStore.update({
+    lootDataStore.updateOptions({
       since: configStore.config.since,
       items: getAllItems(),
     })
