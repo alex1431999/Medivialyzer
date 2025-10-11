@@ -23,10 +23,8 @@ function readNewLines(filePath: string) {
   const stats = fs.statSync(filePath);
   const newSize = stats.size;
 
-  console.log(lastReadSize, newSize);
-
   if (newSize < lastReadSize) {
-    lastReadSize = 0;
+    lastReadSize = newSize;
   }
 
   if (newSize === lastReadSize) {
