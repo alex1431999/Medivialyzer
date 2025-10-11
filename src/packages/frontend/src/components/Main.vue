@@ -31,12 +31,7 @@ watch(
 // Update when the loot path changes
 watch(
   () => configStore.config.lootFilePath,
-  () => {
-    lootDataStore.updateOptions({
-      since: configStore.config.since,
-      items: getAllItems(),
-    })
-  },
+  () => lootDataStore.init(),
 )
 
 // Update when since changes
