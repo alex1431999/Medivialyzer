@@ -109,9 +109,10 @@ function onFavoriteClick(item: SuppliesTableItem, value: boolean) {
       <v-text-field
         v-model="suppliesStore.supplies[item.name].before"
         type="number"
-        variant="plain"
+        variant="outlined"
         density="compact"
         hide-details
+        class="pa-2"
       />
     </template>
 
@@ -119,7 +120,7 @@ function onFavoriteClick(item: SuppliesTableItem, value: boolean) {
       <v-text-field
         v-model="suppliesStore.supplies[item.name].after"
         type="number"
-        variant="plain"
+        variant="outlined"
         density="compact"
         hide-details
       />
@@ -129,7 +130,7 @@ function onFavoriteClick(item: SuppliesTableItem, value: boolean) {
       <v-text-field
         v-model="suppliesStore.supplies[item.name].cost"
         type="number"
-        variant="plain"
+        variant="outlined"
         density="compact"
         hide-details
       />
