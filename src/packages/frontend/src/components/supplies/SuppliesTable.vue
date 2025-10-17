@@ -40,6 +40,19 @@ const headers = [
 function onFavoriteClick(item: SuppliesTableItem, value: boolean) {
   emit('update:favorite', { item, value })
 }
+
+function itemHasBeforeValue(item: SuppliesTableItem) {
+  const before = suppliesStore.supplies[item.name].before
+  return before !== undefined && before !== null && before !== ''
+}
+
+function getBeforeColor(item: SuppliesTableItem): string | undefined {
+  return itemHasBeforeValue(item) ? 'success' : undefined
+}
+
+function getAfterColor(item: SuppliesTableItem): string | undefined {
+  return itemHasBeforeValue(item) ? 'warning' : undefined
+}
 </script>
 
 <template>
@@ -113,6 +126,8 @@ function onFavoriteClick(item: SuppliesTableItem, value: boolean) {
         density="compact"
         hide-details
         class="pa-2"
+        :color="getBeforeColor(item)"
+        :base-color="getBeforeColor(item)"
       />
     </template>
 
@@ -123,6 +138,8 @@ function onFavoriteClick(item: SuppliesTableItem, value: boolean) {
         variant="outlined"
         density="compact"
         hide-details
+        :color="getAfterColor(item)"
+        :base-color="getAfterColor(item)"
       />
     </template>
 
