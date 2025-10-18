@@ -202,7 +202,7 @@ describe('lootParser', () => {
     })
   })
 
-  describe('creatures with average loot', () => {
+  describe('creatures with loot', () => {
     test('no creatures', () => {
       const lootData = ``
       const lootParser = new LootParser(lootData)
