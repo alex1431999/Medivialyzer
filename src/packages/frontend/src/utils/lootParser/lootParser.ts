@@ -175,8 +175,7 @@ export class LootParser {
       )
       const averageLootValue = totalLootValue / entry.count
 
-      // TODO calculate confidence
-      return { averageLootValue, creature: entry.creature, confidence: 1 }
+      return { averageLootValue, creature: entry.creature }
     })
   }
 

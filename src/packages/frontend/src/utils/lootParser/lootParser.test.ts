@@ -222,7 +222,6 @@ describe('lootParser', () => {
       expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
         {
           averageLootValue: 9,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
@@ -241,7 +240,6 @@ describe('lootParser', () => {
       expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
         {
           averageLootValue: 5,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
@@ -260,14 +258,12 @@ describe('lootParser', () => {
       expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
         {
           averageLootValue: 7,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
         },
         {
           averageLootValue: 3,
-          confidence: expect.any(Number),
           creature: {
             name: 'bat',
           },
@@ -286,7 +282,6 @@ describe('lootParser', () => {
       expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
         {
           averageLootValue: 19,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
@@ -308,7 +303,6 @@ describe('lootParser', () => {
       expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
         {
           averageLootValue: 7.5,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
@@ -322,7 +316,6 @@ describe('lootParser', () => {
       ).toEqual([
         {
           averageLootValue: 5,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
