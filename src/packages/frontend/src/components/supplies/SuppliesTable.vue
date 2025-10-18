@@ -46,12 +46,21 @@ function itemHasBeforeValue(item: SuppliesTableItem) {
   return before !== undefined && before !== null && before !== ''
 }
 
+function itemHasAfterValue(item: SuppliesTableItem) {
+  const before = suppliesStore.supplies[item.name].after
+  return before !== undefined && before !== null && before !== ''
+}
+
 function getBeforeColor(item: SuppliesTableItem): string | undefined {
   return itemHasBeforeValue(item) ? 'success' : undefined
 }
 
 function getAfterColor(item: SuppliesTableItem): string | undefined {
-  return itemHasBeforeValue(item) ? 'warning' : undefined
+  if (itemHasBeforeValue(item)) {
+    return itemHasAfterValue(item) ? 'success' : 'warning'
+  }
+
+  return undefined
 }
 </script>
 
