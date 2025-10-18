@@ -6,6 +6,7 @@ import {
   Creature,
   CreatureEntry,
   CreatureWithLoot,
+  LootTable,
 } from '../creature/creature.types.ts'
 import { lootDataTypeCreature } from './lootDataType/lootDataTypes/lootdataType.creature.ts'
 import _ from 'lodash'
@@ -24,10 +25,13 @@ export type LootParserOptions = {
   items?: Item[]
 }
 
-type CreaturesToLootMap = Record<
-  string,
-  { creature: Creature; items: ItemLooted[]; count: number }
->
+type CreaturesToLootMapEntry = {
+  creature: Creature
+  items: ItemLooted[]
+  count: number
+}
+
+type CreaturesToLootMap = Record<string, CreaturesToLootMapEntry>
 
 export class LootParser {
   private readonly lootData: string
@@ -174,10 +178,50 @@ export class LootParser {
         _.map(entry.items, (item) => (item.value || 0) * item.amount),
       )
       const averageLootValue = totalLootValue / entry.count
+      const lootTable = this.calculateLootTable(entry)
 
-      // TODO define lootTable
-      return { averageLootValue, creature: entry.creature, lootTable: [] }
+      return { averageLootValue, creature: entry.creature, lootTable }
     })
+  }
+
+  private calculateLootTable(
+    creatureToLootMapEntry: CreaturesToLootMapEntry,
+  ): LootTable {
+    const uniqueItems = _.uniqWith(
+      creatureToLootMapEntry.items,
+      (a, b) => a.name === b.name,
+    )
+
+    return uniqueItems.map((item) => {
+      const dropChance = this.calculateDropChance(
+        creatureToLootMapEntry,
+        item.name,
+      )
+
+      return { item, dropChance }
+    })
+  }
+
+  private calculateDropChance(
+    creatureToLootMapEntry: CreaturesToLootMapEntry,
+    itemName: Item['name'],
+  ) {
+    const totalKills = creatureToLootMapEntry.count || 0
+    const timesItemHasDropped =
+      creatureToLootMapEntry.items.filter((item) => item.name === itemName)
+        .length || 0
+
+    const dropChance = timesItemHasDropped / totalKills
+
+    // Sometimes the drop chance can be higher than 100%. For example, if a monster
+    // drops gold, and then drops gold in a bag. They have technically dropped the same
+    // item twice, and if they would do that every time the drop chance would be 200%.
+    // But we don't really want to look at it that way so we normalize it to 100%.
+    if (dropChance > 1) {
+      return 1
+    }
+
+    return dropChance
   }
 
   private forEachLine(callback: (line: string) => void) {

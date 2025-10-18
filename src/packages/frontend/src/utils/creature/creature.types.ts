@@ -9,6 +9,8 @@ export type LootTableItem = {
   dropChance: number
 }
 
+export type LootTable = LootTableItem[]
+
 export type CreatureEntry = {
   timestamp: number
 } & Creature
@@ -20,5 +22,5 @@ export type CreatureGrouped = {
 export type CreatureWithLoot = {
   creature: Creature
   averageLootValue: number
-  lootTable: LootTableItem[]
+  lootTable: LootTable
 }

@@ -223,6 +223,12 @@ describe('lootParser', () => {
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
     })
@@ -241,6 +247,12 @@ describe('lootParser', () => {
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
     })
@@ -259,12 +271,24 @@ describe('lootParser', () => {
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
         {
           averageLootValue: 3,
           creature: {
             name: 'bat',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
     })
@@ -283,6 +307,12 @@ describe('lootParser', () => {
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
     })
@@ -304,6 +334,12 @@ describe('lootParser', () => {
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
 
@@ -317,6 +353,12 @@ describe('lootParser', () => {
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
     })
