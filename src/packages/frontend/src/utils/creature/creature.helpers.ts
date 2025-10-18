@@ -2,7 +2,7 @@ import {
   Creature,
   CreatureEntry,
   CreatureGrouped,
-  CreatureWithAverageLoot,
+  CreatureWithLoot,
 } from './creature.types.ts'
 import _ from 'lodash'
 
@@ -20,21 +20,20 @@ export function groupCreatures(creatures: Creature[]): CreatureGrouped[] {
   return Object.values(creaturesMap)
 }
 
-export function getCreatureWithAverageLoot(
-  creaturesWithAverageLoot: CreatureWithAverageLoot[],
+export function getCreatureWithLoot(
+  creaturesWithLoot: CreatureWithLoot[],
   creature: CreatureGrouped,
-): CreatureWithAverageLoot {
-  const creatureWithAverageLoot = creaturesWithAverageLoot.find(
-    (creaturesWithAverageLoot) =>
-      creaturesWithAverageLoot.creature.name === creature.name,
+): CreatureWithLoot {
+  const creatureWithLoot = creaturesWithLoot.find(
+    (creaturesWithLoot) => creaturesWithLoot.creature.name === creature.name,
   )
 
-  if (!creatureWithAverageLoot)
+  if (!creatureWithLoot)
     throw new Error(
       `No creature with average loot found for creature ${creature.toString()}`,
     )
 
-  return creatureWithAverageLoot
+  return creatureWithLoot
 }
 
 export function getCreatureKillsPerHour(

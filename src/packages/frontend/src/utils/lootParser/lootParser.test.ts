@@ -202,14 +202,12 @@ describe('lootParser', () => {
     })
   })
 
-  describe('creatures with average loot', () => {
+  describe('creatures with loot', () => {
     test('no creatures', () => {
       const lootData = ``
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual(
-        [],
-      )
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([])
     })
 
     test('one creatures', () => {
@@ -219,13 +217,18 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
         {
           averageLootValue: 9,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
     })
@@ -238,13 +241,18 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
         {
           averageLootValue: 5,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
     })
@@ -257,20 +265,30 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
         {
           averageLootValue: 7,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
         {
           averageLootValue: 3,
-          confidence: expect.any(Number),
           creature: {
             name: 'bat',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
     })
@@ -283,13 +301,18 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
         {
           averageLootValue: 19,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
     })
@@ -305,27 +328,107 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
         {
           averageLootValue: 7.5,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
         },
       ])
 
       expect(
         lootParser.parse({
           since: new Date('Wed Dec 04 02:00:00 2024').getTime(),
-        }).creaturesWithAverageLootCurrentHunt,
+        }).creaturesWithLootCurrentHunt,
       ).toEqual([
         {
           averageLootValue: 5,
-          confidence: expect.any(Number),
           creature: {
             name: 'giant cobra',
           },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 1,
+            },
+          ],
+        },
+      ])
+    })
+
+    test('drop chance (50%)', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        19:19 Loot of giant cobra: 9 gold coins.
+        19:19 Loot of giant cobra: a Hammer.
+        `
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
+        {
+          averageLootValue: 4.5,
+          creature: {
+            name: 'giant cobra',
+          },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 0.5,
+            },
+            {
+              item: {
+                name: 'hammer',
+                amount: expect.any(Number),
+              },
+              dropChance: 0.5,
+            },
+          ],
+        },
+      ])
+    })
+
+    test('drop chance (33%)', () => {
+      const lootData = `
+        Channel saved at Wed Dec 04 19:29:20 2024
+        19:19 Loot of giant cobra: 9 gold coins.
+        19:19 Loot of giant cobra: a Hammer.
+        19:19 Loot of giant cobra: a Club.
+        `
+      const lootParser = new LootParser(lootData)
+
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
+        {
+          averageLootValue: 3,
+          creature: {
+            name: 'giant cobra',
+          },
+          lootTable: [
+            {
+              item: { name: 'Gold Coin', value: 1, amount: expect.any(Number) },
+              dropChance: 0.3333333333333333,
+            },
+            {
+              item: {
+                name: 'hammer',
+                amount: expect.any(Number),
+              },
+              dropChance: 0.3333333333333333,
+            },
+            {
+              item: {
+                name: 'club',
+                amount: expect.any(Number),
+              },
+              dropChance: 0.3333333333333333,
+            },
+          ],
         },
       ])
     })

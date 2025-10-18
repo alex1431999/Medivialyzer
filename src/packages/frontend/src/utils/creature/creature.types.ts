@@ -1,7 +1,15 @@
+import { Item } from '../item/item.types.ts'
+
 export type Creature = {
   name: string
-  exp?: number
 }
+
+export type LootTableItem = {
+  item: Item
+  dropChance: number
+}
+
+export type LootTable = LootTableItem[]
 
 export type CreatureEntry = {
   timestamp: number
@@ -11,8 +19,8 @@ export type CreatureGrouped = {
   amount: number
 } & Creature
 
-export type CreatureWithAverageLoot = {
+export type CreatureWithLoot = {
   creature: Creature
   averageLootValue: number
-  confidence: number // a number between 0 and 1 where 1 is very confident
+  lootTable: LootTable
 }

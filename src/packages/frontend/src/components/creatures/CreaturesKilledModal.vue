@@ -16,7 +16,7 @@ import { useLootDataStore } from '../../stores/lootDataStore.ts'
 import { computed, ref } from 'vue'
 import {
   getCreatureKillsPerHour,
-  getCreatureWithAverageLoot,
+  getCreatureWithLoot,
   groupCreatures,
 } from '../../utils/creature/creature.helpers.ts'
 import _ from 'lodash'
@@ -53,8 +53,8 @@ const tableItemsCurrent = computed<CreaturesKilledTableItem[]>(() => {
       creature,
       lootDataStore.lootDataParsed.creaturesCurrentHunt,
     ),
-    avgLoot: getCreatureWithAverageLoot(
-      lootDataStore.lootDataParsed.creaturesWithAverageLootCurrentHunt,
+    avgLoot: getCreatureWithLoot(
+      lootDataStore.lootDataParsed.creaturesWithLootCurrentHunt,
       creature,
     ).averageLootValue,
   }))
@@ -64,8 +64,8 @@ const tableItemsGeneral = computed<CreaturesKilledTableItem[]>(() => {
   return creaturesGeneral.value.map((creature) => ({
     name: creature.name,
     amount: creature.amount,
-    avgLoot: getCreatureWithAverageLoot(
-      lootDataStore.lootDataParsed.creaturesWithAverageLoot,
+    avgLoot: getCreatureWithLoot(
+      lootDataStore.lootDataParsed.creaturesWithLoot,
       creature,
     ).averageLootValue,
   }))
