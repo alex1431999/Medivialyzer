@@ -175,7 +175,8 @@ export class LootParser {
       )
       const averageLootValue = totalLootValue / entry.count
 
-      return { averageLootValue, creature: entry.creature }
+      // TODO define lootTable
+      return { averageLootValue, creature: entry.creature, lootTable: [] }
     })
   }
 
