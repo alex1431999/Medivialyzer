@@ -31,7 +31,7 @@ const creatures = computed(
   () => lootDataStore.lootDataParsed.creaturesCurrentHunt,
 )
 const creaturesAverageLoot = computed(
-  () => lootDataStore.lootDataParsed.creaturesWithAverageLoot,
+  () => lootDataStore.lootDataParsed.creaturesWithLoot,
 )
 
 const lootSorted = computed(() =>

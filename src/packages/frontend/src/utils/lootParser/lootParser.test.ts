@@ -207,9 +207,7 @@ describe('lootParser', () => {
       const lootData = ``
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual(
-        [],
-      )
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([])
     })
 
     test('one creatures', () => {
@@ -219,7 +217,7 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
         {
           averageLootValue: 9,
           creature: {
@@ -237,7 +235,7 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
         {
           averageLootValue: 5,
           creature: {
@@ -255,7 +253,7 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
         {
           averageLootValue: 7,
           creature: {
@@ -279,7 +277,7 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
         {
           averageLootValue: 19,
           creature: {
@@ -300,7 +298,7 @@ describe('lootParser', () => {
         `
       const lootParser = new LootParser(lootData)
 
-      expect(lootParser.parse({ since: 0 }).creaturesWithAverageLoot).toEqual([
+      expect(lootParser.parse({ since: 0 }).creaturesWithLoot).toEqual([
         {
           averageLootValue: 7.5,
           creature: {
@@ -312,7 +310,7 @@ describe('lootParser', () => {
       expect(
         lootParser.parse({
           since: new Date('Wed Dec 04 02:00:00 2024').getTime(),
-        }).creaturesWithAverageLootCurrentHunt,
+        }).creaturesWithLootCurrentHunt,
       ).toEqual([
         {
           averageLootValue: 5,

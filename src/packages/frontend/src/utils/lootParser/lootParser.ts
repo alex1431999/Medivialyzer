@@ -5,7 +5,7 @@ import { LootEntry } from '../loot/loot.types.ts'
 import {
   Creature,
   CreatureEntry,
-  CreatureWithAverageLoot,
+  CreatureWithLoot,
 } from '../creature/creature.types.ts'
 import { lootDataTypeCreature } from './lootDataType/lootDataTypes/lootdataType.creature.ts'
 import _ from 'lodash'
@@ -15,8 +15,8 @@ export type LootDataParsed = {
   loot: LootEntry[]
   creatures: CreatureEntry[]
   creaturesCurrentHunt: CreatureEntry[]
-  creaturesWithAverageLoot: CreatureWithAverageLoot[]
-  creaturesWithAverageLootCurrentHunt: CreatureWithAverageLoot[]
+  creaturesWithLoot: CreatureWithLoot[]
+  creaturesWithLootCurrentHunt: CreatureWithLoot[]
 }
 
 export type LootParserOptions = {
@@ -43,8 +43,8 @@ export class LootParser {
       loot: [],
       creatures: [],
       creaturesCurrentHunt: [],
-      creaturesWithAverageLoot: [],
-      creaturesWithAverageLootCurrentHunt: [],
+      creaturesWithLoot: [],
+      creaturesWithLootCurrentHunt: [],
     }
 
     let creaturesToLootMap: CreaturesToLootMap = {}
@@ -95,11 +95,11 @@ export class LootParser {
       }
     })
 
-    lootDataParsed.creaturesWithAverageLoot =
-      this.calculateCreaturesWithAverageLoot(creaturesToLootMap)
+    lootDataParsed.creaturesWithLoot =
+      this.calculateCreaturesWithLoot(creaturesToLootMap)
 
-    lootDataParsed.creaturesWithAverageLootCurrentHunt =
-      this.calculateCreaturesWithAverageLoot(creaturesCurrentHuntToLootMap)
+    lootDataParsed.creaturesWithLootCurrentHunt =
+      this.calculateCreaturesWithLoot(creaturesCurrentHuntToLootMap)
 
     return lootDataParsed
   }
@@ -166,9 +166,9 @@ export class LootParser {
     return creaturesToLootMap
   }
 
-  private calculateCreaturesWithAverageLoot(
+  private calculateCreaturesWithLoot(
     creaturesToLootMap: CreaturesToLootMap,
-  ): CreatureWithAverageLoot[] {
+  ): CreatureWithLoot[] {
     return Object.values(creaturesToLootMap).map((entry) => {
       const totalLootValue = _.sum(
         _.map(entry.items, (item) => (item.value || 0) * item.amount),

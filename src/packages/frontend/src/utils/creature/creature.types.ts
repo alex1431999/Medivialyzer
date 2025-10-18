@@ -17,7 +17,7 @@ export type CreatureGrouped = {
   amount: number
 } & Creature
 
-export type CreatureWithAverageLoot = {
+export type CreatureWithLoot = {
   creature: Creature
   averageLootValue: number
   lootTable: LootTableItem[]
