@@ -62,6 +62,29 @@ function getAfterColor(item: SuppliesTableItem): string | undefined {
 
   return undefined
 }
+
+function handleEnterKey(event: KeyboardEvent) {
+  const currentInput = event.target as HTMLInputElement
+  const currentTd = currentInput.closest('td')
+  const currentRow = currentInput.closest('tr')
+
+  if (!currentTd || !currentRow) return
+
+  const currentCellIndex = Array.from(currentRow.children).indexOf(currentTd)
+  const nextRow = currentRow.nextElementSibling
+
+  if (nextRow) {
+    const nextRowCells = Array.from(nextRow.children)
+    const targetCell = nextRowCells[currentCellIndex]
+
+    if (targetCell) {
+      const nextInput = targetCell.querySelector('input')
+      if (nextInput) {
+        nextInput.focus()
+      }
+    }
+  }
+}
 </script>
 
 <template>
@@ -137,6 +160,7 @@ function getAfterColor(item: SuppliesTableItem): string | undefined {
         class="pa-2"
         :color="getBeforeColor(item)"
         :base-color="getBeforeColor(item)"
+        @keydown.enter.prevent="handleEnterKey($event)"
       />
     </template>
 
@@ -149,6 +173,7 @@ function getAfterColor(item: SuppliesTableItem): string | undefined {
         hide-details
         :color="getAfterColor(item)"
         :base-color="getAfterColor(item)"
+        @keydown.enter.prevent="handleEnterKey($event)"
       />
     </template>
 
@@ -159,6 +184,7 @@ function getAfterColor(item: SuppliesTableItem): string | undefined {
         variant="outlined"
         density="compact"
         hide-details
+        @keydown.enter.prevent="handleEnterKey($event)"
       />
     </template>
   </v-data-table>
