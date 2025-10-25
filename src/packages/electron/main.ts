@@ -27,6 +27,33 @@ async function createWindow() {
     const mainWindow = new BrowserWindow(BrowserWindowOptions);
     mainWindow.setMenu(null);
 
+    ipcMain.handle('versions', () => {
+      return {
+        node: process.versions.chrome,
+        chrome: process.versions.chrome,
+        electron: process.versions.electron,
+        version: app.getVersion(),
+        name: app.getName(),
+      };
+    });
+
+    // Handle the file dialog request
+    ipcMain.handle('open-file-dialog', async () => {
+      const result = await dialog.showOpenDialog(mainWindow, {
+        properties: ['openFile'],
+        filters: [{ name: '', extensions: ['txt'] }]
+      });
+      return result.filePaths[0]; // Return the selected file path
+    });
+
+    ipcMain.handle('watch-loot-file', async () => {
+      await watchLootFile()
+    })
+
+    ipcMain.handle('read-entire-loot-file', async () => {
+      readEntireLootFile()
+    })
+
     // and load the index.html of the app.
     // win.loadFile("index.html");
     await mainWindow.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "./index.html")}`);
@@ -43,33 +70,6 @@ async function createWindow() {
     if (isDev) {
         mainWindow.webContents.openDevTools();
     }
-
-    ipcMain.handle('versions', () => {
-        return {
-            node: process.versions.chrome,
-            chrome: process.versions.chrome,
-            electron: process.versions.electron,
-            version: app.getVersion(),
-            name: app.getName(),
-        };
-    });
-
-    // Handle the file dialog request
-    ipcMain.handle('open-file-dialog', async () => {
-        const result = await dialog.showOpenDialog(mainWindow, {
-            properties: ['openFile'],
-            filters: [{ name: '', extensions: ['txt'] }]
-        });
-        return result.filePaths[0]; // Return the selected file path
-    });
-
-    ipcMain.handle('watch-loot-file', async () => {
-      await watchLootFile()
-    })
-
-    ipcMain.handle('read-entire-loot-file', async () => {
-      readEntireLootFile()
-    })
 
     return mainWindow
 }
