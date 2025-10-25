@@ -18,18 +18,6 @@ export type SuppliesStoreData = {
   supplies: SuppliesData
 }
 
-const DEFAULT_SUPPLIES_DATA: SuppliesData = SUPPLIES.reduce(
-  (data, supply) => ({
-    ...data,
-    [supply.name]: {
-      before: null,
-      after: null,
-      cost: supply.cost,
-    },
-  }),
-  {},
-)
-
 /**
  * This function makes sure you always have all supplies in your supply data list.
  */
@@ -101,7 +89,10 @@ export const useSuppliesStore = defineStore('supplies', {
   },
   actions: {
     reset() {
-      this.supplies = _.cloneDeep(DEFAULT_SUPPLIES_DATA)
+      Object.values(this.supplies).forEach((supply) => {
+        supply.before = ''
+        supply.after = ''
+      })
     },
   },
 })
