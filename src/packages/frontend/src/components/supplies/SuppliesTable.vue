@@ -94,7 +94,7 @@ function handleEnterKey(event: KeyboardEvent) {
     :sort-by="[]"
     density="compact"
     fixed-header
-    height="300px"
+    style="height: 90%"
     hide-default-footer
     class="data-table"
   >

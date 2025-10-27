@@ -105,7 +105,7 @@ function onUpdateFavorite(payload: {
 </script>
 
 <template>
-  <v-dialog max-width="1100">
+  <v-dialog max-width="1100" height="80%">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn
         size="small"
@@ -124,7 +124,7 @@ function onUpdateFavorite(payload: {
             <v-icon icon="mdi-gold" />
           </v-chip>
         </v-card-title>
-        <v-card-text>
+        <v-card-text style="height: 80%">
           <SuppliesVocationFilter
             class="mb-3 mt-3"
             :active-vocation-id="vocationSelected.id"
