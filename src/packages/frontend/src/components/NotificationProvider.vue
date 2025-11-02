@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VSnackbar } from 'vuetify/components'
+import { VSnackbar, VBtn } from 'vuetify/components'
 import { useNotifications } from '../composables/useNotifications.ts'
 
 const { show, message, color } = useNotifications()
@@ -14,5 +14,9 @@ const { show, message, color } = useNotifications()
     variant="elevated"
   >
     {{ message }}
+
+    <template v-slot:actions>
+      <v-btn variant="text" @click="show = false"> Close </v-btn>
+    </template>
   </v-snackbar>
 </template>
