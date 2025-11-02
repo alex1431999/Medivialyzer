@@ -1,8 +1,18 @@
 <script setup lang="ts">
 import { VChip, VIcon, VTooltip } from 'vuetify/components'
 import { formatNumber } from 'medivialyzer-frontend/src/utils/number.ts'
+import { useNotifications } from '../../../composables/useNotifications.ts'
+
+const { notify } = useNotifications()
 
 const { payout } = defineProps<{ payout?: number }>()
+
+function onClick() {
+  if (payout !== undefined) {
+    navigator.clipboard.writeText(payout.toString())
+    notify('Copied to clipboard')
+  }
+}
 </script>
 
 <template>
@@ -13,6 +23,7 @@ const { payout } = defineProps<{ payout?: number }>()
         v-bind="props"
         color="secondary"
         append-icon="mdi-gold"
+        @click="onClick"
       >
         {{ formatNumber(payout) }}
       </v-chip>
