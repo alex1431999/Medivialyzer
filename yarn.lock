@@ -6096,6 +6096,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"electron-window-state@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "electron-window-state@npm:5.0.3"
+  dependencies:
+    jsonfile: "npm:^4.0.0"
+    mkdirp: "npm:^0.5.1"
+  checksum: 10c0/10d01f3bcb1e4024a61f9b7116a251b6caf3e21f9d5e50f1b842758d93161b40b790be2efdbeb65dbbb611f4e58c4107aa785a2dbcfdefa8a6b80ad4a8d914e2
+  languageName: node
+  linkType: hard
+
 "electron@npm:^33.2.1":
   version: 33.4.11
   resolution: "electron@npm:33.4.11"
@@ -9386,6 +9396,7 @@ __metadata:
     electron-devtools-installer: "npm:^3.2.0"
     electron-log: "npm:^4.4.8"
     electron-store: "npm:^8.1.0"
+    electron-window-state: "npm:^5.0.3"
     json: "npm:^11.0.0"
     nodemon: "npm:^2.0.20"
     typescript: "npm:^4.9.4"
