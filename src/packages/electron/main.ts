@@ -3,15 +3,23 @@ import path from "path";
 import { isDev } from "./env";
 import { appConfig } from "./electronStore/configuration";
 import { readEntireLootFile, watchLootFile } from './utils/lootData';
+import windowStateKeeper from 'electron-window-state';
 
 async function createWindow() {
+    const mainWindowState = windowStateKeeper({
+      defaultWidth: 1200,
+      defaultHeight: 750,
+    })
+
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
     const appBounds: any = appConfig.get("setting.appBounds");
     const BrowserWindowOptions: BrowserWindowConstructorOptions = {
-        width: 1200,
         minWidth: 900,
-        height: 750,
         minHeight: 600,
+        x: mainWindowState.x,
+        y: mainWindowState.y,
+        width: mainWindowState.width,
+        height: mainWindowState.height,
         webPreferences: {
             preload: __dirname + "/preload.js",
             devTools: isDev,
@@ -24,8 +32,11 @@ async function createWindow() {
     };
 
     if (appBounds !== undefined && appBounds !== null) Object.assign(BrowserWindowOptions, appBounds);
+
     const mainWindow = new BrowserWindow(BrowserWindowOptions);
+
     mainWindow.setMenu(null);
+    mainWindowState.manage(mainWindow)
 
     ipcMain.handle('versions', () => {
       return {
