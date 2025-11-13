@@ -53,16 +53,44 @@ export class LootParserV2 {
       const { items, count } = creaturesToLootMap[creature.name]
 
       // If the loot came in a bag, then we don't count the extra kill
-      const countUpdate = isBagLoot ? count : count + 1
+      const countUpdated = isBagLoot ? count : count + 1
+      const itemsUpdated = this.upsertItems(items, itemsLooted)
 
       creaturesToLootMap[creature.name] = {
         creature,
-        items: [...items, ...itemsLooted],
-        count: countUpdate,
+        items: itemsUpdated,
+        count: countUpdated,
       }
     }
 
     return creaturesToLootMap
+  }
+
+  private upsertItems(
+    items: ItemLooted[],
+    itemsToAdd: ItemLooted[],
+  ): ItemLooted[] {
+    let itemsUpdated = [...items]
+
+    itemsToAdd.forEach((item) => {
+      itemsUpdated = this.upsertItem(itemsUpdated, item)
+    })
+
+    return itemsUpdated
+  }
+
+  private upsertItem(items: ItemLooted[], item: ItemLooted): ItemLooted[] {
+    const itemIndex = items.findIndex(
+      (itemCurrent) => itemCurrent.name === item.name,
+    )
+
+    if (itemIndex === -1) {
+      items.push(item)
+    } else {
+      items[itemIndex].amount += item.amount
+    }
+
+    return items
   }
 
   private forEachLine(lootData: string, callback: (line: string) => void) {

@@ -99,11 +99,7 @@ describe('lootParser', () => {
         ['giant cobra']: {
           items: [
             {
-              amount: 1,
-              name: 'gold coin',
-            },
-            {
-              amount: 12,
+              amount: 13,
               name: 'gold coin',
             },
           ],
