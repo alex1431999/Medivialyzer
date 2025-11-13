@@ -16,19 +16,21 @@ export class LootParserV2 {
     let creaturesToLootMap: CreaturesToLootMap = {}
 
     this.forEachLine(lootData, (line) => {
-      // Creatures with average loot
       if (
         lootDataTypeCreature.matches(line) ||
         lootDataTypeCreature.matchesBag(line)
       ) {
-        creaturesToLootMap = this.handleAverageLoot(line, creaturesToLootMap)
+        creaturesToLootMap = this.parseCreatureLootLine(
+          line,
+          creaturesToLootMap,
+        )
       }
     })
 
     return creaturesToLootMap
   }
 
-  private handleAverageLoot(
+  private parseCreatureLootLine(
     line: string,
     creaturesToLootMap: CreaturesToLootMap,
   ): CreaturesToLootMap {
