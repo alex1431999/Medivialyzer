@@ -3,6 +3,7 @@ import { ItemLooted } from '../item/item.types.ts'
 import { lootDataTypeItems } from './lootDataType/lootDataTypes/lootDataType.items.ts'
 import { lootDataTypeCreature } from './lootDataType/lootDataTypes/lootdataType.creature.ts'
 import { lootDataTypeTimestamp } from './lootDataType/lootDataTypes/lootDataType.timestamp.ts'
+import { mergeItemsLooted } from './lootParser.helpers.ts'
 
 type CreaturesToLootMapEntry = {
   creature: Creature
@@ -10,7 +11,7 @@ type CreaturesToLootMapEntry = {
   count: number
 }
 
-type CreaturesToLootMap = Record<string, CreaturesToLootMapEntry>
+export type CreaturesToLootMap = Record<string, CreaturesToLootMapEntry>
 
 export class LootParserV2 {
   public parse(lootData: string): CreaturesToLootMap {
@@ -78,7 +79,7 @@ export class LootParserV2 {
 
       // If the loot came in a bag, then we don't count the extra kill
       const countUpdated = isBagLoot ? count : count + 1
-      const itemsUpdated = this.upsertItems(items, itemsLooted)
+      const itemsUpdated = mergeItemsLooted(items, itemsLooted)
 
       creaturesToLootMap[creature.name] = {
         creature,
@@ -88,33 +89,6 @@ export class LootParserV2 {
     }
 
     return creaturesToLootMap
-  }
-
-  private upsertItems(
-    items: ItemLooted[],
-    itemsToAdd: ItemLooted[],
-  ): ItemLooted[] {
-    let itemsUpdated = [...items]
-
-    itemsToAdd.forEach((item) => {
-      itemsUpdated = this.upsertItem(itemsUpdated, item)
-    })
-
-    return itemsUpdated
-  }
-
-  private upsertItem(items: ItemLooted[], item: ItemLooted): ItemLooted[] {
-    const itemIndex = items.findIndex(
-      (itemCurrent) => itemCurrent.name === item.name,
-    )
-
-    if (itemIndex === -1) {
-      items.push(item)
-    } else {
-      items[itemIndex].amount += item.amount
-    }
-
-    return items
   }
 
   private forEachLine(lootData: string, callback: (line: string) => void) {

@@ -1,0 +1,30 @@
+import {
+  CreaturesToLootMap,
+  LootParserV2,
+} from '../lootParser/lootParser.v2.ts'
+import { mergeCreaturesToLootMap } from '../lootParser/lootParser.helpers.ts'
+import { Item, ItemLooted } from '../item/item.types.ts'
+import { getAllItems, getItem } from '../item/item.helpers.ts'
+
+export class LootManager {
+  private lootParser = new LootParserV2()
+
+  // TODO: we need to persist this data
+  private creaturesToLootMap: CreaturesToLootMap = {}
+
+  public addLootData(lootData: string) {
+    const creaturesToLooMapToAdd = this.lootParser.parse(lootData)
+    this.creaturesToLootMap = mergeCreaturesToLootMap(
+      this.creaturesToLootMap,
+      creaturesToLooMapToAdd,
+    )
+  }
+
+  public getItems(itemsConfiguration?: Item[]): ItemLooted[] {
+    const allItems = itemsConfiguration || getAllItems()
+
+    return Object.values(this.creaturesToLootMap).flatMap(({ items }) =>
+      items.map((item) => ({ ...item, ...getItem(item.name, allItems) })),
+    )
+  }
+}
