@@ -2,6 +2,7 @@ import { Creature } from '../creature/creature.types.ts'
 import { ItemLooted } from '../item/item.types.ts'
 import { lootDataTypeItems } from './lootDataType/lootDataTypes/lootDataType.items.ts'
 import { lootDataTypeCreature } from './lootDataType/lootDataTypes/lootdataType.creature.ts'
+import { lootDataTypeTimestamp } from './lootDataType/lootDataTypes/lootDataType.timestamp.ts'
 
 type CreaturesToLootMapEntry = {
   creature: Creature
@@ -28,6 +29,27 @@ export class LootParserV2 {
     })
 
     return creaturesToLootMap
+  }
+
+  // TODO this should be optimised using a binary search
+  public getLootDataSince(lootData: string, since: number): string {
+    const lines = this.lootDataToLines(lootData)
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i]
+
+      if (lootDataTypeTimestamp.matches(line)) {
+        const timestamp = lootDataTypeTimestamp.toValue(line)
+
+        if (timestamp >= since) {
+          const remainingLines = lines.slice(i)
+          return remainingLines.join('\n')
+        }
+      }
+    }
+
+    // If the timestamp is newer than the lootData, we return nothing
+    return ''
   }
 
   private parseCreatureLootLine(
@@ -96,6 +118,11 @@ export class LootParserV2 {
   }
 
   private forEachLine(lootData: string, callback: (line: string) => void) {
+    const lines = this.lootDataToLines(lootData)
+    lines.forEach(callback)
+  }
+
+  private lootDataToLines(lootData: string): string[] {
     const lines = lootData
       .split('\n') // Split by break lines
       .map((line) => line.trim()) // Remove any extra white space
@@ -118,7 +145,7 @@ export class LootParserV2 {
       }
     }
 
-    linesPiecedTogehter.forEach(callback)
+    return linesPiecedTogehter
   }
 
   private isValidStartOfLine(line: string) {
