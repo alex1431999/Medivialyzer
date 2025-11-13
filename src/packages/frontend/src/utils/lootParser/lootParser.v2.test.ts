@@ -1,10 +1,11 @@
 import { describe, expect, test } from 'vitest'
 import { LootParserV2 as LootParser } from './lootParser.v2.ts'
 
+const lootParser = new LootParser()
+
 describe('lootParser', () => {
   describe('loot', () => {
     test('no loot', () => {
-      const lootParser = new LootParser()
       expect(lootParser.parse('')).toEqual({})
     })
 
@@ -13,7 +14,7 @@ describe('lootParser', () => {
         Channel saved at Wed Dec 04 19:29:20 2024
         19:14 Loot of giant cobra: a gold coin.
         `
-      const lootParser = new LootParser()
+
       expect(lootParser.parse(lootData)).toEqual({
         ['giant cobra']: {
           items: [
@@ -36,7 +37,6 @@ describe('lootParser', () => {
         19:14 Loot of giant cobra: 66 gold coins.
         `
 
-      const lootParser = new LootParser()
       expect(lootParser.parse(lootData)).toEqual({
         ['giant cobra']: {
           items: [
@@ -65,7 +65,7 @@ describe('lootParser', () => {
         cobra: a gold 
         coin.
         `
-      const lootParser = new LootParser()
+
       expect(lootParser.parse(lootData)).toEqual({
         ['giant cobra']: {
           items: [
@@ -94,7 +94,7 @@ describe('lootParser', () => {
         19:12 Loot of giant 
         cobra: 12 gold coins.
         `
-      const lootParser = new LootParser()
+
       expect(lootParser.parse(lootData)).toEqual({
         ['giant cobra']: {
           items: [
@@ -117,7 +117,6 @@ describe('lootParser', () => {
       const lootData = `
         Channel saved at Wed Dec 04 19:29:20 2024
         `
-      const lootParser = new LootParser()
 
       expect(lootParser.parse(lootData)).toEqual({})
     })
@@ -127,7 +126,7 @@ describe('lootParser', () => {
         Channel saved at Wed Dec 04 19:29:20 2024
         19:19 Loot of giant cobra: 9 gold coins.
         `
-      const lootParser = new LootParser()
+
       expect(lootParser.parse(lootData)).toEqual({
         ['giant cobra']: {
           items: [
@@ -150,7 +149,7 @@ describe('lootParser', () => {
         19:19 Loot of giant cobra: 9 gold coins.
         19:19 Loot of winged vermin: 17 gold coins.
         `
-      const lootParser = new LootParser()
+
       expect(lootParser.parse(lootData)).toEqual({
         ['giant cobra']: {
           items: [
@@ -189,7 +188,6 @@ describe('lootParser', () => {
         20:40 Loot of winged vermin: 17 gold coins.
         `
 
-      const lootParser = new LootParser()
       const lootDataSince = lootParser.getLootDataSince(lootData, 0)
 
       expect(lootParser.parse(lootDataSince)).toEqual({
@@ -229,7 +227,6 @@ describe('lootParser', () => {
         `
 
       const since = new Date('Wed Dec 04 20:29:20 2024').getTime()
-      const lootParser = new LootParser()
       const lootDataSince = lootParser.getLootDataSince(lootData, since)
 
       expect(lootParser.parse(lootDataSince)).toEqual({
