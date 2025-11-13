@@ -2,7 +2,10 @@ import {
   CreaturesToLootMap,
   LootParserV2,
 } from '../lootParser/lootParser.v2.ts'
-import { mergeCreaturesToLootMap } from '../lootParser/lootParser.helpers.ts'
+import {
+  mergeCreaturesToLootMap,
+  mergeItemsLooted,
+} from '../lootParser/lootParser.helpers.ts'
 import { Item, ItemLooted } from '../item/item.types.ts'
 import { getAllItems, getItem } from '../item/item.helpers.ts'
 
@@ -25,9 +28,15 @@ export class LootManager {
   //  recompute if the underlying data changes or the itemsConfiguration changes
   public getItems(itemsConfiguration?: Item[]): ItemLooted[] {
     const allItems = itemsConfiguration || getAllItems()
+    let allItemsLooted: ItemLooted[] = []
 
-    return Object.values(this.creaturesToLootMap).flatMap(({ items }) =>
-      items.map((item) => ({ ...item, ...getItem(item.name, allItems) })),
-    )
+    Object.values(this.creaturesToLootMap).forEach(({ items }) => {
+      allItemsLooted = mergeItemsLooted(allItemsLooted, items)
+    })
+
+    return allItemsLooted.map((item) => ({
+      ...item,
+      ...getItem(item.name, allItems),
+    }))
   }
 }
