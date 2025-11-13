@@ -6,6 +6,7 @@ import { mergeCreaturesToLootMap } from '../lootParser/lootParser.helpers.ts'
 import { Item, ItemLooted } from '../item/item.types.ts'
 import { getAllItems, getItem } from '../item/item.helpers.ts'
 
+// TODO add all the other helper functions to get different information form the data
 export class LootManager {
   private lootParser = new LootParserV2()
 
@@ -20,6 +21,8 @@ export class LootManager {
     )
   }
 
+  // TODO we can probably only compute these values once and then cache them and only
+  //  recompute if the underlying data changes or the itemsConfiguration changes
   public getItems(itemsConfiguration?: Item[]): ItemLooted[] {
     const allItems = itemsConfiguration || getAllItems()
 
