@@ -1,13 +1,13 @@
 import { CreaturesToLootMap } from './lootParser.v2.ts'
 import { ItemLooted } from '../item/item.types.ts'
-
-// TODO test this file
+import _ from 'lodash'
 
 export function mergeCreaturesToLootMap(
   creaturesToLootMap: CreaturesToLootMap,
   creaturesToLootMapToAdd: CreaturesToLootMap,
 ) {
-  const creaturesToLootMapFinal: CreaturesToLootMap = {}
+  const creaturesToLootMapFinal: CreaturesToLootMap =
+    _.cloneDeep(creaturesToLootMap)
 
   Object.keys(creaturesToLootMapToAdd).forEach((creatureName) => {
     const entryInMap = creaturesToLootMap[creatureName]

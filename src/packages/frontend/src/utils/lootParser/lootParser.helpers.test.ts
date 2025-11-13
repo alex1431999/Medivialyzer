@@ -1,6 +1,11 @@
 import { describe, test, expect } from 'vitest'
 import { ItemLooted } from '../item/item.types.ts'
-import { mergeItemsLooted, upsertItemLooted } from './lootParser.helpers.ts'
+import {
+  mergeCreaturesToLootMap,
+  mergeItemsLooted,
+  upsertItemLooted,
+} from './lootParser.helpers.ts'
+import { CreaturesToLootMap } from './lootParser.v2.ts'
 
 describe('loot parser helpers', () => {
   describe('upsertItemLooted', () => {
@@ -42,6 +47,67 @@ describe('loot parser helpers', () => {
       expect(mergeItemsLooted(items, itemsToAdd)).toEqual([
         { name: 'gold coin', amount: 6 },
       ])
+    })
+  })
+
+  describe('mergeCreaturesToLootMap', () => {
+    test('creature does not exist in the list yet', () => {
+      const creaturesToLootMap: CreaturesToLootMap = {
+        cobra: {
+          creature: { name: 'cobra' },
+          count: 1,
+          items: [{ name: 'gold coin', amount: 1 }],
+        },
+      }
+      const creaturesToLootMapToAdd: CreaturesToLootMap = {
+        snake: {
+          creature: { name: 'snake' },
+          count: 1,
+          items: [{ name: 'gold coin', amount: 5 }],
+        },
+      }
+
+      expect(
+        mergeCreaturesToLootMap(creaturesToLootMap, creaturesToLootMapToAdd),
+      ).toEqual({
+        cobra: {
+          creature: { name: 'cobra' },
+          count: 1,
+          items: [{ name: 'gold coin', amount: 1 }],
+        },
+        snake: {
+          creature: { name: 'snake' },
+          count: 1,
+          items: [{ name: 'gold coin', amount: 5 }],
+        },
+      })
+    })
+
+    test('creature does exist in the list yet', () => {
+      const creaturesToLootMap: CreaturesToLootMap = {
+        cobra: {
+          creature: { name: 'cobra' },
+          count: 1,
+          items: [{ name: 'gold coin', amount: 1 }],
+        },
+      }
+      const creaturesToLootMapToAdd: CreaturesToLootMap = {
+        cobra: {
+          creature: { name: 'cobra' },
+          count: 1,
+          items: [{ name: 'gold coin', amount: 5 }],
+        },
+      }
+
+      expect(
+        mergeCreaturesToLootMap(creaturesToLootMap, creaturesToLootMapToAdd),
+      ).toEqual({
+        cobra: {
+          creature: { name: 'cobra' },
+          count: 2,
+          items: [{ name: 'gold coin', amount: 6 }],
+        },
+      })
     })
   })
 })
