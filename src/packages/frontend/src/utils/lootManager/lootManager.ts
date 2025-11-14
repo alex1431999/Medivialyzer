@@ -40,15 +40,6 @@ export class LootManager {
     await this.compute(newLootData)
   }
 
-  /**
-   * Call this function to fully recompute the entire loot data internally.
-   */
-  public async recompute() {
-    this.creaturesToLootMap = {}
-    await this.compute(this.lootData)
-    this.computeItems(this.creaturesToLootMap)
-  }
-
   public async updateSince(since: number) {
     this.options.since = since
     await this.recompute()
@@ -57,6 +48,25 @@ export class LootManager {
   public updateItems(items: Item[]) {
     this.options.items = items
     this.itemsLooted = []
+    this.computeItems(this.creaturesToLootMap)
+  }
+
+  /**
+   * This function will compute new data that has just come in and update
+   * all the internal data accordingly.
+   */
+  private async compute(newLootData: string) {
+    const newCreaturesToLootMap =
+      await this.computeCreaturesToLootMap(newLootData)
+    this.computeItems(newCreaturesToLootMap)
+  }
+
+  /**
+   * Call this function to fully recompute the entire loot data internally.
+   */
+  public async recompute() {
+    this.creaturesToLootMap = {}
+    await this.compute(this.lootData)
     this.computeItems(this.creaturesToLootMap)
   }
 
@@ -77,7 +87,12 @@ export class LootManager {
     this.itemsLooted = mergeItemsLooted(this.itemsLooted, newItemsLootedEhanced)
   }
 
-  private async compute(lootData: string) {
+  /**
+   * Returns the map that was added
+   */
+  private async computeCreaturesToLootMap(
+    lootData: string,
+  ): Promise<CreaturesToLootMap> {
     const lootDataFiltered = this.lootParser.getLootDataSince(
       lootData,
       this.options.since,
@@ -90,6 +105,6 @@ export class LootManager {
       creaturesToLooMapToAdd,
     )
 
-    this.computeItems(creaturesToLooMapToAdd)
+    return creaturesToLooMapToAdd
   }
 }
