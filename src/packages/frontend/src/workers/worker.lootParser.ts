@@ -1,9 +1,7 @@
 import { LootParser } from '../utils/lootParser/lootParser.ts'
 
 self.onmessage = function (event) {
-  const { lootData, options, v2 } = event.data
-
-  if (v2) return
+  const { lootData, options } = event.data
 
   const lootParser = new LootParser(lootData)
 

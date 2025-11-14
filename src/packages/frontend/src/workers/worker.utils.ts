@@ -4,6 +4,7 @@ import {
 } from '../utils/lootParser/lootParser.ts'
 
 import WorkerLootParser from './worker.lootParser.ts?worker&inline'
+import WorkerLootParserV2 from './worker.lootParser.v2.ts?worker&inline'
 import { CreaturesToLootMap } from '../utils/lootParser/lootParser.v2.ts'
 
 export function runWorker<Input extends any, Output extends any>(
@@ -11,7 +12,9 @@ export function runWorker<Input extends any, Output extends any>(
 ): Promise<Output> {
   return new Promise((resolve, reject) => {
     if (window.Worker) {
-      const worker = new WorkerLootParser()
+      const worker = (input as any).v2
+        ? new WorkerLootParserV2()
+        : new WorkerLootParser()
 
       worker.onmessage = (event: MessageEvent) => {
         resolve(event.data as Output)
