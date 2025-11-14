@@ -4,6 +4,7 @@ import {
 } from '../utils/lootParser/lootParser.ts'
 
 import WorkerLootParser from './worker.lootParser.ts?worker&inline'
+import { CreaturesToLootMap } from '../utils/lootParser/lootParser.v2.ts'
 
 export function runWorker<Input extends any, Output extends any>(
   input?: Input,
@@ -34,4 +35,8 @@ export function runWorkerLootParser(
     lootData,
     options,
   })
+}
+
+export function runWorkerLootParserV2(lootData: string) {
+  return runWorker<{ lootData: string }, CreaturesToLootMap>({ lootData })
 }

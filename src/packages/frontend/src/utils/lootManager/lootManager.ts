@@ -16,8 +16,8 @@ export class LootManager {
   // TODO: we need to persist this data
   private creaturesToLootMap: CreaturesToLootMap = {}
 
-  public addLootData(lootData: string) {
-    const creaturesToLooMapToAdd = this.lootParser.parse(lootData)
+  public async addLootData(lootData: string) {
+    const creaturesToLooMapToAdd = await this.lootParser.parse(lootData)
     this.creaturesToLootMap = mergeCreaturesToLootMap(
       this.creaturesToLootMap,
       creaturesToLooMapToAdd,
@@ -28,9 +28,9 @@ export class LootManager {
    * Call this function to fully recompute the entire loot data internally
    * given a new lootData input.
    */
-  public recompute(lootData: string) {
+  public async recompute(lootData: string) {
     this.creaturesToLootMap = {}
-    this.addLootData(lootData)
+    await this.addLootData(lootData)
   }
 
   // TODO we can probably only compute these values once and then cache them and only

@@ -4,6 +4,7 @@ import { lootDataTypeItems } from './lootDataType/lootDataTypes/lootDataType.ite
 import { lootDataTypeCreature } from './lootDataType/lootDataTypes/lootdataType.creature.ts'
 import { lootDataTypeTimestamp } from './lootDataType/lootDataTypes/lootDataType.timestamp.ts'
 import { mergeItemsLooted } from './lootParser.helpers.ts'
+import { runWorkerLootParserV2 } from '../../workers/worker.utils.ts'
 
 type CreaturesToLootMapEntry = {
   creature: Creature
@@ -14,7 +15,19 @@ type CreaturesToLootMapEntry = {
 export type CreaturesToLootMap = Record<string, CreaturesToLootMapEntry>
 
 export class LootParserV2 {
-  public parse(lootData: string): CreaturesToLootMap {
+  public parse(lootData: string) {
+    if (this.parseInBackground) {
+      return this.parseAsync(lootData)
+    } else {
+      return this.parseSync(lootData)
+    }
+  }
+
+  public parseAsync(lootData: string) {
+    return runWorkerLootParserV2(lootData)
+  }
+
+  public parseSync(lootData: string): CreaturesToLootMap {
     let creaturesToLootMap: CreaturesToLootMap = {}
 
     this.forEachLine(lootData, (line) => {
@@ -51,6 +64,16 @@ export class LootParserV2 {
 
     // If the timestamp is newer than the lootData, we return nothing
     return ''
+  }
+
+  /**
+   * If this is true, we will parse using a background worker, if it is false
+   * we will parse on the main process. This allows us to run tests on the
+   * main process and use workes in production where they are availab.e
+   * @private
+   */
+  private get parseInBackground() {
+    return window.Worker !== undefined
   }
 
   private parseCreatureLootLine(
