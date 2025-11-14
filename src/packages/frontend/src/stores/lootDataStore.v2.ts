@@ -6,7 +6,6 @@ import { LootParserV2 } from '../utils/lootParser/lootParser.v2.ts'
 import { useConfigStore } from './configStore.ts'
 
 export type LootDataStoreV2Data = {
-  lootData: string
   lootManagerGeneral: LootManager
   lootManagerCurrent: LootManager
   previousOptions: LootParserOptions
@@ -17,7 +16,6 @@ export type LootDataStoreV2Data = {
 }
 
 const DEFAULT_DATA: LootDataStoreV2Data = {
-  lootData: '',
   lootManagerGeneral: new LootManager(),
   lootManagerCurrent: new LootManager(),
   // TODO we aren't tracking any of these parsing events in the store yet
@@ -38,8 +36,6 @@ export const useLootDataStoreV2 = defineStore('lootDataV2', {
     },
     async startLootDataStream() {
       const configStore = useConfigStore()
-
-      this.lootData = ''
       this.lastReadSize = 0
 
       electron.onLootDataUpdated(
@@ -48,7 +44,6 @@ export const useLootDataStoreV2 = defineStore('lootDataV2', {
             // Only accept new data
             if (lastReadSize > this.lastReadSize) {
               this.lastReadSize = lastReadSize
-              this.lootData += newData
 
               const currentData = lootParser.getLootDataSince(
                 newData,

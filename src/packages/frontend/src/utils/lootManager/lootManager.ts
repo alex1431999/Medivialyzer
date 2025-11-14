@@ -13,10 +13,14 @@ import { getAllItems, getItem } from '../item/item.helpers.ts'
 export class LootManager {
   private lootParser = new LootParserV2()
 
+  private lootData: string = ''
+
   // TODO: we need to persist this data
   private creaturesToLootMap: CreaturesToLootMap = {}
 
   public async addLootData(lootData: string) {
+    this.lootData += lootData
+
     const creaturesToLooMapToAdd = await this.lootParser.parse(lootData)
     this.creaturesToLootMap = mergeCreaturesToLootMap(
       this.creaturesToLootMap,
@@ -28,9 +32,9 @@ export class LootManager {
    * Call this function to fully recompute the entire loot data internally
    * given a new lootData input.
    */
-  public async recompute(lootData: string) {
+  public async recompute() {
     this.creaturesToLootMap = {}
-    await this.addLootData(lootData)
+    await this.addLootData(this.lootData)
   }
 
   // TODO we can probably only compute these values once and then cache them and only
