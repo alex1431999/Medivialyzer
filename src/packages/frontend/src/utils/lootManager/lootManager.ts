@@ -54,9 +54,9 @@ export class LootManager {
     await this.recompute()
   }
 
-  // TODO if we cache items we also need to recompute them here
   public updateItems(items: Item[]) {
     this.options.items = items
+    this.itemsLooted = []
     this.computeItems(this.creaturesToLootMap)
   }
 
