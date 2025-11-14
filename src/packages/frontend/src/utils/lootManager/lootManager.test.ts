@@ -15,7 +15,7 @@ describe('LootManager', () => {
     const lootManager = new LootManager()
 
     await lootManager.onNewData(lootDataInitial)
-    expect(lootManager.getItems()).toEqual([
+    expect(lootManager.itemsLooted).toEqual([
       {
         amount: 9,
         name: 'Gold Coin',
@@ -24,7 +24,7 @@ describe('LootManager', () => {
     ])
 
     await lootManager.onNewData(lootDataToAdd)
-    expect(lootManager.getItems()).toEqual([
+    expect(lootManager.itemsLooted).toEqual([
       {
         amount: 9 + 17,
         name: 'Gold Coin',

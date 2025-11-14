@@ -29,6 +29,8 @@ export class LootManager {
   // TODO: we need to persist this data
   private creaturesToLootMap: CreaturesToLootMap = {}
 
+  public itemsLooted: ItemLooted[] = []
+
   /**
    * This function can be called whenever new data has been added to the loot
    * file.
@@ -44,6 +46,7 @@ export class LootManager {
   public async recompute() {
     this.creaturesToLootMap = {}
     await this.compute(this.lootData)
+    this.computeItems(this.creaturesToLootMap)
   }
 
   public async updateSince(since: number) {
@@ -54,22 +57,24 @@ export class LootManager {
   // TODO if we cache items we also need to recompute them here
   public updateItems(items: Item[]) {
     this.options.items = items
+    this.computeItems(this.creaturesToLootMap)
   }
 
   // TODO we can probably only compute these values once and then cache them and only
   //  recompute if the underlying data changes or the itemsConfiguration changes
-  public getItems(itemsConfiguration?: Item[]): ItemLooted[] {
-    const allItems = itemsConfiguration || getAllItems()
-    let allItemsLooted: ItemLooted[] = []
+  private computeItems(creaturesToLootMap: CreaturesToLootMap) {
+    let newItemsLooted: ItemLooted[] = []
 
-    Object.values(this.creaturesToLootMap).forEach(({ items }) => {
-      allItemsLooted = mergeItemsLooted(allItemsLooted, items)
+    Object.values(creaturesToLootMap).forEach(({ items }) => {
+      newItemsLooted = mergeItemsLooted(newItemsLooted, items)
     })
 
-    return allItemsLooted.map((item) => ({
+    const newItemsLootedEhanced = newItemsLooted.map((item) => ({
       ...item,
-      ...getItem(item.name, allItems),
+      ...getItem(item.name, this.options.items),
     }))
+
+    this.itemsLooted = mergeItemsLooted(this.itemsLooted, newItemsLootedEhanced)
   }
 
   private async compute(lootData: string) {
@@ -84,5 +89,7 @@ export class LootManager {
       this.creaturesToLootMap,
       creaturesToLooMapToAdd,
     )
+
+    this.computeItems(creaturesToLooMapToAdd)
   }
 }

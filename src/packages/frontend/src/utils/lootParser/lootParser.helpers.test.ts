@@ -2,8 +2,8 @@ import { describe, test, expect } from 'vitest'
 import { ItemLooted } from '../item/item.types.ts'
 import {
   mergeCreaturesToLootMap,
-  mergeItemsLooted,
-  upsertItemLooted,
+  mergeItems,
+  upsertItem,
 } from './lootParser.helpers.ts'
 import { CreaturesToLootMap } from './lootParser.v2.ts'
 
@@ -13,7 +13,7 @@ describe('loot parser helpers', () => {
       const items: ItemLooted[] = [{ name: 'gold coin', amount: 1 }]
       const item: ItemLooted = { name: 'ham', amount: 5 }
 
-      expect(upsertItemLooted(items, item)).toEqual([
+      expect(upsertItem(items, item)).toEqual([
         { name: 'gold coin', amount: 1 },
         { name: 'ham', amount: 5 },
       ])
@@ -23,7 +23,7 @@ describe('loot parser helpers', () => {
       const items: ItemLooted[] = [{ name: 'gold coin', amount: 1 }]
       const item: ItemLooted = { name: 'gold coin', amount: 5 }
 
-      expect(upsertItemLooted(items, item)).toEqual([
+      expect(upsertItem(items, item)).toEqual([
         { name: 'gold coin', amount: 6 },
       ])
     })
@@ -34,7 +34,7 @@ describe('loot parser helpers', () => {
       const items: ItemLooted[] = [{ name: 'gold coin', amount: 1 }]
       const itemsToAdd: ItemLooted[] = [{ name: 'ham', amount: 5 }]
 
-      expect(mergeItemsLooted(items, itemsToAdd)).toEqual([
+      expect(mergeItems(items, itemsToAdd)).toEqual([
         { name: 'gold coin', amount: 1 },
         { name: 'ham', amount: 5 },
       ])
@@ -44,7 +44,7 @@ describe('loot parser helpers', () => {
       const items: ItemLooted[] = [{ name: 'gold coin', amount: 1 }]
       const itemsToAdd: ItemLooted[] = [{ name: 'gold coin', amount: 5 }]
 
-      expect(mergeItemsLooted(items, itemsToAdd)).toEqual([
+      expect(mergeItems(items, itemsToAdd)).toEqual([
         { name: 'gold coin', amount: 6 },
       ])
     })

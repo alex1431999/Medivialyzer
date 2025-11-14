@@ -3,7 +3,7 @@ import { ItemLooted } from '../item/item.types.ts'
 import { lootDataTypeItems } from './lootDataType/lootDataTypes/lootDataType.items.ts'
 import { lootDataTypeCreature } from './lootDataType/lootDataTypes/lootdataType.creature.ts'
 import { lootDataTypeTimestamp } from './lootDataType/lootDataTypes/lootDataType.timestamp.ts'
-import { mergeItemsLooted } from './lootParser.helpers.ts'
+import { mergeItems } from './lootParser.helpers.ts'
 import { runWorkerLootParserV2 } from '../../workers/worker.utils.ts'
 
 type CreaturesToLootMapEntry = {
@@ -102,7 +102,7 @@ export class LootParserV2 {
 
       // If the loot came in a bag, then we don't count the extra kill
       const countUpdated = isBagLoot ? count : count + 1
-      const itemsUpdated = mergeItemsLooted(items, itemsLooted)
+      const itemsUpdated = mergeItems(items, itemsLooted)
 
       creaturesToLootMap[creature.name] = {
         creature,
