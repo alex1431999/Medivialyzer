@@ -7,7 +7,10 @@ import { useTeamStore } from '../stores/teamStore.ts'
 import { baserowPing } from '../utils/baserow/baserow.requests.ts'
 import { getAllItems } from '../utils/item/item.helpers.ts'
 import { watch } from 'vue'
+import { useLootDataStoreV2 } from '../stores/lootDataStore.v2.ts'
+
 const lootDataStore = useLootDataStore()
+const lootDataStoreV2 = useLootDataStoreV2()
 const configStore = useConfigStore()
 const clientStore = useClientStore()
 const teamStore = useTeamStore()
@@ -19,6 +22,7 @@ configStore.onBoot()
 clientStore.onBoot()
 
 lootDataStore.init()
+lootDataStoreV2.init()
 
 // Only try to load the teamStore once client has been initialised
 watch(
