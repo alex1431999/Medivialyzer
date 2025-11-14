@@ -24,6 +24,15 @@ export class LootManager {
     )
   }
 
+  /**
+   * Call this function to fully recompute the entire loot data internally
+   * given a new lootData input.
+   */
+  public recompute(lootData: string) {
+    this.creaturesToLootMap = {}
+    this.addLootData(lootData)
+  }
+
   // TODO we can probably only compute these values once and then cache them and only
   //  recompute if the underlying data changes or the itemsConfiguration changes
   public getItems(itemsConfiguration?: Item[]): ItemLooted[] {
