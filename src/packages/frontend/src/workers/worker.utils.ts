@@ -38,5 +38,8 @@ export function runWorkerLootParser(
 }
 
 export function runWorkerLootParserV2(lootData: string) {
-  return runWorker<{ lootData: string }, CreaturesToLootMap>({ lootData })
+  return runWorker<{ lootData: string; v2: true }, CreaturesToLootMap>({
+    lootData,
+    v2: true,
+  })
 }
