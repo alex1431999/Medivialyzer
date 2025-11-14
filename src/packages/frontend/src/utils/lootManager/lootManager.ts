@@ -15,6 +15,10 @@ export type LootManagerOptions = {
 }
 
 // TODO add all the other helper functions to get different information form the data
+/**
+ * The loot manager keeps track of the raw loot data and provides information
+ * about that data given the options of the loot manager.
+ */
 export class LootManager {
   private lootParser = new LootParserV2()
 
@@ -25,14 +29,17 @@ export class LootManager {
   // TODO: we need to persist this data
   private creaturesToLootMap: CreaturesToLootMap = {}
 
+  /**
+   * This function can be called whenever new data has been added to the loot
+   * file.
+   */
   public async onNewData(newLootData: string) {
     this.lootData += newLootData
     await this.compute(newLootData)
   }
 
   /**
-   * Call this function to fully recompute the entire loot data internally
-   * given a new lootData input.
+   * Call this function to fully recompute the entire loot data internally.
    */
   public async recompute() {
     this.creaturesToLootMap = {}
