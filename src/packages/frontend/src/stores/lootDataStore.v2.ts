@@ -2,8 +2,6 @@ import { defineStore } from 'pinia'
 import { electron } from '../utils/electron/electron.constants.ts'
 import { LootParserOptions } from '../utils/lootParser/lootParser.ts'
 import { LootManager } from '../utils/lootManager/lootManager.ts'
-import { LootParserV2 } from '../utils/lootParser/lootParser.v2.ts'
-import { useConfigStore } from './configStore.ts'
 
 export type LootDataStoreV2Data = {
   lootManagerGeneral: LootManager
@@ -26,8 +24,6 @@ const DEFAULT_DATA: LootDataStoreV2Data = {
   updatePromise: Promise.resolve(),
 }
 
-const lootParser = new LootParserV2()
-
 export const useLootDataStoreV2 = defineStore('lootDataV2', {
   state: () => ({ ...DEFAULT_DATA }),
   actions: {
@@ -35,7 +31,6 @@ export const useLootDataStoreV2 = defineStore('lootDataV2', {
       await this.startLootDataStream()
     },
     async startLootDataStream() {
-      const configStore = useConfigStore()
       this.lastReadSize = 0
 
       electron.onLootDataUpdated(
@@ -44,14 +39,8 @@ export const useLootDataStoreV2 = defineStore('lootDataV2', {
             // Only accept new data
             if (lastReadSize > this.lastReadSize) {
               this.lastReadSize = lastReadSize
-
-              const currentData = lootParser.getLootDataSince(
-                newData,
-                configStore.config.since,
-              )
-
               this.lootManagerGeneral.onNewData(newData)
-              this.lootManagerCurrent.onNewData(currentData)
+              this.lootManagerCurrent.onNewData(newData)
             }
           })
         },
