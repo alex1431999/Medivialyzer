@@ -50,8 +50,8 @@ export const useLootDataStoreV2 = defineStore('lootDataV2', {
                 configStore.config.since,
               )
 
-              this.lootManagerGeneral.addLootData(newData)
-              this.lootManagerCurrent.addLootData(currentData)
+              this.lootManagerGeneral.onNewData(newData)
+              this.lootManagerCurrent.onNewData(currentData)
             }
           })
         },

@@ -9,23 +9,25 @@ import {
 import { Item, ItemLooted } from '../item/item.types.ts'
 import { getAllItems, getItem } from '../item/item.helpers.ts'
 
+export type LootManagerOptions = {
+  since: number
+  items: Item[]
+}
+
 // TODO add all the other helper functions to get different information form the data
 export class LootManager {
   private lootParser = new LootParserV2()
 
   private lootData: string = ''
 
+  private options: LootManagerOptions = { since: 0, items: getAllItems() }
+
   // TODO: we need to persist this data
   private creaturesToLootMap: CreaturesToLootMap = {}
 
-  public async addLootData(lootData: string) {
-    this.lootData += lootData
-
-    const creaturesToLooMapToAdd = await this.lootParser.parse(lootData)
-    this.creaturesToLootMap = mergeCreaturesToLootMap(
-      this.creaturesToLootMap,
-      creaturesToLooMapToAdd,
-    )
+  public async onNewData(newLootData: string) {
+    this.lootData += newLootData
+    await this.compute(newLootData)
   }
 
   /**
@@ -34,7 +36,17 @@ export class LootManager {
    */
   public async recompute() {
     this.creaturesToLootMap = {}
-    await this.addLootData(this.lootData)
+    await this.compute(this.lootData)
+  }
+
+  public async updateSince(since: number) {
+    this.options.since = since
+    await this.recompute()
+  }
+
+  // TODO if we cache items we also need to recompute them here
+  public updateItems(items: Item[]) {
+    this.options.items = items
   }
 
   // TODO we can probably only compute these values once and then cache them and only
@@ -51,5 +63,19 @@ export class LootManager {
       ...item,
       ...getItem(item.name, allItems),
     }))
+  }
+
+  private async compute(lootData: string) {
+    const lootDataFiltered = this.lootParser.getLootDataSince(
+      lootData,
+      this.options.since,
+    )
+
+    const creaturesToLooMapToAdd = await this.lootParser.parse(lootDataFiltered)
+
+    this.creaturesToLootMap = mergeCreaturesToLootMap(
+      this.creaturesToLootMap,
+      creaturesToLooMapToAdd,
+    )
   }
 }

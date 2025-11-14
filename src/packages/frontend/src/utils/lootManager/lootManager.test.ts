@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest'
 import { LootManager } from './lootManager.ts'
 
 describe('LootManager', () => {
-  test('addLootData', () => {
+  test('onNewData', async () => {
     const lootDataInitial = `
       Channel saved at Wed Dec 04 19:29:20 2024
       19:40 Loot of giant cobra: 9 gold coins.
@@ -14,7 +14,7 @@ describe('LootManager', () => {
 
     const lootManager = new LootManager()
 
-    lootManager.addLootData(lootDataInitial)
+    await lootManager.onNewData(lootDataInitial)
     expect(lootManager.getItems()).toEqual([
       {
         amount: 9,
@@ -23,7 +23,7 @@ describe('LootManager', () => {
       },
     ])
 
-    lootManager.addLootData(lootDataToAdd)
+    await lootManager.onNewData(lootDataToAdd)
     expect(lootManager.getItems()).toEqual([
       {
         amount: 9 + 17,
