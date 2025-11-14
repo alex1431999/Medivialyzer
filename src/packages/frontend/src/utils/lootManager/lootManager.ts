@@ -70,8 +70,6 @@ export class LootManager {
     this.computeItems(this.creaturesToLootMap)
   }
 
-  // TODO we can probably only compute these values once and then cache them and only
-  //  recompute if the underlying data changes or the itemsConfiguration changes
   private computeItems(creaturesToLootMap: CreaturesToLootMap) {
     let newItemsLooted: ItemLooted[] = []
 
