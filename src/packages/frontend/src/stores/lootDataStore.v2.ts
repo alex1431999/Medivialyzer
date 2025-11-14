@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { electron } from '../utils/electron/electron.constants.ts'
 import { LootParserOptions } from '../utils/lootParser/lootParser.ts'
-import _ from 'lodash'
 import { LootManager } from '../utils/lootManager/lootManager.ts'
 import { LootParserV2 } from '../utils/lootParser/lootParser.v2.ts'
 import { useConfigStore } from './configStore.ts'
@@ -65,22 +64,6 @@ export const useLootDataStoreV2 = defineStore('lootDataV2', {
 
       electron.watchLootFile()
       electron.readEntireLootFile()
-    },
-    // TODO we still might want to make use of options here
-    async updateOptions(options: LootParserOptions) {
-      const configStore = useConfigStore()
-      const hasOptionsChanged = !_.isEqual(options, this.previousOptions)
-
-      if (hasOptionsChanged) {
-        this.previousOptions = options || {}
-
-        const currentData = lootParser.getLootDataSince(
-          this.lootData,
-          configStore.config.since,
-        )
-
-        this.lootManagerCurrent.recompute(currentData)
-      }
     },
   },
 })
